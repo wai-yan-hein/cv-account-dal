@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.cv.account</groupId>
-    <artifactId>cv-account-api</artifactId>
+    <artifactId>cv-account-dal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cv-account-api</name>
+    <name>cv-account-dal</name>
     <description>Core Account Api</description>
 
     <properties>
