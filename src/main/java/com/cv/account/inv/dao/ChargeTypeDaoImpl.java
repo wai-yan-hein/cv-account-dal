@@ -34,5 +34,43 @@ public class ChargeTypeDaoImpl extends AbstractDao<String, ChargeType> implement
         String hsql = "delete from ChargeType o where o.chargeTypeId='" + id + "'";
         return execUpdateOrDelete(hsql);
     }
+    
+      @Override
+    public List<ChargeType> search(String ctId, String desp){
+        String strFilter = "";
+        
+        
+        if(!desp.equals("-")){
+            if(strFilter.isEmpty()){
+                strFilter = "o.chargeTypeId =" + desp ;
+            }else{
+                strFilter = strFilter + " and o.chargeTypeId =" + desp ;
+            }
+        }
+        if(!desp.equals("-")){
+            if(strFilter.isEmpty()){
+                strFilter = "o.chargeTypeDesp like '%" + desp + "%'";
+            }else{
+                strFilter = strFilter + " and o.chargeTypeDesp like '%" + desp + "%'";
+            }
+        }
+        
+       /* if(!updatedDate.equals("-")){
+            if(strFilter.isEmpty()){
+                strFilter = "o.updatedDate = '" + updatedDate + "'";
+            }else{
+                strFilter = strFilter + " and o.updatedDate = '" + updatedDate + "'";
+            }
+        }
+        */
+        if(strFilter.isEmpty()){
+            strFilter = "select o from ChargeType o";
+        }else{
+            strFilter = "select o from ChargeType o where " + strFilter;
+        }
+        
+        List<ChargeType> listCT = findHSQL(strFilter);
+        return listCT;
+    }
 
 }

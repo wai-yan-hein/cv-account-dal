@@ -5,6 +5,8 @@
  */
 package com.cv.account.inv.service;
 
+import com.cv.account.api.dummy.DamageVouSearch;
+import com.cv.account.api.dummy.VouSearch;
 import com.cv.account.inv.entity.DamageDetailHis;
 import com.cv.account.inv.entity.DamageHis;
 import java.util.List;
@@ -20,9 +22,13 @@ public interface DamageHisService {
     public List<DamageHis> search(String from, String to, String location,
             String remark, String vouNo);
 
-    public void save(DamageHis sdh, List<DamageDetailHis> listDamageDetail, String vouStatus, List<String> delList);
+    public void save(DamageHis sdh, List<DamageDetailHis> listDamageDetail, 
+            String vouStatus, List<String> delList);
 
     public DamageHis findById(String id);
+    
+    public List<DamageVouSearch> searchM(String from, String to, String location,
+            String remark, String vouNo) throws Exception;
 
     public int delete(String vouNo);
 }

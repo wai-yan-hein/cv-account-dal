@@ -14,9 +14,16 @@ import java.util.List;
  * @author winswe
  */
 public interface PrivilegeDao {
+
     public Privilege save(Privilege privilege);
+
     public Privilege findById(PrivilegeKey key);
+
     public List<Privilege> search(String roleId, String menuId);
+
+    public List<Privilege> searchM();
+
     public int delete(String roleId, String menuId);
+
     public void copyPrivilege(String fromRoleId, String toRoleId) throws Exception;
 }

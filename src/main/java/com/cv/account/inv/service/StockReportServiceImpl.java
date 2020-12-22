@@ -33,4 +33,9 @@ public class StockReportServiceImpl implements StockReportService {
         return dao.getReports();
     }
 
+    @Override
+    public List<StockReport> findAll() {
+        return dao.findAll();
+    }
+
 }

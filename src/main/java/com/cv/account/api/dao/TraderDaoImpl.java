@@ -97,4 +97,11 @@ public class TraderDaoImpl extends AbstractDao<Integer, Trader> implements Trade
         persist(trader);
         return trader;
     }
+
+    @Override
+    public List<Trader> searchM(String updatedDate) {
+        String strSql = "select o from Trader o where o.updatedDate > '" + updatedDate + "'";
+        List<Trader> listTrader = findHSQL(strSql);
+        return listTrader;
+    }
 }

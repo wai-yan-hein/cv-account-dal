@@ -21,5 +21,6 @@ public interface VouStatusDao {
     public int delete(String id);
 
     public VouStatus findById(String id);
+    public List<VouStatus> search(String statusDesp);
 
 }

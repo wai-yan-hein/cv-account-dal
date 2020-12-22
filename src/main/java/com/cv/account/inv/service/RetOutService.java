@@ -5,6 +5,7 @@
  */
 package com.cv.account.inv.service;
 
+import com.cv.account.api.dummy.VouSearch;
 import com.cv.account.inv.entity.RetOutHisDetail;
 import com.cv.account.inv.entity.RetOutHis;
 import java.util.List;
@@ -19,7 +20,11 @@ public interface RetOutService {
 
     public void delete(String retInId);
 
-    public List<RetOutHis> search(String fromDate, String toDate, String cusId, String locId, String vouNo, String filterCode);
+    public List<RetOutHis> search(String fromDate, String toDate, String cusId,
+            String locId, String vouNo, String filterCode);
+
+    public List<VouSearch> searchM(String fromDate, String toDate,
+            String cusId, String locId, String vouNo, String filterCode) throws Exception;
 
     public RetOutHis findById(String id);
 }

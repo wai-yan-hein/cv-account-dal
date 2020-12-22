@@ -6,6 +6,7 @@
 package com.cv.account.inv.dao;
 
 import com.cv.account.inv.entity.RetInHis;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -18,5 +19,9 @@ public interface RetInDao {
 
     public RetInHis findById(String id);
 
-    public List<RetInHis> search(String fromDate, String toDate, String cusId, String locId, String vouNo, String filterCode);
+    public List<RetInHis> search(String fromDate, String toDate, String cusId,
+            String locId, String vouNo, String filterCode);
+
+    public ResultSet searchM(String fromDate, String toDate, String cusId,
+            String locId, String vouNo, String filterCode) throws Exception;
 }

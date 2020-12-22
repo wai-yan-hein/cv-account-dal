@@ -13,9 +13,16 @@ import java.util.List;
  * @author winswe
  */
 public interface UserRoleService {
+
     public UserRole save(UserRole role);
+
     public UserRole findById(Integer id);
+
     public List<UserRole> search(String roleName, String compCode);
+
     public int delete(String id);
+
     public UserRole copyRole(String copyRoleId, String compCode);
+
+    public List<UserRole> searchM(String updatedDate);
 }

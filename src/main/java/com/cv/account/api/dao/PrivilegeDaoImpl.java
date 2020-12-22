@@ -73,4 +73,11 @@ public class PrivilegeDaoImpl extends AbstractDao<PrivilegeKey, Privilege> imple
             "from privilege where role_id = " + fromRoleId;
         execSQL(strSql);
     }
+    
+      @Override
+    public List<Privilege> searchM() {
+        String strSql = "select o from Privilege o";
+        List<Privilege> listPrv = findHSQL(strSql);
+        return listPrv;
+    }
 }

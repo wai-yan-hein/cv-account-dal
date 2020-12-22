@@ -19,4 +19,9 @@ public interface CategoryService {
     public List<Category> findAll();
 
     public int delete(String id);
+
+    public List<Category> search(String catName);
+
+    public List<Category> searchM(String updatedDate);
+
 }

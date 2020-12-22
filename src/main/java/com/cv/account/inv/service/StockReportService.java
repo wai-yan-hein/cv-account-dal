@@ -17,4 +17,6 @@ public interface StockReportService {
     public StockReport save(StockReport report);
 
     public List<StockReport> getReports();
+
+    public List<StockReport> findAll();
 }

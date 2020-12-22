@@ -20,5 +20,7 @@ public interface TraderTypeDao {
 
     public int delete(String id);
 
+    public List<TraderType> search(String desp);
+
     public TraderType findById(String id);
 }

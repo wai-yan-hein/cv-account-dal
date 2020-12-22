@@ -51,4 +51,9 @@ public class MenuServiceImpl implements MenuService{
     public List getParentChildMenu(String roleId,String menuType){
         return dao.getParentChildMenu(roleId,menuType);
     }
+    
+    @Override
+     public List<Menu> searchM(String updatedDate){
+         return dao.searchM(updatedDate);
+     }
 }

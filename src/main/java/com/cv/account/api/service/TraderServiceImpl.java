@@ -45,4 +45,9 @@ public class TraderServiceImpl implements TraderService {
 
         return dao.saveTrader(trader);
     }
+    
+    @Override
+    public List<Trader> searchM(String updatedDate){
+        return dao.searchM(updatedDate);
+    }
 }

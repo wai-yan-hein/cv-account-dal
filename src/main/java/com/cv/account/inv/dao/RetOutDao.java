@@ -6,6 +6,7 @@
 package com.cv.account.inv.dao;
 
 import com.cv.account.inv.entity.RetOutHis;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -18,6 +19,10 @@ public interface RetOutDao {
 
     public RetOutHis findById(String id);
 
-    public List<RetOutHis> search(String fromDate, String toDate, String cusId, String locId, String vouNo, String filterCode);
+    public List<RetOutHis> search(String fromDate, String toDate, 
+            String cusId, String locId, String vouNo, String filterCode);
+    
+    public ResultSet searchM(String fromDate, String toDate, 
+            String cusId, String locId, String vouNo, String filterCode)throws Exception;
 
 }

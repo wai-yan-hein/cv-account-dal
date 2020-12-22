@@ -38,4 +38,14 @@ public class CategoryServiceImpl implements CategoryService {
         return dao.delete(id);
     }
 
+    @Override
+    public List<Category> search(String catName) {
+        return dao.search(catName);
+    }
+    
+    @Override
+         public List<Category> searchM(String updatedDate){
+             return dao.searchM(updatedDate);
+         }
+
 }

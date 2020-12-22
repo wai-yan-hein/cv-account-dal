@@ -93,6 +93,8 @@ public class StockIssueHisDaoImpl extends AbstractDao<String, StockIssueHis> imp
 
         return listDH;
     }
+    
+ 
 
     @Override
     public int delete(String vouNo) {

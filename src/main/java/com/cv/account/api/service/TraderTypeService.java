@@ -21,4 +21,5 @@ public interface TraderTypeService {
     public int delete(String id);
 
     public TraderType findById(String id);
+    public List<TraderType> search(String desp);
 }

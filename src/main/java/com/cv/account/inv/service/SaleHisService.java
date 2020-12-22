@@ -5,6 +5,7 @@
  */
 package com.cv.account.inv.service;
 
+import com.cv.account.api.dummy.SaleVouSearch;
 import com.cv.account.inv.entity.SaleHis;
 import java.util.List;
 
@@ -17,7 +18,10 @@ public interface SaleHisService {
     public SaleHis save(SaleHis saleHis) throws Exception;
 
     public List<SaleHis> search(String fromDate, String toDate, String cusId, 
-            String vouStatusId, String remark, String stockCode,String userId,String machId);
+            String vouStatusId, String remark, String stockCode,String userId);
+    
+     public List<SaleVouSearch> searchM(String fromDate, String toDate, String cusId,
+            String vouStatusId, String remark, String stockCode, String userId) throws Exception;
 
     public SaleHis findById(String id);
 

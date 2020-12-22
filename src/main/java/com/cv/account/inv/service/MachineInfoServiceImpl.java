@@ -39,8 +39,17 @@ public class MachineInfoServiceImpl implements MachineInfoService {
     }
 
     @Override
-    public MachineInfo findById(String id) throws Exception{
+    public MachineInfo findById(String id) throws Exception {
         return machineInfoDao.findById(id);
     }
 
+    @Override
+    public List<MachineInfo> search(String name, String ip) {
+        return machineInfoDao.search(name, ip);
+    }
+
+    @Override
+    public List<MachineInfo> searchM(String name) {
+        return machineInfoDao.searchM(name);
+    }
 }

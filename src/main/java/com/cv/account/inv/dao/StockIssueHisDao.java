@@ -20,6 +20,8 @@ public interface StockIssueHisDao {
 
     public List<StockIssueHis> search(String from, String to, String location,
             String remark, String vouNo);
+    
+    
 
     public int delete(String vouNo);
 }

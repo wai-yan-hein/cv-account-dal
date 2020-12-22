@@ -4,13 +4,19 @@
  */
 package com.cv.account.api.util;
 
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -19,6 +25,8 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -72,7 +80,7 @@ public class Util1 {
     return value;
     }*/
 
-    /*public static String getPropValue(String key) {
+ /*public static String getPropValue(String key) {
         String strFilter = "v.propKey = '" + key + "'";
         List<SystemProperty> listSP = HibernateUtil.findAllHSQL("SystemProperty", strFilter);
 
@@ -244,7 +252,6 @@ public class Util1 {
     
     return status;
     }*/
-
     public static String getFileExtension(String content) {
         String extension = "";
 
@@ -658,4 +665,67 @@ public class Util1 {
 
     }
 
+    public static String getAppWorkFolder() {
+        return System.getProperty("user.dir");
+    }
+
+    public static byte[] readfileAsBytes(File file) throws Exception {
+        RandomAccessFile accessFile = new RandomAccessFile(file, "r");
+        byte[] bytes = new byte[(int) accessFile.length()];
+        accessFile.readFully(bytes);
+        return bytes;
+
+    }
+
+    public static void deletedFile(String zipfilepath) {
+
+        File directory = new File(zipfilepath);
+        File[] fList = directory.listFiles();
+
+        if (fList != null) {
+            for (File file : fList) {
+                if (file.isFile()) {
+
+                    try {
+                        file.delete();
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+    public static String genGSON(Object data, String filePath) throws Exception {
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid.toString().concat(".json");
+        try (FileOutputStream fos = new FileOutputStream(filePath + fileName);
+                OutputStreamWriter isr = new OutputStreamWriter(fos, "UTF-8")) {
+
+            Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls().create();
+            gs.toJson(data, isr);
+        }
+
+        ZipFile zf = new ZipFile();
+        String file = zf.zipFiles(filePath, fileName);
+        return file;
+    }
+
+    public static String genGSON(List list, String filePath) throws Exception {
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid.toString().concat(".json");
+        try (FileOutputStream fos = new FileOutputStream(filePath + fileName);
+                OutputStreamWriter isr = new OutputStreamWriter(fos, "UTF-8")) {
+
+            Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls().create();
+            gs.toJson(list, isr);
+        }
+
+        ZipFile zf = new ZipFile();
+        String file = zf.zipFiles(filePath, fileName);
+        return file;
+    }
 }

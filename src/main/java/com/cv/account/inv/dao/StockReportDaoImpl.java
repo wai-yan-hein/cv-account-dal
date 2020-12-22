@@ -29,4 +29,10 @@ public class StockReportDaoImpl extends AbstractDao<Integer, StockReport> implem
         return findHSQL(hsql);
     }
 
+    @Override
+    public List<StockReport> findAll() {
+        String hsql = "select o from StockReport o";
+        return findHSQL(hsql);
+    }
+
 }

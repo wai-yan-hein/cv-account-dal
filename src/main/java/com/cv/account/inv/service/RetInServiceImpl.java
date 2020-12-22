@@ -5,11 +5,15 @@
  */
 package com.cv.account.inv.service;
 
+import com.cv.account.api.dummy.VouSearch;
+import com.cv.account.api.util.Util1;
 import com.cv.account.inv.dao.RetInDao;
 import com.cv.account.inv.dao.RetInDetailDao;
 import com.cv.account.inv.entity.RetInCompoundKey;
 import com.cv.account.inv.entity.RetInHisDetail;
 import com.cv.account.inv.entity.RetInHis;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,8 +83,40 @@ public class RetInServiceImpl implements RetInService {
     }
 
     @Override
+    public List<VouSearch> searchM(String fromDate, String toDate, String cusId,
+            String locId, String vouNo, String filterCode) throws Exception {
+        ResultSet rs = retInDao.searchM(fromDate, toDate, cusId, locId, vouNo, filterCode);
+        List<VouSearch> listVS = null;
+
+        if (rs != null) {
+            listVS = new ArrayList();
+            while (rs.next()) {
+                VouSearch vs = new VouSearch(
+                        Util1.toDateStr(rs.getDate("ret_in_date"), "yyyy-MM-dd HH:mm:ss"),
+                        rs.getString("ret_in_id"),
+                        rs.getString("remark"),
+                        rs.getString("trader_name"),
+                        rs.getDouble("vou_total"),
+                        rs.getBoolean("deleted"),
+                        rs.getString("location_name"),
+                        rs.getString("user_short_name")
+                );
+                listVS.add(vs);
+            }
+
+            rs.close();
+        }
+        return listVS;
+    }
+
+    @Override
     public RetInHis findById(String id) {
         return retInDao.findById(id);
+    }
+
+    @Override
+    public RetInHis saveM(RetInHis retIn) {
+        return retInDao.save(retIn);
     }
 
 }

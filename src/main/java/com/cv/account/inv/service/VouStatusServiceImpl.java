@@ -43,4 +43,8 @@ public class VouStatusServiceImpl implements VouStatusService {
         return vouDao.findById(id);
     }
 
+    @Override
+    public List<VouStatus> search(String statusDesp) {
+        return vouDao.search(statusDesp);
+    }
 }

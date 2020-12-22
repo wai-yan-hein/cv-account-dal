@@ -24,10 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class StockOpValueServiceImpl implements StockOpValueService {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(StockOpValueServiceImpl.class);
-    
+
     @Autowired
     StockOpValueDao dao;
-    
+
     @Override
     public StockOpValue save(StockOpValue value, String userId) {
         try {
@@ -39,40 +39,45 @@ public class StockOpValueServiceImpl implements StockOpValueService {
             dao.backup(tranDate, coaCode, dept, currancy, compId, userId, "EDIT");
         } catch (Exception ex) {
             LOGGER.error("Save Stock Op Value :" + ex.getMessage());
-            
+
         }
-        
+
         dao.save(value);
         return value;
     }
-    
+
     @Override
     public StockOpValue findById(StockOpValueKey key) {
         return dao.findById(key);
     }
-    
+
     @Override
     public List search(String from, String to, String coaCode, String currency,
             String dept, String compId) {
         return dao.search(from, to, coaCode, currency, dept, compId);
     }
-    
+
     @Override
     public void backup(String tranDate, String coaCode, String dept, String currency,
             String compId, String userId, String option) throws Exception {
         dao.backup(tranDate, coaCode, dept, currency, compId, userId, option);
     }
-    
+
     @Override
     public int delete(String tranDate, String coaCode, String dept, String currency,
             String compId, String userId) {
         try {
             dao.backup(tranDate, coaCode, dept, currency, compId, userId, "DELETE");
         } catch (Exception ex) {
-            
+
         }
-        
+
         int cnt = dao.delete(tranDate, coaCode, dept, currency, compId);
         return cnt;
+    }
+
+    @Override
+    public List<StockOpValue> findAll() {
+        return dao.findAll();
     }
 }

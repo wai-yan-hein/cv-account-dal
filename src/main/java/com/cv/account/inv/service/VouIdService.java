@@ -7,6 +7,7 @@ package com.cv.account.inv.service;
 
 import com.cv.account.inv.entity.CompoundKey;
 import com.cv.account.inv.entity.VouId;
+import java.util.List;
 
 /**
  *
@@ -18,5 +19,6 @@ public interface VouIdService {
 
     public Object getMax(String machineName, String vouType, String vouPeriod) throws Exception;
     public Object find(CompoundKey key);
+        public List<VouId> search(String machineName, String vouType, String period);
 
 }

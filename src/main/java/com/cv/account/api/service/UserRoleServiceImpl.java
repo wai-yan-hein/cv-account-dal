@@ -55,4 +55,9 @@ public class UserRoleServiceImpl implements UserRoleService{
         
         return save(newRole);
     }
+    
+    @Override
+      public List<UserRole> searchM(String updatedDate){
+          return dao.searchM(updatedDate);
+      }
 }

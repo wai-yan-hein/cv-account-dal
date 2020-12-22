@@ -58,4 +58,9 @@ public class SeqTableServiceImpl implements SeqTableService{
         int seq = dao.getSequence(option, period, compCode);
         return seq;
     }
+    
+    @Override
+    public List<SeqTable> findAll() {
+        return dao.findAll();
+    }
 }

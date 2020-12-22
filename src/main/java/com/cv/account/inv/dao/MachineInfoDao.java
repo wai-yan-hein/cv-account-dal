@@ -21,4 +21,8 @@ public interface MachineInfoDao {
     public List<MachineInfo> findAll() throws Exception;
 
     public MachineInfo findById(String id) throws Exception;
+
+    public List<MachineInfo> search(String name, String ip);
+
+    public List<MachineInfo> searchM(String name);
 }

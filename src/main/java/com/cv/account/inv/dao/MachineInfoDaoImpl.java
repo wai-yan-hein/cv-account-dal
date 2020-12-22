@@ -48,5 +48,57 @@ public class MachineInfoDaoImpl extends AbstractDao<Integer, MachineInfo> implem
     public MachineInfo findById(String id) throws Exception {
         return getByKey(Integer.parseInt(id));
     }
+    
+     @Override
+    public List<MachineInfo> search(String name, String ip){
+        String strSql = "";
+        
+        if(!name.equals("-")){
+            if(strSql.isEmpty()){
+                strSql = "o.machineName like '%" + name + "%'";
+            }else{
+                strSql = strSql + " and o.machineName like '%" + name + "%'";
+            }
+        }
+        
+        if(!ip.equals("-")){
+            if(strSql.isEmpty()){
+                strSql = "o.ipAddress like '%" + ip + "%'";
+            }else{
+                strSql = strSql + " and o.ipAddress like '%" + ip + "%'";
+            }
+        }
+        
+        if(strSql.isEmpty()){
+            strSql = "select o from MachineInfo o";
+        }else{
+            strSql = "select o from MachineInfo o where " + strSql;
+        }
+        
+        List<MachineInfo> listMI = findHSQL(strSql);
+        return listMI;
+    }
+    
+     @Override
+    public List<MachineInfo> searchM(String name){
+    
+         String strSql = "";
+        
+        if(!name.equals("-")){
+            if(strSql.isEmpty()){
+                strSql = "o.machineName ='" + name + "'";
+            }else{
+                strSql = strSql + " and o.machineName = '" + name + "'";
+            }
+        }
+        if(strSql.isEmpty()){
+            strSql = "select o from MachineInfo o";
+        }else{
+            strSql = "select o from MachineInfo o where " + strSql;
+        }
+       List<MachineInfo> listMI = findHSQL(strSql);
+        return listMI; 
+    }
+    
 
 }

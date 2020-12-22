@@ -18,5 +18,9 @@ public interface CategoryDao {
 
     public List<Category> findAll();
 
+    public List<Category> search(String catName);
+
+    public List<Category> searchM(String updatedDate);
+
     public int delete(String id);
 }

@@ -8,6 +8,7 @@ package com.cv.account.inv.service;
 import com.cv.account.inv.dao.VouIdDao;
 import com.cv.account.inv.entity.CompoundKey;
 import com.cv.account.inv.entity.VouId;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,5 +38,10 @@ public class VouIdServiceImpl implements VouIdService {
     public Object find(CompoundKey key) {
         return voudIdDao.find(key);
         }
+    
+    @Override
+    public List<VouId> search(String machineName, String vouType, String period){
+        return voudIdDao.search(machineName, vouType, period);
+    }
 
 }

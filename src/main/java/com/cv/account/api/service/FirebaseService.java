@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author Lenovo
  */
+
 public interface FirebaseService {
 
     public void uploadCustomerBalance(List<VApar> listApar) throws  Exception;

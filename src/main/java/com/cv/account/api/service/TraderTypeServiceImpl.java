@@ -42,5 +42,10 @@ public class TraderTypeServiceImpl implements TraderTypeService {
     public TraderType findById(String id) {
         return dao.findById(id);
     }
+    
+       @Override
+    public List<TraderType> search(String desp){
+        return dao.search(desp);
+    }
 
 }

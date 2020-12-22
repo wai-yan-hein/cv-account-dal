@@ -22,4 +22,8 @@ public interface MachineInfoService {
 
     public MachineInfo findById(String id) throws Exception;
 
+    public List<MachineInfo> search(String name, String ip);
+
+    public List<MachineInfo> searchM(String name);
+
 }

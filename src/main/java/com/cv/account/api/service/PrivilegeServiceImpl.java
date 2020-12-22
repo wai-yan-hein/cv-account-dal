@@ -20,66 +20,71 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class PrivilegeServiceImpl implements PrivilegeService{
-    
+public class PrivilegeServiceImpl implements PrivilegeService {
+
     @Autowired
     private PrivilegeDao dao;
-    
+
     @Override
-    public Privilege save(Privilege privilege){
+    public Privilege save(Privilege privilege) {
         return dao.save(privilege);
     }
-    
+
     @Override
-    public Privilege findById(PrivilegeKey key){
+    public Privilege findById(PrivilegeKey key) {
         return dao.findById(key);
     }
-    
+
     @Override
-    public List<Privilege> search(String roleId, String menuId){
+    public List<Privilege> search(String roleId, String menuId) {
         return dao.search(roleId, menuId);
     }
-    
+
     @Override
-    public int delete(String roleId, String menuId){
+    public int delete(String roleId, String menuId) {
         return dao.delete(roleId, menuId);
     }
-    
+
     @Override
-    public void save(String roleId, List<Menu> listMenu){
-        for(Menu menu : listMenu){
+    public void save(String roleId, List<Menu> listMenu) {
+        for (Menu menu : listMenu) {
             PrivilegeKey key = new PrivilegeKey();
             key.setMenuId(menu.getId());
             key.setRoleId(Integer.parseInt(roleId));
-        
+
             Privilege privilege = new Privilege();
             privilege.setKey(key);
             privilege.setIsAllow(Boolean.FALSE);
             dao.save(privilege);
-            
-            if(menu.getChild() != null){
-                if(menu.getChild().size() > 0){
+
+            if (menu.getChild() != null) {
+                if (menu.getChild().size() > 0) {
                     save(roleId, menu.getChild());
                 }
             }
         }
     }
-    
+
     @Override
-    public void delete(String roleId, List<Menu> listMenu){
-        for(Menu menu : listMenu){
+    public void delete(String roleId, List<Menu> listMenu) {
+        for (Menu menu : listMenu) {
             dao.delete(roleId, menu.getId().toString());
-            
-            if(menu.getChild() != null){
-                if(menu.getChild().size() > 0){
+
+            if (menu.getChild() != null) {
+                if (menu.getChild().size() > 0) {
                     delete(roleId, menu.getChild());
                 }
             }
         }
-    } 
-    
+    }
+
     @Override
-    public void copyPrivilege(String fromRoleId, String toRoleId) throws Exception{
+    public void copyPrivilege(String fromRoleId, String toRoleId) throws Exception {
         dao.copyPrivilege(fromRoleId, toRoleId);
+    }
+
+    @Override
+    public List<Privilege> searchM() {
+        return dao.searchM();
     }
 }

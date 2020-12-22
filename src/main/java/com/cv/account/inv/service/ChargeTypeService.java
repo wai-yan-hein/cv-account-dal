@@ -19,5 +19,7 @@ public interface ChargeTypeService {
     public List<ChargeType> findAll();
 
     public int delete(String id);
+      public List<ChargeType> search(String ctId, String desp);
+
 
 }

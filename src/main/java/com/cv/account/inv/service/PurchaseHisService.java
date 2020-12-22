@@ -5,6 +5,7 @@
  */
 package com.cv.account.inv.service;
 
+import com.cv.account.api.dummy.VouSearch;
 import com.cv.account.inv.entity.PurHis;
 import java.util.List;
 
@@ -17,6 +18,9 @@ public interface PurchaseHisService {
     public PurHis save(PurHis purHis) throws Exception;
 
     public List<PurHis> search(String fromDate, String toDate, String cusId, String vouStatusId, String remark);
+
+    public List<VouSearch> searchM(String fromDate, String toDate,
+            String cusId, String vouStatusId, String remark) throws Exception;
 
     public PurHis findById(String id);
 

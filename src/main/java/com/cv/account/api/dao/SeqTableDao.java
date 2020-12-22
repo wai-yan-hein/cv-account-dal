@@ -13,10 +13,18 @@ import java.util.List;
  * @author winswe
  */
 public interface SeqTableDao {
+
     public SeqTable save(SeqTable st);
+
     public SeqTable findById(Integer id);
+
     public List<SeqTable> search(String option, String period, String compCode);
+
     public SeqTable getSeqTable(String option, String period, String compCode);
+
     public int delete(Integer id);
+
     public int getSequence(String option, String period, String compCode);
+
+    public List<SeqTable> findAll();
 }

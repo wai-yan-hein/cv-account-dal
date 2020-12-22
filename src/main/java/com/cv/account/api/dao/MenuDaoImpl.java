@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author winswe
  */
+
 @Repository
 public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
 
@@ -138,5 +139,12 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
                 }
             }
         }
+    }
+    
+      @Override
+    public List<Menu> searchM(String updatedDate){
+        String strSql = "select o from Menu o where o.updatedDate > '" + updatedDate + "'";
+        List<Menu> listMU = findHSQL(strSql);
+        return listMU;
     }
 }

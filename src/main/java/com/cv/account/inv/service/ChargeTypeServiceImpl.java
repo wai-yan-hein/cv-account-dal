@@ -38,5 +38,8 @@ public class ChargeTypeServiceImpl implements ChargeTypeService{
     public int delete(String id) {
         return dao.delete(id);
     }
-    
+     @Override
+  public List<ChargeType> search(String ctId, String desp){
+        return dao.search(ctId, desp);
+    }
 }

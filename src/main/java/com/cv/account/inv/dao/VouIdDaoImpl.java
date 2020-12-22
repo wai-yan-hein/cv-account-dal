@@ -8,6 +8,7 @@ package com.cv.account.inv.dao;
 import com.cv.account.api.dao.AbstractDao;
 import com.cv.account.inv.entity.CompoundKey;
 import com.cv.account.inv.entity.VouId;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -37,5 +38,43 @@ public class VouIdDaoImpl extends AbstractDao<String, VouId> implements VouIdDao
         Object obj = findByKey(VouId.class, key);
         return obj;
         }
+    
+      @Override
+    public List<VouId> search(String machineName, String vouType, String period) {
+        String strSql = "";
+
+        if (!machineName.equals("-")) {
+            if (strSql.isEmpty()) {
+                strSql = "o.key.machineName = '" + machineName + "'";
+            } else {
+                strSql = strSql + " and o.key.machineName = '" + machineName + "'";
+            }
+        }
+
+        if (!vouType.equals("-")) {
+            if (strSql.isEmpty()) {
+                strSql = "o.key.vouType = '" + vouType + "'";
+            } else {
+                strSql = strSql + " and o.key.vouType = '" + vouType + "'";
+            }
+        }
+
+        if (!period.equals("-")) {
+            if (strSql.isEmpty()) {
+                strSql = "o.key.period = '" + period + "'";
+            } else {
+                strSql = strSql + " and o.key.period = '" + period + "'";
+            }
+        }
+
+        if (strSql.isEmpty()) {
+            strSql = "select o from VouId o";
+        } else {
+            strSql = "select o from VouId o where " + strSql;
+        }
+
+        List<VouId> listVI = findHSQL(strSql);
+        return listVI;
+    }
 
 }

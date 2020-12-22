@@ -7,6 +7,7 @@ package com.cv.account.inv.dao;
 
 import com.cv.account.api.dao.AbstractDao;
 import com.cv.account.inv.entity.DamageHis;
+import java.sql.ResultSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class DamageHisDaoImpl extends AbstractDao<String, DamageHis> implements DamageHisDao {
+
     @Autowired
     private DamageDetailHisDao detaildao;
 
@@ -91,6 +93,75 @@ public class DamageHisDaoImpl extends AbstractDao<String, DamageHis> implements 
         }
 
         return listDH;
+    }
+
+    @Override
+    public ResultSet searchM(String from, String to, String location,
+            String remark, String vouNo) throws Exception {
+        String strFilter = "";
+
+        if (!from.equals("-") && !to.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "date(dmg.dmg_date) between '" + from
+                        + "' and '" + to + "'";
+            } else {
+                strFilter = strFilter + " and date(dmg.dmg_date) between '" + from
+                        + "' and '" + to + "'";
+            }
+        } else if (!from.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "date(dmg.dmg_date) >= '" + from + "'";
+            } else {
+                strFilter = strFilter + " and date(dmg.dmg_date) >= '" + from + "'";
+            }
+        } else if (!to.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "date(dmg.dmg_date) <= '" + to + "'";
+            } else {
+                strFilter = strFilter + " and date(dmg.dmg_date) <= '" + to + "'";
+            }
+        }
+
+        if (!location.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "dmg.location = " + location;
+            } else {
+                strFilter = strFilter + " and dmg.location = " + location;
+            }
+        }
+
+        if (!remark.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "dmg.remark like '%" + remark + "%'";
+            } else {
+                strFilter = strFilter + " like dmg.remark '%" + remark + "%'";
+            }
+        }
+
+        if (!vouNo.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "dmg.dmg_id like '%" + vouNo + "%'";
+            } else {
+                strFilter = strFilter + " like dmg.dmg_id '%" + vouNo + "%'";
+            }
+        }
+
+        ResultSet rs = null;
+        if (!strFilter.isEmpty()) {
+            strFilter = "select date(dmg.dmg_date)as dmg_date, dmg.dmg_id, dmg.remark,dmg.amount, "
+                    + " dmg.deleted, l.location_name, \n"
+                    + " apu.user_short_name from dmg_his dmg\n"
+                    + " join dmg_detail_his ddh on ddh.dmg_id=dmg.dmg_id\n"
+                    + " left join location l on dmg.location = l.location_id\n"
+                    + " left join appuser apu on dmg.created_by = apu.user_id\n"
+                    + " where "+strFilter
+                    + " and dmg.deleted=false\n"
+                    + " group by dmg.dmg_date, dmg.dmg_id\n"
+                    + " order by dmg_date desc";
+            rs = getResultSet(strFilter);
+        }
+
+        return rs;
     }
 
     @Override

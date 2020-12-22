@@ -40,4 +40,25 @@ public class VouStatusDaoImpl extends AbstractDao<Integer, VouStatus> implements
         return getByKey(Integer.parseInt(id));
     }
 
+    @Override
+    public List<VouStatus> search(String statusDesp) {
+        String strSql = "";
+
+        if (!statusDesp.equals("-")) {
+            if (strSql.isEmpty()) {
+                strSql = "o.statusDesp like '%" + statusDesp + "%'";
+            } else {
+                strSql = strSql + " and o.statusDesp like '%" + statusDesp + "%'";
+            }
+        }
+
+        if (strSql.isEmpty()) {
+            strSql = "select o from VouStatus o";
+        } else {
+            strSql = "select o from VouStatus o where " + strSql;
+        }
+
+        List<VouStatus> listVS = findHSQL(strSql);
+        return listVS;
+    }
 }

@@ -19,7 +19,7 @@ public interface PrivilegeService {
     public Privilege findById(PrivilegeKey key);
     public List<Privilege> search(String roleId, String menuId);
     public int delete(String roleId, String menuId);
-    
+    public List<Privilege> searchM();
     public void save(String roleId, List<Menu> listMenu);
     public void delete(String roleId, List<Menu> listMenu);
     public void copyPrivilege(String fromRoleId, String toRoleId) throws Exception;

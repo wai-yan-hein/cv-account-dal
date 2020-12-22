@@ -6,6 +6,7 @@
 package com.cv.account.inv.dao;
 
 import com.cv.account.inv.entity.DamageHis;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -20,6 +21,9 @@ public interface DamageHisDao {
 
     public List<DamageHis> search(String from, String to, String location,
             String remark, String vouNo);
+    
+    public ResultSet searchM(String from, String to, String location,
+            String remark, String vouNo)throws Exception;
 
     public int delete(String vouNo);
 }

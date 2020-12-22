@@ -13,10 +13,18 @@ import java.util.List;
  * @author winswe
  */
 public interface MenuDao {
+
     public Menu saveMenu(Menu menu);
+
     public Menu findById(String id);
-    public List<Menu> search(String name, String nameMM, String parentId,String coaCode);
+
+    public List<Menu> search(String name, String nameMM, String parentId, String coaCode);
+
     public List<Menu> getParentChildMenu();
-    public List getParentChildMenu(String roleId,String menuType);
+
+    public List<Menu> searchM(String updatedDate);
+
+    public List getParentChildMenu(String roleId, String menuType);
+
     public int delete(String id);
 }

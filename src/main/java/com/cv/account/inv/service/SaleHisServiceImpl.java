@@ -5,8 +5,12 @@
  */
 package com.cv.account.inv.service;
 
+import com.cv.account.api.dummy.SaleVouSearch;
+import com.cv.account.api.util.Util1;
 import com.cv.account.inv.dao.SaleHisDao;
 import com.cv.account.inv.entity.SaleHis;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +35,8 @@ public class SaleHisServiceImpl implements SaleHisService {
 
     @Override
     public List<SaleHis> search(String fromDate, String toDate, String cusId,
-            String vouStatusId, String remark, String stockCode, String userId, String machId) {
-        return hisDao.search(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userId, machId);
+            String vouStatusId, String remark, String stockCode, String userId) {
+        return hisDao.search(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userId);
     }
 
     @Override
@@ -45,4 +49,29 @@ public class SaleHisServiceImpl implements SaleHisService {
         return hisDao.delete(vouNo);
     }
 
+    @Override
+    public List<SaleVouSearch> searchM(String fromDate, String toDate, String cusId,
+            String vouStatusId, String remark, String stockCode, String userId) throws Exception {
+        ResultSet rs = hisDao.searchM(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userId);
+        List<SaleVouSearch> listVS = null;
+
+        if (rs != null) {
+            listVS = new ArrayList();
+            while (rs.next()) {
+                SaleVouSearch vs = new SaleVouSearch(
+                        Util1.toDateStr(rs.getDate("sale_date"), "yyyy-MM-dd HH:mm:ss"),
+                        rs.getString("voucher_no"),
+                        rs.getString("remark"),
+                        rs.getString("trader_name"),
+                        rs.getDouble("grand_total"),
+                        rs.getBoolean("deleted"),
+                        rs.getString("user_short_name")
+                );
+                listVS.add(vs);
+            }
+
+            rs.close();
+        }
+        return listVS;
+    }
 }

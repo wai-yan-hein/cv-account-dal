@@ -39,4 +39,26 @@ public class TraderTypeDaoImpl extends AbstractDao<String, TraderType> implement
         return getByKey(id);
     }
 
+    @Override
+    public List<TraderType> search(String desp) {
+        String strSql = "";
+
+        if (!desp.equals("-")) {
+            if (strSql.isEmpty()) {
+                strSql = "o.description like '%" + desp + "%'";
+            } else {
+                strSql = strSql + " and o.description like '%" + desp + "%'";
+            }
+        }
+
+        if (strSql.isEmpty()) {
+            strSql = "select o from TraderType o";
+        } else {
+            strSql = "select o from TraderType o where " + strSql;
+        }
+
+        List<TraderType> listTT = findHSQL(strSql);
+        return listTT;
+    }
+
 }
