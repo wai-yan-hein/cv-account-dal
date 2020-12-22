@@ -5,9 +5,15 @@
     <!--<parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< HEAD
         <version>2.4.0</version>
         <relativePath/> < lookup parent from repository 
     </parent>-->
+=======
+        <version>2.4.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+>>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d
     <groupId>com.cv.account</groupId>
     <artifactId>cv-account-dal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -15,11 +21,15 @@
     <description>Core Account Api</description>
 
     <properties>
+<<<<<<< HEAD
        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>15.0.1</java.version>
         <springframework.version>5.3.1</springframework.version>
+=======
+        <java.version>15</java.version>
+>>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d
     </properties>
 
     <dependencies>
@@ -53,12 +63,17 @@
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-spring</artifactId>
-            <version>5.13.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jms</artifactId>
+            <type>jar</type>
             <version>5.2.8.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
