@@ -5,16 +5,11 @@
  */
 package com.cv.inv.dao;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/dao/VouIdDaoImpl.java
-import com.cv.account.api.dao.AbstractDao;
-import com.cv.account.inv.entity.CompoundKey;
-import com.cv.account.inv.entity.VouId;
+
 import java.util.List;
-=======
 import com.cv.accountswing.dao.AbstractDao;
 import com.cv.inv.entity.CompoundKey;
 import com.cv.inv.entity.VouId;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/dao/VouIdDaoImpl.java
 import org.springframework.stereotype.Repository;
 
 /**

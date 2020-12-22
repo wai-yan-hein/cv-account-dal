@@ -5,16 +5,10 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/VouIdServiceImpl.java
-import com.cv.account.inv.dao.VouIdDao;
-import com.cv.account.inv.entity.CompoundKey;
-import com.cv.account.inv.entity.VouId;
-import java.util.List;
-=======
 import com.cv.inv.dao.VouIdDao;
 import com.cv.inv.entity.CompoundKey;
 import com.cv.inv.entity.VouId;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/VouIdServiceImpl.java
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

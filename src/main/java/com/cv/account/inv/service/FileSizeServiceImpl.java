@@ -7,8 +7,8 @@ package com.cv.account.inv.service;
 
 
 
-import com.cv.account.inv.dao.FileSizeDao;
-import com.cv.account.inv.entity.FileSize;
+import com.cv.inv.dao.FileSizeDao;
+import com.cv.inv.entity.FileSize;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

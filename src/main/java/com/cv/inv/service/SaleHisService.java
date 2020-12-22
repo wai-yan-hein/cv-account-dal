@@ -5,12 +5,8 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/SaleHisService.java
 import com.cv.account.api.dummy.SaleVouSearch;
-import com.cv.account.inv.entity.SaleHis;
-=======
 import com.cv.inv.entity.SaleHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/SaleHisService.java
 import java.util.List;
 
 /**

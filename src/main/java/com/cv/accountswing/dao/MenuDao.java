@@ -22,11 +22,8 @@ public interface MenuDao {
 
     public List<Menu> getParentChildMenu();
 
-<<<<<<< HEAD:src/main/java/com/cv/account/api/dao/MenuDao.java
     public List<Menu> searchM(String updatedDate);
 
-=======
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/accountswing/dao/MenuDao.java
     public List getParentChildMenu(String roleId, String menuType);
 
     public int delete(String id);

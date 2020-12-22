@@ -5,14 +5,9 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/VouIdService.java
-import com.cv.account.inv.entity.CompoundKey;
-import com.cv.account.inv.entity.VouId;
 import java.util.List;
-=======
 import com.cv.inv.entity.CompoundKey;
 import com.cv.inv.entity.VouId;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/VouIdService.java
 
 /**
  *
@@ -23,7 +18,9 @@ public interface VouIdService {
     public VouId save(VouId vouId);
 
     public Object getMax(String machineName, String vouType, String vouPeriod) throws Exception;
+
     public Object find(CompoundKey key);
-        public List<VouId> search(String machineName, String vouType, String period);
+
+    public List<VouId> search(String machineName, String vouType, String period);
 
 }

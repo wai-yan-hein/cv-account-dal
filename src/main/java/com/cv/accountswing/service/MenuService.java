@@ -25,13 +25,11 @@ public interface MenuService {
     public List<Menu> getParentChildMenu();
 
     public List getParentChildMenu(String roleId, String menuType);
-<<<<<<< HEAD:src/main/java/com/cv/account/api/service/MenuService.java
-    
-     public List<Menu> searchM(String updatedDate);
-=======
+
+    public List<Menu> searchM(String updatedDate);
 
     public List getReports(String roleId);
 
     public List getReportList(String roleId, String partentCode);
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/accountswing/service/MenuService.java
+
 }

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cv.account.api.common;
+package com.cv.accountswing.common;
 
 
-import com.cv.account.api.util.Util1;
+
+import com.cv.accountswing.util.Util1;
 import java.io.File;
 import java.sql.Connection;
 import java.util.UUID;

@@ -5,15 +5,9 @@
  */
 package com.cv.inv.dao;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/dao/RetOutDaoImpl.java
-import com.cv.account.api.dao.AbstractDao;
-import com.cv.account.inv.entity.RetOutHis;
 import java.sql.ResultSet;
-=======
 import com.cv.accountswing.dao.AbstractDao;
-import com.cv.inv.entity.RetOutHisDetail;
 import com.cv.inv.entity.RetOutHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/dao/RetOutDaoImpl.java
 import java.util.List;
 import org.springframework.stereotype.Repository;
 

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cv.account.inv.dao;
+package com.cv.inv.dao;
 
 
-import com.cv.account.inv.entity.FileSize;
+import com.cv.inv.entity.FileSize;
 import java.util.List;
 
 /**

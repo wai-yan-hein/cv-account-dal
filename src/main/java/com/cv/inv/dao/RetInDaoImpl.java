@@ -5,14 +5,12 @@
  */
 package com.cv.inv.dao;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/dao/RetInDaoImpl.java
-import com.cv.account.api.dao.AbstractDao;
-import com.cv.account.inv.entity.RetInHis;
+
+
 import java.sql.ResultSet;
-=======
 import com.cv.accountswing.dao.AbstractDao;
 import com.cv.inv.entity.RetInHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/dao/RetInDaoImpl.java
+
 import java.util.List;
 import org.springframework.stereotype.Repository;
 

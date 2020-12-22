@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author winswe
  */
-
 @Repository
 public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
 
@@ -139,14 +138,14 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
             }
         }
     }
-<<<<<<< HEAD:src/main/java/com/cv/account/api/dao/MenuDaoImpl.java
-    
-      @Override
-    public List<Menu> searchM(String updatedDate){
+
+    @Override
+    public List<Menu> searchM(String updatedDate) {
         String strSql = "select o from Menu o where o.updatedDate > '" + updatedDate + "'";
         List<Menu> listMU = findHSQL(strSql);
         return listMU;
-=======
+
+    }
 
     @Override
     public List getReports(String roleId) {
@@ -159,7 +158,5 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
         String hsql = "select o from VRoleMenu o where o.key.roleId = " + roleId + " and o.isAllow = true"
                 + "  and o.parent ='" + parentCode + "'";
         return findHSQL(hsql);
-
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/accountswing/dao/MenuDaoImpl.java
     }
 }

@@ -5,12 +5,8 @@
  */
 package com.cv.inv.dao;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/dao/RetInDao.java
-import com.cv.account.inv.entity.RetInHis;
 import java.sql.ResultSet;
-=======
 import com.cv.inv.entity.RetInHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/dao/RetInDao.java
 import java.util.List;
 
 /**

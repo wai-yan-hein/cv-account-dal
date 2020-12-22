@@ -5,14 +5,13 @@
  */
 package com.cv.inv.dao;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/dao/VouIdDao.java
-import com.cv.account.inv.entity.CompoundKey;
-import com.cv.account.inv.entity.VouId;
-import java.util.List;
-=======
+
+
+
 import com.cv.inv.entity.CompoundKey;
 import com.cv.inv.entity.VouId;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/dao/VouIdDao.java
+import java.util.List;
+
 
 /**
  *

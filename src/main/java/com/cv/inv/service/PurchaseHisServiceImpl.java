@@ -5,18 +5,15 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/PurchaseHisServiceImpl.java
+
 import com.cv.account.api.dummy.VouSearch;
-import com.cv.account.api.util.Util1;
-import com.cv.account.inv.dao.PurchaseHisDao;
-import com.cv.account.inv.entity.PurHis;
+import com.cv.accountswing.util.Util1;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
-=======
-
 import com.cv.inv.dao.PurchaseHisDao;
 import com.cv.inv.entity.PurHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/PurchaseHisServiceImpl.java
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

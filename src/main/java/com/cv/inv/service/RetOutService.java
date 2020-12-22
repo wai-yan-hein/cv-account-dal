@@ -5,14 +5,9 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/RetOutService.java
 import com.cv.account.api.dummy.VouSearch;
-import com.cv.account.inv.entity.RetOutHisDetail;
-import com.cv.account.inv.entity.RetOutHis;
-=======
 import com.cv.inv.entity.RetOutHisDetail;
 import com.cv.inv.entity.RetOutHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/RetOutService.java
 import java.util.List;
 
 /**

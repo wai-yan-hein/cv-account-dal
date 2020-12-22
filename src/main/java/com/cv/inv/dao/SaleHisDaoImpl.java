@@ -5,17 +5,10 @@
  */
 package com.cv.inv.dao;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/dao/SaleHisDaoImpl.java
-import com.cv.account.api.dao.AbstractDao;
-import com.cv.account.inv.entity.SaleHis;
 import java.sql.ResultSet;
-=======
 import com.cv.accountswing.dao.AbstractDao;
-import com.cv.accountswing.util.Util1;
 import com.cv.inv.entity.SaleHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/dao/SaleHisDaoImpl.java
 import java.util.List;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -199,7 +192,7 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
                     + " join sale_his_detail shd ON shd.vou_id = sh.voucher_no\n"
                     + " join appuser apu on sh.user_id = apu.user_id\n"
                     + " left join trader td on sh.cus_id=td.id\n"
-                    + " where " +strSql
+                    + " where " + strSql
                     + " and sh.deleted= false order by sh.sale_date desc, sh.voucher_no desc";
             rs = getResultSet(strSql);
         }

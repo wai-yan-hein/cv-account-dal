@@ -5,23 +5,17 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/RetInServiceImpl.java
+
 import com.cv.account.api.dummy.VouSearch;
-import com.cv.account.api.util.Util1;
-import com.cv.account.inv.dao.RetInDao;
-import com.cv.account.inv.dao.RetInDetailDao;
-import com.cv.account.inv.entity.RetInCompoundKey;
-import com.cv.account.inv.entity.RetInHisDetail;
-import com.cv.account.inv.entity.RetInHis;
+import com.cv.accountswing.util.Util1;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
-=======
 import com.cv.inv.dao.RetInDao;
 import com.cv.inv.dao.RetInDetailDao;
 import com.cv.inv.entity.RetInCompoundKey;
 import com.cv.inv.entity.RetInHisDetail;
 import com.cv.inv.entity.RetInHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/RetInServiceImpl.java
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

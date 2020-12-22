@@ -5,23 +5,16 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/RetOutServiceImpl.java
+
 import com.cv.account.api.dummy.VouSearch;
-import com.cv.account.api.util.Util1;
-import com.cv.account.inv.dao.RetOutDao;
-import com.cv.account.inv.dao.RetOutDetailDao;
-import com.cv.account.inv.entity.RetOutCompoundKey;
-import com.cv.account.inv.entity.RetOutHisDetail;
-import com.cv.account.inv.entity.RetOutHis;
+import com.cv.accountswing.util.Util1;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-=======
 import com.cv.inv.dao.RetOutDao;
 import com.cv.inv.dao.RetOutDetailDao;
 import com.cv.inv.entity.RetOutCompoundKey;
 import com.cv.inv.entity.RetOutHisDetail;
 import com.cv.inv.entity.RetOutHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/RetOutServiceImpl.java
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author lenovo
  */
+
+
 @Service
 @Transactional
 public class RetOutServiceImpl implements RetOutService {

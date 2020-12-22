@@ -5,12 +5,8 @@
  */
 package com.cv.inv.dao;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/dao/SaleHisDao.java
-import com.cv.account.inv.entity.SaleHis;
 import java.sql.ResultSet;
-=======
 import com.cv.inv.entity.SaleHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/dao/SaleHisDao.java
 import java.util.List;
 
 /**

@@ -2,30 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< HEAD:src/main/java/com/cv/account/api/util/Util1.java
-package com.cv.account.api.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-=======
 package com.cv.accountswing.util;
 
+
+import com.cv.account.api.util.ZipFile;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/accountswing/util/Util1.java
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
-<<<<<<< HEAD:src/main/java/com/cv/account/api/util/Util1.java
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
-=======
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/accountswing/util/Util1.java
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -251,13 +245,12 @@ public class Util1 {
 
         return status;
     }
-<<<<<<< HEAD:src/main/java/com/cv/account/api/util/Util1.java
-    
-    return status;
-    }*/
-=======
 
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/accountswing/util/Util1.java
+    
+
+
+
+
     public static String getFileExtension(String content) {
         String extension = "";
 

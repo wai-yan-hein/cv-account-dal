@@ -1,8 +1,9 @@
-package com.cv.account.inv.dao;
+package com.cv.inv.dao;
 
 
-import com.cv.account.api.dao.AbstractDao;
-import com.cv.account.inv.entity.FileSize;
+;
+import com.cv.inv.entity.FileSize;
+import com.cv.accountswing.dao.AbstractDao;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 

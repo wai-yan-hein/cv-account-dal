@@ -5,21 +5,15 @@
  */
 package com.cv.inv.service;
 
-<<<<<<< HEAD:src/main/java/com/cv/account/inv/service/DamageHisServiceImpl.java
 import com.cv.account.api.dummy.DamageVouSearch;
-import com.cv.account.api.util.Util1;
-import com.cv.account.inv.dao.DamageDetailHisDao;
-import com.cv.account.inv.dao.DamageHisDao;
-import com.cv.account.inv.entity.DamageDetailHis;
-import com.cv.account.inv.entity.DamageHis;
+import com.cv.accountswing.util.Util1;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
-=======
 import com.cv.inv.dao.DamageDetailHisDao;
 import com.cv.inv.dao.DamageHisDao;
 import com.cv.inv.entity.DamageDetailHis;
 import com.cv.inv.entity.DamageHis;
->>>>>>> b9f0fe79da6831b8a9010e055b7731427530312d:src/main/java/com/cv/inv/service/DamageHisServiceImpl.java
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
