@@ -71,17 +71,17 @@ public class Stock implements java.io.Serializable {
     @Column(name = "remark")
     private String remark;
     @Column(name = "sale_price_n")
-    private Double salePriceN;
+    private Float salePriceN;
     @Column(name = "sale_price_a")
-    private Double salePriceA;
+    private Float salePriceA;
     @Column(name = "sale_price_b")
-    private Double salePriceB;
+    private Float salePriceB;
     @Column(name = "sale_price_c")
-    private Double salePriceC;
+    private Float salePriceC;
     @Column(name = "sale_price_d")
-    private Double salePriceD;
+    private Float salePriceD;
     @Column(name = "cost_price_std")
-    private Double sttCostPrice;
+    private Float sttCostPrice;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;
@@ -222,51 +222,51 @@ public class Stock implements java.io.Serializable {
         this.remark = remark;
     }
 
-    public Double getSalePriceN() {
+    public Float getSalePriceN() {
         return salePriceN;
     }
 
-    public void setSalePriceN(Double salePriceN) {
+    public void setSalePriceN(Float salePriceN) {
         this.salePriceN = salePriceN;
     }
 
-    public Double getSalePriceA() {
+    public Float getSalePriceA() {
         return salePriceA;
     }
 
-    public void setSalePriceA(Double salePriceA) {
+    public void setSalePriceA(Float salePriceA) {
         this.salePriceA = salePriceA;
     }
 
-    public Double getSalePriceB() {
+    public Float getSalePriceB() {
         return salePriceB;
     }
 
-    public void setSalePriceB(Double salePriceB) {
+    public void setSalePriceB(Float salePriceB) {
         this.salePriceB = salePriceB;
     }
 
-    public Double getSalePriceC() {
+    public Float getSalePriceC() {
         return salePriceC;
     }
 
-    public void setSalePriceC(Double salePriceC) {
+    public void setSalePriceC(Float salePriceC) {
         this.salePriceC = salePriceC;
     }
 
-    public Double getSalePriceD() {
+    public Float getSalePriceD() {
         return salePriceD;
     }
 
-    public void setSalePriceD(Double salePriceD) {
+    public void setSalePriceD(Float salePriceD) {
         this.salePriceD = salePriceD;
     }
 
-    public Double getSttCostPrice() {
+    public Float getSttCostPrice() {
         return sttCostPrice;
     }
 
-    public void setSttCostPrice(Double sttCostPrice) {
+    public void setSttCostPrice(Float sttCostPrice) {
         this.sttCostPrice = sttCostPrice;
     }
 
