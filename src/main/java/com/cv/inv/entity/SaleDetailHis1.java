@@ -8,7 +8,6 @@ package com.cv.inv.entity;
 import com.cv.accountswing.entity.Department;
 import java.util.Date;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -34,10 +33,10 @@ public class SaleDetailHis1 implements java.io.Serializable {
     private Float quantity;
     private Float saleSmallestQty;
     private StockUnit itemUnit;
-    private Double price;
-    private Double discount;
+    private Float price;
+    private Float discount;
     private String discType;
-    private Double amount;
+    private Float amount;
     private Location location;
     private Integer uniqueId;
     private Float stdWeight;
@@ -116,20 +115,20 @@ public class SaleDetailHis1 implements java.io.Serializable {
     }
 
     @Column(name = "sale_price", nullable = false)
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
     @Column(name = "item_discount")
-    public Double getDiscount() {
+    public Float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(Float discount) {
         this.discount = discount;
     }
 
@@ -143,11 +142,11 @@ public class SaleDetailHis1 implements java.io.Serializable {
     }
 
     @Column(name = "sale_amount", nullable = false)
-    public Double getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 

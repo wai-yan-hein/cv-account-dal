@@ -125,4 +125,9 @@ public class COAServiceImpl implements COAService {
         String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
         return coaCode;
     }
+
+    @Override
+    public List<ChartOfAccount> searchWhereIn(String strList, String compCode) {
+        return dao.searchWhereIn(strList, compCode);
+    }
 }

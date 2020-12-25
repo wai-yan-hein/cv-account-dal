@@ -26,12 +26,12 @@ public class RetInHisDetail implements java.io.Serializable {
     @Column(name = "ret_in_qty")
     private Float qty;
     @Column(name = "ret_in_price")
-    private Double price;
+    private Float price;
     @ManyToOne
     @JoinColumn(name = "stock_unit")
     private StockUnit stockUnit;
     @Column(name = "ret_in_amount")
-    private Double amount;
+    private Float amount;
     @Column(name = "unique_id")
     private Integer uniqueId;
     @Column(name = "ret_in_std_weight")
@@ -74,11 +74,11 @@ public class RetInHisDetail implements java.io.Serializable {
         this.qty = qty;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -90,11 +90,11 @@ public class RetInHisDetail implements java.io.Serializable {
         this.stockUnit = stockUnit;
     }
 
-    public Double getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 

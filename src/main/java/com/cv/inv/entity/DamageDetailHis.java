@@ -33,8 +33,8 @@ public class DamageDetailHis implements java.io.Serializable {
     private StockUnit unit;
     private Integer uniqueId;
     private Float smallestQty;
-    private Double costPrice;
-    private Double amount;
+    private Float costPrice;
+    private Float amount;
     private Date updatedDate;
 
     @Id
@@ -115,20 +115,20 @@ public class DamageDetailHis implements java.io.Serializable {
     }
 
     @Column(name = "cost_price")
-    public Double getCostPrice() {
+    public Float getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(Double costPrice) {
+    public void setCostPrice(Float costPrice) {
         this.costPrice = costPrice;
     }
 
     @Column(name = "amount")
-    public Double getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 

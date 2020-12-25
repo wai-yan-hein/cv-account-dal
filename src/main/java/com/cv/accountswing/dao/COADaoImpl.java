@@ -176,11 +176,11 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
             if (!listCOA.isEmpty()) {
                 listAllChild.addAll(listCOA);
             }
+            listCOA.forEach(coa -> {
+                getChild(listAllChild, coa.getCode(), compCode);
+            });
         }
 
-        for (ChartOfAccount coa : listCOA) {
-            getChild(listAllChild, coa.getCode(), compCode);
-        }
     }
 
     @Override
@@ -229,5 +229,12 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
         }
 
         return listCOA;
+    }
+
+    @Override
+    public List<ChartOfAccount> searchWhereIn(String strList, String compCode) {
+        String hsql = "select o from ChartOfAccount o where o.code in (" + strList + ") "
+                + "and o.active = true and o.compCode = " + compCode + "";
+        return findHSQL(hsql);
     }
 }

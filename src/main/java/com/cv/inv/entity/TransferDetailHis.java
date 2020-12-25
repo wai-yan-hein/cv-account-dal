@@ -20,14 +20,14 @@ public class TransferDetailHis implements java.io.Serializable {
     private Stock medicineId;
     private Date expireDate;
     private Float qty;
-    private Double price;
+    private Float price;
     private StockUnit unit;
     private Integer uniqueId;
     private Float smallestQty;
     private String inHandQtyStr;
     private Float inHandQtySmall;
     private String balQtyStr;
-    private Double amount;
+    private Float amount;
     private String tranVouId;
     private Date updatedDate;
 
@@ -52,11 +52,11 @@ public class TransferDetailHis implements java.io.Serializable {
     }
 
     @Column(name = "tran_price")
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -136,11 +136,11 @@ public class TransferDetailHis implements java.io.Serializable {
     }
 
     @Column(name = "amount")
-    public Double getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 

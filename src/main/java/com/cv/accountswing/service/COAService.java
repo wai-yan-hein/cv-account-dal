@@ -28,4 +28,5 @@ public interface COAService {
     public List<ChartOfAccount> getCompanyCOA(String compCode);
     public List<ChartOfAccount> getCompanyCOA(String compCode, String deptId, String projectId);
     public List<ChartOfAccount> getChild(String compCode, String parent);
+    public List<ChartOfAccount> searchWhereIn(String strList,String compCode);
 }
