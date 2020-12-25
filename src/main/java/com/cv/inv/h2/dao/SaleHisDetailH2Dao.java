@@ -3,23 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cv.account.inv.service;
+package com.cv.inv.h2.dao;
 
-
-import com.cv.inv.entity.FileSize;
+import com.cv.inv.h2.entity.SaleHisDetailH2;
 import java.util.List;
 
 /**
  *
- * @author Sai
+ * @author SAI
  */
-public interface FileSizeService {
+public interface SaleHisDetailH2Dao {
 
-    public FileSize save(FileSize fs);
+    public SaleHisDetailH2 save(SaleHisDetailH2 sdh);
 
-    public FileSize findById(Integer id);
-
-    public List<FileSize> search(String queue);
+    public List<SaleHisDetailH2> search(String vouId);
 
     public int delete(String id);
+
 }

@@ -5,7 +5,7 @@
  */
 package com.cv.inv.service;
 
-import com.cv.account.api.dummy.VouSearch;
+import com.cv.accountswing.dummy.VouSearch;
 import com.cv.inv.entity.RetOutHisDetail;
 import com.cv.inv.entity.RetOutHis;
 import java.util.List;

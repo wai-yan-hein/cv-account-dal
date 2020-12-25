@@ -5,7 +5,8 @@
  */
 package com.cv.inv.service;
 
-import com.cv.account.api.dummy.DamageVouSearch;
+
+import com.cv.accountswing.dummy.DamageVouSearch;
 import com.cv.accountswing.util.Util1;
 
 import java.sql.ResultSet;

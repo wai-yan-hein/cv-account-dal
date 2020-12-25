@@ -6,7 +6,7 @@
 package com.cv.inv.service;
 
 
-import com.cv.account.api.dummy.VouSearch;
+import com.cv.accountswing.dummy.VouSearch;
 import com.cv.accountswing.util.Util1;
 import java.sql.ResultSet;
 import java.util.ArrayList;

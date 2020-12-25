@@ -5,7 +5,8 @@
  */
 package com.cv.inv.service;
 
-import com.cv.account.api.dummy.DamageVouSearch;
+
+import com.cv.accountswing.dummy.DamageVouSearch;
 import com.cv.inv.entity.DamageDetailHis;
 import com.cv.inv.entity.DamageHis;
 import java.util.List;

@@ -5,7 +5,8 @@
  */
 package com.cv.inv.service;
 
-import com.cv.account.api.dummy.VouSearch;
+
+import com.cv.accountswing.dummy.VouSearch;
 import com.cv.inv.entity.PurHis;
 import java.util.List;
 
