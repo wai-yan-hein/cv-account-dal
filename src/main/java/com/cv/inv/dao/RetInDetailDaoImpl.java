@@ -6,6 +6,7 @@
 package com.cv.inv.dao;
 
 import com.cv.accountswing.dao.AbstractDao;
+import com.cv.inv.entity.RetInCompoundKey;
 import com.cv.inv.entity.RetInHisDetail;
 import java.util.List;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author Lenovo
  */
 @Repository
-public class RetInDetailDaoImpl extends AbstractDao<String, RetInHisDetail> implements RetInDetailDao {
+public class RetInDetailDaoImpl extends AbstractDao<RetInCompoundKey, RetInHisDetail> implements RetInDetailDao {
 
     @Override
     public RetInHisDetail save(RetInHisDetail pd) {
@@ -24,29 +25,26 @@ public class RetInDetailDaoImpl extends AbstractDao<String, RetInHisDetail> impl
     }
 
     @Override
-    public List<RetInHisDetail> search(String glId) {
+    public List<RetInHisDetail> search(String retInCode) {
         String strFilter = "";
-        if (!glId.equals("-")) {
+        if (!retInCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "v.inCompoundKey.vouNo = '" + glId + "'";
+                strFilter = "o.retInKey.vouNo = '" + retInCode + "'";
             } else {
-                strFilter = strFilter + " and v.inCompoundKey.vouNo = '" + glId + "'";
+                strFilter = strFilter + " and o.retInKey.vouNo = '" + retInCode + "'";
             }
         }
-        String strSql = "select v from RetInDetailHis v";
+        String strSql = "select o from RetInHisDetail o";
 
-        List<RetInHisDetail> listDH = null;
         if (!strFilter.isEmpty()) {
             strSql = strSql + " where " + strFilter;
-            listDH = findHSQL(strSql);
         }
-
-        return listDH;
+        return findHSQL(strSql);
     }
 
     @Override
     public int delete(String id) {
-        String strSql = "delete from RetInDetailHis o where o.inCompoundKey.retInDetailId = '" + id + "'";
+        String strSql = "delete from RetInDetailHis o where o.retInKey.retInDetailId = '" + id + "'";
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

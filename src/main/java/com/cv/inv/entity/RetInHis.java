@@ -4,6 +4,7 @@
  */
 package com.cv.inv.entity;
 
+import com.cv.accountswing.entity.AppUser;
 import com.cv.accountswing.entity.Currency;
 import com.cv.accountswing.entity.PaymentType;
 import com.cv.accountswing.entity.Trader;
@@ -25,43 +26,38 @@ public class RetInHis implements java.io.Serializable {
     private PaymentType paymentType;
     private Location location;
     private String remark;
-    private String createdBy;
+    private AppUser createdBy;
     private Date createdDate;
-    private String updatedBy;
+    private AppUser updatedBy;
     private Date updatedDate;
     private Boolean deleted;
     private Integer session;
-    private Double vouTotal;
-    private Double paid;
-    private Double balance;
+    private Float vouTotal;
+    private Float paid;
+    private Float balance;
     private Currency currency;
     //For parent currency
-    private Double exRateP;
+    private Float exRateP;
     //=========================
-    //For school
-    private String regNo;
-    private String stuNo;
-    private String stuName;
 
     private String migId;
-    private String admissionNo;
-    private String ptType; //Patient Type
 
     @Column(name = "balance")
-    public Double getBalance() {
+    public Float getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(Float balance) {
         this.balance = balance;
     }
 
-    @Column(name = "created_by")
-    public String getCreatedBy() {
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    public AppUser getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy) {
+    public void setCreatedBy(AppUser createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -107,11 +103,11 @@ public class RetInHis implements java.io.Serializable {
     }
 
     @Column(name = "paid")
-    public Double getPaid() {
+    public Float getPaid() {
         return paid;
     }
 
-    public void setPaid(Double paid) {
+    public void setPaid(Float paid) {
         this.paid = paid;
     }
 
@@ -145,7 +141,7 @@ public class RetInHis implements java.io.Serializable {
     }
 
     @Id
-    @Column(name = "ret_in_id", unique = true, nullable = false, length = 15)
+    @Column(name = "ret_in_code", unique = true, nullable = false, length = 15)
     public String getRetInId() {
         return retInId;
     }
@@ -163,12 +159,13 @@ public class RetInHis implements java.io.Serializable {
         this.session = session;
     }
 
-    @Column(name = "updated_by")
-    public String getUpdatedBy() {
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    public AppUser getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(String updatedBy) {
+    public void setUpdatedBy(AppUser updatedBy) {
         this.updatedBy = updatedBy;
     }
 
@@ -183,11 +180,11 @@ public class RetInHis implements java.io.Serializable {
     }
 
     @Column(name = "vou_total")
-    public Double getVouTotal() {
+    public Float getVouTotal() {
         return vouTotal;
     }
 
-    public void setVouTotal(Double vouTotal) {
+    public void setVouTotal(Float vouTotal) {
         this.vouTotal = vouTotal;
     }
 
@@ -205,39 +202,12 @@ public class RetInHis implements java.io.Serializable {
     }
 
     @Column(name = "exchange_rate_p")
-    public Double getExRateP() {
+    public Float getExRateP() {
         return exRateP;
     }
 
-    public void setExRateP(Double exRateP) {
+    public void setExRateP(Float exRateP) {
         this.exRateP = exRateP;
-    }
-
-    @Column(name = "stu_reg_no", length = 15)
-    public String getRegNo() {
-        return regNo;
-    }
-
-    public void setRegNo(String regNo) {
-        this.regNo = regNo;
-    }
-
-    @Column(name = "stu_no", length = 25)
-    public String getStuNo() {
-        return stuNo;
-    }
-
-    public void setStuNo(String stuNo) {
-        this.stuNo = stuNo;
-    }
-
-    @Column(name = "stu_name", length = 255)
-    public String getStuName() {
-        return stuName;
-    }
-
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
     }
 
     @Column(name = "mig_id", length = 25)
@@ -249,21 +219,5 @@ public class RetInHis implements java.io.Serializable {
         this.migId = migId;
     }
 
-    @Column(name = "admission_no", length = 15)
-    public String getAdmissionNo() {
-        return admissionNo;
-    }
-
-    public void setAdmissionNo(String admissionNo) {
-        this.admissionNo = admissionNo;
-    }
-
-    @Column(name = "patient_type", length = 15)
-    public String getPtType() {
-        return ptType;
-    }
-
-    public void setPtType(String ptType) {
-        this.ptType = ptType;
-    }
+    
 }
