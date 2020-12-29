@@ -74,12 +74,12 @@ public class SaleHisH2 implements java.io.Serializable{
     private Double vouBalance;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private AppUser createdBy;
+    private AppUserH2 createdBy;
     @Column(name = "session_id")
     private Integer session;
     @ManyToOne
     @JoinColumn(name = "updated_by")
-    private AppUser updatedBy;
+    private AppUserH2 updatedBy;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;
@@ -237,11 +237,11 @@ public class SaleHisH2 implements java.io.Serializable{
         this.vouBalance = vouBalance;
     }
 
-    public AppUser getCreatedBy() {
+    public AppUserH2 getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(AppUser createdBy) {
+    public void setCreatedBy(AppUserH2 createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -253,11 +253,11 @@ public class SaleHisH2 implements java.io.Serializable{
         this.updatedDate = updatedDate;
     }
 
-    public AppUser getUpdatedBy() {
+    public AppUserH2 getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(AppUser updatedBy) {
+    public void setUpdatedBy(AppUserH2 updatedBy) {
         this.updatedBy = updatedBy;
     }
 

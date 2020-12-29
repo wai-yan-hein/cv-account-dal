@@ -33,7 +33,7 @@ public class SaleHisDetailH2 implements java.io.Serializable {
     private StockUnit saleUnit;
     private Float price;
     private Float amount;
-    private Location location;
+    private LocationH2 location;
     private Integer uniqueId;
     private Float stdWeight;
     private Long glId;
@@ -119,11 +119,11 @@ public class SaleHisDetailH2 implements java.io.Serializable {
 
     @ManyToOne
     @JoinColumn(name = "loc_id")
-    public Location getLocation() {
+    public LocationH2 getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LocationH2 location) {
         this.location = location;
     }
 

@@ -32,21 +32,21 @@ public class StockH2 implements java.io.Serializable {
     private Boolean isActive;
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    private StockBrand brand;
+    private StockBrandH2 brand;
     @Column(name = "stock_name", nullable = true, length = 100, unique = true)
     private String stockName;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category category;
+    private CategoryH2 category;
     @ManyToOne
     @JoinColumn(name = "stock_type_code")
     private StockType stockType;
     @ManyToOne
     @JoinColumn(name = "created_by")
-    private AppUser createdBy;
+    private AppUserH2 createdBy;
     @ManyToOne
     @JoinColumn(name = "updated_by")
-    private AppUser updatedBy;
+    private AppUserH2 updatedBy;
     @Column(name = "barcode")
     private String barcode;
     @Column(name = "short_name", length = 50)
@@ -57,15 +57,15 @@ public class StockH2 implements java.io.Serializable {
     private Float purPrice;
     @ManyToOne
     @JoinColumn(name = "pur_price_unit")
-    private StockUnit purPriceUnit;
+    private StockUnitH2 purPriceUnit;
     @Column(name = "sale_price_mes")
     private Float saleMeasure;
     @ManyToOne
     @JoinColumn(name = "sale_unit")
-    private StockUnit saleUnit;
+    private StockUnitH2 saleUnit;
     @ManyToOne
     @JoinColumn(name = "pattern_id")
-    private UnitPattern pattern;
+    private UnitPatternH2 pattern;
     @Temporal(TemporalType.DATE)
     @Column(name = "licene_exp_date")
     private Date expireDate;
@@ -103,11 +103,11 @@ public class StockH2 implements java.io.Serializable {
         this.isActive = isActive;
     }
 
-    public StockBrand getBrand() {
+    public StockBrandH2 getBrand() {
         return brand;
     }
 
-    public void setBrand(StockBrand brand) {
+    public void setBrand(StockBrandH2 brand) {
         this.brand = brand;
     }
 
@@ -119,11 +119,11 @@ public class StockH2 implements java.io.Serializable {
         this.stockName = stockName;
     }
 
-    public Category getCategory() {
+    public CategoryH2 getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryH2 category) {
         this.category = category;
     }
 
@@ -135,19 +135,19 @@ public class StockH2 implements java.io.Serializable {
         this.stockType = stockType;
     }
 
-    public AppUser getCreatedBy() {
+    public AppUserH2 getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(AppUser createdBy) {
+    public void setCreatedBy(AppUserH2 createdBy) {
         this.createdBy = createdBy;
     }
 
-    public AppUser getUpdatedBy() {
+    public AppUserH2 getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(AppUser updatedBy) {
+    public void setUpdatedBy(AppUserH2 updatedBy) {
         this.updatedBy = updatedBy;
     }
 
@@ -183,11 +183,11 @@ public class StockH2 implements java.io.Serializable {
         this.purPrice = purPrice;
     }
 
-    public StockUnit getPurPriceUnit() {
+    public StockUnitH2 getPurPriceUnit() {
         return purPriceUnit;
     }
 
-    public void setPurPriceUnit(StockUnit purPriceUnit) {
+    public void setPurPriceUnit(StockUnitH2 purPriceUnit) {
         this.purPriceUnit = purPriceUnit;
     }
 
@@ -199,11 +199,11 @@ public class StockH2 implements java.io.Serializable {
         this.saleMeasure = saleMeasure;
     }
 
-    public StockUnit getSaleUnit() {
+    public StockUnitH2 getSaleUnit() {
         return saleUnit;
     }
 
-    public void setSaleUnit(StockUnit saleUnit) {
+    public void setSaleUnit(StockUnitH2 saleUnit) {
         this.saleUnit = saleUnit;
     }
 
@@ -271,11 +271,11 @@ public class StockH2 implements java.io.Serializable {
         this.sttCostPrice = sttCostPrice;
     }
 
-    public UnitPattern getPattern() {
+    public UnitPatternH2 getPattern() {
         return pattern;
     }
 
-    public void setPattern(UnitPattern pattern) {
+    public void setPattern(UnitPatternH2 pattern) {
         this.pattern = pattern;
     }
 
