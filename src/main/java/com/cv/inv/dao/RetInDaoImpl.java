@@ -29,23 +29,23 @@ public class RetInDaoImpl extends AbstractDao<String, RetInHis> implements RetIn
 
         if (!fromDate.equals("-") && !toDate.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.retInDate between '" + fromDate
+                strFilter = "date(o.retInDate) between '" + fromDate
                         + "' and '" + toDate + "'";
             } else {
-                strFilter = strFilter + " and o.retInDate between '"
+                strFilter = strFilter + " and date(o.retInDate) between '"
                         + fromDate + "' and '" + toDate + "'";
             }
         } else if (!fromDate.endsWith("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.retInDate >= '" + fromDate + "'";
+                strFilter = "date(o.retInDate) >= '" + fromDate + "'";
             } else {
-                strFilter = strFilter + " and o.retInDate >= '" + fromDate + "'";
+                strFilter = strFilter + " and date(o.retInDate) >= '" + fromDate + "'";
             }
         } else if (!toDate.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.retInDate <= '" + toDate + "'";
+                strFilter = "date(o.retInDate) <= '" + toDate + "'";
             } else {
-                strFilter = strFilter + " and o.retInDate <= '" + toDate + "'";
+                strFilter = strFilter + " and date(o.retInDate) <= '" + toDate + "'";
             }
         }
 
@@ -56,7 +56,6 @@ public class RetInDaoImpl extends AbstractDao<String, RetInHis> implements RetIn
                 strFilter = strFilter + " and o.customer = '" + cusId + "'";
             }
         }
-
         if (!locId.equals("-")) {
             if (strFilter.isEmpty()) {
                 strFilter = "o.location = '" + locId + "'";

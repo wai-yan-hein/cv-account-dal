@@ -30,9 +30,6 @@ public class RetInDetatilServiceImpl implements RetInDetailService {
 
     @Autowired
     private RetInDetailDao dao;
-    @Autowired
-    private PurchaseHisDao glDao;
-
     @Override
     public RetInHisDetail save(RetInHisDetail pd) {
 

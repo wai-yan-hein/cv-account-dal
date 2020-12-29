@@ -56,7 +56,7 @@ public class Stock implements java.io.Serializable {
     private Float purPrice;
     @ManyToOne
     @JoinColumn(name = "pur_price_unit")
-    private StockUnit purPriceUnit;
+    private StockUnit purUnit;
     @Column(name = "sale_price_mes")
     private Float saleMeasure;
     @ManyToOne
@@ -182,14 +182,6 @@ public class Stock implements java.io.Serializable {
         this.purPrice = purPrice;
     }
 
-    public StockUnit getPurPriceUnit() {
-        return purPriceUnit;
-    }
-
-    public void setPurPriceUnit(StockUnit purPriceUnit) {
-        this.purPriceUnit = purPriceUnit;
-    }
-
     public Float getSaleMeasure() {
         return saleMeasure;
     }
@@ -285,6 +277,13 @@ public class Stock implements java.io.Serializable {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
+
+    public StockUnit getPurUnit() {
+        return purUnit;
+    }
+
+    public void setPurUnit(StockUnit purUnit) {
+        this.purUnit = purUnit;
+    }
 
 }

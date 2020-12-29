@@ -6,7 +6,6 @@
 package com.cv.inv.dao;
 
 import com.cv.accountswing.dao.AbstractDao;
-import com.cv.inv.entity.Category;
 import com.cv.inv.entity.PurHisDetail;
 import java.util.List;
 import org.springframework.stereotype.Repository;

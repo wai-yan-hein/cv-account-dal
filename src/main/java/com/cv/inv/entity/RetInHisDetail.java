@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class RetInHisDetail implements java.io.Serializable {
 
     @EmbeddedId
-    private RetInCompoundKey inCompoundKey;
+    private RetInCompoundKey retInKey;
     @ManyToOne
     @JoinColumn(name = "stock_code")
     private Stock stock;
@@ -42,14 +42,15 @@ public class RetInHisDetail implements java.io.Serializable {
     @JoinColumn(name = "small_unit")
     private StockUnit smallUnit;
 
-    public RetInCompoundKey getInCompoundKey() {
-        return inCompoundKey;
+    public RetInCompoundKey getRetInKey() {
+        return retInKey;
     }
 
-    public void setInCompoundKey(RetInCompoundKey inCompoundKey) {
-        this.inCompoundKey = inCompoundKey;
+    public void setRetInKey(RetInCompoundKey retInKey) {
+        this.retInKey = retInKey;
     }
 
+    
     public Stock getStock() {
         return stock;
     }

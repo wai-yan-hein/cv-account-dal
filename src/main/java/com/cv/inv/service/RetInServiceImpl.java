@@ -19,14 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author lenovo
+ * @author Wai Yan
  */
 @Service
 @Transactional
 public class RetInServiceImpl implements RetInService {
 
-    private static final Logger logger = LoggerFactory.getLogger(RetInServiceImpl.class);
-    RetInHisDetail retInDetailHis = null;
+    private static final Logger log = LoggerFactory.getLogger(RetInServiceImpl.class);
 
     @Autowired
     private RetInDao retInDao;
@@ -36,33 +35,29 @@ public class RetInServiceImpl implements RetInService {
 
     @Override
     public void save(RetInHis retIn, List<RetInHisDetail> listRetIn, List<String> delList) {
-
         String retInDetailId;
-        RetInCompoundKey key;
-
         try {
             if (delList != null) {
-                for (String detailId : delList) {
+                delList.forEach(detailId -> {
                     dao.delete(detailId);
-                }
+                });
             }
             retInDao.save(retIn);
             String vouNo = retIn.getRetInId();
             for (RetInHisDetail rd : listRetIn) {
                 if (rd.getStock() != null) {
-                    if (rd.getInCompoundKey() != null) {
-                        rd.setInCompoundKey(rd.getInCompoundKey());
+                    if (rd.getRetInKey() != null) {
+                        rd.setRetInKey(rd.getRetInKey());
                     } else {
                         retInDetailId = vouNo + '-' + rd.getUniqueId();
-                        rd.setInCompoundKey(new RetInCompoundKey(retInDetailId, vouNo));
+                        rd.setRetInKey(new RetInCompoundKey(retInDetailId, vouNo));
                     }
                     dao.save(rd);
                 }
-
             }
 
         } catch (Exception ex) {
-            logger.error("saveRetIn : " + ex.getStackTrace()[0].getLineNumber() + " - " + ex.getMessage());
+            log.error("saveRetIn : " + ex.getStackTrace()[0].getLineNumber() + " - " + ex.getMessage());
 
         }
 
