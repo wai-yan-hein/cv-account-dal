@@ -26,11 +26,11 @@ import javax.persistence.TemporalType;
 public class SaleHisDetailH2 implements java.io.Serializable {
 
     private SaleDetailKeyH2 saleDetailKey;
-    private Stock stock;
+    private StockH2 stock;
     private Date expDate;
     private Float quantity;
     private Float saleSmallestQty;
-    private StockUnit saleUnit;
+    private StockUnitH2 saleUnit;
     private Float price;
     private Float amount;
     private LocationH2 location;
@@ -39,7 +39,7 @@ public class SaleHisDetailH2 implements java.io.Serializable {
     private Long glId;
     private Float smallestWT;
     private String smallestUnit;
-    private Department department;
+    private DepartmentH2 department;
     private Float stdSmallWeight;
 
     @EmbeddedId
@@ -53,11 +53,11 @@ public class SaleHisDetailH2 implements java.io.Serializable {
 
     @ManyToOne
     @JoinColumn(name = "stock_code", nullable = false)
-    public Stock getStock() {
+    public StockH2 getStock() {
         return stock;
     }
 
-    public void setStock(Stock stock) {
+    public void setStock(StockH2 stock) {
         this.stock = stock;
     }
 
@@ -91,11 +91,11 @@ public class SaleHisDetailH2 implements java.io.Serializable {
 
     @ManyToOne
     @JoinColumn(name = "sale_unit", nullable = false)
-    public StockUnit getSaleUnit() {
+    public StockUnitH2 getSaleUnit() {
         return saleUnit;
     }
 
-    public void setSaleUnit(StockUnit saleUnit) {
+    public void setSaleUnit(StockUnitH2 saleUnit) {
         this.saleUnit = saleUnit;
     }
 
@@ -174,11 +174,11 @@ public class SaleHisDetailH2 implements java.io.Serializable {
 
     @ManyToOne
     @JoinColumn(name = "dept_id")
-    public Department getDepartment() {
+    public DepartmentH2 getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(DepartmentH2 department) {
         this.department = department;
     }
 

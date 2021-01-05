@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cv.inv.service;
+package com.cv.inv.h2.service;
 
 import com.cv.accountswing.service.*;
 import com.cv.accountswing.entity.Supplier;
@@ -37,6 +37,11 @@ public class SupplierH2ServiceImpl implements SupplierH2Service {
         }
         sup = dao.save(sup);
         return sup;
+    }
+    
+    @Override
+    public SupplierH2 saveM(SupplierH2 sup){
+        return dao.save(sup);
     }
 
     @Override

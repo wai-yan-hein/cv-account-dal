@@ -4,10 +4,8 @@
  */
 package com.cv.inv.h2.entity;
 
-import com.cv.accountswing.entity.*;
 import java.util.Date;
 import javax.persistence.*;
-import static javax.persistence.GenerationType.IDENTITY;
 import org.hibernate.annotations.GenerationTime;
 
 /**
@@ -17,7 +15,7 @@ import org.hibernate.annotations.GenerationTime;
  * is trader.
  */
 @Entity
-@Table(name = "trader")
+@Table(name = "trader_h2")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "T")
@@ -28,15 +26,15 @@ public class TraderH2 implements java.io.Serializable {
     private Integer compCode;
     private String traderName;
     private String address;
-    private Region region;
-    private TraderType traderType;
+    private RegionH2 region;
+    private TraderTypeH2 traderType;
     private String phone;
     private String email;
     private String createdBy;
     private Date createdDate;
     private String updatedBy;
     private Date updatedDate;
-    private ChartOfAccount account;
+    private ChartOfAccountH2 account;
     private boolean active;
     private String remark;
     private String parent;
@@ -159,11 +157,11 @@ public class TraderH2 implements java.io.Serializable {
 
     @ManyToOne
     @JoinColumn(name = "account_code")
-    public ChartOfAccount getAccount() {
+    public ChartOfAccountH2 getAccount() {
         return account;
     }
 
-    public void setAccount(ChartOfAccount account) {
+    public void setAccount(ChartOfAccountH2 account) {
         this.account = account;
     }
 
@@ -219,21 +217,21 @@ public class TraderH2 implements java.io.Serializable {
 
     @ManyToOne
     @JoinColumn(name = "reg_id")
-    public Region getRegion() {
+    public RegionH2 getRegion() {
         return region;
     }
 
-    public void setRegion(Region region) {
+    public void setRegion(RegionH2 region) {
         this.region = region;
     }
 
     @ManyToOne
     @JoinColumn(name = "trader_type_id")
-    public TraderType getTraderType() {
+    public TraderTypeH2 getTraderType() {
         return traderType;
     }
 
-    public void setTraderType(TraderType traderType) {
+    public void setTraderType(TraderTypeH2 traderType) {
         this.traderType = traderType;
     }
 

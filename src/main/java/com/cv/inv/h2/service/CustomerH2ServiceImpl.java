@@ -46,6 +46,11 @@ public class CustomerH2ServiceImpl implements CustomerH2Service {
     }
 
     @Override
+    public CustomerH2 saveM(CustomerH2 cus) {
+        return dao.save(cus);
+    }
+
+    @Override
     public List<CustomerH2> search(String code, String name, String address,
             String phone, String compCode) {
         List<CustomerH2> listCus = dao.search(code, name, address, phone, compCode);

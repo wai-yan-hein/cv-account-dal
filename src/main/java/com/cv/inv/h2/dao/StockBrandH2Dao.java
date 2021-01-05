@@ -6,6 +6,7 @@
 package com.cv.inv.h2.dao;
 
 import com.cv.inv.h2.entity.StockBrandH2;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,8 @@ import com.cv.inv.h2.entity.StockBrandH2;
 public interface StockBrandH2Dao {
 
     public StockBrandH2 save(StockBrandH2 brand);
+    
+    public List<StockBrandH2> findAll();
 
     public StockBrandH2 findById(String id);
     

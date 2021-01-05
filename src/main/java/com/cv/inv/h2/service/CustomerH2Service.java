@@ -16,6 +16,8 @@ public interface CustomerH2Service {
 
     public CustomerH2 save(CustomerH2 cus, String traderCodeLength);
 
+    public CustomerH2 saveM(CustomerH2 cus);
+
     public CustomerH2 findById(Integer id);
 
     public List<CustomerH2> search(String code, String name, String address,

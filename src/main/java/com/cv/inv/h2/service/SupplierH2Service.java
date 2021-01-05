@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cv.inv.service;
+package com.cv.inv.h2.service;
 
 import com.cv.inv.h2.entity.SupplierH2;
 import java.util.List;
@@ -15,6 +15,8 @@ import java.util.List;
 public interface SupplierH2Service {
 
     public SupplierH2 save(SupplierH2 sup, String traderCodeLength);
+    
+    public SupplierH2 saveM(SupplierH2 sup);
 
     public SupplierH2 findById(Integer id);
 

@@ -6,7 +6,6 @@
 package com.cv.inv.h2.dao;
 
 import com.cv.accountswing.dao.*;
-import com.cv.accountswing.entity.TraderType;
 import com.cv.inv.h2.entity.TraderTypeH2;
 import java.util.List;
 import org.springframework.stereotype.Repository;

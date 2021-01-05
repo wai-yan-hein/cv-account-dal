@@ -7,6 +7,7 @@ package com.cv.inv.h2.dao;
 
 import com.cv.accountswing.dao.AbstractDao;
 import com.cv.inv.h2.entity.StockBrandH2;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,6 +21,13 @@ public class StockBrandH2DaoImpl extends AbstractDao<String, StockBrandH2> imple
     public StockBrandH2 save(StockBrandH2 brand) {
         persist(brand);
         return brand;
+    }
+    
+      @Override
+    public List<StockBrandH2> findAll() {
+        String hsql = "select o from StockBrandH2 o";
+        List<StockBrandH2> listStockBrand = findHSQL(hsql);
+        return listStockBrand;
     }
 
     @Override
