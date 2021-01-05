@@ -6,8 +6,6 @@ package com.cv.accountswing.entity;
 
 import java.util.Date;
 import javax.persistence.*;
-import static javax.persistence.GenerationType.IDENTITY;
-import org.hibernate.annotations.GenerationTime;
 
 /**
  *
@@ -22,56 +20,64 @@ import org.hibernate.annotations.GenerationTime;
 //@DiscriminatorValue(value = "T")
 public class Trader implements java.io.Serializable {
 
-    private Integer id;
-    private String traderId;
+    @Id
+    @Column(name = "code", unique = true, nullable = false)
+    private String code;
+    @Column(name = "comp_code", length = 15, nullable = false)
     private Integer compCode;
+    @Column(name = "trader_name", nullable = false, length = 255)
     private String traderName;
     private String address;
+    @ManyToOne
+    @JoinColumn(name = "reg_id")
     private Region region;
+    @ManyToOne
+    @JoinColumn(name = "trader_type_id")
     private TraderType traderType;
+    @Column(name = "phone", nullable = true, length = 255)
     private String phone;
+    @Column(name = "email", nullable = true, length = 25)
     private String email;
-    private String createdBy;
-    private Date createdDate;
-    private String updatedBy;
-    private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "account_code")
     private ChartOfAccount account;
+    @Column(name = "active")
     private boolean active;
+    @Column(name = "remark", length = 255)
     private String remark;
+    @Column(name = "parent", nullable = true, length = 15)
     private String parent;
+    @Column(name = "app_short_name", length = 10)
     private String appShortName; //use integration with other application
+    @Column(name = "app_trader_code", length = 25)
     private String appTraderCode; //Original trader id from integration app
+    @Column(name = "mig_code")
     private String migCode;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_date")
+    private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private AppUser updatedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+    @Column(name = "mac_id")
+    private Integer macId;
+    @Column(name = "user_code")
+    private String userCode;
 
-    public Trader(Integer id, String traderName) {
-        this.id = id;
+    public Trader(String code, String traderName) {
+        this.code = code;
         this.traderName = traderName;
     }
 
     public Trader() {
     }
 
-    @Id
-    
-    @Column(name = "id", unique = true, nullable = false)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @Column(name = "trader_id", unique = true, nullable = false, length = 25)
-    public String getTraderId() {
-        return traderId;
-    }
-
-    public void setTraderId(String traderId) {
-        this.traderId = traderId;
-    }
-
-    @Column(name = "comp_code", length = 15, nullable = false)
     public Integer getCompCode() {
         return compCode;
     }
@@ -80,7 +86,6 @@ public class Trader implements java.io.Serializable {
         this.compCode = compCode;
     }
 
-    @Column(name = "address", nullable = true, length = 500)
     public String getAddress() {
         return address;
     }
@@ -89,28 +94,6 @@ public class Trader implements java.io.Serializable {
         this.address = address;
     }
 
-    @Column(name = "created_id", nullable = true, length = 15)
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    @Column(name = "created_date", insertable = false, updatable = false,
-            columnDefinition = "timestamp default current_timestamp")
-    @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    @Column(name = "email", nullable = true, length = 25)
     public String getEmail() {
         return email;
     }
@@ -119,7 +102,6 @@ public class Trader implements java.io.Serializable {
         this.email = email;
     }
 
-    @Column(name = "phone", nullable = true, length = 500)
     public String getPhone() {
         return phone;
     }
@@ -128,7 +110,6 @@ public class Trader implements java.io.Serializable {
         this.phone = phone;
     }
 
-    @Column(name = "trader_name", nullable = false, length = 255)
     public String getTraderName() {
         return traderName;
     }
@@ -137,27 +118,6 @@ public class Trader implements java.io.Serializable {
         this.traderName = traderName;
     }
 
-    @Column(name = "updated_id", nullable = true, length = 15)
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    @Column(name = "updated_date", nullable = true)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "account_code")
     public ChartOfAccount getAccount() {
         return account;
     }
@@ -166,7 +126,6 @@ public class Trader implements java.io.Serializable {
         this.account = account;
     }
 
-    @Column(name = "active")
     public boolean getActive() {
         return active;
     }
@@ -175,7 +134,6 @@ public class Trader implements java.io.Serializable {
         this.active = active;
     }
 
-    @Column(name = "remark", length = 255)
     public String getRemark() {
         return remark;
     }
@@ -184,7 +142,6 @@ public class Trader implements java.io.Serializable {
         this.remark = remark;
     }
 
-    @Column(name = "parent", nullable = true, length = 15)
     public String getParent() {
         return parent;
     }
@@ -193,7 +150,6 @@ public class Trader implements java.io.Serializable {
         this.parent = parent;
     }
 
-    @Column(name = "app_short_name", length = 10)
     public String getAppShortName() {
         return appShortName;
     }
@@ -202,7 +158,6 @@ public class Trader implements java.io.Serializable {
         this.appShortName = appShortName;
     }
 
-    @Column(name = "app_trader_code", length = 25)
     public String getAppTraderCode() {
         return appTraderCode;
     }
@@ -211,13 +166,6 @@ public class Trader implements java.io.Serializable {
         this.appTraderCode = appTraderCode;
     }
 
-    @Transient
-    public String getDecriminatorValue() {
-        return this.getClass().getAnnotation(DiscriminatorValue.class).value();
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "reg_id")
     public Region getRegion() {
         return region;
     }
@@ -226,8 +174,6 @@ public class Trader implements java.io.Serializable {
         this.region = region;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "trader_type_id")
     public TraderType getTraderType() {
         return traderType;
     }
@@ -236,13 +182,68 @@ public class Trader implements java.io.Serializable {
         this.traderType = traderType;
     }
 
-    @Column(name = "mig_code")
     public String getMigCode() {
         return migCode;
     }
 
     public void setMigCode(String migCode) {
         this.migCode = migCode;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public AppUser getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(AppUser updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public AppUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
     @Override

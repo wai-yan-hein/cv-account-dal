@@ -141,7 +141,7 @@ public class CSVFileServiceImpl implements CSVFileService {
                             logger.error("Invalid trader id : " + tmpId);
                         } else {
                             Trader trd = listTrd.get(0);
-                            gl.setTraderId(Long.parseLong(trd.getId().toString()));
+                            gl.setTraderId(Long.parseLong(trd.getCode().toString()));
                         }
                     }
 

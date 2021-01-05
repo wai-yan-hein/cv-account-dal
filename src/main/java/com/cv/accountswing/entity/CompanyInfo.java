@@ -7,9 +7,9 @@ package com.cv.accountswing.entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,38 +23,54 @@ import javax.persistence.Transient;
 @Table(name = "company_info")
 public class CompanyInfo implements java.io.Serializable {
 
-    private Integer compId;
-    private String compCode;
-    private String name;
-    private String phone;
-    private String email;
-    private String shortCode;
-    private String securityCode;
-    private String parent;
-    private String address;
-    private Boolean active;
-    private String createdBy;
-    private Date createdDt;
-    private String updatedBy;
-    private Date updatedDt;
-    private Integer businessType;
-    private Date finicialPeriodFrom;
-    private Date finicialPeriodTo;
-    private Integer owner;
-    private Integer roleId;
-
     @Id
-    
-    @Column(name = "comp_id", unique = true, nullable = false)
-    public Integer getCompId() {
-        return compId;
-    }
+    @Column(name = "comp_code", unique = true, nullable = false)
+    private String compCode;
+    @Column(name = "name", length = 255)
+    private String name;
+    @Column(name = "phone", length = 255)
+    private String phone;
+    @Column(name = "email", length = 255)
+    private String email;
+    @Column(name = "short_code", length = 5)
+    private String shortCode;
+    @Column(name = "security_code", length = 255)
+    private String securityCode;
+    @Column(name = "parent", length = 15)
+    private String parent;
+    @Column(name = "address", length = 15)
+    private String address;
+    @Column(name = "active")
+    private Boolean active;
+    @Column(name = "business_type")
+    private Integer businessType;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "finicial_period_from")
+    private Date finicialPeriodFrom;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "finicial_period_to")
+    private Date finicialPeriodTo;
+    @Column(name = "owner")
+    private Integer owner;
+    @Transient
+    private String roleCode;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_date")
+    private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private AppUser updatedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+    @Column(name = "mac_id")
+    private Integer macId;
+    @Column(name = "user_code")
+    private String userCode;
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
-    }
-
-    @Column(name = "comp_code", nullable = false, length = 15)
     public String getCompCode() {
         return compCode;
     }
@@ -63,7 +79,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.compCode = compCode;
     }
 
-    @Column(name = "name", length = 255)
     public String getName() {
         return name;
     }
@@ -72,7 +87,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.name = name;
     }
 
-    @Column(name = "phone", length = 255)
     public String getPhone() {
         return phone;
     }
@@ -81,7 +95,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.phone = phone;
     }
 
-    @Column(name = "email", length = 255)
     public String getEmail() {
         return email;
     }
@@ -90,7 +103,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.email = email;
     }
 
-    @Column(name = "short_code", length = 5)
     public String getShortCode() {
         return shortCode;
     }
@@ -99,7 +111,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.shortCode = shortCode;
     }
 
-    @Column(name = "security_code", length = 255)
     public String getSecurityCode() {
         return securityCode;
     }
@@ -108,7 +119,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.securityCode = securityCode;
     }
 
-    @Column(name = "parent", length = 15)
     public String getParent() {
         return parent;
     }
@@ -117,7 +127,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.parent = parent;
     }
 
-    @Column(name = "address", length = 15)
     public String getAddress() {
         return address;
     }
@@ -126,7 +135,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.address = address;
     }
 
-    @Column(name = "active")
     public Boolean getActive() {
         return active;
     }
@@ -135,45 +143,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.active = active;
     }
 
-    @Column(name = "created_by", length = 15)
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_dt")
-    public Date getCreatedDt() {
-        return createdDt;
-    }
-
-    public void setCreatedDt(Date createdDt) {
-        this.createdDt = createdDt;
-    }
-
-    @Column(name = "updated_by")
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_dt")
-    public Date getUpdatedDt() {
-        return updatedDt;
-    }
-
-    public void setUpdatedDt(Date updatedDt) {
-        this.updatedDt = updatedDt;
-    }
-
-    @Column(name = "business_type")
     public Integer getBusinessType() {
         return businessType;
     }
@@ -182,8 +151,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.businessType = businessType;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "finicial_period_from")
     public Date getFinicialPeriodFrom() {
         return finicialPeriodFrom;
     }
@@ -192,8 +159,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.finicialPeriodFrom = finicialPeriodFrom;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "finicial_period_to")
     public Date getFinicialPeriodTo() {
         return finicialPeriodTo;
     }
@@ -202,7 +167,6 @@ public class CompanyInfo implements java.io.Serializable {
         this.finicialPeriodTo = finicialPeriodTo;
     }
 
-    @Column(name = "owner")
     public Integer getOwner() {
         return owner;
     }
@@ -211,18 +175,65 @@ public class CompanyInfo implements java.io.Serializable {
         this.owner = owner;
     }
 
-    @Transient
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
     @Override
     public String toString() {
         return name;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public AppUser getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(AppUser updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public AppUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 
 }

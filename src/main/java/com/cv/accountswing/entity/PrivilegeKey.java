@@ -17,40 +17,37 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class PrivilegeKey implements Serializable {
 
-    private Integer roleId;
-    private Integer menuId;
+    @Column(name = "role_code")
+    private String roleCode;
+    @Column(name = "menu_code")
+    private String menuCode;
 
     public PrivilegeKey() {
     }
 
-    public PrivilegeKey(Integer roleId, Integer menuId) {
-        this.roleId = roleId;
-        this.menuId = menuId;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    @Column(name = "role_id")
-    public Integer getRoleId() {
-        return roleId;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public String getMenuCode() {
+        return menuCode;
     }
 
-    @Column(name = "menu_id")
-    public Integer getMenuId() {
-        return menuId;
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
 
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
-    }
+  
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.roleId);
-        hash = 97 * hash + Objects.hashCode(this.menuId);
+        hash = 97 * hash + Objects.hashCode(this.roleCode);
+        hash = 97 * hash + Objects.hashCode(this.menuCode);
         return hash;
     }
 
@@ -63,10 +60,10 @@ public class PrivilegeKey implements Serializable {
             return false;
         }
         final PrivilegeKey other = (PrivilegeKey) obj;
-        if (!Objects.equals(this.roleId, other.roleId)) {
+        if (!Objects.equals(this.roleCode, other.roleCode)) {
             return false;
         }
-        if (!Objects.equals(this.menuId, other.menuId)) {
+        if (!Objects.equals(this.menuCode, other.menuCode)) {
             return false;
         }
         return true;

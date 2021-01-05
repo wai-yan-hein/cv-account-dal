@@ -152,7 +152,7 @@ public class ReceiverServiceImpl implements ReceiverService {
     public void setSyncFinish(boolean syncFinish) {
         this.syncFinish = syncFinish;
     }
-    
+
     @Override
     public void doReceiverOperation(ReloadData rlData, String operationId, String entityType, Object data) {
 
@@ -251,8 +251,8 @@ public class ReceiverServiceImpl implements ReceiverService {
                 LOGGER.error("doEntityOperation VouStatus : " + ex.getMessage());
             }
             break;
-            
-             case "ACK":
+
+            case "ACK":
                 LOGGER.info(operationId + " : " + data.toString());
                 switch (operationId) {
                     case "NEW-INIT":
@@ -260,7 +260,6 @@ public class ReceiverServiceImpl implements ReceiverService {
                         break;
                 }
                 break;
-                
 
         }
 
@@ -309,7 +308,7 @@ public class ReceiverServiceImpl implements ReceiverService {
                 LOGGER.error("doEntityOperationFile PaymentType : " + ex.getMessage());
             }
             break;*/
-           case "Appuser":
+            case "Appuser":
                 try {
                 java.lang.reflect.Type collectionType
                         = new TypeToken<List<AppUserH2>>() {
@@ -321,7 +320,7 @@ public class ReceiverServiceImpl implements ReceiverService {
                     auService.saveAccount(app);
                     return app;
                 }).forEachOrdered(app -> {
-                    LOGGER.info("Appuser:" + app.getUserId() + "," + app.getUserName());
+                    LOGGER.info("Appuser:" + app.getUserCode() + "," + app.getUserName());
                 });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Appuser : " + ex.getMessage());
@@ -337,16 +336,16 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListCIFH2.stream().map(cif -> {
                     cifService.save(cif);
-                return cif;
-            }).forEachOrdered(cif -> {
-                LOGGER.info("CompanyInfo:" + cif.getCompCode());
-            });
+                    return cif;
+                }).forEachOrdered(cif -> {
+                    LOGGER.info("CompanyInfo:" + cif.getCompCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile CompanyInfo : " + ex.getMessage());
             }
             break;
-            
-             case "UsrCompRole":
+
+            case "UsrCompRole":
                 try {
                 java.lang.reflect.Type collectionType
                         = new TypeToken<List<UsrCompRole>>() {
@@ -356,15 +355,15 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListUCRH2.stream().map(uc -> {
                     ucrService.save(uc);
-                return uc;
-            }).forEachOrdered(uc -> {
-                LOGGER.info("UsrCompRole:" + uc.getKey().getRoleId()+ "," + uc.getKey().getUserId());
-            });
+                    return uc;
+                }).forEachOrdered(uc -> {
+                    LOGGER.info("UsrCompRole:" + uc.getKey().getRoleCode() + "," + uc.getKey().getUserCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile UsrCompRole : " + ex.getMessage());
             }
             break;
-            
+
             case "Region":
                 try {
                 java.lang.reflect.Type collectionType
@@ -375,10 +374,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListRegion.stream().map(re -> {
                     regService.save(re);
-                return re;
-            }).forEachOrdered(re -> {
-                LOGGER.info("Region:" + re.getRegionCode() + "," + re.getRegionName());
-            });
+                    return re;
+                }).forEachOrdered(re -> {
+                    LOGGER.info("Region:" + re.getRegCode() + "," + re.getRegionName());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Region : " + ex.getMessage());
             }
@@ -394,15 +393,14 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListDepart.stream().map(de -> {
                     deptService.save(de);
-                return de;
-            }).forEachOrdered(de -> {
-                LOGGER.info("Department:" + de.getDeptCode());
-            });
+                    return de;
+                }).forEachOrdered(de -> {
+                    LOGGER.info("Department:" + de.getDeptCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Department : " + ex.getMessage());
             }
             break;
-
 
             case "Currency":
                 try {
@@ -413,10 +411,10 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<Currency> ListCurr = gson.fromJson(data, collectionType);
                 ListCurr.stream().map(curr -> {
                     currService.save(curr);
-                return curr;
-            }).forEachOrdered(curr -> {
-                LOGGER.info("Currency:" + curr.getKey().getCode());
-            });
+                    return curr;
+                }).forEachOrdered(curr -> {
+                    LOGGER.info("Currency:" + curr.getKey().getCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Currency : " + ex.getMessage());
             }
@@ -433,15 +431,14 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListLocH2.stream().map(loc -> {
                     locService.save(loc);
-                return loc;
-            }).forEachOrdered(loc -> {
-                LOGGER.info("Location:" + loc.getLocationId());
-            });
+                    return loc;
+                }).forEachOrdered(loc -> {
+                    LOGGER.info("Location:" + loc.getLocationCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Location : " + ex.getMessage());
             }
             break;
-
 
             case "VouStatus":
                 try {
@@ -455,7 +452,7 @@ public class ReceiverServiceImpl implements ReceiverService {
                     vouService.save(pt);
                     return pt;
                 }).forEachOrdered(pt -> {
-                    LOGGER.info("VouStatus:" + pt.getVouStatusId());
+                    LOGGER.info("VouStatus:" + pt.getVouStatusCode());
                 });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile VouStatus : " + ex.getMessage());
@@ -471,10 +468,10 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<UnitRelation> ListURH2 = gson.fromJson(data, collectionType);
                 ListURH2.stream().map(ur -> {
                     unitrService.save(ur);
-                return ur;
-            }).forEachOrdered(ur -> {
-                LOGGER.info("UnitRelation: " + ur.getUnitKey().getPatternId());
-            });
+                    return ur;
+                }).forEachOrdered(ur -> {
+                    LOGGER.info("UnitRelation: " + ur.getUnitKey().getPatternId());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile UnitRelation : " + ex.getMessage());
             }
@@ -491,10 +488,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListCTH2.stream().map(cth -> {
                     ctService.save(cth);
-                return cth;
-            }).forEachOrdered(cth -> {
-                LOGGER.info("ChargeType: " + cth.getChargeTypeId());
-            });
+                    return cth;
+                }).forEachOrdered(cth -> {
+                    LOGGER.info("ChargeType: " + cth.getChargeTypeCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile ChargeType : " + ex.getMessage());
             }
@@ -510,10 +507,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListSTH2.stream().map(it -> {
                     stService.save(it);
-                return it;
-            }).forEachOrdered(it -> {
-                LOGGER.info("StockType: " + it.getItemTypeCode());
-            });
+                    return it;
+                }).forEachOrdered(it -> {
+                    LOGGER.info("StockType: " + it.getItemTypeCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile StockType : " + ex.getMessage());
             }
@@ -529,10 +526,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListCatH2.stream().map(cat -> {
                     cService.save(cat);
-                return cat;
-            }).forEachOrdered(cat -> {
-                LOGGER.info("Category:" + cat.getCatId() + "," + cat.getCatName());
-            });
+                    return cat;
+                }).forEachOrdered(cat -> {
+                    LOGGER.info("Category:" + cat.getCatCode() + "," + cat.getCatName());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Category : " + ex.getMessage());
             }
@@ -549,15 +546,14 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListSBH2.stream().map(ib -> {
                     sbService.save(ib);
-                return ib;
-            }).forEachOrdered(ib -> {
-                LOGGER.info("StockBrand: " + ib.getBrandId());
-            });
+                    return ib;
+                }).forEachOrdered(ib -> {
+                    LOGGER.info("StockBrand: " + ib.getBrandCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile StockBrand : " + ex.getMessage());
             }
             break;
-
 
             case "CharacterNo":
                 try {
@@ -568,10 +564,10 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<CharacterNo> ListCNH2 = gson.fromJson(data, collectionType);
                 ListCNH2.stream().map(cn -> {
                     cnService.save(cn);
-                return cn;
-            }).forEachOrdered(cn -> {
-                LOGGER.info("CharacterNo: " + cn.getStrNumber());
-            });
+                    return cn;
+                }).forEachOrdered(cn -> {
+                    LOGGER.info("CharacterNo: " + cn.getStrNumber());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile CharacterNo : " + ex.getMessage());
             }
@@ -588,10 +584,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListSUH2.stream().map(iu -> {
                     suService.save(iu);
-                return iu;
-            }).forEachOrdered(iu -> {
-                LOGGER.info("StockUnit: " + iu.getItemUnitCode());
-            });
+                    return iu;
+                }).forEachOrdered(iu -> {
+                    LOGGER.info("StockUnit: " + iu.getItemUnitCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile StockUnit : " + ex.getMessage());
             }
@@ -606,10 +602,10 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<UnitPattern> ListUPH2 = gson.fromJson(data, collectionType);
                 ListUPH2.stream().map(up -> {
                     upService.save(up);
-                return up;
-            }).forEachOrdered(up -> {
-                LOGGER.info("UnitPattern: " + up.getPatternId());
-            });
+                    return up;
+                }).forEachOrdered(up -> {
+                    LOGGER.info("UnitPattern: " + up.getPatternCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile UnitPattern : " + ex.getMessage());
             }
@@ -625,11 +621,11 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<Stock> ListStock = gson.fromJson(data, collectionType);
                 // LOGGER.info("Stock Size:" + ListStock.size());
                 ListStock.stream().map(sk -> {
-                    stockService.save(sk,"NEW");
-                return sk;
-            }).forEachOrdered(sk -> {
-                LOGGER.info("Stock  :" + sk.getStockCode());
-            });
+                    stockService.save(sk, "NEW");
+                    return sk;
+                }).forEachOrdered(sk -> {
+                    LOGGER.info("Stock  :" + sk.getStockCode());
+                });
                 boolean isNull = false;
                 if (rlData == null) {
                     isNull = true;
@@ -647,7 +643,6 @@ public class ReceiverServiceImpl implements ReceiverService {
             }
             break;
 
-
             case "ChartOfAccount":
                 try {
                 java.lang.reflect.Type collectionType
@@ -657,15 +652,14 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<ChartOfAccount> ListCOAH2 = gson.fromJson(data, collectionType);
                 ListCOAH2.stream().map(coa -> {
                     coaService.save(coa);
-                return coa;
-            }).forEachOrdered(coa -> {
-                LOGGER.info("ChartOfAccount:" + coa.getCode());
-            });
+                    return coa;
+                }).forEachOrdered(coa -> {
+                    LOGGER.info("ChartOfAccount:" + coa.getCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile ChartOfAccount : " + ex.getMessage());
             }
             break;
-
 
             case "TraderType":
                 try {
@@ -676,10 +670,10 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<TraderType> ListTTH2 = gson.fromJson(data, collectionType);
                 ListTTH2.stream().map(tt -> {
                     ttService.save(tt);
-                return tt;
-            }).forEachOrdered(tt -> {
-                LOGGER.info("TraderType:" + tt.getTypeId());
-            });
+                    return tt;
+                }).forEachOrdered(tt -> {
+                    LOGGER.info("TraderType:" + tt.getTypeId());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile TraderType : " + ex.getMessage());
             }
@@ -700,7 +694,7 @@ public class ReceiverServiceImpl implements ReceiverService {
                 LOGGER.error("doEntityOperationFile SaleMan : " + ex.getMessage());
             }
             break;*/
-         case "SystemProperty":
+            case "SystemProperty":
                 try {
                 java.lang.reflect.Type collectionType
                         = new TypeToken<List<SystemProperty>>() {
@@ -709,15 +703,14 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<SystemProperty> ListSPH2 = gson.fromJson(data, collectionType);
                 ListSPH2.stream().map(sp -> {
                     spService.save(sp);
-                return sp;
-            }).forEachOrdered(sp -> {
-                LOGGER.info("SystemProperty:" + sp.getPropValue());
-            }); //LOGGER.info(sp.getPropDesp());
+                    return sp;
+                }).forEachOrdered(sp -> {
+                    LOGGER.info("SystemProperty:" + sp.getPropValue());
+                }); //LOGGER.info(sp.getPropDesp());
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperation SystemProperty : " + ex.getMessage());
             }
             break;
-            
 
             case "Trader":
                 try {
@@ -728,13 +721,12 @@ public class ReceiverServiceImpl implements ReceiverService {
                 int count = 0;
 
                 for (Trader t : ListTraderH2) {
-
-                    String tmp = t.getTraderId().substring(0, 3);
+                    String tmp = t.getCode().substring(0, 3);
                     switch (tmp.toUpperCase()) {
                         case "CUS":
                             Customer cus = new Customer();
-                            cus.setId(t.getId());
-                            cus.setTraderId(t.getTraderId());
+                            cus.setCode(t.getCode());
+                            cus.setUserCode(t.getUserCode());
                             cus.setCompCode(t.getCompCode());
                             cus.setTraderName(t.getTraderName());
                             cus.setAddress(t.getAddress());
@@ -755,8 +747,8 @@ public class ReceiverServiceImpl implements ReceiverService {
                             break;
                         case "SUP":
                             Supplier s = new Supplier();
-                            s.setId(t.getId());
-                            s.setTraderId(t.getTraderId());
+                            s.setCode(t.getCode());
+                            s.setUserCode(t.getUserCode());
                             s.setCompCode(t.getCompCode());
                             s.setTraderName(t.getTraderName());
                             s.setAddress(t.getAddress());
@@ -780,7 +772,7 @@ public class ReceiverServiceImpl implements ReceiverService {
                             break;
 
                     }
-                    LOGGER.info("Trader:" + t.getTraderId());
+                    LOGGER.info("Trader:" + t.getUserCode());
                 }
 
             } catch (JsonSyntaxException ex) {
@@ -798,10 +790,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListMenu.stream().map(mh2 -> {
                     m2Service.saveMenu(mh2);
-                return mh2;
-            }).forEachOrdered(mh2 -> {
-                LOGGER.info("Menu:" + mh2.getId() + "," + mh2.getMenuName());
-            });
+                    return mh2;
+                }).forEachOrdered(mh2 -> {
+                    LOGGER.info("Menu:" + mh2.getCode() + "," + mh2.getMenuName());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Menu : " + ex.getMessage());
             }
@@ -817,15 +809,14 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 ListURoleH2.stream().map(ur -> {
                     urService.save(ur);
-                return ur;
-            }).forEachOrdered(ur -> {
-                LOGGER.info("UserRole:" + ur.getRoleId());
-            });
+                    return ur;
+                }).forEachOrdered(ur -> {
+                    LOGGER.info("UserRole:" + ur.getRoleCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile UserRole : " + ex.getMessage());
             }
             break;
-
 
             case "MachineInfo":
                 try {
@@ -853,10 +844,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 
                 medicine.stream().map(prvh2 -> {
                     prvService.save(prvh2);
-                return prvh2;
-            }).forEachOrdered(prvh2 -> {
-                LOGGER.info("Privilege:" + prvh2.getKey().getRoleId());
-            });
+                    return prvh2;
+                }).forEachOrdered(prvh2 -> {
+                    LOGGER.info("Privilege:" + prvh2.getKey().getRoleCode());
+                });
             } catch (JsonSyntaxException ex) {
                 LOGGER.error("doEntityOperationFile Privilege : " + ex.getMessage());
             }

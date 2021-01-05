@@ -31,9 +31,9 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier save(Supplier sup, String traderCodeLength) {
-        if (sup.getTraderId().isEmpty() || sup.getTraderId() == null) {
+        if (sup.getCode().isEmpty() || sup.getCode() == null) {
             String tmpTraderId = getTraderId("SUP", "-", sup.getCompCode().toString(), traderCodeLength);
-            sup.setTraderId(tmpTraderId);
+            sup.setCode(tmpTraderId);
         }
         sup = dao.save(sup);
         return sup;

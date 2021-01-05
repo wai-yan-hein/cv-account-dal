@@ -92,7 +92,7 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
     }
 
     private Menu getChild(Menu parent) {
-        String strSql = "select o from Menu o where o.parent = '" + parent.getId() + "'";
+        String strSql = "select o from Menu o where o.parent = '" + parent.getCode() + "'";
         List<Menu> listChild = findHSQL(strSql);
 
         if (listChild != null) {

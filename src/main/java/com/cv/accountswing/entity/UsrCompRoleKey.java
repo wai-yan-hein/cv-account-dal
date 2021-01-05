@@ -15,44 +15,49 @@ import javax.persistence.Embeddable;
  * @author winswe
  */
 @Embeddable
-public class UsrCompRoleKey implements Serializable{
-    private Integer userId;
-    private Integer compCode;
-    private Integer roleId;
+public class UsrCompRoleKey implements Serializable {
 
-    @Column(name="user_id")
-    public Integer getUserId() {
-        return userId;
+    @Column(name = "user_code")
+    private String userCode;
+    @Column(name = "comp_code")
+    private String compCode;
+    @Column(name = "role_code")
+    private String roleCode;
+
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    @Column(name="comp_code")
-    public Integer getCompCode() {
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
+    
+
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 
-    @Column(name="role_id")
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
+    
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.userId);
+        hash = 71 * hash + Objects.hashCode(this.userCode);
         hash = 71 * hash + Objects.hashCode(this.compCode);
-        hash = 71 * hash + Objects.hashCode(this.roleId);
+        hash = 71 * hash + Objects.hashCode(this.roleCode);
         return hash;
     }
 
@@ -65,13 +70,13 @@ public class UsrCompRoleKey implements Serializable{
             return false;
         }
         final UsrCompRoleKey other = (UsrCompRoleKey) obj;
-        if (!Objects.equals(this.userId, other.userId)) {
+        if (!Objects.equals(this.userCode, other.userCode)) {
             return false;
         }
         if (!Objects.equals(this.compCode, other.compCode)) {
             return false;
         }
-        if (!Objects.equals(this.roleId, other.roleId)) {
+        if (!Objects.equals(this.roleCode, other.roleCode)) {
             return false;
         }
         return true;

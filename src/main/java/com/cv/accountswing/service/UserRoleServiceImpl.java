@@ -19,45 +19,45 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class UserRoleServiceImpl implements UserRoleService{
-    
+public class UserRoleServiceImpl implements UserRoleService {
+
     @Autowired
     private UserRoleDao dao;
-    
+
     @Override
-    public UserRole save(UserRole role){
+    public UserRole save(UserRole role) {
         return dao.save(role);
     }
-    
+
     @Override
-    public UserRole findById(Integer id){
+    public UserRole findById(Integer id) {
         return dao.findById(id);
     }
-    
+
     @Override
-    public List<UserRole> search(String roleName, String compCode){
+    public List<UserRole> search(String roleName, String compCode) {
         return dao.search(roleName, compCode);
     }
-    
+
     @Override
-    public int delete(String id){
+    public int delete(String id) {
         return dao.delete(id);
     }
-    
+
     @Override
-    public UserRole copyRole(String copyRoleId, String compCode){
+    public UserRole copyRole(String copyRoleId, String compCode) {
         UserRole old = findById(Integer.parseInt(copyRoleId));
         UserRole newRole = new UserRole();
-        
+
         BeanUtils.copyProperties(old, newRole);
-        newRole.setRoleId(null);
+        newRole.setRoleCode(null);
         newRole.setCompCode(Integer.parseInt(compCode));
-        
+
         return save(newRole);
     }
-    
+
     @Override
-      public List<UserRole> searchM(String updatedDate){
-          return dao.searchM(updatedDate);
-      }
+    public List<UserRole> searchM(String updatedDate) {
+        return dao.searchM(updatedDate);
+    }
 }

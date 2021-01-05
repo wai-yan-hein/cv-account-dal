@@ -31,9 +31,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer save(Customer cus, String traderCodeLength) {
-        if (cus.getTraderId() == null || cus.getTraderId().isEmpty()) {
+        if (cus.getCode() == null || cus.getCode().isEmpty()) {
             String tmpTraderId = getTraderId("CUS", "-", cus.getCompCode().toString(), traderCodeLength);
-            cus.setTraderId(tmpTraderId);
+            cus.setCode(tmpTraderId);
         }
         return dao.save(cus);
     }
@@ -45,9 +45,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer save(Customer cus){
+    public Customer save(Customer cus) {
         return dao.save(cus);
     }
+
     @Override
     public List<Customer> search(String code, String name, String address,
             String phone, String compCode) {

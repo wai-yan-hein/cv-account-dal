@@ -5,13 +5,14 @@
  */
 package com.cv.inv.entity;
 
+import com.cv.accountswing.entity.AppUser;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,27 +26,36 @@ import javax.persistence.TemporalType;
 public class UnitPattern implements Serializable {
 
     @Id
-    @Column(name = "pattern_id", unique = true, nullable = false)
-    private Integer patternId;
+    @Column(name = "pattern_code", unique = true, nullable = false)
+    private String patternCode;
     @Column(name = "pattern_name")
     private String patternName;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private AppUser updatedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+    @Column(name = "mac_id")
+    private Integer macId;
+    @Column(name = "user_code")
+    private String userCode;
 
-    public UnitPattern(Integer patternId) {
-        this.patternId = patternId;
-    }
-    
     public UnitPattern() {
     }
 
-    public Integer getPatternId() {
-        return patternId;
+    public String getPatternCode() {
+        return patternCode;
     }
 
-    public void setPatternId(Integer patternId) {
-        this.patternId = patternId;
+    public void setPatternCode(String patternCode) {
+        this.patternCode = patternCode;
     }
 
     public String getPatternName() {
@@ -68,6 +78,45 @@ public class UnitPattern implements Serializable {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
+
+    public AppUser getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(AppUser updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public AppUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
 
 }

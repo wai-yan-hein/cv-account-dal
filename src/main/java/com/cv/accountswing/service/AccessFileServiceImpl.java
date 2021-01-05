@@ -151,7 +151,7 @@ public class AccessFileServiceImpl implements AccessFileService {
                                 throw new Exception("Invalid trader id : " + tmpId);
                             } else {
                                 Trader trd = listTrd.get(0);
-                                gl.setTraderId(Long.parseLong(trd.getId().toString()));
+                                gl.setTraderId(Long.parseLong(trd.getCode().toString()));
                             }
                         }
 

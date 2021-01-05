@@ -5,13 +5,16 @@
  */
 package com.cv.accountswing.entity;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -22,40 +25,54 @@ import javax.persistence.Transient;
 @Table(name = "menu")
 public class Menu implements java.io.Serializable {
 
-    private Integer id; //menu_id
+    @Id
+    @Column(name = "menu_code", unique = true, nullable = false)
+    private String code; //menu_id
+    @Column(name = "parent_menu_id")
     private String parent; //parent_menu_id
+    @Column(name = "menu_name", length = 50)
     private String menuName; //menu_name
+    @Column(name = "menu_name_mm", length = 255)
     private String menuNameMM;
+    @Column(name = "menu_url", length = 255)
     private String menuUrl;
+    @Column(name = "menu_type")
     private String menuType;
+    @Column(name = "order_by")
     private Integer orderBy;
+    @Column(name = "source_acc_code")
     private String soureAccCode;
+    @Column(name = "menu_class")
     private String menuClass;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_date")
+    private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private AppUser updatedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+    @Column(name = "mac_id")
+    private Integer macId;
+    @Column(name = "user_code")
+    private String userCode;
+    @Transient
     private List<Menu> child;
 
     public Menu() {
 
     }
 
-    public Menu(Integer id, String menuName, String menuType) {
-        this.id = id;
+    public Menu(String code, String menuName, String menuType) {
+        this.code = code;
         this.menuName = menuName;
         this.menuType = menuType;
     }
 
-    @Id
-    
-    @Column(name = "menu_id", unique = true, nullable = false)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @Column(name = "parent_menu_id")
     public String getParent() {
         return parent;
     }
@@ -64,7 +81,6 @@ public class Menu implements java.io.Serializable {
         this.parent = parent;
     }
 
-    @Column(name = "menu_name", length = 50)
     public String getMenuName() {
         return menuName;
     }
@@ -73,7 +89,6 @@ public class Menu implements java.io.Serializable {
         this.menuName = menuName;
     }
 
-    @Column(name = "menu_name_mm", length = 500)
     public String getMenuNameMM() {
         return menuNameMM;
     }
@@ -82,7 +97,6 @@ public class Menu implements java.io.Serializable {
         this.menuNameMM = menuNameMM;
     }
 
-    @Column(name = "menu_url", length = 500)
     public String getMenuUrl() {
         return menuUrl;
     }
@@ -91,7 +105,6 @@ public class Menu implements java.io.Serializable {
         this.menuUrl = menuUrl;
     }
 
-    @Column(name = "menu_type")
     public String getMenuType() {
         return menuType;
     }
@@ -100,7 +113,6 @@ public class Menu implements java.io.Serializable {
         this.menuType = menuType;
     }
 
-    @Transient
     public List<Menu> getChild() {
         return child;
     }
@@ -114,7 +126,6 @@ public class Menu implements java.io.Serializable {
         return menuName;
     }
 
-    @Column(name = "order_by")
     public Integer getOrderBy() {
         return orderBy;
     }
@@ -123,7 +134,6 @@ public class Menu implements java.io.Serializable {
         this.orderBy = orderBy;
     }
 
-    @Column(name = "source_acc_code")
     public String getSoureAccCode() {
         return soureAccCode;
     }
@@ -132,14 +142,68 @@ public class Menu implements java.io.Serializable {
         this.soureAccCode = soureAccCode;
     }
 
-    @Column(name = "menu_class")
-
     public String getMenuClass() {
         return menuClass;
     }
 
     public void setMenuClass(String menuClass) {
         this.menuClass = menuClass;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public AppUser getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(AppUser updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public AppUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
 }

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.cv.accountswing.entity;
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,27 +20,33 @@ import javax.persistence.TemporalType;
  * @author winswe
  */
 @Entity
-@Table(name="payment_type")
-public class PaymentType implements java.io.Serializable{
-    private Integer typeId;
-    private String paymentTypeName;
-    private String createdBy;
-    private Date createdDt;
-    private String updatedBy;
-    private Date updatedDt;
-    private Integer compId;
-    
-    @Id
-    @Column(name="payment_type_id", unique=true, nullable=false)
-    public Integer getTypeId() {
-        return typeId;
-    }
+@Table(name = "payment_type")
+public class PaymentType implements java.io.Serializable {
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
-    
-    @Column(name="payment_type_name", length=40)
+    @Id
+    @Column(name = "payment_type_code", unique = true, nullable = false)
+    private String typeCode;
+    @Column(name = "payment_type_name", length = 40)
+    private String paymentTypeName;
+    @Column(name = "comp_code")
+    private String compCode;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_date")
+    private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private AppUser updatedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+    @Column(name = "mac_id")
+    private Integer macId;
+    @Column(name = "user_code")
+    private String userCode;
+
     public String getPaymentTypeName() {
         return paymentTypeName;
     }
@@ -48,51 +54,70 @@ public class PaymentType implements java.io.Serializable{
     public void setPaymentTypeName(String paymentTypeName) {
         this.paymentTypeName = paymentTypeName;
     }
-    
-    @Column(name="created_by", length=15)
-    public String getCreatedBy() {
-        return createdBy;
+
+    public String getTypeCode() {
+        return typeCode;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_dt")
-    public Date getCreatedDt() {
-        return createdDt;
+    public String getCompCode() {
+        return compCode;
     }
 
-    public void setCreatedDt(Date createdDt) {
-        this.createdDt = createdDt;
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
-    @Column(name="updated_by", length=15)
-    public String getUpdatedBy() {
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public AppUser getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(String updatedBy) {
+    public void setUpdatedBy(AppUser updatedBy) {
         this.updatedBy = updatedBy;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_dt")
-    public Date getUpdatedDt() {
-        return updatedDt;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setUpdatedDt(Date updatedDt) {
-        this.updatedDt = updatedDt;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    @Column(name="comp_id")
-    public Integer getCompId() {
-        return compId;
+    public AppUser getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
     }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+    
+
 }

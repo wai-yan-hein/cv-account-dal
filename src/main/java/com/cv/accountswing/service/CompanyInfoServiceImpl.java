@@ -69,11 +69,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
             Integer businessType = ci.getBusinessType();
             List<CompanyInfo> listCI = dao.search("-", "-", "-", "-", businessType.toString(), "-");
             String oldCompCode = "-";
-            String newCompCode = ci.getCompId().toString();
+            String newCompCode = ci.getCompCode().toString();
 
             if (listCI != null) {
                 if (!listCI.isEmpty()) {
-                    oldCompCode = listCI.get(0).getCompId().toString();
+                    oldCompCode = listCI.get(0).getCompCode().toString();
                 }
             }
 
@@ -113,17 +113,17 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                     String oldRoleId = spService.findById(spk).getPropValue();
                     UserRole newRole = userRoleService.copyRole(oldRoleId, newCompCode);
                     
-                    ci.setRoleId(newRole.getRoleId());
+                    ci.setRoleCode(newRole.getRoleCode());
                     
                     //Copy privilege
-                    privilegeService.copyPrivilege(oldRoleId, newRole.getRoleId().toString());
+                    privilegeService.copyPrivilege(oldRoleId, newRole.getRoleCode().toString());
                         
                     if (!type.equals("-")) {
                         //Assign role to user
                         UsrCompRoleKey newKey = new UsrCompRoleKey();
-                        newKey.setCompCode(Integer.parseInt(newCompCode));
-                        newKey.setRoleId(newRole.getRoleId());
-                        newKey.setUserId(Integer.parseInt(userId));
+                        newKey.setCompCode(newCompCode);
+                        newKey.setRoleCode(newRole.getRoleCode());
+                        newKey.setUserCode(userId);
                         
                         UsrCompRole newUserRole = new UsrCompRole();
                         newUserRole.setKey(newKey);

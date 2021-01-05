@@ -49,8 +49,8 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     public void save(String roleId, List<Menu> listMenu) {
         for (Menu menu : listMenu) {
             PrivilegeKey key = new PrivilegeKey();
-            key.setMenuId(menu.getId());
-            key.setRoleId(Integer.parseInt(roleId));
+            key.setMenuCode(menu.getCode());
+            key.setRoleCode(roleId);
 
             Privilege privilege = new Privilege();
             privilege.setKey(key);
@@ -68,8 +68,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
     @Override
     public void delete(String roleId, List<Menu> listMenu) {
         for (Menu menu : listMenu) {
-            dao.delete(roleId, menu.getId().toString());
-
+            dao.delete(roleId, menu.getCode().toString());
             if (menu.getChild() != null) {
                 if (menu.getChild().size() > 0) {
                     delete(roleId, menu.getChild());

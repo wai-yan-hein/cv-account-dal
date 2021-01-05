@@ -10,20 +10,19 @@ import javax.persistence.Table;
 
 /**
  *
- * Patient class is patient information. Sharing "trader" table with Patient, 
- * Customer and Trader class.
- * Database table name is trader.
+ * Patient class is patient information. Sharing "trader" table with Patient,
+ * Customer and Trader class. Database table name is trader.
  */
 @Entity
-@Table(name="trader")
+@Table(name = "trader")
 @DiscriminatorValue("S")
-public class Supplier extends Trader implements java.io.Serializable{
+public class Supplier extends Trader implements java.io.Serializable {
 
     public Supplier() {
     }
-    
-    public Supplier(Integer id, String traderName) {
-        super(id, traderName);
+
+    public Supplier(String code, String traderName) {
+        super(code, traderName);
     }
-    
+
 }
