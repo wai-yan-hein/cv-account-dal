@@ -8,6 +8,7 @@ package com.cv.inv.entity;
 import com.cv.accountswing.entity.AppUser;
 import com.cv.accountswing.entity.Currency;
 import com.cv.accountswing.entity.Trader;
+import com.cv.inv.h2.entity.CurrencyH2;
 import java.util.Date;
 import javax.persistence.*;
 

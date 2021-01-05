@@ -40,7 +40,7 @@ public class StockH2 implements java.io.Serializable {
     private CategoryH2 category;
     @ManyToOne
     @JoinColumn(name = "stock_type_code")
-    private StockType stockType;
+    private StockTypeH2 stockType;
     @ManyToOne
     @JoinColumn(name = "created_by")
     private AppUserH2 createdBy;
@@ -127,11 +127,11 @@ public class StockH2 implements java.io.Serializable {
         this.category = category;
     }
 
-    public StockType getStockType() {
+    public StockTypeH2 getStockType() {
         return stockType;
     }
 
-    public void setStockType(StockType stockType) {
+    public void setStockType(StockTypeH2 stockType) {
         this.stockType = stockType;
     }
 

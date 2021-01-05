@@ -29,6 +29,12 @@ public class CategoryH2DaoImpl extends AbstractDao<String, CategoryH2> implement
         return ch2;
     }
 
+     @Override
+    public List<CategoryH2> findAll() {
+        String hsql = "select o from CategoryH2 o";
+        List<CategoryH2> listCate = findHSQL(hsql);
+        return listCate;
+    }
     @Override
     public List<CategoryH2> search(String catName, String updatedDate) {
         String strFilter = "";

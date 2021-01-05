@@ -15,6 +15,8 @@ import java.util.List;
 public interface CategoryH2Service {
 
     public CategoryH2 save(CategoryH2 item);
+    
+      public List<CategoryH2> findAll();
 
     public CategoryH2 findById(String id);
 

@@ -29,6 +29,10 @@ public class CategoryH2ServiceImpl implements CategoryH2Service {
     }
 
     @Override
+    public List<CategoryH2> findAll(){
+        return dao.findAll();
+    }
+    @Override
     public CategoryH2 findById(String id) {
         return dao.findById(id);
     }

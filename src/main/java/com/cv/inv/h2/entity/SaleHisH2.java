@@ -33,10 +33,10 @@ public class SaleHisH2 implements java.io.Serializable{
     private String vouNo;
     @ManyToOne
     @JoinColumn(name = "cus_id")
-    private Trader traderId;
+    private TraderH2 traderId;
     @ManyToOne
     @JoinColumn(name = "saleman_id")
-    private SaleMan saleManId;
+    private SaleManH2 saleManId;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sale_date")
     private Date saleDate;
@@ -48,10 +48,10 @@ public class SaleHisH2 implements java.io.Serializable{
         @JoinColumn(name = "from_cur_id"),
         @JoinColumn(name = "comp_code")
     })
-    private Currency currency;
+    private CurrencyH2 currency;
     @ManyToOne
     @JoinColumn(name = "vou_status_id")
-    private VouStatus vouStatusId;
+    private VouStatusH2 vouStatusId;
     @Column(name = "remark", length = 500)
     private String remark;
     @Column(name = "vou_total")
@@ -109,19 +109,19 @@ public class SaleHisH2 implements java.io.Serializable{
         this.session = session;
     }
 
-    public Trader getTraderId() {
+    public TraderH2 getTraderId() {
         return traderId;
     }
 
-    public void setTraderId(Trader traderId) {
+    public void setTraderId(TraderH2 traderId) {
         this.traderId = traderId;
     }
 
-    public SaleMan getSaleManId() {
+    public SaleManH2 getSaleManId() {
         return saleManId;
     }
 
-    public void setSaleManId(SaleMan saleManId) {
+    public void setSaleManId(SaleManH2 saleManId) {
         this.saleManId = saleManId;
     }
 
@@ -141,19 +141,19 @@ public class SaleHisH2 implements java.io.Serializable{
         this.creditTerm = creditTerm;
     }
 
-    public Currency getCurrency() {
+    public CurrencyH2 getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(CurrencyH2 currency) {
         this.currency = currency;
     }
 
-    public VouStatus getVouStatusId() {
+    public VouStatusH2 getVouStatusId() {
         return vouStatusId;
     }
 
-    public void setVouStatusId(VouStatus vouStatusId) {
+    public void setVouStatusId(VouStatusH2 vouStatusId) {
         this.vouStatusId = vouStatusId;
     }
 

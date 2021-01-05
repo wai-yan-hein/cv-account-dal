@@ -110,22 +110,26 @@ public class MenuH2DaoImpl extends AbstractDao<String, MenuH2> implements MenuH2
 
     @Override
     public List getParentChildMenu(String roleId, String menuType) {
-        String strSql = "select o from VRoleMenu o where o.key.roleId = " + roleId
-                + " and o.parent = '1' order by o.orderBy";
+        /*String strSql = "select o from VRoleMenu o where o.key.roleId = " + roleId
+                + " and o.parent = '1' order by o.orderBy";*/
+        String strSql ="select m from MenuH2 m where m.parent = '1' and "
+                +" m.id in(select p.key.menuId from PrivilegeH2 p where p.isAllow=true and p.key.roleId = "+ roleId +") order by m.orderBy";
         List listRootMenu = findHSQL(strSql);
         for (int i = 0; i < listRootMenu.size(); i++) {
-            VRoleMenu parent = (VRoleMenu) listRootMenu.get(i);
-            getChild(parent, roleId, menuType);
+            MenuH2 parent = (MenuH2) listRootMenu.get(i);
+            getChild(parent, roleId, "-");
         }
 
         return listRootMenu;
     }
 
-    private void getChild(VRoleMenu parent, String roleId, String menuType) {
-        String strSql = "select o from VRoleMenu o where o.parent = '" + parent.getKey().getMenuId()
-                + "' and o.key.roleId = " + roleId + "";
+    private void getChild(MenuH2 parent, String roleId, String menuType) {
+        /* String strSql = "select o from VRoleMenu o where o.parent = '" + parent.getKey().getMenuId()
+                + "' and o.key.roleId = " + roleId + "";*/
+        String strSql = "select m from MenuH2 m where m.parent=" + parent.getId()
+                + " and m.id in(select p.key.menuId from PrivilegeH2 p where p.isAllow=true and p.key.roleId='" + roleId + "') order by m.orderBy";
         if (!menuType.equals("-")) {
-            strSql = strSql + " and o.menuType = '" + menuType + "'";
+            strSql = strSql + " and m.menuType = '" + menuType + "'";
         }
         List listChild = findHSQL(strSql);
 
@@ -133,7 +137,7 @@ public class MenuH2DaoImpl extends AbstractDao<String, MenuH2> implements MenuH2
             if (listChild.size() > 0) {
                 parent.setChild(listChild);
                 for (int i = 0; i < listChild.size(); i++) {
-                    VRoleMenu child = (VRoleMenu) listChild.get(i);
+                    MenuH2 child = (MenuH2) listChild.get(i);
                     getChild(child, roleId, menuType);
                 }
             }

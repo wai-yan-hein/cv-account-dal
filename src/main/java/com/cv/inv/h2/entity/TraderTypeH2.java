@@ -35,7 +35,7 @@ public class TraderTypeH2 implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+   // @GeneratedValue(strategy = IDENTITY)
     @Column(name = "trader_type_id", unique = true, nullable = false)
     public Integer getTypeId() {
         return typeId;
