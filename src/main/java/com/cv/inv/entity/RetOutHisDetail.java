@@ -34,7 +34,7 @@ public class RetOutHisDetail implements java.io.Serializable {
     @Column(name = "qty")
     private Float qty;
     @Column(name = "price")
-    private Double price;
+    private Float price;
     @ManyToOne
     @JoinColumn(name = "stock_unit")
     private StockUnit stockUnit;
@@ -85,11 +85,11 @@ public class RetOutHisDetail implements java.io.Serializable {
         this.qty = qty;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

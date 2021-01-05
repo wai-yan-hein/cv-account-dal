@@ -30,23 +30,23 @@ public class RetOutDaoImpl extends AbstractDao<String, RetOutHis> implements Ret
 
         if (!fromDate.equals("-") && !toDate.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.retOutDate between '" + fromDate
+                strFilter = "date(o.retOutDate) between '" + fromDate
                         + "' and '" + toDate + "'";
             } else {
-                strFilter = strFilter + " and o.retOutDate between '"
+                strFilter = strFilter + " and date(o.retOutDate) between '"
                         + fromDate + "' and '" + toDate + "'";
             }
         } else if (!fromDate.endsWith("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.retOutDate >= '" + fromDate + "'";
+                strFilter = "date(o.retOutDate) >= '" + fromDate + "'";
             } else {
-                strFilter = strFilter + " and o.retOutDate >= '" + fromDate + "'";
+                strFilter = strFilter + " and date(o.retOutDate) >= '" + fromDate + "'";
             }
         } else if (!toDate.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.retOutDate <= '" + toDate + "'";
+                strFilter = "date(o.retOutDate) <= '" + toDate + "'";
             } else {
-                strFilter = strFilter + " and o.retOutDate <= '" + toDate + "'";
+                strFilter = strFilter + " and date(o.retOutDate) <= '" + toDate + "'";
             }
         }
 
