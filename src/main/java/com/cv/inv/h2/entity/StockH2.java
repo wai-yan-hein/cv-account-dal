@@ -5,7 +5,6 @@
  */
 package com.cv.inv.h2.entity;
 
-import com.cv.inv.entity.*;
 import com.cv.accountswing.entity.AppUser;
 import java.util.Date;
 import javax.persistence.Column;
@@ -51,15 +50,15 @@ public class StockH2 implements java.io.Serializable {
     private String barcode;
     @Column(name = "short_name", length = 50)
     private String shortName;
-    @Column(name = "pur_price_mes")
-    private Float purPriceMeasure;
+    @Column(name = "pur_wt")
+    private Float purWeight;
     @Column(name = "pur_price")
     private Float purPrice;
     @ManyToOne
     @JoinColumn(name = "pur_price_unit")
-    private StockUnitH2 purPriceUnit;
-    @Column(name = "sale_price_mes")
-    private Float saleMeasure;
+    private StockUnitH2 purUnit;
+    @Column(name = "sale_wt")
+    private Float saleWeight;
     @ManyToOne
     @JoinColumn(name = "sale_unit")
     private StockUnitH2 saleUnit;
@@ -72,20 +71,28 @@ public class StockH2 implements java.io.Serializable {
     @Column(name = "remark")
     private String remark;
     @Column(name = "sale_price_n")
-    private Double salePriceN;
+    private Float salePriceN;
     @Column(name = "sale_price_a")
-    private Double salePriceA;
+    private Float salePriceA;
     @Column(name = "sale_price_b")
-    private Double salePriceB;
+    private Float salePriceB;
     @Column(name = "sale_price_c")
-    private Double salePriceC;
+    private Float salePriceC;
     @Column(name = "sale_price_d")
-    private Double salePriceD;
+    private Float salePriceD;
     @Column(name = "cost_price_std")
-    private Double sttCostPrice;
+    private Float sttCostPrice;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @Column(name = "mig_code")
+    private String migCode;
+    @Column(name = "comp_id")
+    private Integer compId;
+    
 
     public String getStockCode() {
         return stockCode;
@@ -167,36 +174,12 @@ public class StockH2 implements java.io.Serializable {
         this.shortName = shortName;
     }
 
-    public Float getPurPriceMeasure() {
-        return purPriceMeasure;
-    }
-
-    public void setPurPriceMeasure(Float purPriceMeasure) {
-        this.purPriceMeasure = purPriceMeasure;
-    }
-
     public Float getPurPrice() {
         return purPrice;
     }
 
     public void setPurPrice(Float purPrice) {
         this.purPrice = purPrice;
-    }
-
-    public StockUnitH2 getPurPriceUnit() {
-        return purPriceUnit;
-    }
-
-    public void setPurPriceUnit(StockUnitH2 purPriceUnit) {
-        this.purPriceUnit = purPriceUnit;
-    }
-
-    public Float getSaleMeasure() {
-        return saleMeasure;
-    }
-
-    public void setSaleMeasure(Float saleMeasure) {
-        this.saleMeasure = saleMeasure;
     }
 
     public StockUnitH2 getSaleUnit() {
@@ -223,51 +206,51 @@ public class StockH2 implements java.io.Serializable {
         this.remark = remark;
     }
 
-    public Double getSalePriceN() {
+    public Float getSalePriceN() {
         return salePriceN;
     }
 
-    public void setSalePriceN(Double salePriceN) {
+    public void setSalePriceN(Float salePriceN) {
         this.salePriceN = salePriceN;
     }
 
-    public Double getSalePriceA() {
+    public Float getSalePriceA() {
         return salePriceA;
     }
 
-    public void setSalePriceA(Double salePriceA) {
+    public void setSalePriceA(Float salePriceA) {
         this.salePriceA = salePriceA;
     }
 
-    public Double getSalePriceB() {
+    public Float getSalePriceB() {
         return salePriceB;
     }
 
-    public void setSalePriceB(Double salePriceB) {
+    public void setSalePriceB(Float salePriceB) {
         this.salePriceB = salePriceB;
     }
 
-    public Double getSalePriceC() {
+    public Float getSalePriceC() {
         return salePriceC;
     }
 
-    public void setSalePriceC(Double salePriceC) {
+    public void setSalePriceC(Float salePriceC) {
         this.salePriceC = salePriceC;
     }
 
-    public Double getSalePriceD() {
+    public Float getSalePriceD() {
         return salePriceD;
     }
 
-    public void setSalePriceD(Double salePriceD) {
+    public void setSalePriceD(Float salePriceD) {
         this.salePriceD = salePriceD;
     }
 
-    public Double getSttCostPrice() {
+    public Float getSttCostPrice() {
         return sttCostPrice;
     }
 
-    public void setSttCostPrice(Double sttCostPrice) {
+    public void setSttCostPrice(Float sttCostPrice) {
         this.sttCostPrice = sttCostPrice;
     }
 
@@ -285,6 +268,54 @@ public class StockH2 implements java.io.Serializable {
 
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public StockUnitH2 getPurUnit() {
+        return purUnit;
+    }
+
+    public void setPurUnit(StockUnitH2 purUnit) {
+        this.purUnit = purUnit;
+    }
+
+    public String getMigCode() {
+        return migCode;
+    }
+
+    public void setMigCode(String migCode) {
+        this.migCode = migCode;
+    }
+
+    public Float getPurWeight() {
+        return purWeight;
+    }
+
+    public void setPurWeight(Float purWeight) {
+        this.purWeight = purWeight;
+    }
+
+    public Float getSaleWeight() {
+        return saleWeight;
+    }
+
+    public void setSaleWeight(Float saleWeight) {
+        this.saleWeight = saleWeight;
+    }
+
+    public Integer getCompId() {
+        return compId;
+    }
+
+    public void setCompId(Integer compId) {
+        this.compId = compId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
     
 

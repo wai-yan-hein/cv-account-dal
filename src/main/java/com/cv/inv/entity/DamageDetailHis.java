@@ -38,7 +38,7 @@ public class DamageDetailHis implements java.io.Serializable {
     private Date updatedDate;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+   
     @Column(name = "dmg_detail_id", unique = true, nullable = false)
     public Long getDmgDetailId() {
         return dmgDetailId;

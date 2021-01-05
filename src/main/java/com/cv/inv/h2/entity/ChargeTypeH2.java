@@ -30,7 +30,7 @@ public class ChargeTypeH2 implements Serializable {
     private Date updatedDate;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+   // @GeneratedValue(strategy = IDENTITY)
     @Column(name = "charge_type_id", unique = true, nullable = false)
     public Integer getChargeTypeId() {
         return chargeTypeId;

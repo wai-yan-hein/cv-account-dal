@@ -55,6 +55,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
         return coaCode;
     }
+    
+    @Override
+     public CompanyInfo save(CompanyInfo ci){
+         return dao.save(ci);
+     }
 
     @Override
     public CompanyInfo save(CompanyInfo ci, String status, String userId, String type) {

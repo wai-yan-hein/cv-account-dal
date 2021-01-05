@@ -24,7 +24,7 @@ public class ProjectCOAMapping implements java.io.Serializable {
     private Long projectId;
     private String coaCode;
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id 
     @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;

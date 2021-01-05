@@ -33,7 +33,6 @@ public class AccOpeningH implements java.io.Serializable{
     private String curr;
     
     @Id
-    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "tran_id", unique = true, nullable = false)
     public Long getTranId() {
         return tranId;

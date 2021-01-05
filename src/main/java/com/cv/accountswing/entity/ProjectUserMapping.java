@@ -24,7 +24,7 @@ public class ProjectUserMapping implements java.io.Serializable {
     private Long projectId;
     private Long userId;
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id 
     @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;

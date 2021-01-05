@@ -22,7 +22,6 @@ import javax.persistence.Table;
 public class StockReport implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
     private Integer id;
     @Column(name = "name")
     private String reportName;

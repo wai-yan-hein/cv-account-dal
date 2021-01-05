@@ -30,7 +30,7 @@ public class PaymentType implements java.io.Serializable{
     private Date updatedDt;
     private Integer compId;
     
-    @Id @GeneratedValue
+    @Id
     @Column(name="payment_type_id", unique=true, nullable=false)
     public Integer getTypeId() {
         return typeId;

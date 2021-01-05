@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 public class StockInOutDetail implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+   
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
     @ManyToOne

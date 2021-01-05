@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 public class COAOpening implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "coa_op_id", unique = true, nullable = false)
     private Integer opId;
     @Temporal(TemporalType.DATE)

@@ -31,7 +31,7 @@ public class AppUser implements java.io.Serializable {
     private String createStatus;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+   
     @Column(name = "user_id", unique = true, nullable = false)
     public Integer getUserId() {
         return userId;

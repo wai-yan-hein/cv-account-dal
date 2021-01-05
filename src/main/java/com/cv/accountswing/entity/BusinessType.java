@@ -23,7 +23,7 @@ public class BusinessType implements java.io.Serializable {
     private String typeName;
 
     @Id
-    @GeneratedValue
+   
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return id;

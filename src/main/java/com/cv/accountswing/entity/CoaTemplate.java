@@ -33,7 +33,7 @@ public class CoaTemplate implements java.io.Serializable{
     private String parentUserDesp;
     
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "tran_id", unique = true, nullable = false)
     public Long getTranId() {
         return tranId;

@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class Location implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "location_id", unique = true, nullable = false)
     private Integer locationId;
     @Column(name = "location_name", nullable = false, length = 50, unique = true)

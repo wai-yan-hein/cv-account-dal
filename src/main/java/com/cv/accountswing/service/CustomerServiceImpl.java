@@ -45,6 +45,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer save(Customer cus){
+        return dao.save(cus);
+    }
+    @Override
     public List<Customer> search(String code, String name, String address,
             String phone, String compCode) {
         List<Customer> listCus = dao.search(code, name, address, phone, compCode);

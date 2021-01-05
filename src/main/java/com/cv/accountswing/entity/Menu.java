@@ -45,7 +45,7 @@ public class Menu implements java.io.Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "menu_id", unique = true, nullable = false)
     public Integer getId() {
         return id;

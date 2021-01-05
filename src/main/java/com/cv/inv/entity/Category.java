@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class Category implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+  
     @Column(name = "cat_id", unique = true, nullable = false)
     private Integer catId;
     @Column(name = "cat_name", nullable = false, length = 500, unique = true)

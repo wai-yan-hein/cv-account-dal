@@ -18,7 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class MachineInfo implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "machine_id", unique = true, nullable = false)
     private Integer machineId;
     @Column(name = "machine_name", unique = true, nullable = false)

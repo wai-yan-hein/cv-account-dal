@@ -12,7 +12,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
@@ -28,6 +30,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -705,5 +709,35 @@ public class Util1 {
         ZipFile zf = new ZipFile();
         String file = zf.zipFiles(filePath, fileName);
         return file;
+    }
+    
+     public static String unzip(String zipFilePath, String destDirectory, String fileName) throws Exception {
+        final int BUFFER_SIZE = 4096;
+        File destDir = new File(destDirectory);
+        if (!destDir.exists()) {
+            destDir.mkdir();
+        }
+        ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath + File.separator + fileName));
+        ZipEntry entry = zipIn.getNextEntry();
+        while (entry != null) {
+            String filePath = destDirectory + File.separator + fileName.replaceAll(".zip", ".json");
+            if (!entry.isDirectory()) {
+                try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath))) {
+                    byte[] bytesIn = new byte[BUFFER_SIZE];
+                    int read = 0;
+                    while ((read = zipIn.read(bytesIn)) != -1) {
+                        bos.write(bytesIn, 0, read);
+                    }
+                }
+
+            } else {
+                File dir = new File(filePath);
+                dir.mkdir();
+            }
+            zipIn.closeEntry();
+            entry = zipIn.getNextEntry();
+            zipIn.close();
+        }
+        return zipFilePath;
     }
 }

@@ -15,6 +15,8 @@ import java.util.List;
 public interface SupplierService {
 
     public Supplier save(Supplier sup, String traderCodeLength);
+    
+    public Supplier save(Supplier sup);
 
     public Supplier findById(Integer id);
 

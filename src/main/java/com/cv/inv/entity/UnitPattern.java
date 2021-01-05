@@ -25,7 +25,6 @@ import javax.persistence.TemporalType;
 public class UnitPattern implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "pattern_id", unique = true, nullable = false)
     private Integer patternId;
     @Column(name = "pattern_name")

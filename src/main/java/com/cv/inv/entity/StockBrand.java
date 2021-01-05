@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class StockBrand implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "brand_id", unique = true, nullable = false)
     private Integer brandId;
     @Column(name = "brand_name", nullable = false, length = 80, unique = true)

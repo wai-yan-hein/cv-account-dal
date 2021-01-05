@@ -27,7 +27,7 @@ public class SeqTable implements java.io.Serializable {
     private Integer compCode;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
     @Column(name = "id", unique = true,nullable = false)
     public Integer getId() {
         return id;

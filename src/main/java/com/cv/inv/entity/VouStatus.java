@@ -24,7 +24,6 @@ import javax.persistence.TemporalType;
 public class VouStatus implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "vou_status_id", unique = true, nullable = false)
     private Integer vouStatusId;
     @Column(name = "status_desp", nullable = false, length = 15, unique = true)

@@ -28,7 +28,7 @@ public class AccOpeningD implements java.io.Serializable{
     private Double crAmt;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "tran_id", unique = true, nullable = false)
     public Long getTranId() {
         return tranId;

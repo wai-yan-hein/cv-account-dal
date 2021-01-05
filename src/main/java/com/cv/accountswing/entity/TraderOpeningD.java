@@ -27,7 +27,7 @@ public class TraderOpeningD implements java.io.Serializable{
     private Double opAmt;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "tran_id", unique = true, nullable = false)
     public Long getTranId() {
         return tranId;

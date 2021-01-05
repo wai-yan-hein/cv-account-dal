@@ -35,7 +35,7 @@ public class Region implements java.io.Serializable {
     private String regionCode;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "reg_id", unique = true, nullable = false, length = 15)
     public Integer getRegId() {
         return regId;

@@ -44,7 +44,7 @@ public class CompanyInfo implements java.io.Serializable {
     private Integer roleId;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    
     @Column(name = "comp_id", unique = true, nullable = false)
     public Integer getCompId() {
         return compId;

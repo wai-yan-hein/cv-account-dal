@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface CompanyInfoService {
     public CompanyInfo save(CompanyInfo ci, String status, String userId, String type);
+    public CompanyInfo save(CompanyInfo ci);
     public CompanyInfo findById(Integer code);
     public List<CompanyInfo> search(String code, String name, String phone, String address,
             String businessType, String owner);

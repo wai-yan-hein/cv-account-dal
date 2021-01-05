@@ -34,7 +34,7 @@ public class Project implements java.io.Serializable {
     private Integer compCode;
     private String deptCode;
     
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id 
     @Column(name = "project_id", unique = true, nullable = false)
     public Long getProjectId() {
         return projectId;
