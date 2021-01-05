@@ -25,15 +25,15 @@ public class PurchaseDetailDaoImpl extends AbstractDao<String, PurHisDetail> imp
 
     @Override
     public List<PurHisDetail> search(String vouId) {
-        String hsql = "select o from PurHisDetail o where o.purDetailKey.vouId = '" + vouId + "'";
+        String hsql = "select o from PurHisDetail o where o.purDetailKey.vouId = '" + vouId + "' order by o.uniqueId";
         return findHSQL(hsql);
 
     }
 
     @Override
-    public int delete(String id) {
-        String strSql = "delete from PurchaseDetail o where o.purDetailKey.purDetailId = '" + id + "'";
-        int cnt = execUpdateOrDelete(strSql);
-        return cnt;
+    public int delete(String id) throws Exception {
+        String strSql = "delete from pur_his_detail where pur_detail_code = '" + id + "'";
+        execSQL(strSql);
+        return 1;
     }
 }

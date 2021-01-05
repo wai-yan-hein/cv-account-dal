@@ -19,6 +19,6 @@ public interface PurchaseDetailService {
 
     public List<PurHisDetail> search(String glId);
 
-    public void save(PurHis gl, List<PurHisDetail> pd,List<String> delList);
+    public void save(PurHis gl, List<PurHisDetail> pd, List<String> delList);
 
 }

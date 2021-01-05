@@ -5,8 +5,6 @@
  */
 package com.cv.inv.dao;
 
-
-
 import java.sql.ResultSet;
 import com.cv.accountswing.dao.AbstractDao;
 import com.cv.inv.entity.RetInHis;
@@ -171,6 +169,12 @@ public class RetInDaoImpl extends AbstractDao<String, RetInHis> implements RetIn
     public RetInHis findById(String id) {
         RetInHis ph = getByKey(id);
         return ph;
+    }
+
+    @Override
+    public void delete(String id) throws Exception {
+        String strSql = "update ret_in_his set deleted = true where ret_in_code = '" + id + "'";
+        execSQL(strSql);
     }
 
 }

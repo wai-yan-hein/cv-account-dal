@@ -24,6 +24,6 @@ public interface PurchaseHisDao {
 
     public PurHis findById(String id);
 
-    public int delete(String vouNo);
+    public int delete(String vouNo) throws Exception;
 
 }

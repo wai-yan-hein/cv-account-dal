@@ -5,8 +5,6 @@
  */
 package com.cv.inv.service;
 
-import com.cv.inv.entity.PurHis;
-import com.cv.inv.entity.PurHisDetail;
 import com.cv.inv.entity.RetInHisDetail;
 import java.util.List;
 
@@ -20,6 +18,7 @@ public interface RetInDetailService {
 
     public List<RetInHisDetail> search(String glId);
 
-  //  public void save(PurHis gl, List<PurchaseDetail> pd,List<String> delList);
+    public int delete(String id) throws Exception;
 
+    //  public void save(PurHis gl, List<PurchaseDetail> pd,List<String> delList);
 }

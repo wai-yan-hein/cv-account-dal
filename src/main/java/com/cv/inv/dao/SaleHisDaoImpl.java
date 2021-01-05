@@ -106,12 +106,10 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
     }
 
     @Override
-    public int delete(String vouNo) {
-        String strSql1 = "delete from SaleDetailHis o where o.vouNo = '" + vouNo + "'";
-        execUpdateOrDelete(strSql1);
-        String strSql = "delete from SaleHis o where o.vouNo = '" + vouNo + "'";
-        int cnt = execUpdateOrDelete(strSql);
-        return cnt;
+    public int delete(String vouNo) throws Exception{
+        String strSql = "update sale_his set deleted = true where voucher_no = '" + vouNo + "'";
+        execSQL(strSql);
+        return 1;
     }
 
     @Override

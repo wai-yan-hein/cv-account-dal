@@ -25,4 +25,6 @@ public interface RetOutDao {
     public ResultSet searchM(String fromDate, String toDate,
             String cusId, String locId, String vouNo, String filterCode) throws Exception;
 
+    public int delete(String id) throws Exception;
+
 }

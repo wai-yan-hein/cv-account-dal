@@ -5,7 +5,6 @@
  */
 package com.cv.inv.service;
 
-
 import com.cv.accountswing.dummy.VouSearch;
 import com.cv.accountswing.util.Util1;
 
@@ -74,7 +73,7 @@ public class PurchaseHisServiceImpl implements PurchaseHisService {
     }
 
     @Override
-    public int delete(String vouNo) {
+    public int delete(String vouNo) throws Exception {
         return hisDao.delete(vouNo);
     }
 

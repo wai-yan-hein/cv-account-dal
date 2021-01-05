@@ -5,7 +5,6 @@
  */
 package com.cv.inv.service;
 
-
 import com.cv.accountswing.dummy.VouSearch;
 import com.cv.inv.entity.PurHis;
 import java.util.List;
@@ -25,5 +24,5 @@ public interface PurchaseHisService {
 
     public PurHis findById(String id);
 
-    public int delete(String vouNo);
+    public int delete(String vouNo) throws Exception;
 }

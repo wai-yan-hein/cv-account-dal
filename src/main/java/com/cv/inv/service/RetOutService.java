@@ -18,7 +18,7 @@ public interface RetOutService {
 
     public void save(RetOutHis retIn, List<RetOutHisDetail> listRetIn, List<String> delList);
 
-    public void delete(String retInId);
+    public void delete(String retInId) throws Exception;
 
     public List<RetOutHis> search(String fromDate, String toDate, String cusId,
             String locId, String vouNo, String filterCode);

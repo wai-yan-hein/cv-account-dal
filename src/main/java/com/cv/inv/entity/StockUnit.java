@@ -30,6 +30,10 @@ public class StockUnit implements java.io.Serializable {
     @Column(name = "updated_date")
     private Date updateDate;
 
+    public StockUnit(String itemUnitCode) {
+        this.itemUnitCode = itemUnitCode;
+    }
+    
     public StockUnit() {
     }
 

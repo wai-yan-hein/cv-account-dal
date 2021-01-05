@@ -5,7 +5,6 @@
  */
 package com.cv.inv.service;
 
-
 import com.cv.accountswing.dummy.VouSearch;
 import com.cv.accountswing.util.Util1;
 
@@ -43,9 +42,24 @@ public class RetInServiceImpl implements RetInService {
     public void save(RetInHis retIn, List<RetInHisDetail> listRetIn, List<String> delList) {
         String retInDetailId;
         try {
+            for (int i = 0; i < listRetIn.size(); i++) {
+                RetInHisDetail cRD = listRetIn.get(i);
+                if (cRD.getUniqueId() == null) {
+                    if (i == 0) {
+                        cRD.setUniqueId(1);
+                    } else {
+                        RetInHisDetail pRD = listRetIn.get(i - 1);
+                        cRD.setUniqueId(pRD.getUniqueId() + 1);
+                    }
+                }
+            }
             if (delList != null) {
                 delList.forEach(detailId -> {
-                    dao.delete(detailId);
+                    try {
+                        dao.delete(detailId);
+                    } catch (Exception ex) {
+                        log.error("Delete RetIn :" + ex.getMessage());
+                    }
                 });
             }
             retInDao.save(retIn);
@@ -70,7 +84,7 @@ public class RetInServiceImpl implements RetInService {
     }
 
     @Override
-    public void delete(String retInId) {
+    public void delete(String retInId) throws Exception {
         dao.delete(retInId);
     }
 

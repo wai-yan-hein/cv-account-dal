@@ -6,7 +6,6 @@
 package com.cv.inv.dao;
 
 import com.cv.accountswing.dao.AbstractDao;
-import com.cv.inv.entity.RetInHisDetail;
 import com.cv.inv.entity.RetOutHisDetail;
 import java.util.List;
 import org.springframework.stereotype.Repository;
@@ -40,10 +39,10 @@ public class RetOutDetailDaoImpl extends AbstractDao<String, RetOutHisDetail> im
     }
 
     @Override
-    public int delete(String id) {
-        String strSql = "delete from RetOutDetailHis o where o.outCompoundKey.retOutDetailId = '" + id + "'";
-        int cnt = execUpdateOrDelete(strSql);
-        return cnt;
+    public int delete(String id) throws Exception{
+        String strSql = "delete from ret_out_detail_his where ret_out_detail_id = '" + id + "'";
+        execSQL(strSql);
+        return 1;
     }
 
     @Override

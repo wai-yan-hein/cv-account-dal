@@ -34,6 +34,10 @@ public class UnitPattern implements Serializable {
     @Column(name = "updated_date")
     private Date updatedDate;
 
+    public UnitPattern(Integer patternId) {
+        this.patternId = patternId;
+    }
+    
     public UnitPattern() {
     }
 

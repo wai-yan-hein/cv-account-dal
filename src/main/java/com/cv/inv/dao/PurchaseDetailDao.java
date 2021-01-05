@@ -19,6 +19,6 @@ public interface PurchaseDetailDao {
 
     public List<PurHisDetail> search(String glId);
 
-    public int delete(String id);
+    public int delete(String id) throws Exception;
 
 }

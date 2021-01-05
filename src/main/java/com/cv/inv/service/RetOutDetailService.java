@@ -18,6 +18,7 @@ public interface RetOutDetailService {
 
     public List<RetOutHisDetail> search(String glId);
 
-  //  public void save(PurHis gl, List<PurchaseDetail> pd,List<String> delList);
+    public int delete(String id) throws Exception;
 
+    //  public void save(PurHis gl, List<PurchaseDetail> pd,List<String> delList);
 }

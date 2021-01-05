@@ -5,7 +5,6 @@
  */
 package com.cv.inv.dao;
 
-import com.cv.inv.entity.RetInHisDetail;
 import com.cv.inv.entity.RetOutHisDetail;
 import java.util.List;
 
@@ -19,6 +18,6 @@ public interface RetOutDetailDao {
 
     public List<RetOutHisDetail> search(String glId);
 
-    public int delete(String id);
+    public int delete(String id) throws Exception;
 
 }

@@ -5,7 +5,6 @@
  */
 package com.cv.inv.service;
 
-import com.cv.inv.entity.StockType;
 import com.cv.inv.entity.Stock;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
  */
 public interface StockService {
 
-    public Stock save(Stock stock, StockType item, String status);
+    public Stock save(Stock stock, String status);
 
     public Stock findById(String id);
 

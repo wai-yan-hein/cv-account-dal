@@ -19,7 +19,7 @@ import org.hibernate.annotations.GenerationTime;
 @Table(name = "trader")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "T")
+//@DiscriminatorValue(value = "T")
 public class Trader implements java.io.Serializable {
 
     private Integer id;
@@ -41,6 +41,7 @@ public class Trader implements java.io.Serializable {
     private String parent;
     private String appShortName; //use integration with other application
     private String appTraderCode; //Original trader id from integration app
+    private String migCode;
 
     public Trader(Integer id, String traderName) {
         this.id = id;
@@ -49,8 +50,7 @@ public class Trader implements java.io.Serializable {
 
     public Trader() {
     }
-    
-    
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -234,6 +234,15 @@ public class Trader implements java.io.Serializable {
 
     public void setTraderType(TraderType traderType) {
         this.traderType = traderType;
+    }
+
+    @Column(name = "mig_code")
+    public String getMigCode() {
+        return migCode;
+    }
+
+    public void setMigCode(String migCode) {
+        this.migCode = migCode;
     }
 
     @Override

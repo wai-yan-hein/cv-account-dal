@@ -5,7 +5,6 @@
  */
 package com.cv.inv.service;
 
-
 import com.cv.accountswing.dummy.VouSearch;
 import com.cv.accountswing.util.Util1;
 import java.sql.ResultSet;
@@ -26,14 +25,11 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author lenovo
  */
-
-
 @Service
 @Transactional
 public class RetOutServiceImpl implements RetOutService {
 
-    private static final Logger logger = LoggerFactory.getLogger(RetOutServiceImpl.class);
-    private RetOutHisDetail retOutDetailHis;
+    private static final Logger log = LoggerFactory.getLogger(RetOutServiceImpl.class);
     @Autowired
     private RetOutDao retOutDao;
     @Autowired
@@ -41,41 +37,45 @@ public class RetOutServiceImpl implements RetOutService {
 
     @Override
     public void save(RetOutHis retOut, List<RetOutHisDetail> listRetIn, List<String> delList) {
-
-        String retInDetailId;
-        RetOutCompoundKey key;
-
-        try {
-            if (delList != null) {
-                for (String detailId : delList) {
-                    dao.delete(detailId);
-                }
-            }
-            retOutDao.save(retOut);
-            String vouNo = retOut.getRetOutId();
-            for (RetOutHisDetail rd : listRetIn) {
-                if (rd.getStock() != null) {
-                    if (rd.getOutCompoundKey() != null) {
-                        rd.setOutCompoundKey(rd.getOutCompoundKey());
+        for (int i = 0; i < listRetIn.size(); i++) {
+                RetOutHisDetail cRD = listRetIn.get(i);
+                if (cRD.getUniqueId() == null) {
+                    if (i == 0) {
+                        cRD.setUniqueId(1);
                     } else {
-                        retInDetailId = vouNo + '-' + rd.getUniqueId();
-                        rd.setOutCompoundKey(new RetOutCompoundKey(retInDetailId, vouNo));
+                        RetOutHisDetail pRD = listRetIn.get(i - 1);
+                        cRD.setUniqueId(pRD.getUniqueId() + 1);
                     }
-                    dao.save(rd);
                 }
-
             }
-
-        } catch (Exception ex) {
-            logger.error("saveRetIn : " + ex.getStackTrace()[0].getLineNumber() + " - " + ex.getMessage());
-
+        if (delList != null) {
+            delList.forEach(detailId -> {
+                try {
+                    dao.delete(detailId);
+                } catch (Exception ex) {
+                    log.error("Delete Return Out Detail :"+ex.getMessage());
+                }
+            });
         }
+        retOutDao.save(retOut);
+        String vouNo = retOut.getRetOutId();
+        listRetIn.stream().filter(rd -> (rd.getStock() != null)).map(rd -> {
+            if (rd.getOutCompoundKey() != null) {
+                rd.setOutCompoundKey(rd.getOutCompoundKey());
+            } else {
+                String retInDetailId = vouNo + '-' + rd.getUniqueId();
+                rd.setOutCompoundKey(new RetOutCompoundKey(retInDetailId, vouNo));
+            }
+            return rd;
+        }).forEachOrdered(rd -> {
+            dao.save(rd);
+        });
 
     }
 
     @Override
-    public void delete(String retInId) {
-        dao.delete(retInId);
+    public void delete(String retInId) throws Exception{
+        retOutDao.delete(retInId);
     }
 
     @Override

@@ -24,4 +24,6 @@ public interface RetInDao {
 
     public ResultSet searchM(String fromDate, String toDate, String cusId,
             String locId, String vouNo, String filterCode) throws Exception;
+
+    public void delete(String id) throws Exception;
 }

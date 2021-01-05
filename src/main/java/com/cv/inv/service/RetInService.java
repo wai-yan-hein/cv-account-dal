@@ -20,7 +20,7 @@ public interface RetInService {
 
     public RetInHis saveM(RetInHis retIn);
 
-    public void delete(String retInId);
+    public void delete(String retInId) throws Exception;
 
     public List<RetInHis> search(String fromDate, String toDate, String cusId,
             String locId, String vouNo, String filterCode);

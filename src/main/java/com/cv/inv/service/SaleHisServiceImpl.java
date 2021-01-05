@@ -45,7 +45,7 @@ public class SaleHisServiceImpl implements SaleHisService {
     }
 
     @Override
-    public int delete(String vouNo) {
+    public int delete(String vouNo) throws Exception {
         return hisDao.delete(vouNo);
     }
 

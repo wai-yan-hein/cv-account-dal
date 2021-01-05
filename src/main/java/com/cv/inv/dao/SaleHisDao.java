@@ -25,5 +25,5 @@ public interface SaleHisDao {
 
     public SaleHis findById(String id);
 
-    public int delete(String vouNo);
+    public int delete(String vouNo) throws Exception;
 }

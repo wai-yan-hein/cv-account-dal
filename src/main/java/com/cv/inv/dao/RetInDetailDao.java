@@ -18,6 +18,6 @@ public interface RetInDetailDao {
 
     public List<RetInHisDetail> search(String glId);
 
-    public int delete(String id);
+    public int delete(String id) throws Exception;
 
 }

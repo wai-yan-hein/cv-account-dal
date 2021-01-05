@@ -33,10 +33,10 @@ public class StockServiceImpl implements StockService {
     private CharacterNoDao chDao;
 
     @Override
-    public Stock save(Stock stock, StockType item, String status) {
+    public Stock save(Stock stock, String status) {
         if (status.equals("NEW")) {
-            if (stock.getStockCode().isEmpty()) {
-                stock.setStockCode(getMedCode(stock.getStockName(), item));
+            if (stock.getStockCode() == null || stock.getStockCode().isEmpty()) {
+                stock.setStockCode(getMedCode(stock.getStockName(), stock.getStockType()));
             } else {
                 Stock findById = dao.findById(stock.getStockCode());
                 if (findById != null) {
@@ -81,7 +81,7 @@ public class StockServiceImpl implements StockService {
                             i = stockName.length();
                             characterNo = new CharacterNo(" ", "00");
                         } else {
-                            characterNo = chDao.findById(stockName);
+                            characterNo = chDao.findById(strTmp);
                             if (characterNo != null) {
                                 i = stockName.length();
                             }
@@ -122,7 +122,7 @@ public class StockServiceImpl implements StockService {
 
                     medCode = medCode + tmpMedSerial;
                 }
-            } catch (Exception ex) {
+            } catch (NumberFormatException ex) {
                 LOGGER.error("getMedCode : " + ex.getStackTrace()[0].getLineNumber() + " - " + ex.toString());
             }
         }

@@ -41,6 +41,7 @@ public class ChartOfAccount implements java.io.Serializable {
     private String prvCoaCode;
     private String appShortName;
     private String appTraderTypeCode;
+    private String migCode;
 
     public ChartOfAccount() {
     }
@@ -231,6 +232,15 @@ public class ChartOfAccount implements java.io.Serializable {
 
     public void setAppTraderTypeCode(String appTraderTypeCode) {
         this.appTraderTypeCode = appTraderTypeCode;
+    }
+
+    @Column(name = "mig_code", length = 15)
+    public String getMigCode() {
+        return migCode;
+    }
+
+    public void setMigCode(String migCode) {
+        this.migCode = migCode;
     }
 
     @Override

@@ -6,8 +6,11 @@
 package com.cv.inv.dao;
 
 import com.cv.accountswing.dao.AbstractDao;
+import com.cv.inv.entity.SaleDetailKey;
 import com.cv.inv.entity.SaleHisDetail;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +18,7 @@ import org.springframework.stereotype.Repository;
  * @author Mg Kyaw Thura Aung
  */
 @Repository
-public class SaleDetailDaoImpl extends AbstractDao<String, SaleHisDetail> implements SaleDetailDao {
+public class SaleDetailDaoImpl extends AbstractDao<SaleDetailKey, SaleHisDetail> implements SaleDetailDao {
 
     @Override
     public SaleHisDetail save(SaleHisDetail sdh) {
@@ -25,15 +28,19 @@ public class SaleDetailDaoImpl extends AbstractDao<String, SaleHisDetail> implem
 
     @Override
     public List<SaleHisDetail> search(String vouId) {
-        String hsql = "select o from SaleHisDetail o where o.saleDetailKey.vouId ='" + vouId + "'";
+        String hsql = "select o from SaleHisDetail o where o.saleDetailKey.vouId ='" + vouId + "' order by o.uniqueId";
         return findHSQL(hsql);
     }
 
     @Override
     public int delete(String id) {
-        String strSql = "delete from SaleDetailHis o where o.saleDetailKey.saleDetailId = " + id;
-        int cnt = execUpdateOrDelete(strSql);
-        return cnt;
+        String strSql = "delete from sale_his_detail where sale_detail_id = '" + id + "' ";
+        try {
+            execSQL(strSql);
+        } catch (Exception ex) {
+            Logger.getLogger(SaleDetailDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
     }
 
 }

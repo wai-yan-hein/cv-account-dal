@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  * @author lenovo
  */
 @Entity
-@Table(name = "ret_out__his_detail")
+@Table(name = "ret_out_his_detail")
 public class RetOutHisDetail implements java.io.Serializable {
 
     @EmbeddedId
@@ -31,18 +31,18 @@ public class RetOutHisDetail implements java.io.Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "expire_date")
     private Date expireDate;
-    @Column(name = "ret_out_qty")
+    @Column(name = "qty")
     private Float qty;
-    @Column(name = "ret_out_price")
+    @Column(name = "price")
     private Double price;
     @ManyToOne
     @JoinColumn(name = "stock_unit")
     private StockUnit stockUnit;
-    @Column(name = "ret_out_amount")
-    private Double amount;
+    @Column(name = "amount")
+    private Float amount;
     @Column(name = "unique_id")
     private Integer uniqueId;
-    @Column(name = "ret_out_std_weight")
+    @Column(name = "std_wt")
     private Float stdWt;
     @Column(name = "small_wt")
     private Float smallWeight;
@@ -101,11 +101,11 @@ public class RetOutHisDetail implements java.io.Serializable {
         this.stockUnit = stockUnit;
     }
 
-    public Double getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 

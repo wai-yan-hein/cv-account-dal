@@ -43,9 +43,9 @@ public class RetInDetailDaoImpl extends AbstractDao<RetInCompoundKey, RetInHisDe
     }
 
     @Override
-    public int delete(String id) {
-        String strSql = "delete from RetInDetailHis o where o.retInKey.retInDetailId = '" + id + "'";
-        int cnt = execUpdateOrDelete(strSql);
-        return cnt;
+    public int delete(String id) throws Exception {
+        String strSql = "delete from ret_in_his_detail where ret_in_detail_id = '" + id + "'";
+        execSQL(strSql);
+        return 1;
     }
 }

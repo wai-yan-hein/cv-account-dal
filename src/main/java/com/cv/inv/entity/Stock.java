@@ -50,15 +50,15 @@ public class Stock implements java.io.Serializable {
     private String barcode;
     @Column(name = "short_name", length = 50)
     private String shortName;
-    @Column(name = "pur_price_mes")
-    private Float purPriceMeasure;
+    @Column(name = "pur_wt")
+    private Float purWeight;
     @Column(name = "pur_price")
     private Float purPrice;
     @ManyToOne
     @JoinColumn(name = "pur_price_unit")
     private StockUnit purUnit;
-    @Column(name = "sale_price_mes")
-    private Float saleMeasure;
+    @Column(name = "sale_wt")
+    private Float saleWeight;
     @ManyToOne
     @JoinColumn(name = "sale_unit")
     private StockUnit saleUnit;
@@ -85,6 +85,14 @@ public class Stock implements java.io.Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @Column(name = "mig_code")
+    private String migCode;
+    @Column(name = "comp_id")
+    private Integer compId;
+    
 
     public String getStockCode() {
         return stockCode;
@@ -166,28 +174,12 @@ public class Stock implements java.io.Serializable {
         this.shortName = shortName;
     }
 
-    public Float getPurPriceMeasure() {
-        return purPriceMeasure;
-    }
-
-    public void setPurPriceMeasure(Float purPriceMeasure) {
-        this.purPriceMeasure = purPriceMeasure;
-    }
-
     public Float getPurPrice() {
         return purPrice;
     }
 
     public void setPurPrice(Float purPrice) {
         this.purPrice = purPrice;
-    }
-
-    public Float getSaleMeasure() {
-        return saleMeasure;
-    }
-
-    public void setSaleMeasure(Float saleMeasure) {
-        this.saleMeasure = saleMeasure;
     }
 
     public StockUnit getSaleUnit() {
@@ -285,5 +277,46 @@ public class Stock implements java.io.Serializable {
     public void setPurUnit(StockUnit purUnit) {
         this.purUnit = purUnit;
     }
+
+    public String getMigCode() {
+        return migCode;
+    }
+
+    public void setMigCode(String migCode) {
+        this.migCode = migCode;
+    }
+
+    public Float getPurWeight() {
+        return purWeight;
+    }
+
+    public void setPurWeight(Float purWeight) {
+        this.purWeight = purWeight;
+    }
+
+    public Float getSaleWeight() {
+        return saleWeight;
+    }
+
+    public void setSaleWeight(Float saleWeight) {
+        this.saleWeight = saleWeight;
+    }
+
+    public Integer getCompId() {
+        return compId;
+    }
+
+    public void setCompId(Integer compId) {
+        this.compId = compId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    
 
 }

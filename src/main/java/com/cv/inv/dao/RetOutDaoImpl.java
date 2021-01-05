@@ -171,4 +171,11 @@ public class RetOutDaoImpl extends AbstractDao<String, RetOutHis> implements Ret
         return ph;
     }
 
+    @Override
+    public int delete(String id) throws Exception{
+        String strSql = "update ret_out_his set deleted = true where ret_out_id = '" + id + "'";
+        execSQL(strSql);
+        return 1;
+    }
+
 }

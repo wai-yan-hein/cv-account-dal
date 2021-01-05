@@ -30,6 +30,7 @@ public class RetInDetatilServiceImpl implements RetInDetailService {
 
     @Autowired
     private RetInDetailDao dao;
+
     @Override
     public RetInHisDetail save(RetInHisDetail pd) {
 
@@ -39,6 +40,11 @@ public class RetInDetatilServiceImpl implements RetInDetailService {
     @Override
     public List<RetInHisDetail> search(String glId) {
         return dao.search(glId);
+    }
+
+    @Override
+    public int delete(String id) throws Exception {
+        return dao.delete(id);
     }
 
 }

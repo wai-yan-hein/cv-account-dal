@@ -54,35 +54,43 @@ public class SaleDetailServiceImpl implements SaleDetailService {
     public void save(SaleHis saleHis, List<SaleHisDetail> listSaleDetail,
             String vouStatus, List<String> deleteList) throws Exception {
         String retInDetailId;
-
-        try {
-            if (vouStatus.equals("EDIT")) {
-                if (deleteList != null) {
-                    deleteList.forEach(detailId -> {
-                        dao.delete(detailId);
-                    });
+        //serialize unique id
+        for (int i = 0; i < listSaleDetail.size(); i++) {
+            SaleHisDetail cSd = listSaleDetail.get(i);
+            if (cSd.getUniqueId() == null) {
+                if (i == 0) {
+                    cSd.setUniqueId(1);
+                } else {
+                    SaleHisDetail pSd = listSaleDetail.get(i - 1);
+                    cSd.setUniqueId(pSd.getUniqueId() + 1);
                 }
             }
-
-            hisDao.save(saleHis);
-
-            String vouNo = saleHis.getVouNo();
-            for (SaleHisDetail sd : listSaleDetail) {
-                if (sd.getStock() != null) {
-                    if (sd.getSaleDetailKey() != null) {
-                        sd.setSaleDetailKey(sd.getSaleDetailKey());
-                    } else {
-                        retInDetailId = vouNo + '-' + sd.getUniqueId();
-                        sd.setSaleDetailKey(new SaleDetailKey(vouNo, retInDetailId));
-                    }
-                    //  pd.setLocation(pur.getLocationId());
-                    dao.save(sd);
-                }
-            }
-        } catch (Exception ex) {
-            logger.error("saveSaleDetail : " + ex.getStackTrace()[0].getLineNumber() + " - " + ex.getMessage());
-
         }
+        if (vouStatus.equals("EDIT")) {
+
+            if (deleteList != null) {
+                deleteList.forEach(detailId -> {
+                    if (detailId != null) {
+                        dao.delete(detailId);
+                    }
+                });
+            }
+        }
+        hisDao.save(saleHis);
+        String vouNo = saleHis.getVouNo();
+        for (SaleHisDetail sd : listSaleDetail) {
+            if (sd.getStock() != null) {
+                if (sd.getSaleDetailKey() != null) {
+                    sd.setSaleDetailKey(sd.getSaleDetailKey());
+                } else {
+                    retInDetailId = vouNo + '-' + sd.getUniqueId();
+                    sd.setSaleDetailKey(new SaleDetailKey(vouNo, retInDetailId));
+                }
+                //  pd.setLocation(pur.getLocationId());
+                dao.save(sd);
+            }
+        }
+
     }
 
     /*private void saveInGl() throws Exception {

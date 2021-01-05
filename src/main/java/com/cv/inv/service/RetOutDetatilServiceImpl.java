@@ -6,7 +6,6 @@
 package com.cv.inv.service;
 
 import com.cv.inv.dao.RetOutDetailDao;
-import com.cv.inv.entity.RetInHisDetail;
 import com.cv.inv.entity.RetOutHisDetail;
 import java.util.List;
 import org.slf4j.Logger;
@@ -30,13 +29,17 @@ public class RetOutDetatilServiceImpl implements RetOutDetailService {
 
     @Override
     public RetOutHisDetail save(RetOutHisDetail pd) {
-
         return dao.save(pd);
     }
 
     @Override
     public List<RetOutHisDetail> search(String glId) {
         return dao.search(glId);
+    }
+
+    @Override
+    public int delete(String id) throws Exception{
+        return dao.delete(id);
     }
 
 }

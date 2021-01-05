@@ -6,15 +6,13 @@
 package com.cv.inv.service;
 
 import com.cv.accountswing.dao.GlDao;
-import com.cv.accountswing.entity.Gl;
 import com.cv.inv.dao.PurchaseHisDao;
 import com.cv.inv.dao.PurchaseDetailDao;
 import com.cv.inv.entity.PurDetailKey;
 import com.cv.inv.entity.PurHis;
 import com.cv.inv.entity.PurHisDetail;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,57 +26,66 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
-
+    
     private static final Logger logger = LoggerFactory.getLogger(RetInServiceImpl.class);
     private final String DELETE_OPTION = "INV_DELETE";
     private final String SOURCE_PROG = "ACCOUNT";
-
+    
     @Autowired
     private GlDao glDao;
-
+    
     @Autowired
     private PurchaseDetailDao dao;
     @Autowired
     private PurchaseHisDao purchaseHisDao;
-
+    
     @Override
     public PurHisDetail save(PurHisDetail pd) {
-
+        
         return dao.save(pd);
     }
-
+    
     @Override
     public List<PurHisDetail> search(String glId) {
         return dao.search(glId);
     }
-
+    
     @Override
     public void save(PurHis pur, List<PurHisDetail> listPD, List<String> delList) {
         String retInDetailId;
-        try {
-            if (delList != null) {
-                delList.forEach(detailId -> {
-                    dao.delete(detailId);
-                });
-            }
-            purchaseHisDao.save(pur);
-            String vouNo = pur.getPurInvId();
-            for (PurHisDetail pd : listPD) {
-                if (pd.getStock() != null) {
-                    if (pd.getPurDetailKey() != null) {
-                        pd.setPurDetailKey(pd.getPurDetailKey());
-                    } else {
-                        retInDetailId = vouNo + '-' + pd.getUniqueId();
-                        pd.setPurDetailKey(new PurDetailKey(vouNo, retInDetailId));
-                    }
-                    //  pd.setLocation(pur.getLocationId());
-                    dao.save(pd);
+        for (int i = 0; i < listPD.size(); i++) {
+            PurHisDetail cPD = listPD.get(i);
+            if (cPD.getUniqueId() == null) {
+                if (i == 0) {
+                    cPD.setUniqueId(1);
+                } else {
+                    PurHisDetail pSd = listPD.get(i - 1);
+                    cPD.setUniqueId(pSd.getUniqueId() + 1);
                 }
             }
-
-        } catch (Exception ex) {
-            logger.error("savePurchaseDetail : " + ex.getStackTrace()[0].getLineNumber() + " - " + ex.getMessage());
-
+        }
+        if (delList != null) {
+            delList.forEach(detailId -> {
+                try {
+                    dao.delete(detailId);
+                } catch (Exception ex) {
+                    logger.error("delete purchase detail :" + ex.getMessage());
+                }
+            });
+        }
+        purchaseHisDao.save(pur);
+        String vouNo = pur.getPurInvId();
+        for (PurHisDetail pd : listPD) {
+            if (pd.getStock() != null) {
+                if (pd.getPurDetailKey() != null) {
+                    pd.setPurDetailKey(pd.getPurDetailKey());
+                } else {
+                    retInDetailId = vouNo + '-' + pd.getUniqueId();
+                    pd.setPurDetailKey(new PurDetailKey(vouNo, retInDetailId));
+                }
+                //  pd.setLocation(pur.getLocationId());
+                dao.save(pd);
+            }
         }
     }
 

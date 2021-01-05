@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service
-public class TraderTypeServiceImpl implements TraderTypeH2Service {
+public class TraderTypeH2ServiceImpl implements TraderTypeH2Service {
 
     @Autowired
     private TraderTypeH2Dao dao;
