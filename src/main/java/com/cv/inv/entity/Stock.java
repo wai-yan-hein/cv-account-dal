@@ -301,6 +301,17 @@ public class Stock implements java.io.Serializable {
         this.saleWeight = saleWeight;
     }
 
+<<<<<<< HEAD
+=======
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+>>>>>>> c22669eaab33b00c4e34b7cf2c20935a3f28f32a
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -308,6 +319,7 @@ public class Stock implements java.io.Serializable {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+<<<<<<< HEAD
 
     public String getCompCode() {
         return compCode;
@@ -316,5 +328,7 @@ public class Stock implements java.io.Serializable {
     public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
+=======
+>>>>>>> c22669eaab33b00c4e34b7cf2c20935a3f28f32a
 
 }

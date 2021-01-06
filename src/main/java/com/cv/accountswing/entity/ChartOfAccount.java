@@ -42,6 +42,7 @@ public class ChartOfAccount implements java.io.Serializable {
     private String appShortName;
     private String appTraderTypeCode;
     private String migCode;
+    private Integer macId;
 
     public ChartOfAccount() {
     }
@@ -162,11 +163,7 @@ public class ChartOfAccount implements java.io.Serializable {
         this.option = option;
     }
 
-<<<<<<< HEAD
-    @Column(name = "comp_code", length = 15)
-=======
     @Column(name = "comp_code")
->>>>>>> 9e315394bc257bcd08e18f3bc41e51f8b462b12a
     public String getCompCode() {
         return compCode;
     }
@@ -252,4 +249,14 @@ public class ChartOfAccount implements java.io.Serializable {
         return coaNameEng;
     }
 
+    @Column(name = "mac_id")
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    
 }
