@@ -49,7 +49,6 @@ import com.cv.inv.entity.StockUnit;
 import com.cv.inv.entity.UnitPattern;
 import com.cv.inv.entity.UnitRelation;
 import com.cv.inv.entity.VouStatus;
-import com.cv.inv.h2.entity.AppUserH2;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -311,7 +310,7 @@ public class ReceiverServiceImpl implements ReceiverService {
             case "Appuser":
                 try {
                 java.lang.reflect.Type collectionType
-                        = new TypeToken<List<AppUserH2>>() {
+                        = new TypeToken<List<AppUser>>() {
                         }.getType();
 
                 List<AppUser> ListAppUser = gson.fromJson(data, collectionType);

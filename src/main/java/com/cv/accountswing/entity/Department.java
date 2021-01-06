@@ -25,7 +25,7 @@ public class Department implements java.io.Serializable {
     private String deptName;
     private String parentDept;
     private Boolean active;
-    private Integer compCode;
+    private String compCode;
     private String createdBy;
     private Date createdDt;
     private String updatedBy;
@@ -78,12 +78,12 @@ public class Department implements java.io.Serializable {
         this.active = active;
     }
 
-    @Column(name = "comp_code", length = 15)
-    public Integer getCompCode() {
+    @Column(name = "comp_code")
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 

@@ -45,6 +45,8 @@ public class VouStatus implements java.io.Serializable {
     private Integer macId;
     @Column(name = "user_code")
     private String userCode;
+    @Column(name = "comp_code")
+    private String compCode;
 
     public String getVouStatusCode() {
         return vouStatusCode;
@@ -108,6 +110,14 @@ public class VouStatus implements java.io.Serializable {
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
+    }
+
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
 }

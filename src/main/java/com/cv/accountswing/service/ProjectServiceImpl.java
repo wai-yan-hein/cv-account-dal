@@ -48,8 +48,8 @@ public class ProjectServiceImpl implements ProjectService {
             Date prjDate = project.getCreatedDate();
             LocalDate localDate = prjDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             String strYear = String.valueOf(localDate.getYear());
-            int seqNo = sqtDao.getSequence("PROJECT", strYear, project.getCompCode().toString());
-            project.setProjectCode(seqNo + "/" + strYear);
+           // int seqNo = sqtDao.getSequence("PROJECT", strYear, project.getCompCode().toString());
+           // project.setProjectCode(seqNo + "/" + strYear);
         }
         return dao.save(project);
     }

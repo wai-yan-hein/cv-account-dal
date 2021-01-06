@@ -26,7 +26,7 @@ public class Category implements java.io.Serializable {
 
     @Id
     @Column(name = "cat_code", unique = true, nullable = false)
-    private Integer catCode;
+    private String catCode;
     @Column(name = "cat_name", nullable = false, length = 500, unique = true)
     private String catName;
     @Column(name = "mig_id")
@@ -47,6 +47,8 @@ public class Category implements java.io.Serializable {
     private Integer macId;
     @Column(name = "user_code")
     private String userCode;
+     @Column(name = "comp_code")
+    private String compCode;
 
     public Category() {
     }
@@ -80,11 +82,11 @@ public class Category implements java.io.Serializable {
         this.updatedDate = updatedDate;
     }
 
-    public Integer getCatCode() {
+    public String getCatCode() {
         return catCode;
     }
 
-    public void setCatCode(Integer catCode) {
+    public void setCatCode(String catCode) {
         this.catCode = catCode;
     }
 
@@ -128,4 +130,13 @@ public class Category implements java.io.Serializable {
         this.userCode = userCode;
     }
 
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+    
 }

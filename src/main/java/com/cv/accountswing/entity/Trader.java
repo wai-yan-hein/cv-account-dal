@@ -23,8 +23,8 @@ public class Trader implements java.io.Serializable {
     @Id
     @Column(name = "code", unique = true, nullable = false)
     private String code;
-    @Column(name = "comp_code", length = 15, nullable = false)
-    private Integer compCode;
+    @Column(name = "comp_code")
+    private String compCode;
     @Column(name = "trader_name", nullable = false, length = 255)
     private String traderName;
     private String address;
@@ -78,11 +78,11 @@ public class Trader implements java.io.Serializable {
     public Trader() {
     }
 
-    public Integer getCompCode() {
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 

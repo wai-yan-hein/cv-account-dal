@@ -33,7 +33,7 @@ public class ChartOfAccount implements java.io.Serializable {
     private String modifiedBy;
     private String parent;
     private String option;
-    private Integer compCode;
+    private String compCode;
     private Integer level;
     private String coaCodeUsr;
     private String parentUsrCode;
@@ -162,12 +162,12 @@ public class ChartOfAccount implements java.io.Serializable {
         this.option = option;
     }
 
-    @Column(name = "comp_code", length = 15)
-    public Integer getCompCode() {
+    @Column(name = "comp_code")
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 

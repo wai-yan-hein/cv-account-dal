@@ -46,6 +46,8 @@ public class UnitPattern implements Serializable {
     private Integer macId;
     @Column(name = "user_code")
     private String userCode;
+    @Column(name = "comp_code")
+    private String compCode;
 
     public UnitPattern() {
     }
@@ -119,4 +121,13 @@ public class UnitPattern implements Serializable {
         this.userCode = userCode;
     }
 
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+    
 }

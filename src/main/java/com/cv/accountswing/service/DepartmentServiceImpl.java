@@ -32,7 +32,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department save(Department dept) {
         if (dept.getDeptCode().isEmpty()) {
-            dept.setDeptCode(getDeptCode(dept.getCompCode().toString()));
+           // dept.setDeptCode(getDeptCode(dept.getCompCode().toString()));
         }
         dept = dao.save(dept);
         return dept;
@@ -56,16 +56,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         return cnt;
     }
 
-    private String getDeptCode(String compCode) {
+   /* private String getDeptCode(String compCode) {
         SystemPropertyKey spk = new SystemPropertyKey("system.dept.code.length",
                 Integer.parseInt(compCode));
         SystemProperty sp = spService.findById(spk);
         int ttlLength = Integer.parseInt(sp.getPropValue());
-        int seqNo = seqService.getSequence("DEPT", "-", compCode);
+       // int seqNo = seqService.getSequence("DEPT", "-", compCode);
         String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
         return coaCode;
     }
-
+*/
     @Override
     public List<Department> findAll() {
         return dao.findAll();

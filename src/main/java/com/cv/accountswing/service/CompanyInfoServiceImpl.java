@@ -50,11 +50,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Autowired
     private UsrCompRoleService usrCompRoleService;
     
-    private String getCOACode(String compCode, int ttlLength) {
-        int seqNo = seqService.getSequence("COA", "-", compCode);
-        String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
-        return coaCode;
-    }
+   // private String getCOACode(String compCode, int ttlLength) {
+       // int seqNo = seqService.getSequence("COA", "-", compCode);
+       // String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
+    //    return coaCode;
+   // }
     
     @Override
      public CompanyInfo save(CompanyInfo ci){
@@ -88,18 +88,18 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                     spService.copySystemProperty(oldCompCode, newCompCode);
 
                     for (ChartOfAccount tmpCOA : listLevel2COA) {
-                        String newCOACode = getCOACode(newCompCode, ttlLength);
+                      //  String newCOACode = getCOACode(newCompCode, ttlLength);
                         ChartOfAccount newCOA = new ChartOfAccount();
 
                         BeanUtils.copyProperties(tmpCOA, newCOA);
                         newCOA.setPrvCoaCode(newCOA.getCode());
-                        newCOA.setCode(newCOACode);
-                        newCOA.setCompCode(Integer.parseInt(newCompCode));
+                        //newCOA.setCode(newCOACode);
+                        newCOA.setCompCode(newCompCode);
                         coaDao.save(newCOA);
 
                         List<SystemProperty> listSP = spService.search("-", newCompCode, tmpCOA.getCode());
                         for (SystemProperty tmpSP : listSP) {
-                            tmpSP.setPropValue(newCOACode);
+                         //   tmpSP.setPropValue(newCOACode);
                             spService.save(tmpSP);
                         }
 
@@ -150,13 +150,13 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         List<ChartOfAccount> listCOA = coaDao.getChild(oldCompCode, parent);
 
         for (ChartOfAccount tmpCOA : listCOA) {
-            String newCOACode = getCOACode(newCompCode, ttlLength);
+            //String newCOACode = getCOACode(newCompCode, ttlLength);
             ChartOfAccount newCOA = new ChartOfAccount();
 
             BeanUtils.copyProperties(tmpCOA, newCOA);
             newCOA.setPrvCoaCode(newCOA.getCode());
-            newCOA.setCode(newCOACode);
-            newCOA.setCompCode(Integer.parseInt(newCompCode));
+           // newCOA.setCode(newCOACode);
+            newCOA.setCompCode(newCompCode);
             newCOA.setParent(currParent);
             coaDao.save(newCOA);
 

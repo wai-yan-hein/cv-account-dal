@@ -28,8 +28,8 @@ public class UserRole implements java.io.Serializable {
     private String roleCode;
     @Column(name = "role_name", length = 50)
     private String roleName;
-    @Column(name = "comp_code", length = 15)
-    private Integer compCode;
+    @Column(name = "comp_code")
+    private String compCode;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;
@@ -55,11 +55,11 @@ public class UserRole implements java.io.Serializable {
         this.roleName = roleName;
     }
 
-    public Integer getCompCode() {
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 

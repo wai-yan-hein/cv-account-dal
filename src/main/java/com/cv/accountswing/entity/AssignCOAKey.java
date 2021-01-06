@@ -16,24 +16,26 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class AssignCOAKey implements Serializable {
-    private Integer compId;
+    private String compCode;
     private Integer roleId;
     private String deptCode;
     private String coaCode;
     
-    @Column(name="comp_id")
-    public Integer getCompId() {
-        return compId;
+    @Column(name="comp_code")
+     public String getCompCode() {
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
     @Column(name="role_id")
     public Integer getRoleId() {
         return roleId;
     }
+
+   
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
@@ -60,7 +62,7 @@ public class AssignCOAKey implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.compId);
+        hash = 67 * hash + Objects.hashCode(this.compCode);
         hash = 67 * hash + Objects.hashCode(this.roleId);
         hash = 67 * hash + Objects.hashCode(this.deptCode);
         hash = 67 * hash + Objects.hashCode(this.coaCode);
@@ -85,7 +87,7 @@ public class AssignCOAKey implements Serializable {
         if (!Objects.equals(this.coaCode, other.coaCode)) {
             return false;
         }
-        if (!Objects.equals(this.compId, other.compId)) {
+        if (!Objects.equals(this.compCode, other.compCode)) {
             return false;
         }
         if (!Objects.equals(this.roleId, other.roleId)) {

@@ -90,8 +90,8 @@ public class Stock implements java.io.Serializable {
     private Date createdDate;
     @Column(name = "mig_code")
     private String migCode;
-    @Column(name = "comp_id")
-    private Integer compId;
+    @Column(name = "comp_code")
+    private String compCode;
     
 
     public String getStockCode() {
@@ -302,13 +302,7 @@ public class Stock implements java.io.Serializable {
         this.saleWeight = saleWeight;
     }
 
-    public Integer getCompId() {
-        return compId;
-    }
-
-    public void setCompId(Integer compId) {
-        this.compId = compId;
-    }
+   
 
     public Date getCreatedDate() {
         return createdDate;
@@ -317,6 +311,15 @@ public class Stock implements java.io.Serializable {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
     
 
+    
 }

@@ -5,6 +5,7 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.service.SeqTableService;
 import com.cv.inv.entity.StockBrand;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,17 @@ public class StockBrandServiceImpl implements StockBrandService {
     @Autowired
     private StockBrandDao dao;
 
+    @Autowired
+    private SeqTableService seqService;
+
     @Override
-    public StockBrand save(StockBrand brand) {
-        return dao.save(brand);
+    public StockBrand save(StockBrand sb) {
+        if (sb.getBrandCode() == null || sb.getBrandCode().isEmpty()) {
+            Integer macId = sb.getMacId();
+            String compCode = sb.getCompCode();
+            sb.setBrandCode(getStockBrandCode(macId, "StockBrand", "-", compCode));
+        }
+        return dao.save(sb);
     }
 
     @Override
@@ -38,4 +47,11 @@ public class StockBrandServiceImpl implements StockBrandService {
         return dao.delete(id);
     }
 
+    private String getStockBrandCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
+    }
 }

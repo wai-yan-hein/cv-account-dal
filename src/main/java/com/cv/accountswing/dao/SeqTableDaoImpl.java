@@ -5,6 +5,7 @@
  */
 package com.cv.accountswing.dao;
 
+import com.cv.accountswing.entity.SeqKey;
 import com.cv.accountswing.entity.SeqTable;
 import java.util.List;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class SeqTableDaoImpl extends AbstractDao<Integer, SeqTable> implements SeqTableDao {
+public class SeqTableDaoImpl extends AbstractDao<SeqKey, SeqTable> implements SeqTableDao {
 
     @Override
     public SeqTable save(SeqTable st) {
@@ -23,7 +24,7 @@ public class SeqTableDaoImpl extends AbstractDao<Integer, SeqTable> implements S
     }
 
     @Override
-    public SeqTable findById(Integer id) {
+    public SeqTable findById(SeqKey id) {
         SeqTable st = getByKey(id);
         return st;
     }
@@ -63,19 +64,18 @@ public class SeqTableDaoImpl extends AbstractDao<Integer, SeqTable> implements S
     }
 
     @Override
-    public int getSequence(String option, String period, String compCode) {
-        SeqTable st = getSeqTable(option, period, compCode);
-
+    public int getSequence(Integer macId, String option, String period, String compCode) {
+        SeqKey key = new SeqKey();
+        key.setCompCode(compCode);
+        key.setMacId(macId);
+        key.setPeriod(period);
+        key.setSeqOption(option);
+        SeqTable st = findById(key);
         if (st == null) {
-            st = new SeqTable();
             st.setSeqNo(1);
-            st.setSeqOption(option);
-            st.setPeriod(period);
-            st.setCompCode(Integer.parseInt(compCode));
         } else {
             st.setSeqNo(st.getSeqNo() + 1);
         }
-
         save(st);
         int seq = st.getSeqNo();
         return seq;

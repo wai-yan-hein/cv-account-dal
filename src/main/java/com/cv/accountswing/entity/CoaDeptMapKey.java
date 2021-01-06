@@ -17,16 +17,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class CoaDeptMapKey implements Serializable{
     
-    private Integer compCode;
+    private String compCode;
     private String coaCode;
     private String deptCode;
 
-    @Column(name="comp_id", unique=true, nullable=false)
-    public Integer getCompCode() {
+    @Column(name="comp_code", unique=true, nullable=false)
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 

@@ -5,6 +5,7 @@
  */
 package com.cv.accountswing.service;
 
+import com.cv.accountswing.entity.SeqKey;
 import com.cv.accountswing.entity.SeqTable;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface SeqTableService {
 
     public SeqTable save(SeqTable st);
 
-    public SeqTable findById(Integer id);
+    public SeqTable findById(SeqKey id);
 
     public List<SeqTable> search(String option, String period, String compCode);
 
@@ -24,7 +25,7 @@ public interface SeqTableService {
 
     public int delete(Integer id);
 
-    public int getSequence(String option, String period, String compCode);
+    public int getSequence(Integer macId,String option, String period, String compCode);
 
     public List<SeqTable> findAll();
 }

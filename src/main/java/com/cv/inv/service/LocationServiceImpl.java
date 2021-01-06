@@ -5,6 +5,7 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.service.SeqTableService;
 import com.cv.inv.dao.LocationDao;
 import com.cv.inv.entity.Location;
 import java.util.List;
@@ -22,9 +23,17 @@ public class LocationServiceImpl implements LocationService {
 
     @Autowired
     private LocationDao dao;
+    
+     @Autowired
+    private SeqTableService seqService;
 
     @Override
     public Location save(Location loc) {
+       if (loc.getLocationCode() == null || loc.getLocationCode().isEmpty()) {
+            Integer macId = loc.getMacId();
+            String compCode = loc.getCompCode();
+            loc.setLocationCode(getLocationCode(macId, "Location", "-", compCode));
+        }
         return dao.save(loc);
     }
 
@@ -48,4 +57,11 @@ public class LocationServiceImpl implements LocationService {
         return dao.search(parent);
     }
 
+    private String getLocationCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
+    }
 }

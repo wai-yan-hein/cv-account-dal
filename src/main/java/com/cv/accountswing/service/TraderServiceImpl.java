@@ -41,13 +41,26 @@ public class TraderServiceImpl implements TraderService {
     }
 
     @Override
-    public Trader saveTrader(Trader trader) {
+    public Trader saveTrader(Trader td) {
 
-        return dao.saveTrader(trader);
+        if (td.getCode() == null || td.getCode().isEmpty()) {
+            Integer macId = td.getMacId();
+            String compCode = td.getCompCode();
+            td.setCode(getTraderCode(macId, "Trader", "-", compCode));
+        }
+        return dao.saveTrader(td);
     }
-    
+
     @Override
-    public List<Trader> searchM(String updatedDate){
+    public List<Trader> searchM(String updatedDate) {
         return dao.searchM(updatedDate);
+    }
+
+    private String getTraderCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }

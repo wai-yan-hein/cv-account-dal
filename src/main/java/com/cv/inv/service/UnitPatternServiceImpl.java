@@ -6,8 +6,8 @@
 package com.cv.inv.service;
 
 import com.cv.accountswing.service.SeqTableService;
-import com.cv.inv.dao.ChargeTypeDao;
-import com.cv.inv.entity.ChargeType;
+import com.cv.inv.dao.UnitPatternDao;
+import com.cv.inv.entity.UnitPattern;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,30 +15,30 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Mg Kyaw Thura Aung
+ * @author Lenovo
  */
 @Service
 @Transactional
-public class ChargeTypeServiceImpl implements ChargeTypeService {
+public class UnitPatternServiceImpl implements UnitPatternService {
 
     @Autowired
-    private ChargeTypeDao dao;
-
-    @Autowired
+    private UnitPatternDao dao;
+    
+     @Autowired
     private SeqTableService seqService;
 
     @Override
-    public ChargeType save(ChargeType ct) {
-        if (ct.getChargeTypeCode() == null || ct.getChargeTypeCode().isEmpty()) {
-            Integer macId = ct.getMacId();
-            String compCode = ct.getCompCode();
-            ct.setChargeTypeCode(getChargeTypeCode(macId, "ChargeType", "-", compCode));
+    public UnitPattern save(UnitPattern up) {
+        if (up.getPatternCode() == null || up.getPatternCode().isEmpty()) {
+            Integer macId = up.getMacId();
+            String compCode = up.getCompCode();
+            up.setPatternCode(getUnitPatternCode(macId, "UnitPattern", "-", compCode));
         }
-        return dao.save(ct);
+        return dao.save(up);
     }
 
     @Override
-    public List<ChargeType> findAll() {
+    public List<UnitPattern> findAll() {
         return dao.findAll();
     }
 
@@ -47,12 +47,7 @@ public class ChargeTypeServiceImpl implements ChargeTypeService {
         return dao.delete(id);
     }
 
-    @Override
-    public List<ChargeType> search(String ctId, String desp) {
-        return dao.search(ctId, desp);
-    }
-
-    private String getChargeTypeCode(Integer macId, String option, String period, String compCode) {
+     private String getUnitPatternCode(Integer macId, String option, String period, String compCode) {
 
         int seqNo = seqService.getSequence(macId, option, period, compCode);
 

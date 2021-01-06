@@ -24,9 +24,17 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
     private UserRoleDao dao;
 
+    @Autowired
+    SeqTableService seqService;
+
     @Override
-    public UserRole save(UserRole role) {
-        return dao.save(role);
+    public UserRole save(UserRole ur) {
+        if (ur.getRoleCode() == null || ur.getRoleCode().isEmpty()) {
+            Integer macId = ur.getMacId();
+            String compCode = ur.getCompCode();
+            ur.setRoleCode(getUserRoleCode(macId, "Trader", "-", compCode));
+        }
+        return dao.save(ur);
     }
 
     @Override
@@ -51,7 +59,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
         BeanUtils.copyProperties(old, newRole);
         newRole.setRoleCode(null);
-        newRole.setCompCode(Integer.parseInt(compCode));
+        newRole.setCompCode(compCode);
 
         return save(newRole);
     }
@@ -59,5 +67,13 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Override
     public List<UserRole> searchM(String updatedDate) {
         return dao.searchM(updatedDate);
+    }
+
+    private String getUserRoleCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }

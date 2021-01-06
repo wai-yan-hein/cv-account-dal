@@ -19,44 +19,59 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class AccountServiceImpl implements AccountService{
-    
+public class AccountServiceImpl implements AccountService {
+
     @Autowired
     private AccountDao dao;
-    
+
+    @Autowired
+    private SeqTableService seqService;
+
     @Override
-    public AppUser saveAccount(AppUser au){
-        dao.saveAccount(au);
-        return au;
+    public AppUser saveAccount(AppUser au) {
+        if (au.getAppUserCode() == null || au.getAppUserCode().isEmpty()) {
+            Integer macId = au.getMacId();
+            String compCode = au.getCompCode();
+            au.setAppUserCode(getAppUserCode(macId, "AppUser", "-", compCode));
+        }
+        return dao.saveAccount(au);
     }
-    
+
     @Override
-    public AppUser findUserById(Integer id){
+    public AppUser findUserById(Integer id) {
         AppUser au = dao.findUserById(id);
         return au;
     }
-    
+
     @Override
-    public AppUser findUserByShort(String userShort){
+    public AppUser findUserByShort(String userShort) {
         AppUser au = dao.findUserByShort(userShort);
         return au;
     }
-    
+
     @Override
-    public AppUser findUserByEmail(String email){
+    public AppUser findUserByEmail(String email) {
         AppUser au = dao.findUserByEmail(email);
         return au;
     }
-    
+
     @Override
-    public List<AppUser> search(String id, String userShort, String email, String owner){
+    public List<AppUser> search(String id, String userShort, String email, String owner) {
         List<AppUser> listAU = dao.search(id, userShort, email, owner);
         return listAU;
     }
-    
+
     @Override
-    public AppUser login(String user, String password) throws AuthenticationException{
+    public AppUser login(String user, String password) throws AuthenticationException {
         AppUser au = dao.login(user, password);
         return au;
+    }
+
+    private String getAppUserCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }

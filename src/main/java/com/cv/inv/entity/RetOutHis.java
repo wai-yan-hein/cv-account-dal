@@ -7,7 +7,6 @@ package com.cv.inv.entity;
 import com.cv.accountswing.entity.Currency;
 import com.cv.accountswing.entity.PaymentType;
 import com.cv.accountswing.entity.Trader;
-import com.cv.inv.h2.entity.CurrencyH2;
 import java.util.Date;
 import javax.persistence.*;
 import org.hibernate.annotations.GenerationTime;

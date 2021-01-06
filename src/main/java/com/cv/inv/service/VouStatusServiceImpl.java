@@ -5,6 +5,7 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.service.SeqTableService;
 import com.cv.inv.dao.VouStatusDao;
 import com.cv.inv.entity.VouStatus;
 import java.util.List;
@@ -22,10 +23,18 @@ public class VouStatusServiceImpl implements VouStatusService {
 
     @Autowired
     private VouStatusDao vouDao;
+    
+     @Autowired
+    private SeqTableService seqService;
 
     @Override
-    public VouStatus save(VouStatus vouStatus) {
-        return vouDao.save(vouStatus);
+    public VouStatus save(VouStatus vs) {
+       if (vs.getVouStatusCode() == null || vs.getVouStatusCode().isEmpty()) {
+            Integer macId = vs.getMacId();
+            String compCode = vs.getCompCode();
+            vs.setVouStatusCode(getVouStatusCode(macId, "UnitPattern", "-", compCode));
+        }
+        return vouDao.save(vs);
     }
 
     @Override
@@ -46,5 +55,13 @@ public class VouStatusServiceImpl implements VouStatusService {
     @Override
     public List<VouStatus> search(String statusDesp) {
         return vouDao.search(statusDesp);
+    }
+    
+     private String getVouStatusCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }
