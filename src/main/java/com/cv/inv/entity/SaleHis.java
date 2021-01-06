@@ -80,7 +80,7 @@ public class SaleHis implements java.io.Serializable {
     @Column(name = "order_code")
     private String orderCode;
     @ManyToOne
-    @JoinColumn(name = "updated_by")
+    @JoinColumn(name = "reg_code")
     private Region region;
 
     public SaleHis() {

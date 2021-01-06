@@ -28,11 +28,7 @@ public class UserRole implements java.io.Serializable {
     private String roleCode;
     @Column(name = "role_name", length = 50)
     private String roleName;
-<<<<<<< HEAD
-    @Column(name = "comp_code", length = 15)
-=======
     @Column(name = "comp_code")
->>>>>>> 9e315394bc257bcd08e18f3bc41e51f8b462b12a
     private String compCode;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")

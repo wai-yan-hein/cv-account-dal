@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class AppUser implements java.io.Serializable {
 
     @Id
-    @Column(name = "app_user_id", unique = true, nullable = false)
+    @Column(name = "app_user_code", unique = true, nullable = false)
     private String appUserCode;
     @Column(name = "active")
     private Boolean active;
