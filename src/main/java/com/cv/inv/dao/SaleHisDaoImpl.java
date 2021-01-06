@@ -106,7 +106,7 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
     }
 
     @Override
-    public int delete(String vouNo) throws Exception{
+    public int delete(String vouNo) throws Exception {
         String strSql = "update sale_his set deleted = true where voucher_no = '" + vouNo + "'";
         execSQL(strSql);
         return 1;
@@ -183,15 +183,16 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
 
         ResultSet rs = null;
         if (!strSql.isEmpty()) {
-            strSql = " select distinct sh.sale_date, sh.voucher_no, sh.remark,td.trader_name,\n"
+            strSql = "  select distinct sh.sale_date, sh.voucher_no, sh.remark,td.trader_name,\n"
                     + " sh.grand_total, sh.deleted,\n"
                     + " apu.user_short_name \n"
                     + " from sale_his sh	\n"
                     + " join sale_his_detail shd ON shd.vou_id = sh.voucher_no\n"
-                    + " join appuser apu on sh.user_id = apu.user_id\n"
-                    + " left join trader td on sh.cus_id=td.id\n"
-                    + " where " + strSql
-                    + " and sh.deleted= false order by sh.sale_date desc, sh.voucher_no desc";
+                    + " join appuser apu on sh.user_id = apu.app_user_code\n"
+                    + " left join trader td on sh.cus_id=td.code\n"
+                    + "  where  \n"
+                    +strSql
+                    + "  and sh.deleted= false order by sh.sale_date desc, sh.voucher_no desc";
             rs = getResultSet(strSql);
         }
 

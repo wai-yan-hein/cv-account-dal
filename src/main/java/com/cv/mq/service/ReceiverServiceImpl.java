@@ -42,6 +42,7 @@ import com.cv.inv.entity.CharacterNo;
 import com.cv.inv.entity.ChargeType;
 import com.cv.inv.entity.Location;
 import com.cv.inv.entity.MachineInfo;
+import com.cv.inv.entity.SaleHis;
 import com.cv.inv.entity.Stock;
 import com.cv.inv.entity.StockBrand;
 import com.cv.inv.entity.StockType;
@@ -64,6 +65,7 @@ import com.cv.inv.service.ChargeTypeService;
 import com.cv.inv.service.LocationService;
 import com.cv.inv.service.MachineInfoService;
 import com.cv.inv.service.RelationService;
+import com.cv.inv.service.SaleHisService;
 import com.cv.inv.service.SaleManService;
 import com.cv.inv.service.StockBrandService;
 import com.cv.inv.service.StockService;
@@ -142,6 +144,8 @@ public class ReceiverServiceImpl implements ReceiverService {
     private UsrCompRoleService ucrService;
     @Autowired
     private CompanyInfoService cifService;
+    @Autowired
+    private SaleHisService shService;
     private boolean syncFinish = false;
 
     public boolean isSyncFinish() {
@@ -156,6 +160,27 @@ public class ReceiverServiceImpl implements ReceiverService {
     public void doReceiverOperation(ReloadData rlData, String operationId, String entityType, Object data) {
 
         switch (operationId) {
+            case "SALE-VOUSEARCH":
+                switch (entityType) {
+                    case "ACK":
+                        if (rlData != null) {
+                            rlData.reload(entityType, operationId);
+                        }
+                        break;
+                    default:
+                        if (rlData != null) {
+                            rlData.reload(operationId, data);
+                        }
+                        break;
+                }
+                break;
+
+            case "GET-SALEVOUCHER":
+                //SaleHis sh = gson.fromJson(data.toString(), SaleHis.class);
+                if (rlData != null) {
+                    rlData.reload(operationId, data);
+                }
+                break;
 
             default:
                 doEntityOperation(rlData, operationId, entityType, data);
@@ -257,6 +282,17 @@ public class ReceiverServiceImpl implements ReceiverService {
                     case "NEW-INIT":
                         syncFinish = true;
                         break;
+                }
+                break;
+                
+                   case "ACK-SaveSale":
+                String invId = data.toString();
+                try {
+                    SaleHis shh2 = shService.findById(invId);
+                    //shh2.setIntgUpdStatus("SSAVE");
+                    shService.save(shh2);
+                } catch (Exception ex) {
+                    LOGGER.error("doEntityOperation ACK-SaveSale : " + invId + " : " + ex.getMessage());
                 }
                 break;
 

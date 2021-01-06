@@ -25,10 +25,20 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import javax.jms.BytesMessage;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JsonDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,8 +162,96 @@ public class CareServerListener {
                         } catch (JsonIOException | JsonSyntaxException | FileNotFoundException | UnsupportedEncodingException e) {
                             LOGGER.error("receiveFileMessage : " + e.getMessage());
                         }
-                        rService.doReceiverFileOperation(rlData, operationType, entityType, data);
-                        LOGGER.info("End");
+                         if (operationType.endsWith("ReportGeneration")) {
+                            String rptPath = Util1.getAppWorkFolder() + File.separator + "inv_swing_report";
+                            Map<String, Object> params = new HashMap();
+                            File file = null;
+                            /*switch (entityType) {
+                                case "StockBalance":
+                                case "StockBalanceAllLoc":
+                                case "StockBalanceExp":
+                                    params.put("data_date", vsf.getTo());
+                                    break;
+                                case "StockInOut":
+                                    break;
+                                case "StockMovement":
+                                    break;
+                                case "StockMovementExp":
+                                    break;
+                                case "GroundStockValue":
+                                    break;
+                                case "rptSaleSummary":
+                                    params.put("data_date", "Between " + vsf.getDueFrom()
+                                            + " and " + vsf.getDueTo());
+                                    break;
+                                case "rptSaleItemSummary":
+                                    params.put("data_date", "Between " + vsf.getDueFrom()
+                                            + " and " + vsf.getDueTo());
+                                    break;
+                                case "rptSaleByDocument":
+                                    break;
+                                case "rptSaleByDueDate":
+                                    params.put("data_date", "Between " + vsf.getDueFrom()
+                                            + " and " + vsf.getDueTo());
+                                    break;
+                                case "rptSaleByDocumentT":
+                                    break;
+                                case "rptBarCode":
+                                    break;
+                                case "rptBarCode_Time_Store":
+                                    break;
+                                case "rptPurItemHistory":
+                                    break;
+                                case "rptPurItemSummary":
+                                    break;
+                                case "rptPurchaseByDueDate":
+                                    break;
+                                case "rptPurchaseSummary":
+                                case "rptPurchaseByDocument":
+                                    params.put("data_date", "Between " + vsf.getFrom()
+                                            + " and " + vsf.getTo());
+                                    break;
+                                case "rptReturnInSummary":
+                                case "rptReturnInItemSummary":
+                                    params.put("data_date", "Between " + vsf.getFrom()
+                                            + " and " + vsf.getTo());
+                                    break;
+                                case "rptReturnOutSummary":
+                                case "rptRetOutItemSummary":
+                                    params.put("data_date", "Between " + vsf.getFrom()
+                                            + " and " + vsf.getTo());
+                                    break;
+                                case "rptDmgItemSummary":
+                                case "rptTranItemSummary":
+                                    params.put("data_date", "Between " + vsf.getFrom()
+                                            + " and " + vsf.getTo());
+                                    break;
+
+                            }*/
+                            file = new File(rptPath + File.separator + entityType + ".jrxml");
+                            JsonDataSource ds = new JsonDataSource(new File(path), "data");
+                            //  JasperDesign jasperDesign = JRXmlLoader.load(resource.getInputStream());
+                            JasperDesign jasperDesign = JRXmlLoader.load(file);
+                            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+                           // String strValue1 = spService.getPropertyValue("report.company.name");
+                           // params.put("compName", strValue1);
+                            //String strValue = spService.getPropertyValue("report.folder.path");
+                            //params.put("SUBREPORT_DIR", Util1.getAppWorkFolder()
+                            //        + strValue);
+                            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, ds);
+                            if (jasperPrint != null) {
+                                JasperViewer.viewReport(jasperPrint, false);
+
+                            }
+                           // report.butPrint(true);
+                            LOGGER.info("File Finished.");
+                        } else {
+                            rService.doReceiverFileOperation(rlData, operationType, entityType, data);
+                            LOGGER.info("End");
+                        }
+                        //rService.doReceiverFileOperation(rlData, operationType, entityType, data);
+                        //LOGGER.info("End");
 
                         LOGGER.info("receiveFileMessageadm : operationType : " + operationType
                                 + ";  entityType : " + entityType + "; data : " + data);

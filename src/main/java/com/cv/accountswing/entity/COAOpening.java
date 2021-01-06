@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 public class COAOpening implements Serializable {
 
     @Id
-
+    @GeneratedValue
     @Column(name = "coa_op_id", unique = true, nullable = false)
     private Integer opId;
     @Temporal(TemporalType.DATE)
@@ -41,11 +41,7 @@ public class COAOpening implements Serializable {
     private Double drAmt;
     @Column(name = "user_id")
     private Integer userId;
-<<<<<<< HEAD
-    @Column(name = "comp_id")
-=======
     @Column(name = "comp_code")
->>>>>>> 9e315394bc257bcd08e18f3bc41e51f8b462b12a
     private String compCode;
     @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
