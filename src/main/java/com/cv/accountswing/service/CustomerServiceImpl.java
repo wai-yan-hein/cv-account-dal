@@ -72,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
         return tmpTraderId;
     }
 
-    private boolean isAutoGenerate(int compCode) {
+    private boolean isAutoGenerate(String compCode) {
         boolean status = false;
         SystemPropertyKey spk = new SystemPropertyKey("system.trader.id.auto.generate",
                 compCode);

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author WSwe
  */
 @Repository
-public class CompanyInfoDaoImpl extends AbstractDao<Integer, CompanyInfo> implements CompanyInfoDao{
+public class CompanyInfoDaoImpl extends AbstractDao<String, CompanyInfo> implements CompanyInfoDao{
     
     @Override
     public CompanyInfo save(CompanyInfo ci){
@@ -24,7 +24,7 @@ public class CompanyInfoDaoImpl extends AbstractDao<Integer, CompanyInfo> implem
     }
     
     @Override
-    public CompanyInfo findById(Integer code){
+    public CompanyInfo findById(String code){
         CompanyInfo ci = getByKey(code);
         return ci;
     }

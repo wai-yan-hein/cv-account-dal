@@ -22,6 +22,11 @@ public class PrivilegeKey implements Serializable {
     @Column(name = "menu_code")
     private String menuCode;
 
+    public PrivilegeKey(String roleCode, String menuCode) {
+        this.roleCode = roleCode;
+        this.menuCode = menuCode;
+    }
+
     public PrivilegeKey() {
     }
 
@@ -40,8 +45,6 @@ public class PrivilegeKey implements Serializable {
     public void setMenuCode(String menuCode) {
         this.menuCode = menuCode;
     }
-
-  
 
     @Override
     public int hashCode() {

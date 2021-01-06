@@ -43,7 +43,7 @@ public class CompanyInfo implements java.io.Serializable {
     @Column(name = "active")
     private Boolean active;
     @Column(name = "business_type")
-    private Integer businessType;
+    private String businessType;
     @Temporal(TemporalType.DATE)
     @Column(name = "finicial_period_from")
     private Date finicialPeriodFrom;
@@ -143,11 +143,11 @@ public class CompanyInfo implements java.io.Serializable {
         this.active = active;
     }
 
-    public Integer getBusinessType() {
+    public String getBusinessType() {
         return businessType;
     }
 
-    public void setBusinessType(Integer businessType) {
+    public void setBusinessType(String businessType) {
         this.businessType = businessType;
     }
 

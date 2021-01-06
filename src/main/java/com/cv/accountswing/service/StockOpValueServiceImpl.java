@@ -34,7 +34,7 @@ public class StockOpValueServiceImpl implements StockOpValueService {
             String tranDate = Util1.toDateStr(value.getKey().getTranDate(), "yyyy-MM-dd");
             String coaCode = value.getKey().getCoaCode();
             String currancy = value.getKey().getCurrency();
-            String compId = value.getKey().getCompId().toString();
+            String compId = value.getKey().getCompCode();
             String dept = value.getKey().getDeptCode();
             dao.backup(tranDate, coaCode, dept, currancy, compId, userId, "EDIT");
         } catch (Exception ex) {

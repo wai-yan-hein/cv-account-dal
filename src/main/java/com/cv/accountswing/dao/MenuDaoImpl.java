@@ -121,7 +121,7 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
     }
 
     private void getChild(VRoleMenu parent, String roleId, String menuType) {
-        String strSql = "select o from VRoleMenu o where o.parent = '" + parent.getKey().getMenuId()
+        String strSql = "select o from VRoleMenu o where o.parent = '" + parent.getKey().getMenuCode()
                 + "' and o.key.roleId = " + roleId + "";
         if (!menuType.equals("-")) {
             strSql = strSql + " and o.menuType = '" + menuType + "'";

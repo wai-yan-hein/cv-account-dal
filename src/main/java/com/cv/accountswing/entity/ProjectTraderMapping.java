@@ -17,14 +17,14 @@ import javax.persistence.Table;
  * @author winswe
  */
 @Entity
-@Table(name="prj_cus_mapping")
+@Table(name = "prj_cus_mapping")
 public class ProjectTraderMapping implements java.io.Serializable {
-    
-    private Long id;
-    private Long projectId;
-    private Long traderId;
 
-    @Id 
+    private Long id;
+    private String projectCode;
+    private String traderCode;
+
+    @Id
     @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
@@ -34,21 +34,22 @@ public class ProjectTraderMapping implements java.io.Serializable {
         this.id = id;
     }
 
-    @Column(name="prj_id")
-    public Long getProjectId() {
-        return projectId;
+    @Column(name = "prj_id")
+    public String getProjectCode() {
+        return projectCode;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 
-    @Column(name="trader_id")
-    public Long getTraderId() {
-        return traderId;
+    @Column(name = "trader_id")
+    public String getTraderCode() {
+        return traderCode;
     }
 
-    public void setTraderId(Long traderId) {
-        this.traderId = traderId;
+    public void setTraderCode(String traderCode) {
+        this.traderCode = traderCode;
     }
+
 }

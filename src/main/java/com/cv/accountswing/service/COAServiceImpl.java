@@ -118,7 +118,7 @@ public class COAServiceImpl implements COAService {
 
     private String getCOACode(String compCode) {
         SystemPropertyKey spk = new SystemPropertyKey("system.coa.code.length",
-                Integer.parseInt(compCode));
+                compCode);
         SystemProperty sp = spService.findById(spk);
         int ttlLength = Integer.parseInt(sp.getPropValue());
         int seqNo = seqService.getSequence("COA", "-", compCode);

@@ -58,7 +58,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private String getDeptCode(String compCode) {
         SystemPropertyKey spk = new SystemPropertyKey("system.dept.code.length",
-                Integer.parseInt(compCode));
+                compCode);
         SystemProperty sp = spService.findById(spk);
         int ttlLength = Integer.parseInt(sp.getPropValue());
         int seqNo = seqService.getSequence("DEPT", "-", compCode);

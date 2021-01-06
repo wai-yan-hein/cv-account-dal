@@ -51,7 +51,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
         BeanUtils.copyProperties(old, newRole);
         newRole.setRoleCode(null);
-        newRole.setCompCode(Integer.parseInt(compCode));
+        newRole.setCompCode(compCode);
 
         return save(newRole);
     }

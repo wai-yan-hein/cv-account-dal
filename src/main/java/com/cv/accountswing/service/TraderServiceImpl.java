@@ -28,7 +28,7 @@ public class TraderServiceImpl implements TraderService {
     SystemPropertyService spService;
 
     @Override
-    public Trader findById(Integer id) {
+    public Trader findById(String id) {
         return dao.findById(id);
     }
 

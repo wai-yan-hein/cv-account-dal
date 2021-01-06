@@ -18,15 +18,16 @@ import javax.persistence.TemporalType;
  * @author winswe
  */
 @Embeddable
-public class StockOpValueKey implements Serializable{
+public class StockOpValueKey implements Serializable {
+
     private Date tranDate;
     private String coaCode;
     private String deptCode;
     private String currency;
-    private Integer compId;
-    
+    private String compCode;
+
     @Temporal(TemporalType.DATE)
-    @Column(name="tran_date", nullable=false)
+    @Column(name = "tran_date", nullable = false)
     public Date getTranDate() {
         return tranDate;
     }
@@ -35,7 +36,7 @@ public class StockOpValueKey implements Serializable{
         this.tranDate = tranDate;
     }
 
-    @Column(name="coa_code", nullable=false, length=15)
+    @Column(name = "coa_code", nullable = false, length = 15)
     public String getCoaCode() {
         return coaCode;
     }
@@ -44,7 +45,7 @@ public class StockOpValueKey implements Serializable{
         this.coaCode = coaCode;
     }
 
-    @Column(name="dept_code", nullable=false, length=15)
+    @Column(name = "dept_code", nullable = false, length = 15)
     public String getDeptCode() {
         return deptCode;
     }
@@ -53,7 +54,7 @@ public class StockOpValueKey implements Serializable{
         this.deptCode = deptCode;
     }
 
-    @Column(name="curr_code", nullable=false, length=15)
+    @Column(name = "curr_code", nullable = false, length = 15)
     public String getCurrency() {
         return currency;
     }
@@ -62,13 +63,13 @@ public class StockOpValueKey implements Serializable{
         this.currency = currency;
     }
 
-    @Column(name="comp_id", nullable=false)
-    public Integer getCompId() {
-        return compId;
+    @Column(name = "comp_id", nullable = false)
+    public String getCompCode() {
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class StockOpValueKey implements Serializable{
         hash = 53 * hash + Objects.hashCode(this.coaCode);
         hash = 53 * hash + Objects.hashCode(this.deptCode);
         hash = 53 * hash + Objects.hashCode(this.currency);
-        hash = 53 * hash + Objects.hashCode(this.compId);
+        hash = 53 * hash + Objects.hashCode(this.compCode);
         return hash;
     }
 
@@ -103,7 +104,7 @@ public class StockOpValueKey implements Serializable{
         if (!Objects.equals(this.currency, other.currency)) {
             return false;
         }
-        if (!Objects.equals(this.compId, other.compId)) {
+        if (!Objects.equals(this.compCode, other.compCode)) {
             return false;
         }
         return true;

@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
  * @author WSwe
  */
 @Repository
-public class TraderDaoImpl extends AbstractDao<Integer, Trader> implements TraderDao {
+public class TraderDaoImpl extends AbstractDao<String, Trader> implements TraderDao {
 
     @Override
-    public Trader findById(Integer id) {
+    public Trader findById(String id) {
         Trader trader = getByKey(id);
         return trader;
     }

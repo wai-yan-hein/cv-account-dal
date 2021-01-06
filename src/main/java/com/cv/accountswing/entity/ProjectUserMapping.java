@@ -7,8 +7,6 @@ package com.cv.accountswing.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,14 +15,14 @@ import javax.persistence.Table;
  * @author winswe
  */
 @Entity
-@Table(name="prj_usr_mapping")
+@Table(name = "prj_usr_mapping")
 public class ProjectUserMapping implements java.io.Serializable {
-    
-    private Long id;
-    private Long projectId;
-    private Long userId;
 
-    @Id 
+    private Long id;
+    private String projecCode;
+    private String userCode;
+
+    @Id
     @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
@@ -34,21 +32,23 @@ public class ProjectUserMapping implements java.io.Serializable {
         this.id = id;
     }
 
-    @Column(name="prj_id")
-    public Long getProjectId() {
-        return projectId;
+    @Column(name = "prj_id")
+    public String getProjecCode() {
+        return projecCode;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setProjecCode(String projecCode) {
+        this.projecCode = projecCode;
     }
 
-    @Column(name="user_id")
-    public Long getUserId() {
-        return userId;
+    @Column(name = "user_id")
+
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
+
 }

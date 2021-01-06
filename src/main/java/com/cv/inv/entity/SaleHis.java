@@ -7,8 +7,8 @@ package com.cv.inv.entity;
 
 import com.cv.accountswing.entity.AppUser;
 import com.cv.accountswing.entity.Currency;
+import com.cv.accountswing.entity.Region;
 import com.cv.accountswing.entity.Trader;
-import com.cv.inv.h2.entity.CurrencyH2;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -79,8 +79,9 @@ public class SaleHis implements java.io.Serializable {
     private String address;
     @Column(name = "order_code")
     private String orderCode;
-    @Column(name = "reg_id")
-    private Integer regionId;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private Region region;
 
     public SaleHis() {
     }
@@ -269,13 +270,12 @@ public class SaleHis implements java.io.Serializable {
         this.orderCode = orderCode;
     }
 
-    public Integer getRegionId() {
-        return regionId;
+    public Region getRegion() {
+        return region;
     }
 
-    public void setRegionId(Integer regionId) {
-        this.regionId = regionId;
+    public void setRegion(Region region) {
+        this.region = region;
     }
-    
 
 }

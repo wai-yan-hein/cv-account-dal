@@ -42,9 +42,9 @@ public class VCOAOpening implements Serializable {
     @Column(name = "dr_amt")
     private Double drAmt;
     @Column(name = "user_id")
-    private Integer userId;
+    private String userId;
     @Column(name = "comp_id")
-    private Integer compId;
+    private String compCode;
     @Column(name = "dep_usr_code")
     private String depUsrCode;
     @Column(name = "trader_code")
@@ -104,20 +104,20 @@ public class VCOAOpening implements Serializable {
         this.drAmt = drAmt;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Integer getCompId() {
-        return compId;
+    public String getCompCode() {
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
     public String getSourceAccName() {

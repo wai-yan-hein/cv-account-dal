@@ -15,33 +15,34 @@ import javax.persistence.Embeddable;
  * @author winswe
  */
 @Embeddable
-public class VRoleMenuKey implements Serializable{
-    private Integer roleId;
-    private Integer menuId;
+public class VRoleMenuKey implements Serializable {
 
-    @Column(name="role_id")
-    public Integer getRoleId() {
-        return roleId;
+    private String roleCode;
+    private String menuCode;
+
+    @Column(name = "role_code")
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 
-    @Column(name="menu_id")
-    public Integer getMenuId() {
-        return menuId;
+    @Column(name = "menu_code")
+    public String getMenuCode() {
+        return menuCode;
     }
 
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.roleId);
-        hash = 89 * hash + Objects.hashCode(this.menuId);
+        hash = 89 * hash + Objects.hashCode(this.roleCode);
+        hash = 89 * hash + Objects.hashCode(this.menuCode);
         return hash;
     }
 
@@ -54,10 +55,10 @@ public class VRoleMenuKey implements Serializable{
             return false;
         }
         final VRoleMenuKey other = (VRoleMenuKey) obj;
-        if (!Objects.equals(this.roleId, other.roleId)) {
+        if (!Objects.equals(this.roleCode, other.roleCode)) {
             return false;
         }
-        if (!Objects.equals(this.menuId, other.menuId)) {
+        if (!Objects.equals(this.menuCode, other.menuCode)) {
             return false;
         }
         return true;

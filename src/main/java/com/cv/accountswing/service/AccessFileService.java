@@ -10,7 +10,10 @@ package com.cv.accountswing.service;
  * @author winswe
  */
 public interface AccessFileService {
-    public void uploadGL(String path, int compId);
+
+    public void uploadGL(String path, String compId);
+
     public void uploadTrader(String path, int compId);
+
     public void uploadOpening(String path, int compId);
 }

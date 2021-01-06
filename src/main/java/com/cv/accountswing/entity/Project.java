@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,31 +22,45 @@ import javax.persistence.TemporalType;
  * @author winswe
  */
 @Entity
-@Table(name="project")
+@Table(name = "project")
 public class Project implements java.io.Serializable {
-    
-    private Long projectId;
+
+    private String projectId;
     private String projectCode;
     private String projectName;
     private Date startDate;
     private Date endDate;
     private Boolean projectStatus;
-    private Date createdDate;
-    private Long createdBy;
-    private Integer compCode;
+    private String compCode;
     private String deptCode;
-    
-    @Id 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_date")
+    private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private AppUser updatedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+    @Column(name = "mac_id")
+    private Integer macId;
+    @Column(name = "user_code")
+    private String userCode;
+
+    @Id
     @Column(name = "project_id", unique = true, nullable = false)
-    public Long getProjectId() {
+    public String getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
-    @Column(name="project_code", length=15)
+    @Column(name = "project_code", length = 15)
     public String getProjectCode() {
         return projectCode;
     }
@@ -53,7 +69,7 @@ public class Project implements java.io.Serializable {
         this.projectCode = projectCode;
     }
 
-    @Column(name="project_name", length=100)
+    @Column(name = "project_name", length = 100)
     public String getProjectName() {
         return projectName;
     }
@@ -82,7 +98,7 @@ public class Project implements java.io.Serializable {
         this.endDate = endDate;
     }
 
-    @Column(name="project_status")
+    @Column(name = "project_status")
     public Boolean getProjectStatus() {
         return projectStatus;
     }
@@ -91,8 +107,40 @@ public class Project implements java.io.Serializable {
         this.projectStatus = projectStatus;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created_date")
+    @Column(name = "comp_code")
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+    @Column(name = "dept_code", length = 15)
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public AppUser getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(AppUser updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -101,30 +149,28 @@ public class Project implements java.io.Serializable {
         this.createdDate = createdDate;
     }
 
-    @Column(name="created_by")
-    public Long getCreatedBy() {
+    public AppUser getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Long createdBy) {
+    public void setCreatedBy(AppUser createdBy) {
         this.createdBy = createdBy;
     }
 
-    @Column(name="comp_code")
-    public Integer getCompCode() {
-        return compCode;
+    public Integer getMacId() {
+        return macId;
     }
 
-    public void setCompCode(Integer compCode) {
-        this.compCode = compCode;
+    public void setMacId(Integer macId) {
+        this.macId = macId;
     }
 
-    @Column(name="dept_code", length=15)
-    public String getDeptCode() {
-        return deptCode;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setDeptCode(String deptCode) {
-        this.deptCode = deptCode;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
+
 }

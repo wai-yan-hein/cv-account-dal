@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface CompanyInfoDao {
     public CompanyInfo save(CompanyInfo ci);
-    public CompanyInfo findById(Integer code);
+    public CompanyInfo findById(String code);
     public List<CompanyInfo> search(String code, String name, String phone, String address,
             String businessType, String owner);
     public int delete(String code);

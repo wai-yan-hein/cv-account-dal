@@ -49,24 +49,24 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     private PrivilegeService privilegeService;
     @Autowired
     private UsrCompRoleService usrCompRoleService;
-    
+
     private String getCOACode(String compCode, int ttlLength) {
         int seqNo = seqService.getSequence("COA", "-", compCode);
         String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
         return coaCode;
     }
-    
+
     @Override
-     public CompanyInfo save(CompanyInfo ci){
-         return dao.save(ci);
-     }
+    public CompanyInfo save(CompanyInfo ci) {
+        return dao.save(ci);
+    }
 
     @Override
     public CompanyInfo save(CompanyInfo ci, String status, String userId, String type) {
         ci = dao.save(ci);
 
         if (status.equals("NEW")) {
-            Integer businessType = ci.getBusinessType();
+            String businessType = ci.getBusinessType();
             List<CompanyInfo> listCI = dao.search("-", "-", "-", "-", businessType.toString(), "-");
             String oldCompCode = "-";
             String newCompCode = ci.getCompCode().toString();
@@ -79,7 +79,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
             if (!oldCompCode.equals("-")) {
                 SystemPropertyKey spk = new SystemPropertyKey("system.coa.code.length",
-                        Integer.parseInt(oldCompCode));
+                        oldCompCode);
                 SystemProperty sp = spService.findById(spk);
                 int ttlLength = Integer.parseInt(sp.getPropValue());
                 List<ChartOfAccount> listLevel2COA = coaDao.getCOAWithLevel(oldCompCode, "2");
@@ -94,7 +94,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                         BeanUtils.copyProperties(tmpCOA, newCOA);
                         newCOA.setPrvCoaCode(newCOA.getCode());
                         newCOA.setCode(newCOACode);
-                        newCOA.setCompCode(Integer.parseInt(newCompCode));
+                        newCOA.setCompCode(newCompCode);
                         coaDao.save(newCOA);
 
                         List<SystemProperty> listSP = spService.search("-", newCompCode, tmpCOA.getCode());
@@ -109,27 +109,27 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
                     //Copy user role
                     spk = new SystemPropertyKey("system.default.admin.role",
-                            Integer.parseInt(newCompCode));
+                            newCompCode);
                     String oldRoleId = spService.findById(spk).getPropValue();
                     UserRole newRole = userRoleService.copyRole(oldRoleId, newCompCode);
-                    
+
                     ci.setRoleCode(newRole.getRoleCode());
-                    
+
                     //Copy privilege
                     privilegeService.copyPrivilege(oldRoleId, newRole.getRoleCode().toString());
-                        
+
                     if (!type.equals("-")) {
                         //Assign role to user
                         UsrCompRoleKey newKey = new UsrCompRoleKey();
                         newKey.setCompCode(newCompCode);
                         newKey.setRoleCode(newRole.getRoleCode());
                         newKey.setUserCode(userId);
-                        
+
                         UsrCompRole newUserRole = new UsrCompRole();
                         newUserRole.setKey(newKey);
-                        
+
                         usrCompRoleService.save(newUserRole);
-                        
+
                         //Change user status to finished
                         AppUser user = accountService.findUserById(Integer.parseInt(userId));
                         user.setCreateStatus("FINISHED");
@@ -156,7 +156,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
             BeanUtils.copyProperties(tmpCOA, newCOA);
             newCOA.setPrvCoaCode(newCOA.getCode());
             newCOA.setCode(newCOACode);
-            newCOA.setCompCode(Integer.parseInt(newCompCode));
+            newCOA.setCompCode(newCompCode);
             newCOA.setParent(currParent);
             coaDao.save(newCOA);
 
@@ -166,7 +166,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     }
 
     @Override
-    public CompanyInfo findById(Integer code) {
+    public CompanyInfo findById(String code) {
         CompanyInfo ci = dao.findById(code);
         return ci;
     }

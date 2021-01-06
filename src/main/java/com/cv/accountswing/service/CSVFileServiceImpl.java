@@ -49,7 +49,7 @@ public class CSVFileServiceImpl implements CSVFileService {
     private DepartmentDao deptDao;
 
     @Override
-    public void uploadCSVVoucher(String path, int compId) throws Exception {
+    public void uploadCSVVoucher(String path, String compId) throws Exception {
         FileReader fr = new FileReader(path);
         BufferedReader reader = new BufferedReader(fr);
         CSVReader csvReader = new CSVReader(reader);
@@ -71,7 +71,7 @@ public class CSVFileServiceImpl implements CSVFileService {
                     //gl_date
                     Gl gl = new Gl();
                     gl.setGlDate(Util1.toDate(nextRecord[0], "MM/dd/yyyy"));
-                    gl.setCompId(compId);
+                    gl.setCompCode(compId);
                     gl.setFromCurId("MMK");
 
                     //account
@@ -141,7 +141,7 @@ public class CSVFileServiceImpl implements CSVFileService {
                             logger.error("Invalid trader id : " + tmpId);
                         } else {
                             Trader trd = listTrd.get(0);
-                            gl.setTraderId(Long.parseLong(trd.getCode().toString()));
+                            gl.setTraderCode(trd.getCode());
                         }
                     }
 
@@ -157,7 +157,7 @@ public class CSVFileServiceImpl implements CSVFileService {
                             }
 
                             String tmpDept = nextRecord[9].substring(0, 2);
-                            List<Department> listDept = deptDao.search("-", "-", Integer.toString(compId), tmpDept, "-");
+                            List<Department> listDept = deptDao.search("-", "-", compId, tmpDept, "-");
                             if (listDept == null) {
                                 //throw new Exception("Invalid dept : " + tmpDept);
                                 logger.error("Invalid dept : " + tmpDept);

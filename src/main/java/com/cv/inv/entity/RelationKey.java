@@ -21,13 +21,13 @@ public class RelationKey implements Serializable {
     private String fromUnit;
     @Column(name = "to_unit")
     private String toUnit;
-    @Column(name = "pattern_id")
-    private Integer patternId;
+    @Column(name = "pattern_code")
+    private String patternId;
 
     public RelationKey() {
     }
 
-    public RelationKey(String fromUnit, String toUnit, Integer patternId) {
+    public RelationKey(String fromUnit, String toUnit, String patternId) {
         this.fromUnit = fromUnit;
         this.toUnit = toUnit;
         this.patternId = patternId;
@@ -78,11 +78,11 @@ public class RelationKey implements Serializable {
         return Objects.equals(this.patternId, other.patternId);
     }
 
-    public Integer getPatternId() {
+    public String getPatternId() {
         return patternId;
     }
 
-    public void setPatternId(Integer patternId) {
+    public void setPatternId(String patternId) {
         this.patternId = patternId;
     }
 

@@ -8,8 +8,6 @@ package com.cv.accountswing.entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,14 +24,14 @@ import javax.persistence.TemporalType;
 public class Region implements java.io.Serializable {
 
     @Id
-    @Column(name = "reg_id", unique = true, nullable = false, length = 15)
+    @Column(name = "reg_code", unique = true, nullable = false, length = 15)
     private String regCode;
     @Column(name = "reg_name", length = 255)
     private String regionName;
     @Column(name = "reg_type_id", length = 15)
     private String regionType;
     @Column(name = "parent_reg_id")
-    private Integer parentRegion;
+    private String parentRegion;
     @Column(name = "comp_code")
     private String compCode;
     @Temporal(TemporalType.TIMESTAMP)
@@ -69,11 +67,11 @@ public class Region implements java.io.Serializable {
         this.regionType = regionType;
     }
 
-    public Integer getParentRegion() {
+    public String getParentRegion() {
         return parentRegion;
     }
 
-    public void setParentRegion(Integer parentRegion) {
+    public void setParentRegion(String parentRegion) {
         this.parentRegion = parentRegion;
     }
 

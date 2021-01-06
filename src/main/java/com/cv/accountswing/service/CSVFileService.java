@@ -10,5 +10,5 @@ package com.cv.accountswing.service;
  * @author winswe
  */
 public interface CSVFileService {
-    public void uploadCSVVoucher(String path, int compId) throws Exception;
+    public void uploadCSVVoucher(String path, String compId) throws Exception;
 }

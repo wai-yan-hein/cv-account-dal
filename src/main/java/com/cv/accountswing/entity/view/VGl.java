@@ -35,9 +35,10 @@ public class VGl implements java.io.Serializable {
     private String reference;
     private String deptId;
     private String vouNo;
-    private Long traderId;
+    private String traderUserCode;
+    private String traderCode;
     private String chequeNo;
-    private Integer compId;
+    private String compCode;
     private Double gst;
     private Date createdDate;
     private Date modifyDate;
@@ -52,7 +53,6 @@ public class VGl implements java.io.Serializable {
     private String deptName;
     private String deptUsrCode;
     private String bankName;
-    private String traderCode;
     private String traderName;
     private String traderType;
     private String glVouNo;
@@ -69,7 +69,7 @@ public class VGl implements java.io.Serializable {
 
     public VGl() {
     }
-    
+
     @Id
     @Column(name = "gl_id", unique = true, nullable = false)
     public Long getGlId() {
@@ -190,12 +190,12 @@ public class VGl implements java.io.Serializable {
     }
 
     @Column(name = "cv_id")
-    public Long getTraderId() {
-        return traderId;
+    public String getTraderCode() {
+        return traderCode;
     }
 
-    public void setTraderId(Long traderId) {
-        this.traderId = traderId;
+    public void setTraderCode(String traderCode) {
+        this.traderCode = traderCode;
     }
 
     @Column(name = "cheque_no", length = 20)
@@ -208,12 +208,12 @@ public class VGl implements java.io.Serializable {
     }
 
     @Column(name = "comp_code")
-    public Integer getCompId() {
-        return compId;
+    public String getCompCode() {
+        return compCode;
     }
 
-    public void setCompId(Integer compCode) {
-        this.compId = compCode;
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -345,12 +345,12 @@ public class VGl implements java.io.Serializable {
     }
 
     @Column(name = "trader_id")
-    public String getTraderCode() {
-        return traderCode;
+    public String getTraderUserCode() {
+        return traderUserCode;
     }
 
-    public void setTraderCode(String traderCode) {
-        this.traderCode = traderCode;
+    public void setTraderUserCode(String traderUserCode) {
+        this.traderUserCode = traderUserCode;
     }
 
     @Column(name = "trader_name")

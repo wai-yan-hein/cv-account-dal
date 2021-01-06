@@ -51,7 +51,7 @@ public class AccessFileServiceImpl implements AccessFileService {
     private DepartmentDao deptDao;
 
     @Override
-    public void uploadGL(String path, int compId) {
+    public void uploadGL(String path, String compId) {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -85,7 +85,7 @@ public class AccessFileServiceImpl implements AccessFileService {
                         //gl_date
                         Gl gl = new Gl();
                         gl.setGlDate(resultSet.getDate(1));
-                        gl.setCompId(compId);
+                        gl.setCompCode(compId);
                         gl.setFromCurId("MMK");
 
                         //account
@@ -151,7 +151,7 @@ public class AccessFileServiceImpl implements AccessFileService {
                                 throw new Exception("Invalid trader id : " + tmpId);
                             } else {
                                 Trader trd = listTrd.get(0);
-                                gl.setTraderId(Long.parseLong(trd.getCode().toString()));
+                                gl.setTraderCode(trd.getCode());
                             }
                         }
 
@@ -168,7 +168,7 @@ public class AccessFileServiceImpl implements AccessFileService {
                                 }
 
                                 String tmpDept = resultSet.getString(10).substring(0, 2);
-                                List<Department> listDept = deptDao.search("-", "-", Integer.toString(compId), tmpDept, "-");
+                                List<Department> listDept = deptDao.search("-", "-", compId, tmpDept, "-");
                                 if (listDept == null) {
                                     throw new Exception("Invalid dept : " + tmpDept);
                                 } else if (listDept.isEmpty()) {

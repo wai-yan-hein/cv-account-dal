@@ -52,11 +52,11 @@ public class Gl implements java.io.Serializable {
     @Column(name = "voucher_no", length = 15)
     private String vouNo;
     @Column(name = "cv_id")
-    private Long traderId;
+    private String traderCode;
     @Column(name = "cheque_no", length = 20)
     private String chequeNo;
     @Column(name = "comp_id")
-    private Integer compId;
+    private String compCode;
     @Column(name = "gst")
     private Double gst;
     @Temporal(TemporalType.TIMESTAMP)
@@ -194,12 +194,12 @@ public class Gl implements java.io.Serializable {
         this.vouNo = vouNo;
     }
 
-    public Long getTraderId() {
-        return traderId;
+    public String getTraderCode() {
+        return traderCode;
     }
 
-    public void setTraderId(Long traderId) {
-        this.traderId = traderId;
+    public void setTraderCode(String traderCode) {
+        this.traderCode = traderCode;
     }
 
     public String getChequeNo() {
@@ -210,12 +210,12 @@ public class Gl implements java.io.Serializable {
         this.chequeNo = chequeNo;
     }
 
-    public Integer getCompId() {
-        return compId;
+    public String getCompCode() {
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
     public Date getCreatedDate() {

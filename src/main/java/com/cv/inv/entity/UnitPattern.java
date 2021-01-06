@@ -47,6 +47,10 @@ public class UnitPattern implements Serializable {
     @Column(name = "user_code")
     private String userCode;
 
+    public UnitPattern(String patternCode) {
+        this.patternCode = patternCode;
+    }
+
     public UnitPattern() {
     }
 

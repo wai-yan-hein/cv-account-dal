@@ -15,19 +15,20 @@ import javax.persistence.Embeddable;
  * @author winswe
  */
 @Embeddable
-public class SystemPropertyKey implements Serializable{
+public class SystemPropertyKey implements Serializable {
+
     private String propKey;
-    private Integer compCode;
+    private String compCode;
 
     public SystemPropertyKey() {
     }
-    
-    public SystemPropertyKey(String propKey, Integer compCode) {
+
+    public SystemPropertyKey(String propKey, String compCode) {
         this.propKey = propKey;
         this.compCode = compCode;
     }
-    
-    @Column(name="prop_key", nullable=false)
+
+    @Column(name = "prop_key", nullable = false)
     public String getPropKey() {
         return propKey;
     }
@@ -36,12 +37,12 @@ public class SystemPropertyKey implements Serializable{
         this.propKey = propKey;
     }
 
-    @Column(name="comp_code")
-    public Integer getCompCode() {
+    @Column(name = "comp_code")
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 
@@ -70,6 +71,5 @@ public class SystemPropertyKey implements Serializable{
         }
         return true;
     }
-    
-    
+
 }

@@ -18,16 +18,15 @@ import javax.persistence.Embeddable;
 public class CurrencyKey implements Serializable {
 
     private String code;
-    private Integer compCode;
+    private String compCode;
 
-    public CurrencyKey(String code, Integer compCode) {
+    public CurrencyKey(String code, String compCode) {
         this.code = code;
         this.compCode = compCode;
     }
 
     public CurrencyKey() {
     }
-    
 
     @Column(name = "cur_code", unique = true, nullable = false, length = 15)
     public String getCode() {
@@ -39,11 +38,12 @@ public class CurrencyKey implements Serializable {
     }
 
     @Column(name = "comp_code")
-    public Integer getCompCode() {
+
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 

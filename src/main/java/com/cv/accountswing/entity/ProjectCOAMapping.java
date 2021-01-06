@@ -17,14 +17,14 @@ import javax.persistence.Table;
  * @author winswe
  */
 @Entity
-@Table(name="prj_coa_mapping")
+@Table(name = "prj_coa_mapping")
 public class ProjectCOAMapping implements java.io.Serializable {
-    
+
     private Long id;
-    private Long projectId;
+    private String projectId;
     private String coaCode;
 
-    @Id 
+    @Id
     @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
@@ -34,16 +34,16 @@ public class ProjectCOAMapping implements java.io.Serializable {
         this.id = id;
     }
 
-    @Column(name="prj_id")
-    public Long getProjectId() {
+    @Column(name = "prj_id")
+    public String getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
-    @Column(name="coa_code", length=15)
+    @Column(name = "coa_code", length = 15)
     public String getCoaCode() {
         return coaCode;
     }
