@@ -72,7 +72,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         ci = dao.save(ci);
 
         if (status.equals("NEW")) {
-            String businessType = ci.getBusinessType();
+            String businessType = ci.getBusinessType().getCode();
             List<CompanyInfo> listCI = dao.search("-", "-", "-", "-", businessType.toString(), "-");
             String oldCompCode = "-";
             String newCompCode = ci.getCompCode().toString();
