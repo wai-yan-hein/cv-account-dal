@@ -47,11 +47,8 @@ public class Category implements java.io.Serializable {
     private Integer macId;
     @Column(name = "user_code")
     private String userCode;
-<<<<<<< HEAD
     @Column(name = "comp_code")
-=======
-     @Column(name = "comp_code")
->>>>>>> 7075bcf62b6b1dc20d3f47e0e2d81d6aab0c6080
+
     private String compCode;
 
     public Category() {
