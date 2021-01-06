@@ -15,6 +15,6 @@ import com.cv.accountswing.entity.Trader;
  */
 public interface MessagingService {
     public void sendPaymentToInv(Gl gl, Trader trader);
-    public void sendDeletePaymentToInv(final long glId);
+    public void sendDeletePaymentToInv(final String glCode);
     public void sendPaymentToInvGV(final Gl gl, final Trader trader);
 }

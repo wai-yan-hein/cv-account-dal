@@ -16,7 +16,7 @@ public interface RetInDetailService {
 
     public RetInHisDetail save(RetInHisDetail pd);
 
-    public List<RetInHisDetail> search(String glId);
+    public List<RetInHisDetail> search(String glCode);
 
     public int delete(String id) throws Exception;
 

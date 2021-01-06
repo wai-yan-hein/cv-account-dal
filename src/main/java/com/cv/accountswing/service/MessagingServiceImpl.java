@@ -55,7 +55,7 @@ public class MessagingServiceImpl implements MessagingService {
                     mm.setString("payDate", Util1.toDateStr(gl.getGlDate(), "yyyy-MM-dd"));
                     mm.setInt("locationId", locationId);
                     mm.setString("currency", "MMK");
-                    mm.setLong("glId", gl.getGlId());
+                    mm.setString("glCode", gl.getGlCode());
                     mm.setString("accId", gl.getSourceAcId());
                     double paid = 0;
                     if (trader instanceof Customer) {
@@ -83,16 +83,16 @@ public class MessagingServiceImpl implements MessagingService {
     }
 
     @Override
-    public void sendDeletePaymentToInv(final long glId) {
+    public void sendDeletePaymentToInv(final String glCode) {
         if (jmsTemplate != null) {
             String inventoryQueueName = environment.getRequiredProperty("activemq.inv.queue.name");
             jmsTemplate.setDefaultDestinationName(inventoryQueueName);
 
             jmsTemplate.send((Session session) -> {
                 MapMessage mm = session.createMapMessage();
-                
+
                 mm.setString("entity", "DELETE-PAYMENT");
-                mm.setLong("glId", glId);
+                mm.setString("glCode", glCode);
                 return mm;
             });
         }
@@ -116,7 +116,7 @@ public class MessagingServiceImpl implements MessagingService {
                     mm.setString("payDate", Util1.toDateStr(gl.getGlDate(), "yyyy-MM-dd"));
                     mm.setInt("locationId", locationId);
                     mm.setString("currency", "MMK");
-                    mm.setLong("glId", gl.getGlId());
+                    mm.setString("glCode", gl.getGlCode());
                     double paid = 0;
                     if (trader instanceof Customer) {
                         if (gl.getDrAmt() != null) {

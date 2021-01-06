@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name = "v_gl")
 public class VGl implements java.io.Serializable {
 
-    private Long glId;
+    private String glCode;
     private Date glDate;
     private String description;
     private String sourceAcId;
@@ -71,13 +71,13 @@ public class VGl implements java.io.Serializable {
     }
 
     @Id
-    @Column(name = "gl_id", unique = true, nullable = false)
-    public Long getGlId() {
-        return glId;
+    @Column(name = "gl_code", unique = true, nullable = false)
+    public String getGlCode() {
+        return glCode;
     }
 
-    public void setGlId(Long glId) {
-        this.glId = glId;
+    public void setGlCode(String glCode) {
+        this.glCode = glCode;
     }
 
     @Temporal(TemporalType.DATE)

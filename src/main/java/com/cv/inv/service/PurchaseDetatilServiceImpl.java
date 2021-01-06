@@ -46,8 +46,8 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
     }
     
     @Override
-    public List<PurHisDetail> search(String glId) {
-        return dao.search(glId);
+    public List<PurHisDetail> search(String glCode) {
+        return dao.search(glCode);
     }
     
     @Override

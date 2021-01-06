@@ -7,8 +7,6 @@ package com.cv.accountswing.entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,9 +21,8 @@ import javax.persistence.TemporalType;
 public class Gl implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "gl_id", unique = true, nullable = false)
-    private Long glId;
+    @Column(name = "gl_code", unique = true, nullable = false)
+    private String glCode;
     @Temporal(TemporalType.DATE)
     @Column(name = "gl_date")
     private Date glDate;
@@ -90,12 +87,12 @@ public class Gl implements java.io.Serializable {
     @Column(name = "project_id")
     private Long projectId;
 
-    public Long getGlId() {
-        return glId;
+    public String getGlCode() {
+        return glCode;
     }
 
-    public void setGlId(Long glId) {
-        this.glId = glId;
+    public void setGlCode(String glCode) {
+        this.glCode = glCode;
     }
 
     public Date getGlDate() {

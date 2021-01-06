@@ -40,7 +40,7 @@ public class SaleDetailHis1 implements java.io.Serializable {
     private Location location;
     private Integer uniqueId;
     private Float stdWeight;
-    private Long glId;
+    private Long glCode;
     private Float smallestWT;
     private String smallestUnit;
     private String chargeType;
@@ -180,11 +180,11 @@ public class SaleDetailHis1 implements java.io.Serializable {
 
     @Column(name = "gl_id")
     public Long getGlId() {
-        return glId;
+        return glCode;
     }
 
-    public void setGlId(Long glId) {
-        this.glId = glId;
+    public void setGlId(Long glCode) {
+        this.glCode = glCode;
     }
 
     @Column(name = "smallest_wt")

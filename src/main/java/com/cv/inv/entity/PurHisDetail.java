@@ -48,7 +48,7 @@ public class PurHisDetail implements Serializable {
     @Column(name = "unique_id")
     private Integer uniqueId;
     @Column(name = "gl_id")
-    private Long glId;
+    private Long glCode;
     @Column(name = "small_wt")
     private Float smallestWT;
     @Column(name = "small_unit")
@@ -140,11 +140,11 @@ public class PurHisDetail implements Serializable {
     }
 
     public Long getGlId() {
-        return glId;
+        return glCode;
     }
 
-    public void setGlId(Long glId) {
-        this.glId = glId;
+    public void setGlId(Long glCode) {
+        this.glCode = glCode;
     }
 
     public Float getSmallestWT() {

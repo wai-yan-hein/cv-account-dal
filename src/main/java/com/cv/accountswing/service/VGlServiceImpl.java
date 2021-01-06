@@ -54,7 +54,7 @@ public class VGlServiceImpl implements VGlService {
     }
 
     @Override
-    public VGl findById(Long id) {
+    public VGl findById(String id) {
         return dao.findById(id);
     }
 

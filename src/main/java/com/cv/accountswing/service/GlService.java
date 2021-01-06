@@ -18,12 +18,12 @@ public interface GlService {
 
     public List<Gl> saveBatchGL(List<Gl> listGL) throws Exception;
 
-    public Gl findById(Long glId);
+    public Gl findById(String glCode);
 
     public List<Gl> search(String from, String to, String desp, String sourceAcId,
             String acId, String frmCurr, String toCurr, String reference, String dept,
             String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
             String glVouNo, String splitId, String projectId);
 
-    public int delete(Long glId, String option) throws Exception;
+    public int delete(String glCode, String option) throws Exception;
 }

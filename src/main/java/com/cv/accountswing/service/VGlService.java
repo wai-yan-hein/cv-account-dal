@@ -16,7 +16,7 @@ public interface VGlService {
 
     public List<VGl> find(String glVouNo);
 
-    public VGl findById(Long id);
+    public VGl findById(String id);
 
     public List<VGl> search(String from, String to, String desp, String sourceAcId,
             String acId, String frmCurr, String toCurr, String reference, String dept,
