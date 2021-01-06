@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author Mg Kyaw Thura Aung
  */
 @Repository
-public class VouStatusDaoImpl extends AbstractDao<Integer, VouStatus> implements VouStatusDao {
+public class VouStatusDaoImpl extends AbstractDao<String, VouStatus> implements VouStatusDao {
 
     @Override
     public VouStatus save(VouStatus vouStatus) {
@@ -37,7 +37,7 @@ public class VouStatusDaoImpl extends AbstractDao<Integer, VouStatus> implements
 
     @Override
     public VouStatus findById(String id) {
-        return getByKey(Integer.parseInt(id));
+        return getByKey(id);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Trader implements java.io.Serializable {
     private String traderName;
     private String address;
     @ManyToOne
-    @JoinColumn(name = "reg_id")
+    @JoinColumn(name = "reg_code")
     private Region region;
     @ManyToOne
     @JoinColumn(name = "trader_type_id")

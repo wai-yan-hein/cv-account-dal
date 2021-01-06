@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface CustomerDao {
     public Customer save(Customer cus);
-    public Customer findById(Integer id);
+    public Customer findById(String id);
     public List<Customer> search(String code, String name, String address, 
             String phone, String compCode);
     public int delete(Integer id);

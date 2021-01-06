@@ -46,7 +46,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Supplier findById(Integer id) {
+    public Supplier findById(String id) {
         Supplier sup = dao.findById(id);
         return sup;
     }

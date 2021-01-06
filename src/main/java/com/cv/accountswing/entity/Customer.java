@@ -18,15 +18,17 @@ import javax.persistence.*;
 @DiscriminatorValue("C")
 public class Customer extends Trader implements java.io.Serializable {
 
+    @Column(name = "credit_days", nullable = true)
     private Integer creditLimit;
+    @Column(name = "credit_limit", nullable = true)
     private Integer creditDays;
+    @Column(name = "contact_person")
     private String contactPerson;
 
     public Customer() {
         super();
     }
 
-    @Column(name = "credit_days", nullable = true)
     public Integer getCreditDays() {
         return creditDays;
     }
@@ -35,7 +37,6 @@ public class Customer extends Trader implements java.io.Serializable {
         this.creditDays = creditDays;
     }
 
-    @Column(name = "credit_limit", nullable = true)
     public Integer getCreditLimit() {
         return creditLimit;
     }
@@ -44,7 +45,6 @@ public class Customer extends Trader implements java.io.Serializable {
         this.creditLimit = creditLimit;
     }
 
-    @Column(name = "contact_person")
     public String getContactPerson() {
         return contactPerson;
     }

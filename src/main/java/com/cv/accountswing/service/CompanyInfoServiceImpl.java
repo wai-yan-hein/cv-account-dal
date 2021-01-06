@@ -50,24 +50,12 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Autowired
     private UsrCompRoleService usrCompRoleService;
 
-    private String getCOACode(Integer macId,String compCode, int ttlLength) {
-        int seqNo = seqService.getSequence(macId,"COA", "-", compCode);
+    private String getCOACode(Integer macId, String compCode, int ttlLength) {
+        int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
         String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
         return coaCode;
     }
 
-<<<<<<< HEAD
-    // private String getCOACode(String compCode, int ttlLength) {
-    // int seqNo = seqService.getSequence("COA", "-", compCode);
-    // String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
-    //    return coaCode;
-    // }
-    @Override
-=======
-
-    
- 
->>>>>>> c22669eaab33b00c4e34b7cf2c20935a3f28f32a
     public CompanyInfo save(CompanyInfo ci) {
         return dao.save(ci);
     }
@@ -99,23 +87,12 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                     spService.copySystemProperty(oldCompCode, newCompCode);
 
                     for (ChartOfAccount tmpCOA : listLevel2COA) {
-<<<<<<< HEAD
-                        String newCOACode = getCOACode(newCompCode, ttlLength);
-=======
-                        String newCOACode = getCOACode(tmpCOA.getMacId(),newCompCode, ttlLength);
->>>>>>> c22669eaab33b00c4e34b7cf2c20935a3f28f32a
+                        String newCOACode = getCOACode(tmpCOA.getMacId(), newCompCode, ttlLength);
                         ChartOfAccount newCOA = new ChartOfAccount();
 
                         BeanUtils.copyProperties(tmpCOA, newCOA);
                         newCOA.setPrvCoaCode(newCOA.getCode());
                         newCOA.setCode(newCOACode);
-<<<<<<< HEAD
-                        //newCOA.setCode(newCOACode);
-=======
-
-                        //newCOA.setCode(newCOACode);
-
->>>>>>> c22669eaab33b00c4e34b7cf2c20935a3f28f32a
                         newCOA.setCompCode(newCompCode);
                         coaDao.save(newCOA);
 
@@ -172,23 +149,12 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         List<ChartOfAccount> listCOA = coaDao.getChild(oldCompCode, parent);
 
         for (ChartOfAccount tmpCOA : listCOA) {
-<<<<<<< HEAD
-            String newCOACode = getCOACode(newCompCode, ttlLength);
-=======
-            String newCOACode = getCOACode(tmpCOA.getMacId(),newCompCode, ttlLength);
->>>>>>> c22669eaab33b00c4e34b7cf2c20935a3f28f32a
+            String newCOACode = getCOACode(tmpCOA.getMacId(), newCompCode, ttlLength);
             ChartOfAccount newCOA = new ChartOfAccount();
 
             BeanUtils.copyProperties(tmpCOA, newCOA);
             newCOA.setPrvCoaCode(newCOA.getCode());
             newCOA.setCode(newCOACode);
-<<<<<<< HEAD
-            // newCOA.setCode(newCOACode);
-=======
-
-           // newCOA.setCode(newCOACode);
-
->>>>>>> c22669eaab33b00c4e34b7cf2c20935a3f28f32a
             newCOA.setCompCode(newCompCode);
             newCOA.setParent(currParent);
             coaDao.save(newCOA);

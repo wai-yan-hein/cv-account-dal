@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer findById(Integer id) {
+    public Customer findById(String id) {
         Customer cus = dao.findById(id);
         return cus;
     }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements CustomerDao{
+public class CustomerDaoImpl extends AbstractDao<String, Customer> implements CustomerDao{
     
     @Override
     public Customer save(Customer cus){
@@ -23,7 +23,7 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
     }
     
     @Override
-    public Customer findById(Integer id){
+    public Customer findById(String id){
         Customer cus = getByKey(id);
         return cus;
     }

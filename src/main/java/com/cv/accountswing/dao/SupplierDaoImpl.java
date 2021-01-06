@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class SupplierDaoImpl extends AbstractDao<Integer, Supplier> implements SupplierDao{
+public class SupplierDaoImpl extends AbstractDao<String, Supplier> implements SupplierDao{
     
     @Override
     public Supplier save(Supplier sup){
@@ -23,7 +23,7 @@ public class SupplierDaoImpl extends AbstractDao<Integer, Supplier> implements S
     }
     
     @Override
-    public Supplier findById(Integer id){
+    public Supplier findById(String id){
         Supplier sup = getByKey(id);
         return sup;
     }

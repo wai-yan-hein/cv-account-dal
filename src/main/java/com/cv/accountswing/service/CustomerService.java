@@ -18,7 +18,7 @@ public interface CustomerService {
 
     public Customer save(Customer cus);
 
-    public Customer findById(Integer id);
+    public Customer findById(String id);
 
     public List<Customer> search(String code, String name, String address,
             String phone, String compCode);

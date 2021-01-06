@@ -18,7 +18,7 @@ public interface SupplierService {
     
     public Supplier save(Supplier sup);
 
-    public Supplier findById(Integer id);
+    public Supplier findById(String id);
 
     public List<Supplier> search(String code, String name, String address,
             String phone, String compCode);

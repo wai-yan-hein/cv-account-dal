@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author Lenovo
  */
 @Repository
-public class LocationDaoImpl extends AbstractDao<Integer, Location> implements LocationDao {
+public class LocationDaoImpl extends AbstractDao<String, Location> implements LocationDao {
 
     @Override
     public Location save(Location ch) {
@@ -37,7 +37,7 @@ public class LocationDaoImpl extends AbstractDao<Integer, Location> implements L
 
     @Override
     public Location findById(String id) {
-        return getByKey(Integer.parseInt(id));
+        return getByKey(id);
     }
 
     @Override

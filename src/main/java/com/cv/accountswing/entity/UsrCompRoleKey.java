@@ -17,13 +17,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class UsrCompRoleKey implements Serializable {
 
-    @Column(name = "user_code")
     private String userCode;
-    @Column(name = "comp_code")
     private String compCode;
-    @Column(name = "role_code")
     private String roleCode;
 
+    @Column(name = "user_code")
     public String getUserCode() {
         return userCode;
     }
@@ -32,16 +30,7 @@ public class UsrCompRoleKey implements Serializable {
         this.userCode = userCode;
     }
 
-    public String getRoleCode() {
-        return roleCode;
-    }
-
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode;
-    }
-
-    
-
+    @Column(name = "comp_code")
     public String getCompCode() {
         return compCode;
     }
@@ -50,19 +39,29 @@ public class UsrCompRoleKey implements Serializable {
         this.compCode = compCode;
     }
 
-    
+    @Column(name = "role_code")
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.userCode);
-        hash = 71 * hash + Objects.hashCode(this.compCode);
-        hash = 71 * hash + Objects.hashCode(this.roleCode);
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.userCode);
+        hash = 67 * hash + Objects.hashCode(this.compCode);
+        hash = 67 * hash + Objects.hashCode(this.roleCode);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -81,4 +80,5 @@ public class UsrCompRoleKey implements Serializable {
         }
         return true;
     }
+
 }

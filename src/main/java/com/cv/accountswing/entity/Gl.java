@@ -55,7 +55,7 @@ public class Gl implements java.io.Serializable {
     private String traderCode;
     @Column(name = "cheque_no", length = 20)
     private String chequeNo;
-    @Column(name = "comp_id")
+    @Column(name = "comp_code")
     private String compCode;
     @Column(name = "gst")
     private Double gst;
