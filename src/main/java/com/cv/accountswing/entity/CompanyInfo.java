@@ -42,8 +42,9 @@ public class CompanyInfo implements java.io.Serializable {
     private String address;
     @Column(name = "active")
     private Boolean active;
-    @Column(name = "business_type")
-    private String businessType;
+    @ManyToOne
+    @JoinColumn(name = "business_type")
+    private BusinessType businessType;
     @Temporal(TemporalType.DATE)
     @Column(name = "finicial_period_from")
     private Date finicialPeriodFrom;
@@ -143,11 +144,11 @@ public class CompanyInfo implements java.io.Serializable {
         this.active = active;
     }
 
-    public String getBusinessType() {
+    public BusinessType getBusinessType() {
         return businessType;
     }
 
-    public void setBusinessType(String businessType) {
+    public void setBusinessType(BusinessType businessType) {
         this.businessType = businessType;
     }
 
