@@ -32,7 +32,8 @@ public class CategoryServiceImpl implements CategoryService {
         if (cat.getCatCode() == null || cat.getCatCode().isEmpty()) {
             Integer macId = cat.getMacId();
             String compCode = cat.getCompCode();
-            cat.setCatCode(getCatCode(macId, "Category", "-", compCode));
+            String getCode=getCatCode(macId, "Category", "-", compCode);
+            cat.setCatCode(getCode);
         }
         return dao.save(cat);
     }

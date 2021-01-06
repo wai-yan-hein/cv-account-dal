@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface StockService {
 
-    public Stock save(Stock stock, String status);
+    public Stock save(Stock stock);
 
     public Stock findById(String id);
 

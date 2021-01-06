@@ -72,6 +72,8 @@ public class SeqTableDaoImpl extends AbstractDao<SeqKey, SeqTable> implements Se
         key.setSeqOption(option);
         SeqTable st = findById(key);
         if (st == null) {
+            st=new SeqTable();
+            st.setKey(key);
             st.setSeqNo(1);
         } else {
             st.setSeqNo(st.getSeqNo() + 1);

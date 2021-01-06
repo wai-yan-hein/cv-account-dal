@@ -47,7 +47,7 @@ public class StockDaoImpl extends AbstractDao<String, Stock> implements StockDao
 
     @Override
     public List<Stock> findActiveStock() {
-        String hsql = "select o from Stock o where o.isActive=true";
+        String hsql = "select o from Stock o where o.isActive is true";
         return findHSQL(hsql);
 
     }

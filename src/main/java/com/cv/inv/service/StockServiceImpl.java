@@ -5,6 +5,7 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.service.SeqTableService;
 import com.cv.accountswing.util.Util1;
 import com.cv.inv.dao.CharacterNoDao;
 import com.cv.inv.dao.StockDao;
@@ -31,18 +32,17 @@ public class StockServiceImpl implements StockService {
     private StockDao dao;
     @Autowired
     private CharacterNoDao chDao;
+    @Autowired
+    private SeqTableService seqService;
 
     @Override
-    public Stock save(Stock stock, String status) {
-        if (status.equals("NEW")) {
-            if (stock.getStockCode() == null || stock.getStockCode().isEmpty()) {
-                stock.setStockCode(getMedCode(stock.getStockName(), stock.getStockType()));
-            } else {
-                Stock findById = dao.findById(stock.getStockCode());
-                if (findById != null) {
-                }
+    public Stock save(Stock stock) {
 
-            }
+        if (stock.getStockCode() == null || stock.getStockCode().isEmpty()) {
+            Integer macId = stock.getMacId();
+            String compCode = stock.getCompCode();
+            String stockType = stock.getStockType().getItemTypeCode();
+            stock.setStockCode(getStockCode(stockType, macId, "Stock", "-", compCode));
         }
 
         return dao.save(stock);
@@ -68,7 +68,7 @@ public class StockServiceImpl implements StockService {
         return dao.delete(id);
     }
 
-    private String getMedCode(String stockName, StockType itemType) {
+    /*private String getMedCode(String stockName, StockType itemType) {
         String medCode = "";
         CharacterNo characterNo = null;
 
@@ -128,6 +128,13 @@ public class StockServiceImpl implements StockService {
         }
 
         return medCode;
+    }
+     */
+    private String getStockCode(String stockType, Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+        String tmpCatCode = stockType + macId + String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 
     @Override

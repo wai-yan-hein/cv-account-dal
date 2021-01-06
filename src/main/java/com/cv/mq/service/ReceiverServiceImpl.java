@@ -656,7 +656,7 @@ public class ReceiverServiceImpl implements ReceiverService {
                 List<Stock> ListStock = gson.fromJson(data, collectionType);
                 // LOGGER.info("Stock Size:" + ListStock.size());
                 ListStock.stream().map(sk -> {
-                    stockService.save(sk, "NEW");
+                    stockService.save(sk);
                     return sk;
                 }).forEachOrdered(sk -> {
                     LOGGER.info("Stock  :" + sk.getStockCode());

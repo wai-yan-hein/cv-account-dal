@@ -30,12 +30,12 @@ public class Stock implements java.io.Serializable {
     @Column(name = "active")
     private Boolean isActive;
     @ManyToOne
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_code")
     private StockBrand brand;
     @Column(name = "stock_name", nullable = true, length = 100, unique = true)
     private String stockName;
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_code")
     private Category category;
     @ManyToOne
     @JoinColumn(name = "stock_type_code")
@@ -92,6 +92,10 @@ public class Stock implements java.io.Serializable {
     private String migCode;
     @Column(name = "comp_code")
     private String compCode;
+    @Column(name = "user_code")
+    private String userCode;
+    @Column(name = "mac_id")
+    private Integer macId;
 
     public String getStockCode() {
         return stockCode;
@@ -315,6 +319,22 @@ public class Stock implements java.io.Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
     }
 
 }
