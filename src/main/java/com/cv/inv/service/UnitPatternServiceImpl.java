@@ -23,8 +23,8 @@ public class UnitPatternServiceImpl implements UnitPatternService {
 
     @Autowired
     private UnitPatternDao dao;
-    
-     @Autowired
+
+    @Autowired
     private SeqTableService seqService;
 
     @Override
@@ -47,11 +47,11 @@ public class UnitPatternServiceImpl implements UnitPatternService {
         return dao.delete(id);
     }
 
-     private String getUnitPatternCode(Integer macId, String option, String period, String compCode) {
+    private String getUnitPatternCode(Integer macId, String option, String period, String compCode) {
 
         int seqNo = seqService.getSequence(macId, option, period, compCode);
 
-        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = macId + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
     }
 }

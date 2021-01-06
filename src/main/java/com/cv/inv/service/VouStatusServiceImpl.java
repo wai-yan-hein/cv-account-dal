@@ -23,13 +23,13 @@ public class VouStatusServiceImpl implements VouStatusService {
 
     @Autowired
     private VouStatusDao vouDao;
-    
-     @Autowired
+
+    @Autowired
     private SeqTableService seqService;
 
     @Override
     public VouStatus save(VouStatus vs) {
-       if (vs.getVouStatusCode() == null || vs.getVouStatusCode().isEmpty()) {
+        if (vs.getVouStatusCode() == null || vs.getVouStatusCode().isEmpty()) {
             Integer macId = vs.getMacId();
             String compCode = vs.getCompCode();
             vs.setVouStatusCode(getVouStatusCode(macId, "UnitPattern", "-", compCode));
@@ -56,12 +56,12 @@ public class VouStatusServiceImpl implements VouStatusService {
     public List<VouStatus> search(String statusDesp) {
         return vouDao.search(statusDesp);
     }
-    
-     private String getVouStatusCode(Integer macId, String option, String period, String compCode) {
+
+    private String getVouStatusCode(Integer macId, String option, String period, String compCode) {
 
         int seqNo = seqService.getSequence(macId, option, period, compCode);
 
-        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = macId + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
     }
 }

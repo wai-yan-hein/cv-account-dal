@@ -23,13 +23,13 @@ public class LocationServiceImpl implements LocationService {
 
     @Autowired
     private LocationDao dao;
-    
-     @Autowired
+
+    @Autowired
     private SeqTableService seqService;
 
     @Override
     public Location save(Location loc) {
-       if (loc.getLocationCode() == null || loc.getLocationCode().isEmpty()) {
+        if (loc.getLocationCode() == null || loc.getLocationCode().isEmpty()) {
             Integer macId = loc.getMacId();
             String compCode = loc.getCompCode();
             loc.setLocationCode(getLocationCode(macId, "Location", "-", compCode));
@@ -61,7 +61,7 @@ public class LocationServiceImpl implements LocationService {
 
         int seqNo = seqService.getSequence(macId, option, period, compCode);
 
-        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = macId + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
     }
 }

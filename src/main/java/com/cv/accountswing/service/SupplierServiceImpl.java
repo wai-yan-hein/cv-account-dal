@@ -32,8 +32,8 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public Supplier save(Supplier sup, String traderCodeLength) {
         if (sup.getCode().isEmpty() || sup.getCode() == null) {
-            Integer macId=sup.getMacId();
-            String tmpTraderId = getTraderId(macId,"SUP", "-", sup.getCompCode().toString(), traderCodeLength);
+            Integer macId = sup.getMacId();
+            String tmpTraderId = getTraderId(macId, "SUP", "-", sup.getCompCode(), traderCodeLength);
             sup.setCode(tmpTraderId);
         }
         sup = dao.save(sup);
@@ -64,13 +64,13 @@ public class SupplierServiceImpl implements SupplierService {
         return cnt;
     }
 
-    private String getTraderId(Integer macId,String option, String period, String compCode, String traderCodeLength) {
+    private String getTraderId(Integer macId, String option, String period, String compCode, String traderCodeLength) {
         int ttlLength = 5;
         if (traderCodeLength != null) {
             ttlLength = Integer.parseInt(traderCodeLength);
         }
-        int seqNo = seqService.getSequence(macId,option, period, compCode);
-        String tmpTraderId = option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo);
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+        String tmpTraderId = macId + "-" + option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo);
         return tmpTraderId;
     }
 
