@@ -17,7 +17,7 @@ public interface PurchaseDetailDao {
 
     public PurHisDetail save(PurHisDetail pd);
 
-    public List<PurHisDetail> search(String glId);
+    public List<PurHisDetail> search(String glCode);
 
     public int delete(String id) throws Exception;
 

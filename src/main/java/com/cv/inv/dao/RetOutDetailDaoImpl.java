@@ -18,13 +18,13 @@ import org.springframework.stereotype.Repository;
 public class RetOutDetailDaoImpl extends AbstractDao<String, RetOutHisDetail> implements RetOutDetailDao {
 
     @Override
-    public List<RetOutHisDetail> search(String glId) {
+    public List<RetOutHisDetail> search(String glCode) {
         String strFilter = "";
-        if (!glId.equals("-")) {
+        if (!glCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "v.outCompoundKey.vouNo = '" + glId + "'";
+                strFilter = "v.outCompoundKey.vouNo = '" + glCode + "'";
             } else {
-                strFilter = strFilter + " and v.outCompoundKey.vouNo = '" + glId + "'";
+                strFilter = strFilter + " and v.outCompoundKey.vouNo = '" + glCode + "'";
             }
         }
         String strSql = "select v from RetOutDetailHis v";

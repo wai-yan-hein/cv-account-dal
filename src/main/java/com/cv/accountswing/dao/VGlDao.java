@@ -16,7 +16,7 @@ public interface VGlDao {
 
     public List<VGl> find(String glVouNo);
 
-    public VGl findById(Long glId);
+    public VGl findById(String glCode);
 
     public List<VGl> search(String from, String to, String desp, String sourceAcId,
             String acId, String frmCurr, String toCurr, String reference, String dept,

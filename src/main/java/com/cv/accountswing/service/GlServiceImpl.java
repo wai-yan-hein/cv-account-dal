@@ -36,8 +36,8 @@ public class GlServiceImpl implements GlService {
     }
 
     @Override
-    public Gl findById(Long glId) {
-        Gl gl = dao.findById(glId);
+    public Gl findById(String glCode) {
+        Gl gl = dao.findById(glCode);
         return gl;
     }
 
@@ -53,8 +53,8 @@ public class GlServiceImpl implements GlService {
     }
 
     @Override
-    public int delete(Long glId, String option) throws Exception {
-        int cnt = dao.delete(glId, option);
+    public int delete(String glCode, String option) throws Exception {
+        int cnt = dao.delete(glCode, option);
         return cnt;
     }
 }

@@ -33,8 +33,8 @@ public class RetOutDetatilServiceImpl implements RetOutDetailService {
     }
 
     @Override
-    public List<RetOutHisDetail> search(String glId) {
-        return dao.search(glId);
+    public List<RetOutHisDetail> search(String glCode) {
+        return dao.search(glCode);
     }
 
     @Override

@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="v_target_gl")
 public class VTargetGl implements java.io.Serializable{
-    private Long glId;
+    private Long glCode;
     private Date glDate;
     private String description;
     private String sourceAcId;
@@ -60,11 +60,11 @@ public class VTargetGl implements java.io.Serializable{
     @Id
     @Column(name = "gl_id", unique = true, nullable = false)
     public Long getGlId() {
-        return glId;
+        return glCode;
     }
 
-    public void setGlId(Long glId) {
-        this.glId = glId;
+    public void setGlId(Long glCode) {
+        this.glCode = glCode;
     }
 
     @Temporal(TemporalType.DATE)

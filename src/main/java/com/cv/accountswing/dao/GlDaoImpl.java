@@ -15,11 +15,11 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class GlDaoImpl extends AbstractDao<Long, Gl> implements GlDao {
+public class GlDaoImpl extends AbstractDao<String, Gl> implements GlDao {
 
     @Override
     public Gl save(Gl gl) throws Exception {
-        if (gl.getGlId() != null) {
+        if (gl.getGlCode() != null) {
             //String strBakSql = getGlLogSql(gl.getGlId(),"GL-UPDATE");
             //execSQL(strBakSql);
         }
@@ -40,8 +40,8 @@ public class GlDaoImpl extends AbstractDao<Long, Gl> implements GlDao {
     }
 
     @Override
-    public Gl findById(Long glId) {
-        Gl gl = getByKey(glId);
+    public Gl findById(String glCode) {
+        Gl gl = getByKey(glCode);
         return gl;
     }
 
@@ -202,11 +202,8 @@ public class GlDaoImpl extends AbstractDao<Long, Gl> implements GlDao {
     }
 
     @Override
-    public int delete(Long glId, String option) throws Exception {
-        String strBakSql = getGlLogSql(glId, option);
-        execSQL(strBakSql);
-
-        String strSql = "delete from Gl o where o.glId = " + glId;
+    public int delete(String glCode, String option) throws Exception {
+        String strSql = "delete from Gl o where o.glCode = " + glCode;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

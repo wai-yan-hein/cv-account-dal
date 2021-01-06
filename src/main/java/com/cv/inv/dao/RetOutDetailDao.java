@@ -16,7 +16,7 @@ public interface RetOutDetailDao {
 
     public RetOutHisDetail save(RetOutHisDetail pd);
 
-    public List<RetOutHisDetail> search(String glId);
+    public List<RetOutHisDetail> search(String glCode);
 
     public int delete(String id) throws Exception;
 

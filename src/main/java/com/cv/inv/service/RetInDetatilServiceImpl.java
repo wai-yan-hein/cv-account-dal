@@ -38,8 +38,8 @@ public class RetInDetatilServiceImpl implements RetInDetailService {
     }
 
     @Override
-    public List<RetInHisDetail> search(String glId) {
-        return dao.search(glId);
+    public List<RetInHisDetail> search(String glCode) {
+        return dao.search(glCode);
     }
 
     @Override

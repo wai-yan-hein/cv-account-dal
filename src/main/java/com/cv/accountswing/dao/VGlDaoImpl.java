@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
  * @author WSwe
  */
 @Repository
-public class VGlDaoImpl extends AbstractDao<Long, VGl> implements VGlDao {
+public class VGlDaoImpl extends AbstractDao<String, VGl> implements VGlDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VGlDaoImpl.class);
 
@@ -227,7 +227,7 @@ public class VGlDaoImpl extends AbstractDao<Long, VGl> implements VGlDao {
         }
 
         if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter + " order by o.glId";
+            strSql = strSql + " where " + strFilter + " order by o.glCode";
         }
 
         List<VGl> listVGL = findHSQL(strSql);
@@ -326,13 +326,13 @@ public class VGlDaoImpl extends AbstractDao<Long, VGl> implements VGlDao {
     @Override
     public List<VGl> getCrDrVoucher(String vouNo, String compCode) {
         String strSql = "select o from VGl o where o.vouNo = '" + vouNo
-                + "' and o.compId = '" + compCode + "' order by o.glId";
+                + "' and o.compId = '" + compCode + "' order by o.glCode";
         List<VGl> listVGL = findHSQL(strSql);
         return listVGL;
     }
 
     @Override
-    public VGl findById(Long glId) {
-        return getByKey(glId);
+    public VGl findById(String glCode) {
+        return getByKey(glCode);
     }
 }
