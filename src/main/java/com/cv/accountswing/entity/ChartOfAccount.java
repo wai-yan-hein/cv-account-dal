@@ -162,7 +162,11 @@ public class ChartOfAccount implements java.io.Serializable {
         this.option = option;
     }
 
+<<<<<<< HEAD
     @Column(name = "comp_code", length = 15)
+=======
+    @Column(name = "comp_code")
+>>>>>>> 9e315394bc257bcd08e18f3bc41e51f8b462b12a
     public String getCompCode() {
         return compCode;
     }

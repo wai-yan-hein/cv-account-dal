@@ -60,6 +60,8 @@ public class Menu implements java.io.Serializable {
     private Integer macId;
     @Column(name = "user_code")
     private String userCode;
+    @Column(name = "comp_code")
+    private String compCode;
     @Transient
     private List<Menu> child;
 
@@ -206,4 +208,13 @@ public class Menu implements java.io.Serializable {
         this.userCode = userCode;
     }
 
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+    
 }

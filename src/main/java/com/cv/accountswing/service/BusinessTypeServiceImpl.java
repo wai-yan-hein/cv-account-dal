@@ -23,8 +23,16 @@ public class BusinessTypeServiceImpl implements BusinessTypeService{
     @Autowired
     private BusinessTypeDao dao;
     
+     @Autowired
+    private SeqTableService seqService;
+    
     @Override
     public BusinessType save(BusinessType bt){
+         if (bt.getCode() == null || bt.getCode().isEmpty()) {
+            Integer macId = bt.getMacId();
+            String compCode = bt.getCompCode();
+            bt.setCode(getBusinessTypeCode(macId, "BusinessType", "-", compCode));
+        }
         return dao.save(bt);
     }
     
@@ -42,5 +50,13 @@ public class BusinessTypeServiceImpl implements BusinessTypeService{
     @Override
     public int delete(String id){
         return dao.delete(id);
+    }
+    
+     private String getBusinessTypeCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }

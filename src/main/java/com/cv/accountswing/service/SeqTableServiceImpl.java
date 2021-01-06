@@ -6,6 +6,7 @@
 package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.SeqTableDao;
+import com.cv.accountswing.entity.SeqKey;
 import com.cv.accountswing.entity.SeqTable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class SeqTableServiceImpl implements SeqTableService{
     }
     
     @Override
-    public SeqTable findById(Integer id){
+    public SeqTable findById(SeqKey id){
         SeqTable st = dao.findById(id);
         return st;
     }
@@ -54,8 +55,8 @@ public class SeqTableServiceImpl implements SeqTableService{
     }
     
     @Override
-    public int getSequence(String option, String period, String compCode){
-        int seq = dao.getSequence(option, period, compCode);
+    public int getSequence(Integer macId,String option, String period, String compCode){
+        int seq = dao.getSequence(macId,option, period, compCode);
         return seq;
     }
     

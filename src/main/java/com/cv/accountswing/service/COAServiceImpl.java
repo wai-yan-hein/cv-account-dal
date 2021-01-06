@@ -36,7 +36,7 @@ public class COAServiceImpl implements COAService {
     @Override
     public ChartOfAccount save(ChartOfAccount coa) {
         if (coa.getCode() == null || coa.getCode().isEmpty()) {
-            coa.setCode(getCOACode(coa.getCompCode().toString()));
+           // coa.setCode(getCOACode(coa.getCompCode().toString()));
         }
         coa = dao.save(coa);
         return coa;
@@ -116,15 +116,15 @@ public class COAServiceImpl implements COAService {
         return listCOA;
     }
 
-    private String getCOACode(String compCode) {
+  /*  private String getCOACode(String compCode) {
         SystemPropertyKey spk = new SystemPropertyKey("system.coa.code.length",
                 compCode);
         SystemProperty sp = spService.findById(spk);
         int ttlLength = Integer.parseInt(sp.getPropValue());
-        int seqNo = seqService.getSequence("COA", "-", compCode);
-        String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
+       // int seqNo = seqService.getSequence("COA", "-", compCode);
+        //String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
         return coaCode;
-    }
+    }*/
 
     @Override
     public List<ChartOfAccount> searchWhereIn(String strList, String compCode) {

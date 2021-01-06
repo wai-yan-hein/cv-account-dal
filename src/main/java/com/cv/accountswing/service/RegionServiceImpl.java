@@ -18,32 +18,47 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class RegionServiceImpl implements RegionService{
-    
+public class RegionServiceImpl implements RegionService {
+
     @Autowired
     RegionDao dao;
-    
+
+    @Autowired
+    private SeqTableService seqService;
+
     @Override
-    public Region save(Region region){
-        region = dao.save(region);
-        return region;
+    public Region save(Region rg) {
+        if (rg.getRegCode() == null || rg.getRegCode().isEmpty()) {
+            Integer macId = rg.getMacId();
+            String compCode = rg.getCompCode();
+            rg.setRegCode(getRegiionCode(macId, "Region", "-", compCode));
+        }
+        return dao.save(rg);
     }
-    
+
     @Override
-    public Region findById(String id){
+    public Region findById(String id) {
         Region region = dao.findById(id);
         return region;
     }
-    
+
     @Override
-    public List<Region> search(String code, String name, String compId,String parentCode){
-        List<Region> listRegion = dao.search(code, name, compId,parentCode);
+    public List<Region> search(String code, String name, String compId, String parentCode) {
+        List<Region> listRegion = dao.search(code, name, compId, parentCode);
         return listRegion;
     }
-    
+
     @Override
-    public int delete(String code, String compCode){
+    public int delete(String code, String compCode) {
         int cnt = dao.delete(code, compCode);
         return cnt;
+    }
+
+    private String getRegiionCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }

@@ -23,7 +23,11 @@ public class Trader implements java.io.Serializable {
     @Id
     @Column(name = "code", unique = true, nullable = false)
     private String code;
+<<<<<<< HEAD
     @Column(name = "comp_code", length = 15, nullable = false)
+=======
+    @Column(name = "comp_code")
+>>>>>>> 9e315394bc257bcd08e18f3bc41e51f8b462b12a
     private String compCode;
     @Column(name = "trader_name", nullable = false, length = 255)
     private String traderName;

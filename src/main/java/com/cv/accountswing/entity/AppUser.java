@@ -58,6 +58,8 @@ public class AppUser implements java.io.Serializable {
     private Integer macId;
     @Column(name = "user_code")
     private String userCode;
+    @Column(name = "comp_code")
+    private String compCode;
 
     public String getAppUserCode() {
         return appUserCode;
@@ -184,4 +186,13 @@ public class AppUser implements java.io.Serializable {
         return userName;
     }
 
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+    
 }

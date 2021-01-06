@@ -41,7 +41,11 @@ public class COAOpening implements Serializable {
     private Double drAmt;
     @Column(name = "user_id")
     private Integer userId;
+<<<<<<< HEAD
     @Column(name = "comp_id")
+=======
+    @Column(name = "comp_code")
+>>>>>>> 9e315394bc257bcd08e18f3bc41e51f8b462b12a
     private String compCode;
     @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
@@ -114,6 +118,8 @@ public class COAOpening implements Serializable {
     public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
+
+    
 
     public Date getCreatedDate() {
         return createdDate;

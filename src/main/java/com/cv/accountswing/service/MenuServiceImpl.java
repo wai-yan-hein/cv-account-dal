@@ -22,10 +22,18 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private MenuDao dao;
+    
+     @Autowired
+    private SeqTableService seqService;
 
     @Override
-    public Menu saveMenu(Menu menu) {
-        return dao.saveMenu(menu);
+    public Menu saveMenu(Menu mu) {
+         if (mu.getCode() == null || mu.getCode().isEmpty()) {
+            Integer macId = mu.getMacId();
+            String compCode = mu.getCompCode();
+            mu.setCode(getMenuCode(macId, "Menu", "-", compCode));
+        }
+        return dao.saveMenu(mu);
     }
 
     @Override
@@ -67,4 +75,11 @@ public class MenuServiceImpl implements MenuService {
      public List<Menu> searchM(String updatedDate){
          return dao.searchM(updatedDate);
      }
+     private String getMenuCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
+    }
 }

@@ -29,7 +29,7 @@ public class CoaDeptMapServiceImpl implements CoaDeptMapService{
         CoaDeptMapKey cdmk = new CoaDeptMapKey();
         
         cdmk.setCoaCode(coaCode);
-        cdmk.setCompCode(Integer.parseInt(compId));
+        cdmk.setCompCode(compId);
         cdmk.setDeptCode(dept);
         cdm.setKey(cdmk);
         

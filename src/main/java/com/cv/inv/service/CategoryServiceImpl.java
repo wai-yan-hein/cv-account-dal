@@ -5,6 +5,7 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.service.SeqTableService;
 import com.cv.inv.dao.CategoryDao;
 import com.cv.inv.entity.Category;
 import java.util.List;
@@ -23,9 +24,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryDao dao;
 
+    @Autowired
+    private SeqTableService seqService;
+
     @Override
-    public Category save(Category item) {
-        return dao.save(item);
+    public Category save(Category cat) {
+        if (cat.getCatCode() == null || cat.getCatCode().isEmpty()) {
+            Integer macId = cat.getMacId();
+            String compCode = cat.getCompCode();
+            cat.setCatCode(getCatCode(macId, "Category", "-", compCode));
+        }
+        return dao.save(cat);
     }
 
     @Override
@@ -42,10 +51,18 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> search(String catName) {
         return dao.search(catName);
     }
-    
+
     @Override
-         public List<Category> searchM(String updatedDate){
-             return dao.searchM(updatedDate);
-         }
+    public List<Category> searchM(String updatedDate) {
+        return dao.searchM(updatedDate);
+    }
+
+    private String getCatCode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
+    }
 
 }
