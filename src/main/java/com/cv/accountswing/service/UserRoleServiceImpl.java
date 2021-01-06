@@ -73,7 +73,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
         int seqNo = seqService.getSequence(macId, option, period, compCode);
 
-        String tmpCatCode = macId + "-" + String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = String.format("%0" + 2 + "d", macId) + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
     }
 }

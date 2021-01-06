@@ -70,7 +70,7 @@ public class SupplierServiceImpl implements SupplierService {
             ttlLength = Integer.parseInt(traderCodeLength);
         }
         int seqNo = seqService.getSequence(macId, option, period, compCode);
-        String tmpTraderId = macId + "-" + option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo);
+        String tmpTraderId = String.format("%0" + 2 + "d", macId) + "-" + option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo);
         return tmpTraderId;
     }
 

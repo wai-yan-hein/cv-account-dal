@@ -43,11 +43,11 @@ public class TraderServiceImpl implements TraderService {
     @Override
     public Trader saveTrader(Trader td) {
 
-        if (td.getCode() == null || td.getCode().isEmpty()) {
+       /* if (td.getCode() == null || td.getCode().isEmpty()) {
             Integer macId = td.getMacId();
             String compCode = td.getCompCode();
             td.setCode(getTraderCode(macId, "Trader", "-", compCode));
-        }
+        }*/
         return dao.saveTrader(td);
     }
 
