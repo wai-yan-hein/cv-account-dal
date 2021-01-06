@@ -56,6 +56,17 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         return coaCode;
     }
 
+<<<<<<< HEAD
+=======
+
+    // private String getCOACode(String compCode, int ttlLength) {
+    // int seqNo = seqService.getSequence("COA", "-", compCode);
+    // String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
+    //    return coaCode;
+    // }
+    @Override
+
+>>>>>>> 7075bcf62b6b1dc20d3f47e0e2d81d6aab0c6080
     public CompanyInfo save(CompanyInfo ci) {
         return dao.save(ci);
     }
@@ -87,12 +98,22 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                     spService.copySystemProperty(oldCompCode, newCompCode);
 
                     for (ChartOfAccount tmpCOA : listLevel2COA) {
+<<<<<<< HEAD
                         String newCOACode = getCOACode(tmpCOA.getMacId(), newCompCode, ttlLength);
+=======
+                       
+                        String newCOACode = getCOACode(tmpCOA.getMacId(),newCompCode, ttlLength);
+
+>>>>>>> 7075bcf62b6b1dc20d3f47e0e2d81d6aab0c6080
                         ChartOfAccount newCOA = new ChartOfAccount();
 
                         BeanUtils.copyProperties(tmpCOA, newCOA);
                         newCOA.setPrvCoaCode(newCOA.getCode());
                         newCOA.setCode(newCOACode);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7075bcf62b6b1dc20d3f47e0e2d81d6aab0c6080
                         newCOA.setCompCode(newCompCode);
                         coaDao.save(newCOA);
 
@@ -149,7 +170,12 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         List<ChartOfAccount> listCOA = coaDao.getChild(oldCompCode, parent);
 
         for (ChartOfAccount tmpCOA : listCOA) {
+<<<<<<< HEAD
             String newCOACode = getCOACode(tmpCOA.getMacId(), newCompCode, ttlLength);
+=======
+
+            String newCOACode = getCOACode(tmpCOA.getMacId(),newCompCode, ttlLength);
+>>>>>>> 7075bcf62b6b1dc20d3f47e0e2d81d6aab0c6080
             ChartOfAccount newCOA = new ChartOfAccount();
 
             BeanUtils.copyProperties(tmpCOA, newCOA);

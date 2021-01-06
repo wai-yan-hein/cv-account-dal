@@ -18,45 +18,45 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class BusinessTypeServiceImpl implements BusinessTypeService{
-    
+public class BusinessTypeServiceImpl implements BusinessTypeService {
+
     @Autowired
     private BusinessTypeDao dao;
-    
-     @Autowired
+
+    @Autowired
     private SeqTableService seqService;
-    
+
     @Override
-    public BusinessType save(BusinessType bt){
-         if (bt.getCode() == null || bt.getCode().isEmpty()) {
+    public BusinessType save(BusinessType bt) {
+        if (bt.getCode() == null || bt.getCode().isEmpty()) {
             Integer macId = bt.getMacId();
             String compCode = bt.getCompCode();
             bt.setCode(getBusinessTypeCode(macId, "BusinessType", "-", compCode));
         }
         return dao.save(bt);
     }
-    
+
     @Override
-    public BusinessType findById(Integer id){
+    public BusinessType findById(Integer id) {
         return dao.findById(id);
     }
-    
+
     @Override
-    public List<BusinessType> getAllBusinessType(){
+    public List<BusinessType> getAllBusinessType() {
         List<BusinessType> listCT = dao.getAllBusinessType();
         return listCT;
     }
-    
+
     @Override
-    public int delete(String id){
+    public int delete(String id) {
         return dao.delete(id);
     }
-    
-     private String getBusinessTypeCode(Integer macId, String option, String period, String compCode) {
+
+    private String getBusinessTypeCode(Integer macId, String option, String period, String compCode) {
 
         int seqNo = seqService.getSequence(macId, option, period, compCode);
 
-        String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = macId + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
     }
 }

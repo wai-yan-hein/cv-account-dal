@@ -32,8 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer save(Customer cus, String traderCodeLength) {
         if (cus.getCode() == null || cus.getCode().isEmpty()) {
-            //String tmpTraderId = getTraderId("CUS", "-", cus.getCompCode().toString(), traderCodeLength);
-           // cus.setCode(tmpTraderId);
+            Integer macId = cus.getMacId();
+            String tmpTraderId = getTraderId(macId, "CUS", "-", cus.getCompCode(), traderCodeLength);
+            cus.setCode(tmpTraderId);
         }
         return dao.save(cus);
     }
@@ -62,15 +63,15 @@ public class CustomerServiceImpl implements CustomerService {
         return cnt;
     }
 
-   /* private String getTraderId(String option, String period, String compCode, String traderCodeLength) {
+    private String getTraderId(Integer macId, String option, String period, String compCode, String traderCodeLength) {
         int ttlLength = 5;
         if (traderCodeLength != null) {
             ttlLength = Integer.parseInt(traderCodeLength);
         }
-        int seqNo = seqService.getSequence(option, period, compCode);
-        String tmpTraderId = option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo);
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+        String tmpTraderId = macId + "-" + option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo);
         return tmpTraderId;
-    }*/
+    }
 
     private boolean isAutoGenerate(String compCode) {
         boolean status = false;
