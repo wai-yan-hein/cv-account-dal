@@ -31,6 +31,7 @@ public class Department implements java.io.Serializable {
     private String updatedBy;
     private Date updatedDt;
     private String usrCode;
+    private Integer macId;
 
     public Department(String deptCode, String deptName) {
         this.deptCode = deptCode;
@@ -132,6 +133,16 @@ public class Department implements java.io.Serializable {
     public void setUsrCode(String usrCode) {
         this.usrCode = usrCode;
     }
+    @Column(name = "mac_id")
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+    
 
     @Override
     public String toString() {

@@ -86,6 +86,8 @@ public class Gl implements java.io.Serializable {
     private String naration;
     @Column(name = "project_id")
     private Long projectId;
+    @Column(name = "mac_id")
+    private Integer macId;
 
     public String getGlCode() {
         return glCode;
@@ -334,4 +336,13 @@ public class Gl implements java.io.Serializable {
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
 }

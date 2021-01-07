@@ -31,8 +31,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department save(Department dept) {
-        if (dept.getDeptCode().isEmpty()) {
-           // dept.setDeptCode(getDeptCode(dept.getCompCode().toString()));
+        if (dept.getDeptCode() == null || dept.getDeptCode().isEmpty()) {
+            Integer macId = dept.getMacId();
+            String compCode = dept.getCompCode();
+            String depCode = getDepCode(macId, "DEP", "-", compCode);
+            dept.setDeptCode(depCode);
         }
         dept = dao.save(dept);
         return dept;
@@ -56,19 +59,15 @@ public class DepartmentServiceImpl implements DepartmentService {
         return cnt;
     }
 
-   /* private String getDeptCode(String compCode) {
-        SystemPropertyKey spk = new SystemPropertyKey("system.dept.code.length",
-                compCode);
-        SystemProperty sp = spService.findById(spk);
-        int ttlLength = Integer.parseInt(sp.getPropValue());
-       // int seqNo = seqService.getSequence("DEPT", "-", compCode);
-        String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
-        return coaCode;
-    }
-*/
     @Override
     public List<Department> findAll() {
         return dao.findAll();
+    }
+
+    private String getDepCode(Integer macId, String option, String period, String compCode) {
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+        String tmpCatCode = String.format("%0" + 3 + "d", macId) + period + String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 
 }
