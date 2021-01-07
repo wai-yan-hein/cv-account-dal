@@ -32,7 +32,7 @@ public class Stock implements java.io.Serializable {
     @ManyToOne
     @JoinColumn(name = "brand_code")
     private StockBrand brand;
-    @Column(name = "stock_name", nullable = true, length = 100, unique = true)
+    @Column(name = "stock_name")
     private String stockName;
     @ManyToOne
     @JoinColumn(name = "category_code")
@@ -48,7 +48,7 @@ public class Stock implements java.io.Serializable {
     private AppUser updatedBy;
     @Column(name = "barcode")
     private String barcode;
-    @Column(name = "short_name", length = 50)
+    @Column(name = "short_name")
     private String shortName;
     @Column(name = "pur_wt")
     private Float purWeight;

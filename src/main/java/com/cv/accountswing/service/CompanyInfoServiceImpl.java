@@ -50,28 +50,20 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Autowired
     private UsrCompRoleService usrCompRoleService;
 
-    private String getCOACode(Integer macId, String compCode, int ttlLength) {
-        int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
-        String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
-        return coaCode;
-    }
-
-    // private String getCOACode(String compCode, int ttlLength) {
-    // int seqNo = seqService.getSequence("COA", "-", compCode);
-    // String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
-    //    return coaCode;
-    // }
     @Override
-
     public CompanyInfo save(CompanyInfo ci) {
         return dao.save(ci);
     }
 
     @Override
     public CompanyInfo save(CompanyInfo ci, String status, String userId, String type) {
+        if (ci.getCompCode() == null || ci.getCompCode().isEmpty()) {
+            String compCode = getCompCode(ci.getMacId());
+            ci.setCompCode(compCode);
+        }
         ci = dao.save(ci);
 
-        if (status.equals("NEW")) {
+        /*if (status.equals("NEW")) {
             String businessType = ci.getBusinessType().getCode();
             List<CompanyInfo> listCI = dao.search("-", "-", "-", "-", businessType.toString(), "-");
             String oldCompCode = "-";
@@ -147,8 +139,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                 }
 
             }
-        }
-
+        }*/
         return ci;
     }
 
@@ -189,5 +180,17 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     public int delete(String code) {
         int cnt = dao.delete(code);
         return cnt;
+    }
+
+    private String getCOACode(Integer macId, String compCode, int ttlLength) {
+        int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
+        String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
+        return coaCode;
+    }
+
+    private String getCompCode(Integer macId) {
+        int seqNo = seqService.getSequence(macId, "Company", "-", "-");
+        String coaCode = macId + "-" + String.format("%0" + 2 + "d", seqNo);
+        return coaCode;
     }
 }

@@ -7,6 +7,7 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.GlDao;
 import com.cv.accountswing.entity.Gl;
+import com.cv.accountswing.util.Util1;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,18 @@ public class GlServiceImpl implements GlService {
 
     @Autowired
     private GlDao dao;
+    @Autowired
+    private SeqTableService seqService;
 
     @Override
     public Gl save(Gl gl) throws Exception {
+        if (gl.getGlCode() == null || gl.getGlCode().isEmpty()) {
+            Integer macId = gl.getMacId();
+            String compCode = gl.getCompCode();
+            String period = Util1.toDateStr(Util1.getTodayDate(), "MM");
+            String glCode = getGLCode(macId, "GL", period, compCode);
+            gl.setGlCode(glCode);
+        }
         dao.save(gl);
         return gl;
     }
@@ -56,5 +66,11 @@ public class GlServiceImpl implements GlService {
     public int delete(String glCode, String option) throws Exception {
         int cnt = dao.delete(glCode, option);
         return cnt;
+    }
+
+    private String getGLCode(Integer macId, String option, String period, String compCode) {
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+        String tmpCatCode = String.format("%0" + 3 + "d", macId) + period + String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }
