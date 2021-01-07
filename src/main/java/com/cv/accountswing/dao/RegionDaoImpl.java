@@ -51,9 +51,9 @@ public class RegionDaoImpl extends AbstractDao<Integer, Region> implements Regio
 
         if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.compId = '" + compCode + "'";
+                strFilter = "o.compCode = '" + compCode + "'";
             } else {
-                strFilter = strFilter + " and o.compId = '" + compCode + "'";
+                strFilter = strFilter + " and o.compCode= '" + compCode + "'";
             }
         }
          if (!parentCode.equals("-")) {
@@ -74,8 +74,8 @@ public class RegionDaoImpl extends AbstractDao<Integer, Region> implements Regio
 
     @Override
     public int delete(String code, String compCode) {
-        String strSql = "delete from Region o where o.regId = '"
-                + code + "' and o.compId = " + compCode;
+        String strSql = "delete from Region o where o.regCode = '"
+                + code + "' and o.compCode = " + compCode;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

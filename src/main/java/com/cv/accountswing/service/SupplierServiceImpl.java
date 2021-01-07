@@ -31,7 +31,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier save(Supplier sup, String traderCodeLength) {
-        if (sup.getCode().isEmpty() || sup.getCode() == null) {
+        if (sup.getCode() == null || sup.getCode().isEmpty()) {
             Integer macId = sup.getMacId();
             String tmpTraderId = getTraderId(macId, "SUP", "-", sup.getCompCode(), traderCodeLength);
             sup.setCode(tmpTraderId);
