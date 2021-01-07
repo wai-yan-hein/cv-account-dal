@@ -5,6 +5,7 @@
  */
 package com.cv.inv.entity;
 
+import com.cv.accountswing.entity.AppUser;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -25,22 +26,29 @@ import javax.persistence.TemporalType;
 @Table(name = "sale_man")
 public class SaleMan implements Serializable {
 
-    private String saleManId;
+    private String saleManCode;
     private String saleManName;
     private Boolean active;
     private String phone;
     private Date updatedDate;
     private Gender genderId;
     private String address;
+    private Integer macId;
+    private String compCode;
+    private String userCode;
+    private Date createdDate;
+    private AppUser createdBy;
+    private AppUser updatedBy;
 
     @Id
-    @Column(name = "saleman_id", unique = true, nullable = false, length = 15)
-    public String getSaleManId() {
-        return saleManId;
+    @Column(name = "saleman_code", unique = true, nullable = false)
+
+    public String getSaleManCode() {
+        return saleManCode;
     }
 
-    public void setSaleManId(String saleManId) {
-        this.saleManId = saleManId;
+    public void setSaleManCode(String saleManCode) {
+        this.saleManCode = saleManCode;
     }
 
     @Column(name = "saleman_name", unique = true, nullable = false)
@@ -97,6 +105,63 @@ public class SaleMan implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Column(name = "mac_id", length = 15)
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    @Column(name = "comp_code")
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+    @Column(name = "user_code")
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    public AppUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    public AppUser getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(AppUser updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
 }

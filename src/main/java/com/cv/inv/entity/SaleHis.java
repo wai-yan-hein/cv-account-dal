@@ -27,7 +27,7 @@ public class SaleHis implements java.io.Serializable {
     @JoinColumn(name = "cus_id")
     private Trader traderId;
     @ManyToOne
-    @JoinColumn(name = "saleman_id")
+    @JoinColumn(name = "saleman_code")
     private SaleMan saleManId;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sale_date")
