@@ -68,9 +68,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private String getAppUserCode(Integer macId, String option, String period, String compCode) {
-
         int seqNo = seqService.getSequence(macId, option, period, compCode);
-
         String tmpCatCode = String.format("%0" + 2 + "d", macId) + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
     }

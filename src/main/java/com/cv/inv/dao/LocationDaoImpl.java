@@ -31,7 +31,7 @@ public class LocationDaoImpl extends AbstractDao<String, Location> implements Lo
 
     @Override
     public int delete(String id) {
-        String hsql = "delete from Location o where o.locationId='" + id + "'";
+        String hsql = "delete from Location o where o.locationCode='" + id + "'";
         return execUpdateOrDelete(hsql);
     }
 
@@ -42,7 +42,7 @@ public class LocationDaoImpl extends AbstractDao<String, Location> implements Lo
 
     @Override
     public List<Location> search(String parent) {
-        String hsql = "select o from Location o where o.parent ='" + parent + "'";
+        String hsql = "select o from Location o where o.parentCode ='" + parent + "'";
         return findHSQL(hsql);
 
     }
