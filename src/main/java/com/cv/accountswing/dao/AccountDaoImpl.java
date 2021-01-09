@@ -133,4 +133,13 @@ public class AccountDaoImpl extends AbstractDao<Integer, AppUser> implements Acc
     public AppUser finfById(String id) {
         return getByKey(Integer.parseInt(id));
     }
+
+    @Override
+    public List<AppUser> findAll() {
+
+        String strSql = "select o from AppUser o";
+        List<AppUser> ListAU = findHSQL(strSql);
+        return ListAU;
+
+    }
 }

@@ -16,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Lenovo
  */
-@Transactional
 @Service
+@Transactional
 public class TraderTypeServiceImpl implements TraderTypeService {
 
     @Autowired

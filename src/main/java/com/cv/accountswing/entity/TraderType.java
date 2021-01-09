@@ -6,12 +6,13 @@
 package com.cv.accountswing.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -23,7 +24,19 @@ public class TraderType implements Serializable {
 
     private Integer typeId;
     private String description;
+    private Date updatedDate;
+  
 
+    
+    @Id
+    @Column(name = "trader_type_id", unique = true, nullable = false)
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
     @Column(name = "description", unique = true, nullable = false, length = 10)
     public String getDescription() {
         return description;
@@ -33,19 +46,16 @@ public class TraderType implements Serializable {
         this.description = description;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "trader_type_id", unique = true, nullable = false)
-    public Integer getTypeId() {
-        return typeId;
+    @Temporal(TemporalType.TIMESTAMP)
+     @Column(name = "updated_date")
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
-    @Override
-    public String toString() {
-        return description;
-    }
+    
+
 }

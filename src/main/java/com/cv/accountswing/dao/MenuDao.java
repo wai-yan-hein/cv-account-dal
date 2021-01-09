@@ -25,6 +25,8 @@ public interface MenuDao {
     public List<Menu> searchM(String updatedDate);
 
     public List getParentChildMenu(String roleId, String menuType);
+    
+    public List getParentChildMenuSelect(String roleId, String menuType);
 
     public int delete(String id);
 

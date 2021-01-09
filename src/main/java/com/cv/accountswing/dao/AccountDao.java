@@ -22,4 +22,5 @@ public interface AccountDao {
     public AppUser login(String user, String password) throws AuthenticationException;
     public int delete(String userCode);
     public AppUser finfById(String id);
+    public List<AppUser> findAll();
 }

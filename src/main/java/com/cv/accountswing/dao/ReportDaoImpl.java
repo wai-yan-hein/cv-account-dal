@@ -25,4 +25,8 @@ public class ReportDaoImpl extends AbstractDao<String, String> implements Report
     public void execSQLRpt(String... strSql) throws Exception {
         execSQL(strSql);
     }
+    @Override
+    public Object getAggResult(String sql) {
+        return getAggregate(sql);
+    }
 }

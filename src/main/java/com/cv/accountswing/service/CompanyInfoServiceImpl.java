@@ -45,7 +45,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     private UsrCompRoleService usrCompRoleService;
 
     @Override
-    public CompanyInfo save(CompanyInfo ci) {
+    public CompanyInfo saveM(CompanyInfo ci) {
         return dao.save(ci);
     }
 
@@ -149,7 +149,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
             newCOA.setPrvCoaCode(newCOA.getCode());
             newCOA.setCode(newCOACode);
             newCOA.setCompCode(newCompCode);
-            newCOA.setParent(currParent);
+            newCOA.setCoaParent(currParent);
             coaDao.save(newCOA);
 
             insertChild(oldCompCode, newCompCode, newCOA.getPrvCoaCode(), newCOA.getCode(),
@@ -187,4 +187,6 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         String coaCode = String.format("%0" + 2 + "d", macId) + String.format("%0" + 2 + "d", seqNo);
         return coaCode;
     }
+  
+            
 }

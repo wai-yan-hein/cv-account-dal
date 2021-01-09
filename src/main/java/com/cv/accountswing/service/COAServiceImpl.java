@@ -7,10 +7,7 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.COADao;
 import com.cv.accountswing.dao.COAOpeningDao;
-import com.cv.accountswing.entity.COALevel;
 import com.cv.accountswing.entity.ChartOfAccount;
-import com.cv.accountswing.entity.SystemProperty;
-import com.cv.accountswing.entity.SystemPropertyKey;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,10 +34,15 @@ public class COAServiceImpl implements COAService {
     public ChartOfAccount save(ChartOfAccount coa) {
         if (coa.getCode() == null || coa.getCode().isEmpty()) {
             Integer macId = coa.getMacId();
+<<<<<<< HEAD
             coa.setCode(getCOACode(macId, coa.getCompCode().toString()));
+=======
+            String compCode = coa.getCompCode();
+            coa.setCode(getCOACode(macId, "ChartOfAccount", "-", compCode));
+>>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
         }
-        coa = dao.save(coa);
-        return coa;
+
+        return dao.save(coa);
     }
 
     @Override
@@ -75,12 +77,12 @@ public class COAServiceImpl implements COAService {
         return listCOA;
     }
 
-    @Override
+    /* @Override
     public List<COALevel> getParentChildCOA(String compCode) {
         List<COALevel> listCOAL = dao.getParentChildCOA(compCode);
         return listCOAL;
     }
-
+     */
     @Override
     public List<ChartOfAccount> getCOALevel3Above(String compCode) {
         List<ChartOfAccount> listCOA = dao.getCOALevel3Above(compCode);
@@ -117,6 +119,7 @@ public class COAServiceImpl implements COAService {
         return listCOA;
     }
 
+<<<<<<< HEAD
     private String getCOACode(Integer macId, String compCode) {
         SystemPropertyKey spk = new SystemPropertyKey("system.coa.code.length",
                 compCode);
@@ -125,10 +128,23 @@ public class COAServiceImpl implements COAService {
         int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
         String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
         return coaCode;
+=======
+    private String getCOACode(Integer macId, String option, String period, String compCode) {
+
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+
+        String tmpCatCode = String.format("%0" + 2 + "d", macId) + "-" + String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
+>>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
     }
 
     @Override
     public List<ChartOfAccount> searchWhereIn(String strList, String compCode) {
         return dao.searchWhereIn(strList, compCode);
+    }
+
+    @Override
+    public List<ChartOfAccount> findAll() {
+        return dao.findAll();
     }
 }

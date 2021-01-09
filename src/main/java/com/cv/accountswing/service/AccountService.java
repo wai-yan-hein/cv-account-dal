@@ -15,9 +15,12 @@ import javax.naming.AuthenticationException;
  */
 public interface AccountService {
     public AppUser saveAccount(AppUser au);
+    public AppUser saveM(AppUser au);
     public AppUser findUserById(Integer id);
     public AppUser findUserByShort(String userShort);
     public AppUser findUserByEmail(String email);
     public List<AppUser> search(String id, String userShort, String email, String owner);
     public AppUser login(String user, String password) throws AuthenticationException;
+    public List<AppUser> findAll();
+   
 }

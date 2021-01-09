@@ -20,7 +20,15 @@ public interface ReportService {
     public ProfitAndLostRetObj getPLCalculateValue(String userCode, String compCode);
     public void genGLReport(String from, String to, String sourceAcId, String acId, String compCode,
             String desp, String fromCurr, String toCurr, String ref, String dept, String tranSource,
+<<<<<<< HEAD
             String vouNo, String cvId, String userCode, String glVouNo, String deptName, String traderName);
     public void genBalanceSheet(String from, String to, String dept, String userCode, 
             String compCode, String curr) throws Exception;
+=======
+            String vouNo, String cvId, String userId, String glVouNo, String deptName, String traderName);
+    public void genBalanceSheet(String from, String to, String dept, String userId, 
+            String compId, String curr) throws Exception;
+    
+    public Object getAggResult(String sql);
+>>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
 }
