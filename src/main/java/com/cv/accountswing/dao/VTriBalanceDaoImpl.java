@@ -18,9 +18,9 @@ import org.springframework.stereotype.Repository;
 public class VTriBalanceDaoImpl extends AbstractDao<TmpOpeningClosingKey, VTriBalance> implements VTriBalanceDao{
     
     @Override
-    public List<VTriBalance> getTriBalance(String userId, String compCode){
-        String strSql = "select o from VTriBalance o where o.key.userId = '" + 
-                userId + "' and o.key.compCode = " + compCode;
+    public List<VTriBalance> getTriBalance(String userCode, String compCode){
+        String strSql = "select o from VTriBalance o where o.key.userCode = '" + 
+                userCode + "' and o.key.compCode = " + compCode;
         List<VTriBalance> listVTB = findHSQL(strSql);
         return listVTB;
     }

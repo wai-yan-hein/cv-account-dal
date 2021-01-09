@@ -13,5 +13,5 @@ import java.util.List;
  * @author winswe
  */
 public interface VCoaTreeService {
-    public List<VCoaTree> getCompanyCoa(String compId);
+    public List<VCoaTree> getCompanyCoa(String compCode);
 }

@@ -154,7 +154,7 @@ public class RetInDaoImpl extends AbstractDao<String, RetInHis> implements RetIn
                     + "  apu.user_short_name from ret_in_his retin\n"
                     + "  join ret_in_his_detail rihd on rihd.voucher_no=retin.ret_in_id\n"
                     + " join location l on retin.location = l.location_id\n"
-                    + " join appuser apu on retin.created_by = apu.user_id\n"
+                    + " join appuser apu on retin.created_by = apu.user_code\n"
                     + "  left join trader td on retin.cus_id=td.id\n"
                     + "  where " + strFilter
                     + " and retin.deleted=false\n"

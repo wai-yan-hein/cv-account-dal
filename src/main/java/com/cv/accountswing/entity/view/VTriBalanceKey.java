@@ -15,15 +15,17 @@ import javax.persistence.Embeddable;
  * @author winswe
  */
 @Embeddable
-public class VTriBalanceKey implements Serializable{
+public class VTriBalanceKey implements Serializable {
+
     private String coaId;
     private String currId;
-    private String userId;
+    private String userCode;
     private Integer compCode;
-    
-    public VTriBalanceKey() {}
-    
-    @Column(name="coa_id", nullable=false, length=25)
+
+    public VTriBalanceKey() {
+    }
+
+    @Column(name = "coa_code", nullable = false, length = 25)
     public String getCoaId() {
         return coaId;
     }
@@ -32,7 +34,7 @@ public class VTriBalanceKey implements Serializable{
         this.coaId = coaId;
     }
 
-    @Column(name="curr_id", nullable=false, length=15)
+    @Column(name = "curr_id", nullable = false, length = 15)
     public String getCurrId() {
         return currId;
     }
@@ -41,16 +43,16 @@ public class VTriBalanceKey implements Serializable{
         this.currId = currId;
     }
 
-    @Column(name="user_id", nullable=false, length=15)
-    public String getUserId() {
-        return userId;
+    @Column(name = "user_code", nullable = false, length = 15)
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    @Column(name="comp_code")
+    @Column(name = "comp_code")
     public Integer getCompCode() {
         return compCode;
     }
@@ -64,7 +66,7 @@ public class VTriBalanceKey implements Serializable{
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.coaId);
         hash = 53 * hash + Objects.hashCode(this.currId);
-        hash = 53 * hash + Objects.hashCode(this.userId);
+        hash = 53 * hash + Objects.hashCode(this.userCode);
         hash = 53 * hash + Objects.hashCode(this.compCode);
         return hash;
     }
@@ -84,7 +86,7 @@ public class VTriBalanceKey implements Serializable{
         if (!Objects.equals(this.currId, other.currId)) {
             return false;
         }
-        if (!Objects.equals(this.userId, other.userId)) {
+        if (!Objects.equals(this.userCode, other.userCode)) {
             return false;
         }
         if (!Objects.equals(this.compCode, other.compCode)) {

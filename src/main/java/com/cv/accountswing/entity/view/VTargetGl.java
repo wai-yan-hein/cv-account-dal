@@ -35,7 +35,7 @@ public class VTargetGl implements java.io.Serializable{
     private String vouNo;
     private Long traderId;
     private String chequeNo;
-    private Integer compId;
+    private Integer compCode;
     private Double gst;
     private Date createdDate;
     private Date modifyDate;
@@ -158,7 +158,7 @@ public class VTargetGl implements java.io.Serializable{
         this.reference = reference;
     }
 
-    @Column(name = "dept_id")
+    @Column(name = "dept_code")
     public String getDeptId() {
         return deptId;
     }
@@ -176,7 +176,7 @@ public class VTargetGl implements java.io.Serializable{
         this.vouNo = vouNo;
     }
 
-    @Column(name = "cv_id")
+    @Column(name = "trader_code")
     public Long getTraderId() {
         return traderId;
     }
@@ -196,11 +196,11 @@ public class VTargetGl implements java.io.Serializable{
 
     @Column(name = "comp_code")
     public Integer getCompId() {
-        return compId;
+        return compCode;
     }
 
     public void setCompId(Integer compCode) {
-        this.compId = compCode;
+        this.compCode = compCode;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -232,7 +232,7 @@ public class VTargetGl implements java.io.Serializable{
         this.modifyBy = modifyBy;
     }
 
-    @Column(name="user_id", length=15)
+    @Column(name="user_code", length=15)
     public String getCreatedBy() {
         return createdBy;
     }

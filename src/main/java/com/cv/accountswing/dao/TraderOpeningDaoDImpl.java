@@ -47,9 +47,9 @@ public class TraderOpeningDaoDImpl extends AbstractDao<Long, TraderOpeningD> imp
     }
     
     private void insertOpBalaceFilter(String compCode, String traderId, String opDate, 
-            String curr, String userId) throws Exception{
-        String strSql = "insert into tmp_trader_op_filter(comp_code, trader_id, curr_id, op_date, op_amt, user_id) " +
-                        "select vto.comp_code, vto.trader_id, vto.curr_id, vto.op_date, vto.op_amt, '" + userId + "' " +
+            String curr, String userCode) throws Exception{
+        String strSql = "insert into tmp_trader_op_filter(comp_code, trader_id, curr_id, op_date, op_amt, user_code) " +
+                        "select vto.comp_code, vto.trader_id, vto.curr_id, vto.op_date, vto.op_amt, '" + userCode + "' " +
                         "  from v_trader_opening vto, (select comp_code, trader_id, curr_id, max(op_date) op_date " +
                                                        " from v_trader_opening " +
                                                        "where op_date <= '" + Util1.toDateStr(opDate, "dd/MM/yyyy", "yyyy-MM-dd") + "' " +
@@ -88,36 +88,36 @@ public class TraderOpeningDaoDImpl extends AbstractDao<Long, TraderOpeningD> imp
         }
         
         execSQL(
-            "delete from tmp_trader_op_filter where user_id = '" + userId + "'",
-            "delete from tmp_trader_balance where user_id = '" + userId + "'",
+            "delete from tmp_trader_op_filter where user_code = '" + userCode + "'",
+            "delete from tmp_trader_balance where user_code = '" + userCode + "'",
             strSql
         );
     }
     
     @Override
     public List<VTmpTraderBalance> getTraderBalance(String compCode, String traderId, String opDate, 
-            String curr, String userId) throws Exception{
-        insertOpBalaceFilter(compCode, traderId, opDate, curr, userId);
+            String curr, String userCode) throws Exception{
+        insertOpBalaceFilter(compCode, traderId, opDate, curr, userCode);
         
-        String strSql = "insert into tmp_trader_balance(comp_code, trader_id, curr_id, balance, user_id) " +
-                        "select a.comp_code, a.trader_id, a.curr_id, sum(ifnull(balance, 0)), '" + userId + "' " +
+        String strSql = "insert into tmp_trader_balance(comp_code, trader_id, curr_id, balance, user_code) " +
+                        "select a.comp_code, a.trader_id, a.curr_id, sum(ifnull(balance, 0)), '" + userCode + "' " +
                         "from (" +
                         "select comp_code, trader_id, curr_id, ifnull(op_amt,0) balance " +
                         "from tmp_trader_op_filter " +
-                        "where user_id = '" + userId + "' " +
+                        "where user_code = '" + userCode + "' " +
                         "group by comp_code, trader_id, curr_id " +
                         "union all " +
-                        "select gl.comp_code, gl.cv_id, gl.from_cur_id, ifnull(gl.dr_amt,0) - ifnull(gl.cr_amt,0) balance " +
+                        "select gl.comp_code, gl.trader_code, gl.from_cur_id, ifnull(gl.dr_amt,0) - ifnull(gl.cr_amt,0) balance " +
                         "from (select comp_code, trader_id, curr_id, op_date " +
-                        "		from tmp_trader_op_filter where user_id = '" + userId + "') opf, gl " +
-                        "where opf.comp_code = gl.comp_code and opf.trader_id = gl.cv_id and " +
+                        "		from tmp_trader_op_filter where user_code = '" + userCode + "') opf, gl " +
+                        "where opf.comp_code = gl.comp_code and opf.trader_id = gl.trader_code and " +
                         "	  opf.curr_id = gl.from_cur_id and gl.gl_date >= opf.op_date and " +
                         "gl.gl_date <= '" + Util1.toDateStr(opDate, "dd/MM/yyyy", "yyyy-MM-dd") + "') a " +
                         "group by a.comp_code, a.trader_id, a.curr_id";
         
         execSQL(strSql);
         
-        String strHSql = "select o from VTmpTraderBalance o where o.userId = '" + userId + "'";
+        String strHSql = "select o from VTmpTraderBalance o where o.userCode = '" + userCode + "'";
         List<VTmpTraderBalance> listVTTB = findHSQLList(strHSql);
         return listVTTB;
     }

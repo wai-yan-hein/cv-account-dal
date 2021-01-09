@@ -61,9 +61,9 @@ public class ProjectServiceImpl implements ProjectService {
     
     @Override
     public List<Project> search(String projectCode, String projectName, String startDate,
-            String endDate, String projectStatus, String compCode, String userId){
+            String endDate, String projectStatus, String compCode, String userCode){
         return dao.search(projectCode, projectName, startDate, endDate, 
-                projectStatus, compCode, userId);
+                projectStatus, compCode, userCode);
     }
     
     @Override

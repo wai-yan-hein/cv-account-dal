@@ -43,8 +43,8 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public List<Region> search(String code, String name, String compId, String parentCode) {
-        List<Region> listRegion = dao.search(code, name, compId, parentCode);
+    public List<Region> search(String code, String name, String compCode, String parentCode) {
+        List<Region> listRegion = dao.search(code, name, compCode, parentCode);
         return listRegion;
     }
 

@@ -35,17 +35,17 @@ public class AssignCOAServiceImpl implements AssignCOAService{
     }
     
     @Override
-    public List search(String compId, String roleId, String deptCode){
-        return dao.search(compId, roleId, deptCode);
+    public List search(String compCode, String roleId, String deptCode){
+        return dao.search(compCode, roleId, deptCode);
     }
     
     @Override
-    public int delete(String compId, String roleId, String deptCode, String coaCode){
-        return dao.delete(compId, roleId, deptCode, coaCode);
+    public int delete(String compCode, String roleId, String deptCode, String coaCode){
+        return dao.delete(compCode, roleId, deptCode, coaCode);
     }
     
     @Override
-    public void updateNew(String compId, String roleId, String deptCode) throws Exception{
-        dao.updateNew(compId, roleId, deptCode);
+    public void updateNew(String compCode, String roleId, String deptCode) throws Exception{
+        dao.updateNew(compCode, roleId, deptCode);
     }
 }

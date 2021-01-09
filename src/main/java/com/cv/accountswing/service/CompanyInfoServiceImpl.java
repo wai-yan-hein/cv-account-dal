@@ -7,14 +7,8 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.COADao;
 import com.cv.accountswing.dao.CompanyInfoDao;
-import com.cv.accountswing.entity.AppUser;
 import com.cv.accountswing.entity.ChartOfAccount;
 import com.cv.accountswing.entity.CompanyInfo;
-import com.cv.accountswing.entity.SystemProperty;
-import com.cv.accountswing.entity.SystemPropertyKey;
-import com.cv.accountswing.entity.UserRole;
-import com.cv.accountswing.entity.UsrCompRole;
-import com.cv.accountswing.entity.UsrCompRoleKey;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +50,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     }
 
     @Override
-    public CompanyInfo save(CompanyInfo ci, String status, String userId, String type) {
+    public CompanyInfo save(CompanyInfo ci, String status, String userCode, String type) {
         if (ci.getCompCode() == null || ci.getCompCode().isEmpty()) {
             String compCode = getCompCode(ci.getMacId());
             ci.setCompCode(compCode);
@@ -122,7 +116,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                         UsrCompRoleKey newKey = new UsrCompRoleKey();
                         newKey.setCompCode(newCompCode);
                         newKey.setRoleCode(newRole.getRoleCode());
-                        newKey.setUserCode(userId);
+                        newKey.setUserCode(userCode);
 
                         UsrCompRole newUserRole = new UsrCompRole();
                         newUserRole.setKey(newKey);
@@ -130,7 +124,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
                         usrCompRoleService.save(newUserRole);
 
                         //Change user status to finished
-                        AppUser user = accountService.findUserById(Integer.parseInt(userId));
+                        AppUser user = accountService.findUserById(Integer.parseInt(userCode));
                         user.setCreateStatus("FINISHED");
                         accountService.saveAccount(user);
                     }
@@ -190,7 +184,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
     private String getCompCode(Integer macId) {
         int seqNo = seqService.getSequence(macId, "Company", "-", "-");
-        String coaCode = macId + "-" + String.format("%0" + 2 + "d", seqNo);
+        String coaCode = String.format("%0" + 2 + "d", macId) + String.format("%0" + 2 + "d", seqNo);
         return coaCode;
     }
 }

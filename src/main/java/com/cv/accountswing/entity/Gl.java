@@ -44,11 +44,11 @@ public class Gl implements java.io.Serializable {
     private Double crAmt;
     @Column(name = "reference", length = 50)
     private String reference;
-    @Column(name = "dept_id")
+    @Column(name = "dept_code")
     private String deptId;
     @Column(name = "voucher_no", length = 15)
     private String vouNo;
-    @Column(name = "cv_id")
+    @Column(name = "trader_code")
     private String traderCode;
     @Column(name = "cheque_no", length = 20)
     private String chequeNo;
@@ -64,7 +64,7 @@ public class Gl implements java.io.Serializable {
     private Date modifyDate;
     @Column(name = "modify_by", length = 15)
     private String modifyBy;
-    @Column(name = "user_id", length = 15)
+    @Column(name = "user_code", length = 15)
     private String createdBy;
     @Column(name = "tran_source", length = 25)
     private String tranSource;

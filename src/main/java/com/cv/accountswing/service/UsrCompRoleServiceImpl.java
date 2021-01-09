@@ -35,27 +35,27 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService{
     }
     
     @Override
-    public List<UsrCompRole> search(String userId, String compCode, String roleId){
-        return dao.search(userId, compCode, roleId);
+    public List<UsrCompRole> search(String userCode, String compCode, String roleId){
+        return dao.search(userCode, compCode, roleId);
     }
     
     @Override
-    public List getAssignRole(String userId){
-        return dao.getAssignRole(userId);
+    public List getAssignRole(String userCode){
+        return dao.getAssignRole(userCode);
     }
     
     @Override
-    public List getAssignCompany(String userId){
-        return dao.getAssignCompany(userId);
+    public List getAssignCompany(String userCode){
+        return dao.getAssignCompany(userCode);
     }
     
     @Override
-    public List getAssignCompany(String userId, String roleId, String compId){
-        return dao.getAssignCompany(userId, roleId, compId);
+    public List getAssignCompany(String userCode, String roleId, String compCode){
+        return dao.getAssignCompany(userCode, roleId, compCode);
     }
     
     @Override
-    public int delete(String userId, String compCode, String roleId){
-        return dao.delete(userId, compCode, roleId);
+    public int delete(String userCode, String compCode, String roleId){
+        return dao.delete(userCode, compCode, roleId);
     }
 }

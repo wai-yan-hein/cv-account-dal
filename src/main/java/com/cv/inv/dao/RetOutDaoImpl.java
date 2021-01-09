@@ -154,7 +154,7 @@ public class RetOutDaoImpl extends AbstractDao<String, RetOutHis> implements Ret
                     + " from ret_out_his retout\n"
                     + " join ret_out_his_detail rohd on  rohd.voucher_no=retout.ret_out_id\n"
                     + " join location l on retout.location = l.location_id\n"
-                    + " join appuser apu on retout.created_by = apu.user_id\n"
+                    + " join appuser apu on retout.created_by = apu.user_code\n"
                     + " left join trader td on retout.cus_id=td.id\n"
                     + " where " + strFilter
                     + " and retout.deleted=false\n"

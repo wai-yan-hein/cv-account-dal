@@ -25,19 +25,19 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
     private static final Logger log = LoggerFactory.getLogger(SReportDaoImpl.class);
 
     @Override
-    public void generateStockBalance(String stockCode, String locId, String compId, String macId) {
+    public void generateStockBalance(String stockCode, String locId, String compCode, String macId) {
         try {
             deleteTmpFilter(macId);
-            insertTmpStockFilter(stockCode, locId, compId, macId);
+            insertTmpStockFilter(stockCode, locId, compCode, macId);
             calculateBalance();
         } catch (Exception ex) {
             log.error("calclate stock balance :" + ex.getMessage());
         }
     }
 
-    private void insertTmpStockFilter(String stockCode, String locId, String compId, String macId) throws Exception {
-        String filterSql = "insert tmp_stock_filter(stock_code, comp_id, loc_id, machine_id)\n"
-                + "select stock_code," + compId + ",location_id," + macId + "\n"
+    private void insertTmpStockFilter(String stockCode, String locId, String compCode, String macId) throws Exception {
+        String filterSql = "insert tmp_stock_filter(stock_code, comp_code, loc_code, mac_id)\n"
+                + "select stock_code," + compCode + ",location_id," + macId + "\n"
                 + "from v_stock_loc";
         String andSql = "";
         if (!stockCode.equals("-")) {
@@ -62,17 +62,17 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
     }
 
     private void calculateBalance() throws Exception {
-        String insertSql = "insert into tmp_stock_balance(stock_code,qty,wt,small_wt_ttl,small_unit,loc_id,machine_id)\n"
+        String insertSql = "insert into tmp_stock_balance(stock_code,qty,wt,small_wt_ttl,small_unit,loc_id,mac_id)\n"
                 + "select b.stock_code,sum(b.qty) qty,b.wt,sum(b.small_wt) as small_wt_ttl,b.small_unit,b.loc,3\n"
                 + "	from(\n"
                 + "		select p.stock_code,sum(p.qty) as qty,p.avg_wt as wt,p.small_wt,p.small_unit,p.loc_id as loc \n"
                 + "		from v_purchase p,tmp_stock_filter tmp\n"
-                + "        where p.stock_code = tmp.stock_code and p.loc_id = tmp.loc_id and p.comp_code = tmp.comp_id\n"
+                + "        where p.stock_code = tmp.stock_code and p.loc_id = tmp.loc_id and p.comp_code = tmp.comp_code\n"
                 + "		group by stock_code,loc,std_wt\n"
                 + "			union all\n"
                 + "		select s.stock_code,sum(s.qty)*-1 as qty,s.std_weight as wt,(s.small_wt)*-1 small_wt,s.small_unit,s.loc_id as loc \n"
                 + "		from v_sale s, tmp_stock_filter tmp\n"
-                + "		where s.stock_code = tmp.stock_code and s.loc_id = tmp.loc_id and s.comp_code = tmp.comp_id\n"
+                + "		where s.stock_code = tmp.stock_code and s.loc_id = tmp.loc_id and s.comp_code = tmp.comp_code\n"
                 + "		group by stock_code,loc,std_weight\n"
                 + "        ) b\n"
                 + "group by b.stock_code,b.loc";
@@ -81,21 +81,21 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
     }
 
     private void deleteTmpFilter(String macId) throws Exception {
-        String delSql = "delete from tmp_stock_filter where machine_id = " + macId + "";
-        String delSql1 = "delete from tmp_stock_balance where machine_id = " + macId + "";
+        String delSql = "delete from tmp_stock_filter where mac_id = " + macId + "";
+        String delSql1 = "delete from tmp_stock_balance where mac_id = " + macId + "";
         execSQL(delSql, delSql1);
         log.info("delete tmp table success.");
     }
 
     private void insertTmpStockCode(String stockCode, String macId) throws Exception {
-        String delSql = "delete from tmp_stock_code where machine_id = " + macId + "";
+        String delSql = "delete from tmp_stock_code where mac_id = " + macId + "";
         execSQL(delSql);
         if (!stockCode.equals("-")) {
-            String insertSql = "insert into tmp_stock_code(stock_code,machine_id)\n"
+            String insertSql = "insert into tmp_stock_code(stock_code,mac_id)\n"
                     + "select stock_code," + macId + " from stock where stock_code in (" + stockCode + ")";
             execSQL(insertSql);
         } else {
-            String inserSql = "insert into tmp_stock_code(stock_code,machine_id)\n"
+            String inserSql = "insert into tmp_stock_code(stock_code,mac_id)\n"
                     + "select stock_code, " + macId + "\n"
                     + "from stock where active = 1";
             execSQL(inserSql);
@@ -103,10 +103,10 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
     }
 
     private void insertTmpRegionCode(String regionCode, String macId) throws Exception {
-        String delSql = "delete from tmp_region_code where machine_id = " + macId + "";
+        String delSql = "delete from tmp_region_code where mac_id = " + macId + "";
         execSQL(delSql);
         if (!regionCode.equals("-")) {
-            String insertSql = "insert tmp_region_code(reg_id,machine_id)\n"
+            String insertSql = "insert tmp_region_code(reg_id,mac_id)\n"
                     + "select reg_id," + macId + " from region where reg_id in (" + regionCode + ")";
             execSQL(insertSql);
         }

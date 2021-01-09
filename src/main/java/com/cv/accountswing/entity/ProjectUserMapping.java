@@ -41,7 +41,7 @@ public class ProjectUserMapping implements java.io.Serializable {
         this.projecCode = projecCode;
     }
 
-    @Column(name = "user_id")
+    @Column(name = "user_code")
 
     public String getUserCode() {
         return userCode;

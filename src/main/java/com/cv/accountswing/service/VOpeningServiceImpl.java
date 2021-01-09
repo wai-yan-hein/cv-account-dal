@@ -24,8 +24,8 @@ public class VOpeningServiceImpl implements VOpeningService {
     private VOpeningDao dao;
 
     @Override
-    public List<VCOAOpening> search(String opDate, String sourceAccId, String userId, String compId, String depId, String curCode) {
-        return dao.search(opDate, sourceAccId, userId, compId, depId, curCode);
+    public List<VCOAOpening> search(String opDate, String sourceAccId, String userCode, String compCode, String depId, String curCode) {
+        return dao.search(opDate, sourceAccId, userCode, compCode, depId, curCode);
     }
 
 }

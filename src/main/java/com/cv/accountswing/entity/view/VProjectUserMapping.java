@@ -23,7 +23,7 @@ public class VProjectUserMapping implements java.io.Serializable {
     
     private Long id;
     private Long projectId;
-    private Long userId;
+    private Long userCode;
     private String projectCode;
     private String projectName;
     private Date startDate;
@@ -56,13 +56,13 @@ public class VProjectUserMapping implements java.io.Serializable {
         this.projectId = projectId;
     }
 
-    @Column(name="user_id")
+    @Column(name="user_code")
     public Long getUserId() {
-        return userId;
+        return userCode;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserId(Long userCode) {
+        this.userCode = userCode;
     }
     
     @Column(name="project_code", length=15)

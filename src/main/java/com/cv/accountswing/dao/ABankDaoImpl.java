@@ -29,7 +29,7 @@ public class ABankDaoImpl extends AbstractDao<String, ABank> implements ABankDao
     
     @Override
     public List<ABank> search(String code, String name, String address, String phone,
-            String compId){
+            String compCode){
         String strSql = "select o from ABank o ";
         String strFilter = "";
         
@@ -65,11 +65,11 @@ public class ABankDaoImpl extends AbstractDao<String, ABank> implements ABankDao
             }
         }
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.key.compId = " + compId;
+                strFilter = "o.key.compCode = " + compCode;
             }else{
-                strFilter = strFilter + " and o.key.compId = " + compId;
+                strFilter = strFilter + " and o.key.compCode = " + compCode;
             }
         }
         
@@ -82,9 +82,9 @@ public class ABankDaoImpl extends AbstractDao<String, ABank> implements ABankDao
     }
     
     @Override
-    public int delete(String code, String compId){
+    public int delete(String code, String compCode){
         String strSql = "delete from ABank o where o.key.bankCode = '" + code 
-                + "' and o.key.compId = " + compId;
+                + "' and o.key.compCode = " + compCode;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

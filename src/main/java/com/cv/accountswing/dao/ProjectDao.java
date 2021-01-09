@@ -16,6 +16,6 @@ public interface ProjectDao {
     public Project save(Project project);
     public Project findById(Long id);
     public List<Project> search(String projectCode, String projectName, String startDate,
-            String endDate, String projectStatus, String compCode, String userId);
+            String endDate, String projectStatus, String compCode, String userCode);
     public int delete(String id);
 }

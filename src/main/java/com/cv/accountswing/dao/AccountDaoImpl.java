@@ -66,9 +66,9 @@ public class AccountDaoImpl extends AbstractDao<Integer, AppUser> implements Acc
 
         if (!id.equals("-")) {
             if (strFilter == null) {
-                strFilter = "o.userId like '" + id + "%'";
+                strFilter = "o.userCode like '" + id + "%'";
             } else {
-                strFilter = strFilter + " and o.userId like '" + id + "%'";
+                strFilter = strFilter + " and o.userCode like '" + id + "%'";
             }
         }
 
@@ -82,17 +82,17 @@ public class AccountDaoImpl extends AbstractDao<Integer, AppUser> implements Acc
 
         if (!email.equals("-")) {
             if (strFilter == null) {
-                strFilter = "o.userId = '" + email + "'";
+                strFilter = "o.userCode = '" + email + "'";
             } else {
-                strFilter = strFilter + " and o.userId = '" + email + "'";
+                strFilter = strFilter + " and o.userCode = '" + email + "'";
             }
         }
 
         if (!owner.equals("-")) {
             if (strFilter == null) {
-                strFilter = "(o.owner = " + owner + " or o.userId = " + owner + ")";
+                strFilter = "(o.owner = " + owner + " or o.userCode = " + owner + ")";
             } else {
-                strFilter = strFilter + " and (o.owner = " + owner + " or o.userId = " + owner + ")";
+                strFilter = strFilter + " and (o.owner = " + owner + " or o.userCode = " + owner + ")";
             }
         }
 
@@ -123,8 +123,8 @@ public class AccountDaoImpl extends AbstractDao<Integer, AppUser> implements Acc
     }
 
     @Override
-    public int delete(String userId) {
-        String strSql = "delete from AppUser o where o.userId = " + userId;
+    public int delete(String userCode) {
+        String strSql = "delete from AppUser o where o.userCode = " + userCode;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

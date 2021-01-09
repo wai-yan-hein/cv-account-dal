@@ -29,11 +29,11 @@ public class ProjectUserMappingDaoImpl extends AbstractDao<Long, ProjectUserMapp
     }
 
     @Override
-    public List search(String projectId, String userId) {
+    public List search(String projectId, String userCode) {
         String strSql = "select o from VProjectUserMapping o where o.projectId = '" + projectId + "'";
 
-        if (!userId.equals("-")) {
-            strSql = strSql + "and o.userId = " + userId;
+        if (!userCode.equals("-")) {
+            strSql = strSql + "and o.userCode = " + userCode;
         }
 
         List listPUM = findHSQL(strSql);

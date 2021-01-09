@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface VOpeningService {
 
-    public List<VCOAOpening> search(String opDate, String sourceAccId, String userId, String compId, String depId,String curCode);
+    public List<VCOAOpening> search(String opDate, String sourceAccId, String userCode, String compCode, String depId,String curCode);
 }

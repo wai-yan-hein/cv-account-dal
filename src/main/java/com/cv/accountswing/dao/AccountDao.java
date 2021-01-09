@@ -20,6 +20,6 @@ public interface AccountDao {
     public AppUser findUserByEmail(String email);
     public List<AppUser> search(String id, String userShort, String email, String owner);
     public AppUser login(String user, String password) throws AuthenticationException;
-    public int delete(String userId);
+    public int delete(String userCode);
     public AppUser finfById(String id);
 }

@@ -156,7 +156,7 @@ public class DamageHisDaoImpl extends AbstractDao<String, DamageHis> implements 
                     + " apu.user_short_name from dmg_his dmg\n"
                     + " join dmg_detail_his ddh on ddh.dmg_id=dmg.dmg_id\n"
                     + " left join location l on dmg.location = l.location_id\n"
-                    + " left join appuser apu on dmg.created_by = apu.user_id\n"
+                    + " left join appuser apu on dmg.created_by = apu.user_code\n"
                     + " where "+strFilter
                     + " and dmg.deleted=false\n"
                     + " group by dmg.dmg_date, dmg.dmg_id\n"

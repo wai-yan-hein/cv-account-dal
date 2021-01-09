@@ -47,7 +47,7 @@ public class TraderOpeningDServiceImpl implements TraderOpeningDService{
     
     @Override
     public List<VTmpTraderBalance> getTraderBalance(String compCode, String traderId, String opDate, 
-            String curr, String userId) throws Exception{
-        return dao.getTraderBalance(compCode, traderId, opDate, curr, userId);
+            String curr, String userCode) throws Exception{
+        return dao.getTraderBalance(compCode, traderId, opDate, curr, userCode);
     }
 }

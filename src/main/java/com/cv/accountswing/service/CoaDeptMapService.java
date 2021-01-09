@@ -14,9 +14,9 @@ import java.util.List;
  * @author winswe
  */
 public interface CoaDeptMapService {
-    public CoaDeptMap save(String compId, String coaCode, String dept);
+    public CoaDeptMap save(String compCode, String coaCode, String dept);
     public CoaDeptMap findById(CoaDeptMapKey id);
-    public List<CoaDeptMap> search(String compId, String coaCode, String dept);
-    public List searchMap(String compId, String coaCode, String dept);
-    public int delete(String compId, String coaCode, String dept);
+    public List<CoaDeptMap> search(String compCode, String coaCode, String dept);
+    public List searchMap(String compCode, String coaCode, String dept);
+    public int delete(String compCode, String coaCode, String dept);
 }

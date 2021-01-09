@@ -25,10 +25,10 @@ public interface COAOpeningDao {
 
     public void deleteOpening(Long id) throws Exception;
 
-    public void GenerateZeroGL(String opDate, String userId, String compCode,
+    public void GenerateZeroGL(String opDate, String userCode, String compCode,
             String currCode, String dept, String coaGroup) throws Exception;
 
-    public void generateZeroOpening(String opDate, String userId, String compCode,
+    public void generateZeroOpening(String opDate, String userCode, String compCode,
             String currCode, String dept, String coaGroup) throws Exception;
 
     public void deleteOpeningGL(String opDate, String compCode, String currCode, String dept) throws Exception;
@@ -36,5 +36,5 @@ public interface COAOpeningDao {
     public void deleteOpening(String opDate, String compCode, String currCode, String dept) throws Exception;
 
     public void insertCoaOpening(String opDate, String compCode, String currCode,
-            String dept, String userId) throws Exception;
+            String dept, String userCode) throws Exception;
 }

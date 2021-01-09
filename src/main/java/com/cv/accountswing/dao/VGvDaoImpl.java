@@ -62,9 +62,9 @@ public class VGvDaoImpl extends AbstractDao<String, VGeneralVoucher> implements 
 
         if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.compId = '" + compCode + "'";
+                strFilter = "o.compCode = '" + compCode + "'";
             } else {
-                strFilter = strFilter + " and o.compId = '" + compCode + "'";
+                strFilter = strFilter + " and o.compCode = '" + compCode + "'";
             }
         }
 

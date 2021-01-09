@@ -81,9 +81,9 @@ public class UsrCompRoleDaoImpl extends AbstractDao<UsrCompRoleKey, UsrCompRole>
     }
 
     @Override
-    public List getAssignCompany(String userCode, String roleCode, String compId) {
+    public List getAssignCompany(String userCode, String roleCode, String compCode) {
         String strSql = "select o from VUsrCompAssign o where o.key.userCode = "
-                + userCode + " and o.key.roleCode = " + roleCode + " and o.key.compCode = " + compId;
+                + userCode + " and o.key.roleCode = " + roleCode + " and o.key.compCode = " + compCode;
         List listAssignComp = findHSQL(strSql);
         return listAssignComp;
     }

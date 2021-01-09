@@ -45,10 +45,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void getProfitLost(String plProcess, String from, String to, String dept,
-            String currency, String comp, String userId) throws Exception {
-        dao.execSQLRpt("delete from tmp_profit_lost where user_id = '" + userId + "' and comp_id = " + comp);
+            String currency, String comp, String userCode) throws Exception {
+        dao.execSQLRpt("delete from tmp_profit_lost where user_code = '" + userCode + "' and comp_code = " + comp);
         String strInsert = "insert into tmp_profit_lost(group_desp, acc_id, acc_name, curr_id, "
-                + "acc_total, user_id, comp_id, sort_order)";
+                + "acc_total, user_code, comp_code, sort_order)";
         String[] process = plProcess.split(",");
         int sortOrder = 1;
 
@@ -61,23 +61,23 @@ public class ReportServiceImpl implements ReportService {
             switch (tmp) {
                 case "os":
                     String strOS = "select 'Cost of Sale', 'os', 'Opening Stock', curr_code, sum(ifnull(amount,0)) amount, "
-                            + "'" + userId + "',comp_id, " + sortOrder + "\n"
+                            + "'" + userCode + "',comp_code, " + sortOrder + "\n"
                             + "from stock_op_value\n"
-                            + "where date(tran_date) = '" + tmpFrom + "' and comp_id = " + comp
+                            + "where date(tran_date) = '" + tmpFrom + "' and comp_code = " + comp
                             + " and (dept_code = '" + dept + "' or '-' = '" + dept + "') \n"
                             + "and curr_code = '" + currency + "' \n"
-                            + "group by comp_id, curr_code";
+                            + "group by comp_code, curr_code";
                     //logger.info("os sql : " + strOS);
                     dao.execSQLRpt(strInsert + "\n" + strOS);
                     break;
                 case "cs":
                     String strCS = "select 'Cost of Sale', 'cs', 'Closing Stock', curr_code, sum(ifnull(amount,0)*-1) amount, "
-                            + "'" + userId + "',comp_id, " + sortOrder + "\n"
+                            + "'" + userCode + "',comp_code, " + sortOrder + "\n"
                             + "from stock_op_value\n"
-                            + "where date(tran_date) = '" + to + "' and comp_id = " + comp
+                            + "where date(tran_date) = '" + to + "' and comp_code = " + comp
                             + " and (dept_code = '" + dept + "' or '-' = '" + dept + "') \n"
                             + "and curr_code = '" + currency + "' \n"
-                            + "group by comp_id, curr_code";
+                            + "group by comp_code, curr_code";
                     //logger.info("cs sql : " + strCS);
                     dao.execSQLRpt(strInsert + "\n" + strCS);
                     break;
@@ -89,7 +89,7 @@ public class ReportServiceImpl implements ReportService {
                         String accDesp = coa.getCoaNameEng();
                         String group = coa.getParentUsrDesp();
                         /*String strSelectDr = "select '" + group + "' pl_group, a.acc_id,'" + accDesp + "',a.curr_id"
-                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userId + "' user_id \n"
+                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userCode + "' user_code \n"
                                 + ", " + comp + "," + sortOrder + "\n "
                                 + "from (\n select '" + coaCode + "' acc_id, "
                                 + "get_dr_cr_amt(source_ac_id, account_id, '" + coaCode + "', dr_amt, cr_amt, 'DR') as dr_amt,"
@@ -98,13 +98,13 @@ public class ReportServiceImpl implements ReportService {
                                 + "from gl\n"
                                 + "where gl_date between '" + from
                                 + "' and '" + to + "' \n"
-                                + "and (dept_id = '" + dept + "' or '-' = '" + dept + "')\n"
+                                + "and (dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                                 + "and from_cur_id = '" + currency + "'\n"
                                 + "and (source_ac_id = '" + coaCode + "')\n"
                                 + "and ifnull(tran_source,'-') <> 'OPENING') a\n"
                                 + "group by a.acc_id, a.curr_id";*/
  /*String strSelectDr = "select '" + group + "' pl_group, a.acc_id,'" + accDesp + "',a.curr_id"
-                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userId + "' user_id \n"
+                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userCode + "' user_code \n"
                                 + ", " + comp + "," + sortOrder + "\n "
                                 + "from (\n select '" + coaCode + "' acc_id, "
                                 + "dr_amt,"
@@ -113,13 +113,13 @@ public class ReportServiceImpl implements ReportService {
                                 + "from gl\n"
                                 + "where gl_date between '" + from
                                 + "' and '" + to + "' \n"
-                                + "and (dept_id = '" + dept + "' or '-' = '" + dept + "')\n"
+                                + "and (dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                                 + "and from_cur_id = '" + currency + "'\n"
                                 + "and (source_ac_id = '" + coaCode + "')\n"
                                 + "and ifnull(tran_source,'-') <> 'OPENING') a\n"
                                 + "group by a.acc_id, a.curr_id";*/
                         String strSelectDr = "select '" + group + "' pl_group, a.acc_id,'" + accDesp + "',a.curr_id"
-                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userId + "' user_id \n"
+                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userCode + "' user_code \n"
                                 + ", " + comp + "," + sortOrder + "\n "
                                 + "from (\n select '" + coaCode + "' acc_id, "
                                 + "if(tran_source='GV',cr_amt,dr_amt) dr_amt,"
@@ -128,7 +128,7 @@ public class ReportServiceImpl implements ReportService {
                                 + "from gl\n"
                                 + "where gl_date between '" + from
                                 + "' and '" + to + "' \n"
-                                + "and (dept_id = '" + dept + "' or '-' = '" + dept + "')\n"
+                                + "and (dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                                 + "and from_cur_id = '" + currency + "'\n"
                                 + "and (source_ac_id = '" + coaCode + "')\n"
                                 + "and ifnull(tran_source,'-') <> 'OPENING') a\n"
@@ -138,7 +138,7 @@ public class ReportServiceImpl implements ReportService {
                         dao.execSQLRpt(strInsert + "\n" + strSelectDr);
 
                         String strSelectCr = "select '" + group + "' pl_group, a.acc_id,'" + accDesp + "',a.curr_id"
-                                + ", sum(ifnull(a.cr_amt,0) - ifnull(a.dr_amt,0)) acc_total,'" + userId + "' user_id \n"
+                                + ", sum(ifnull(a.cr_amt,0) - ifnull(a.dr_amt,0)) acc_total,'" + userCode + "' user_code \n"
                                 + ", " + comp + "," + sortOrder + "\n "
                                 + "from (\n select '" + coaCode + "' acc_id, "
                                 + "get_dr_cr_amt(source_ac_id, account_id, '" + coaCode + "', dr_amt, cr_amt, 'DR') as dr_amt, "
@@ -147,13 +147,13 @@ public class ReportServiceImpl implements ReportService {
                                 + "from gl\n"
                                 + "where gl_date between '" + from
                                 + "' and '" + to + "' \n"
-                                + "and (dept_id = '" + dept + "' or '-' = '" + dept + "')\n"
+                                + "and (dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                                 + "and from_cur_id = '" + currency + "'\n"
                                 + "and (account_id = '" + coaCode + "')\n"
                                 + "and ifnull(tran_source,'-') <> 'OPENING') a\n"
                                 + "group by a.acc_id, a.curr_id";
                         /*String strSelectCr = "select '" + group + "' pl_group, a.acc_id,'" + accDesp + "',a.curr_id"
-                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userId + "' user_id \n"
+                                + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userCode + "' user_code \n"
                                 + ", " + comp + "," + sortOrder + "\n "
                                 + "from (\n select '" + coaCode + "' acc_id, "
                                 + "if(tran_source = 'GV', cr_amt, dr_amt) dr_amt, "
@@ -162,7 +162,7 @@ public class ReportServiceImpl implements ReportService {
                                 + "from gl\n"
                                 + "where gl_date between '" + from
                                 + "' and '" + to + "' \n"
-                                + "and (dept_id = '" + dept + "' or '-' = '" + dept + "')\n"
+                                + "and (dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                                 + "and from_cur_id = '" + currency + "'\n"
                                 + "and (account_id = '" + coaCode + "')\n"
                                 + "and ifnull(tran_source,'-') <> 'OPENING') a\n"
@@ -178,13 +178,13 @@ public class ReportServiceImpl implements ReportService {
         }
 
         /*dao.execSQLRpt("update tmp_profit_lost set acc_total = acc_total * -1\n" +
-            "where user_id = '" + userId + "' and comp_id = " + comp + " and acc_total < 0;");*/
+            "where user_code = '" + userCode + "' and comp_code = " + comp + " and acc_total < 0;");*/
     }
 
     @Override
-    public ProfitAndLostRetObj getPLCalculateValue(String userId, String compId) {
+    public ProfitAndLostRetObj getPLCalculateValue(String userCode, String compCode) {
         ProfitAndLostRetObj obj = new ProfitAndLostRetObj();
-        List<TmpProfitAndLost> listTPAL = tapDao.search(userId, compId);
+        List<TmpProfitAndLost> listTPAL = tapDao.search(userCode, compCode);
 
         for (TmpProfitAndLost tpal : listTPAL) {
             switch (tpal.getSortOrder()) {
@@ -213,9 +213,9 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void genGLReport(String from, String to, String sourceAcId, String acId, String compId,
+    public void genGLReport(String from, String to, String sourceAcId, String acId, String compCode,
             String desp, String fromCurr, String toCurr, String ref, String dept, String tranSource,
-            String vouNo, String cvId, String userId, String glVouNo, String deptName, String traderName) {
+            String vouNo, String cvId, String userCode, String glVouNo, String deptName, String traderName) {
         String strFilter = "";
 
         if (!from.equals("-") && !to.equals("-")) {
@@ -330,11 +330,11 @@ public class ReportServiceImpl implements ReportService {
             }
         }
 
-        if (!compId.equals("-")) {
+        if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.compId = " + compId;
+                strFilter = "o.compCode = " + compCode;
             } else {
-                strFilter = strFilter + " and o.compId = " + compId;
+                strFilter = strFilter + " and o.compCode = " + compCode;
             }
         }
 
@@ -378,19 +378,19 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void genBalanceSheet(String from, String to, String dept, String userId,
-            String compId, String curr) throws Exception {
-        String strSqlDelete = "delete from tmp_balance_sheet where user_id = '" + userId + "'";
+    public void genBalanceSheet(String from, String to, String dept, String userCode,
+            String compCode, String curr) throws Exception {
+        String strSqlDelete = "delete from tmp_balance_sheet where user_code = '" + userCode + "'";
         dao.execSQLRpt(strSqlDelete);
 
         //from = Util1.toDateStrMYSQL(from, "EE MMM d y H:m:s 'GMT'Z (zz)");
         to = Util1.toDateStrMYSQL(to, "dd/MM/yyyy");
 
-        String strSql = "insert tmp_balance_sheet(bs_side,coa_code,bs_balance,user_id)\n"
+        String strSql = "insert tmp_balance_sheet(bs_side,coa_code,bs_balance,user_code)\n"
                 + "select bs_side, child_coa_code, sum((dr_amt-cr_amt)*bs_factor) bs_balance,'"
-                + userId + "' "
+                + userCode + "' "
                 + "from v_balance_sheet_detail "
-                + "where comp_id = " + compId + " and dept_id = '" + dept + "' "
+                + "where comp_code = " + compCode + " and dept_code = '" + dept + "' "
                 + " and gl_date between '" + from
                 + "' and '" + to + "' and from_cur_id = '"
                 + curr + "' "

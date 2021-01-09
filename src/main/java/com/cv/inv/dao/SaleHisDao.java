@@ -18,10 +18,10 @@ public interface SaleHisDao {
     public SaleHis save(SaleHis sh);
 
     public List<SaleHis> search(String fromDate, String toDate, String cusId,
-            String vouStatusId, String remark, String stockCode, String userId);
+            String vouStatusId, String remark, String stockCode, String userCode);
 
     public ResultSet searchM(String fromDate, String toDate, String cusId,
-            String vouStatusId, String remark, String stockCode, String userId) throws Exception;
+            String vouStatusId, String remark, String stockCode, String userCode) throws Exception;
 
     public SaleHis findById(String id);
 

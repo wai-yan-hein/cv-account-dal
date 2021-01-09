@@ -39,8 +39,8 @@ public class COAOpening implements Serializable {
     private Double crAmt;
     @Column(name = "dr_amt")
     private Double drAmt;
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "user_code")
+    private Integer userCode;
     @Column(name = "comp_code")
     private String compCode;
     @Temporal(TemporalType.DATE)
@@ -48,7 +48,7 @@ public class COAOpening implements Serializable {
     private Date createdDate;
     @Column(name = "dept_code")
     private String depCode;
-    @Column(name = "cv_id")
+    @Column(name = "trader_code")
     private String cvId;
 
     public Integer getOpId() {
@@ -100,11 +100,11 @@ public class COAOpening implements Serializable {
     }
 
     public Integer getUserId() {
-        return userId;
+        return userCode;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(Integer userCode) {
+        this.userCode = userCode;
     }
 
     public String getCompCode() {

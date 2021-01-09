@@ -147,7 +147,7 @@ public class PurchaseHisDaoImpl extends AbstractDao<String, PurHis> implements P
                     + " apu.user_short_name  from pur_his ph\n"
                     + " join  pur_his_detail phd on phd.vou_id=ph.pur_inv_id\n"
                     + " join location l on ph.ph_loc_id = l.location_id\n"
-                    + " join appuser apu on ph.created_by = apu.user_id\n"
+                    + " join appuser apu on ph.created_by = apu.user_code\n"
                     + " left join trader td on ph.cus_id=td.id\n"
                     + "  where " + strFilter
                     + " and ph.deleted=false\n"

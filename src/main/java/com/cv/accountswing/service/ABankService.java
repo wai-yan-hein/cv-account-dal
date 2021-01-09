@@ -16,6 +16,6 @@ public interface ABankService {
     public ABank save(ABank bank);
     public ABank findById(String id);
     public List<ABank> search(String code, String name, String address, String phone,
-            String compId);
-    public int delete(String code, String compId);
+            String compCode);
+    public int delete(String code, String compCode);
 }

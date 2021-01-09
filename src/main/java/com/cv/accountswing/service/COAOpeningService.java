@@ -25,9 +25,9 @@ public interface COAOpeningService {
 
     public void deleteOpening(Long id) throws Exception;
 
-    public void GenerateZeroGL(String opDate, String userId, String compCode,
+    public void GenerateZeroGL(String opDate, String userCode, String compCode,
             String currCode, String dept, String coaGroup) throws Exception;
 
-    public void generateZeroOpening(String opDate, String userId, String compCode,
+    public void generateZeroOpening(String opDate, String userCode, String compCode,
             String currCode, String dept, String coaGroup) throws Exception;
 }

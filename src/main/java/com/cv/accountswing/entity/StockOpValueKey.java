@@ -63,7 +63,7 @@ public class StockOpValueKey implements Serializable {
         this.currency = currency;
     }
 
-    @Column(name = "comp_id", nullable = false)
+    @Column(name = "comp_code", nullable = false)
     public String getCompCode() {
         return compCode;
     }

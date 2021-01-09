@@ -24,7 +24,7 @@ public class VTriBalanceServiceImpl implements VTriBalanceService{
     private VTriBalanceDao dao;
     
     @Override
-    public List<VTriBalance> getTriBalance(String userId, String compCode){
-        return dao.getTriBalance(userId, compCode);
+    public List<VTriBalance> getTriBalance(String userCode, String compCode){
+        return dao.getTriBalance(userCode, compCode);
     }
 }

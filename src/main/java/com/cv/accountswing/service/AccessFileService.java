@@ -11,9 +11,9 @@ package com.cv.accountswing.service;
  */
 public interface AccessFileService {
 
-    public void uploadGL(String path, String compId);
+    public void uploadGL(String path, String compCode);
 
-    public void uploadTrader(String path, int compId);
+    public void uploadTrader(String path, int compCode);
 
-    public void uploadOpening(String path, int compId);
+    public void uploadOpening(String path, int compCode);
 }

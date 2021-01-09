@@ -17,8 +17,8 @@ import org.springframework.stereotype.Repository;
 public class VAParDaoImpl extends AbstractDao<Integer, VApar> implements VAParDao{
     
     @Override
-    public List<VApar> getApAr(String userId, String compCode){
-        String strSql = "select o from VApar o where o.key.userId = " + userId +
+    public List<VApar> getApAr(String userCode, String compCode){
+        String strSql = "select o from VApar o where o.key.userCode = " + userCode +
                 " and o.key.compCode = " + compCode;
         List<VApar> listApAr = findHSQL(strSql);
         return listApAr;

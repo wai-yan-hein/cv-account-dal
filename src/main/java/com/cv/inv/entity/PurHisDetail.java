@@ -43,7 +43,7 @@ public class PurHisDetail implements Serializable {
     @Column(name = "pur_amt", nullable = false)
     private Float purAmt;
     @ManyToOne
-    @JoinColumn(name = "loc_id")
+    @JoinColumn(name = "loc_code")
     private Location location;
     @Column(name = "unique_id")
     private Integer uniqueId;
@@ -54,7 +54,7 @@ public class PurHisDetail implements Serializable {
     @Column(name = "small_unit")
     private String smallestUnit;
     @ManyToOne
-    @JoinColumn(name = "dept_id")
+    @JoinColumn(name = "dept_code")
     private Department department;
     @Column(name = "std_small_wt")
     private Float stdSmallWeight;

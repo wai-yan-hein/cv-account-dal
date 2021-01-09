@@ -43,14 +43,14 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
     }
 
     @Override
-    public List<PaymentType> search(String name, String compId) {
-        List<PaymentType> listPT = dao.search(name, compId);
+    public List<PaymentType> search(String name, String compCode) {
+        List<PaymentType> listPT = dao.search(name, compCode);
         return listPT;
     }
 
     @Override
-    public int delete(Integer code, String compId) {
-        int cnt = dao.delete(code, compId);
+    public int delete(Integer code, String compCode) {
+        int cnt = dao.delete(code, compCode);
         return cnt;
     }
 

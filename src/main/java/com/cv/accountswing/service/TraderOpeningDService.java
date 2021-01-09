@@ -20,5 +20,5 @@ public interface TraderOpeningDService {
     public List<VTraderOpeningDetail> search(String tranIdH);
     public int delete(String tranId);
     public List<VTmpTraderBalance> getTraderBalance(String compCode, String traderId, String opDate, 
-            String curr, String userId) throws Exception;
+            String curr, String userCode) throws Exception;
 }

@@ -22,9 +22,17 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AccountDao dao;
+    @Autowired
+    private SeqTableService seqService;
 
     @Override
     public AppUser save(AppUser user) {
+        if (user.getAppUserCode() == null || user.getAppUserCode().isEmpty()) {
+            Integer macId = user.getMacId();
+            String compCode = user.getCompCode();
+            user.setAppUserCode(getAppUserCode(macId, "AppUser", "-", compCode));
+        }
+
         dao.saveAccount(user);
         return user;
     }
@@ -35,8 +43,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int delete(String userId) {
-        return dao.delete(userId);
+    public int delete(String userCode) {
+        return dao.delete(userCode);
     }
 
     @Override
@@ -56,5 +64,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public AppUser findById(String id) {
         return dao.finfById(id);
+    }
+
+    private String getAppUserCode(Integer macId, String option, String period, String compCode) {
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+        String tmpCatCode = String.format("%0" + 2 + "d", macId) + "-" + String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
     }
 }

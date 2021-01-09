@@ -15,7 +15,7 @@ import java.util.List;
 public interface UserService {
     public AppUser save(AppUser user);
     public List<AppUser> search(String id, String userShort, String email, String owner);
-    public int delete(String userId);
+    public int delete(String userCode);
     public AppUser login(String userShort, String password);
     public AppUser findById(String id);
 }

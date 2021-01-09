@@ -36,14 +36,14 @@ public class ABankServiceImpl implements ABankService{
     
     @Override
     public List<ABank> search(String code, String name, String address, String phone,
-            String compId){
-        List<ABank> listBank = dao.search(code, name, address, phone, compId);
+            String compCode){
+        List<ABank> listBank = dao.search(code, name, address, phone, compCode);
         return listBank;
     }
     
     @Override
-    public int delete(String code, String compId){
-        int cnt = dao.delete(code, compId);
+    public int delete(String code, String compCode){
+        int cnt = dao.delete(code, compCode);
         return cnt;
     }
 }

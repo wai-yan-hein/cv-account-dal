@@ -18,7 +18,7 @@ public class MachineInfo implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "machine_id", unique = true, nullable = false)
+    @Column(name = "mac_id", unique = true, nullable = false)
     private Integer machineId;
     @Column(name = "machine_name", unique = true, nullable = false)
     private String machineName;
@@ -29,7 +29,6 @@ public class MachineInfo implements java.io.Serializable {
     @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
     @Temporal(TemporalType.TIMESTAMP)
     private Date regDate;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;

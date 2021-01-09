@@ -30,14 +30,14 @@ public class CoaDeptMapDaoImpl extends AbstractDao<CoaDeptMapKey, CoaDeptMap> im
     }
 
     @Override
-    public List<CoaDeptMap> search(String compId, String coaCode, String dept) {
+    public List<CoaDeptMap> search(String compCode, String coaCode, String dept) {
         String strFilter = "";
 
-        if (!compId.equals("-")) {
+        if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.key.compCode = " + compId;
+                strFilter = "o.key.compCode = " + compCode;
             } else {
-                strFilter = strFilter + " and o.key.compCode = " + compId;
+                strFilter = strFilter + " and o.key.compCode = " + compCode;
             }
         }
 
@@ -68,7 +68,7 @@ public class CoaDeptMapDaoImpl extends AbstractDao<CoaDeptMapKey, CoaDeptMap> im
     }
 
     @Override
-    public List searchMap(String compId, String coaCode, String dept) {
+    public List searchMap(String compCode, String coaCode, String dept) {
         String strFilter = "";
 
         if (strFilter.isEmpty()) {
@@ -77,11 +77,11 @@ public class CoaDeptMapDaoImpl extends AbstractDao<CoaDeptMapKey, CoaDeptMap> im
             strFilter = strFilter + " and o.level >= 3";
         }
 
-        if (!compId.equals("-")) {
+        if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.compCode = " + compId;
+                strFilter = "o.compCode = " + compCode;
             } else {
-                strFilter = strFilter + " and o.compCode = " + compId;
+                strFilter = strFilter + " and o.compCode = " + compCode;
             }
         }
 
@@ -112,16 +112,16 @@ public class CoaDeptMapDaoImpl extends AbstractDao<CoaDeptMapKey, CoaDeptMap> im
     }
 
     @Override
-    public int delete(String compId, String coaCode, String dept) {
+    public int delete(String compCode, String coaCode, String dept) {
         String strSql = "delete from CoaDeptMap o";
         String strFilter = "";
         int cnt = 0;
 
-        if (!compId.equals("-")) {
+        if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.key.compCode = " + compId;
+                strFilter = "o.key.compCode = " + compCode;
             } else {
-                strFilter = strFilter + " and o.key.compCode = " + compId;
+                strFilter = strFilter + " and o.key.compCode = " + compCode;
             }
         }
 

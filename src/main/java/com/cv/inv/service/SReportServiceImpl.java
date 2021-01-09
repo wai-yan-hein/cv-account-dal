@@ -23,8 +23,8 @@ public class SReportServiceImpl implements SReportService {
     private SReportDao dao;
 
     @Override
-    public void generateStockBalance(String stockCode, String locId, String compId, String macId) {
-        dao.generateStockBalance(stockCode, locId, compId, macId);
+    public void generateStockBalance(String stockCode, String locId, String compCode, String macId) {
+        dao.generateStockBalance(stockCode, locId, compCode, macId);
     }
 
     @Override

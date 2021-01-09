@@ -30,14 +30,14 @@ public class AssignDeptDaoImpl extends AbstractDao<AssignDeptKey, AssignDept> im
     }
     
     @Override
-    public List search(String compId, String roleId){
+    public List search(String compCode, String roleId){
         String strFilter = "";
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.key.compId = " + compId;
+                strFilter = "o.key.compCode = " + compCode;
             }else{
-                strFilter = strFilter + " and o.key.compId = " + compId;
+                strFilter = strFilter + " and o.key.compCode = " + compCode;
             }
         }
         
@@ -59,15 +59,15 @@ public class AssignDeptDaoImpl extends AbstractDao<AssignDeptKey, AssignDept> im
     }
     
     @Override
-    public int delete(String compId, String roleId, String deptCode){
+    public int delete(String compCode, String roleId, String deptCode){
         int cnt = 0;
         String strFilter = "";
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.compId = " + compId;
+                strFilter = "o.compCode = " + compCode;
             }else{
-                strFilter = strFilter + " and o.compId = " + compId;
+                strFilter = strFilter + " and o.compCode = " + compCode;
             }
         }
         
@@ -96,12 +96,12 @@ public class AssignDeptDaoImpl extends AbstractDao<AssignDeptKey, AssignDept> im
     }
     
     @Override
-    public void updateNew(String compId, String roleId) throws Exception{
-        String strSql = "insert into assign_dept(comp_id, role_id, dept_code)\n" +
+    public void updateNew(String compCode, String roleId) throws Exception{
+        String strSql = "insert into assign_dept(comp_code, role_id, dept_code)\n" +
             "select comp_code," + roleId + ", dept_code\n" +
             "from department\n" +
-            "where comp_code = " + compId + " and dept_code not in " +
-            "(select dept_code from assign_dept where comp_id = " + compId + 
+            "where comp_code = " + compCode + " and dept_code not in " +
+            "(select dept_code from assign_dept where comp_code = " + compCode + 
             " and role_id = " + roleId + ")";
         execSQL(strSql);
     }

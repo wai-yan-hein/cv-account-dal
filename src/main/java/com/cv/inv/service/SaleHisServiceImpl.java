@@ -35,8 +35,8 @@ public class SaleHisServiceImpl implements SaleHisService {
 
     @Override
     public List<SaleHis> search(String fromDate, String toDate, String cusId,
-            String vouStatusId, String remark, String stockCode, String userId) {
-        return hisDao.search(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userId);
+            String vouStatusId, String remark, String stockCode, String userCode) {
+        return hisDao.search(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userCode);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class SaleHisServiceImpl implements SaleHisService {
 
     @Override
     public List<SaleVouSearch> searchM(String fromDate, String toDate, String cusId,
-            String vouStatusId, String remark, String stockCode, String userId) throws Exception {
-        ResultSet rs = hisDao.searchM(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userId);
+            String vouStatusId, String remark, String stockCode, String userCode) throws Exception {
+        ResultSet rs = hisDao.searchM(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userCode);
         List<SaleVouSearch> listVS = null;
 
         if (rs != null) {

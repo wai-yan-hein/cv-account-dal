@@ -50,75 +50,75 @@ public class COAOpeningDServiceImpl implements COAOpeningDService {
 
     @Override
     public void insertFilter(String coaCode, int level, String opDate,
-            String curr, String userId) throws Exception {
-        dao.insertFilter(coaCode, level, opDate, curr, userId);
+            String curr, String userCode) throws Exception {
+        dao.insertFilter(coaCode, level, opDate, curr, userCode);
     }
 
     @Override
     public List<TmpOpeningClosing> getOpBalance(String coaCode, int level, String opDate,
-            String curr, String userId) throws Exception {
+            String curr, String userCode) throws Exception {
         List<TmpOpeningClosing> listTOC = dao.getOpBalance(coaCode, level, opDate,
-                curr, userId);
+                curr, userCode);
         return listTOC;
     }
 
     @Override
-    public void deleteTmp(String coaCode, String userId) throws Exception {
+    public void deleteTmp(String coaCode, String userCode) throws Exception {
 
     }
 
     @Override
     public void insertFilterGL(String coaCode, String opDate, int level,
-            String curr, String userId) throws Exception {
-        dao.insertFilterGL(coaCode, opDate, level, curr, userId);
+            String curr, String userCode) throws Exception {
+        dao.insertFilterGL(coaCode, opDate, level, curr, userCode);
     }
 
     @Override
     public List<TmpOpeningClosing> getOpBalanceGL(String coaCode, String opDate,
-            String clDae, int level, String curr, String userId, String dept) throws Exception {
-        dao.genOpBalanceGL(coaCode, opDate, clDae, level, curr, userId, dept);
-        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userId, coaCode);
+            String clDae, int level, String curr, String userCode, String dept) throws Exception {
+        dao.genOpBalanceGL(coaCode, opDate, clDae, level, curr, userCode, dept);
+        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode);
         return listTOC;
     }
 
     @Override
     public void genTriBalance(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userId) throws Exception {
+            String coaCode, String currency, String dept, String cvId, String userCode) throws Exception {
 
-        dao.genTriBalance(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userId);
+        dao.genTriBalance(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userCode);
     }
 
     @Override
     public void genArAp(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userId) throws Exception {
-        dao.genArAp(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userId);
+            String coaCode, String currency, String dept, String cvId, String userCode) throws Exception {
+        dao.genArAp(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userCode);
     }
 
     @Override
-    public void genArAp1(String compCode, String fromDate, String opDate, String tranDate, String coaCode, String currency, String dept, String cvId, String userId) throws Exception {
-        dao.genArAp1(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userId);
+    public void genArAp1(String compCode, String fromDate, String opDate, String tranDate, String coaCode, String currency, String dept, String cvId, String userCode) throws Exception {
+        dao.genArAp1(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userCode);
     }
 
     @Override
     public void genTriBalance1(String compCode, String fromDate, String opDate,
             String tranDate, String coaCode, String currency, String dept,
-            String cvId, String userId, String macId) throws Exception {
-        dao.genTriBalance1(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userId, macId);
+            String cvId, String userCode, String macId) throws Exception {
+        dao.genTriBalance1(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userCode, macId);
     }
 
     @Override
     public List<TmpOpeningClosing> getOpBalanceGL1(String coaCode, String opDate,
-            String clDae, int level, String curr, String userId, String dept, String macId) throws Exception {
-        dao.genOpBalanceGL1(coaCode, opDate, clDae, level, curr, userId, dept, macId);
-        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userId, coaCode);
+            String clDae, int level, String curr, String userCode, String dept, String macId) throws Exception {
+        dao.genOpBalanceGL1(coaCode, opDate, clDae, level, curr, userCode, dept, macId);
+        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode);
         return listTOC;
     }
 
     @Override
     public List<TmpOpeningClosing> getOpBalanceByTrader(String coaCode, String opDate,
-            String clDate, int level, String curr, String userId, String dept, String cvId, String macId) throws Exception {
-        dao.getOpBalanceByTrader(coaCode, opDate, clDate, level, curr, userId, dept, cvId, macId);
-        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userId, coaCode);
+            String clDate, int level, String curr, String userCode, String dept, String cvId, String macId) throws Exception {
+        dao.getOpBalanceByTrader(coaCode, opDate, clDate, level, curr, userCode, dept, cvId, macId);
+        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode);
         return listTOC;
     }
 }

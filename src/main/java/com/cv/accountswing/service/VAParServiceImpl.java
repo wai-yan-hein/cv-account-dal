@@ -24,7 +24,7 @@ public class VAParServiceImpl implements VAParService{
     private VAParDao dao;
     
     @Override
-    public List<VApar> getApAr(String userId, String compCode){
-        return dao.getApAr(userId, compCode);
+    public List<VApar> getApAr(String userCode, String compCode){
+        return dao.getApAr(userCode, compCode);
     }
 }

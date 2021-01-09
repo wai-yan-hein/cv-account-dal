@@ -26,7 +26,7 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
 
     @Override
     public List<SaleHis> search(String fromDate, String toDate, String cusId,
-            String vouStatusId, String remark, String stockCode, String userId) {
+            String vouStatusId, String remark, String stockCode, String userCode) {
         String strFilter = "";
 
         if (!fromDate.equals("-") && !toDate.equals("-")) {
@@ -75,11 +75,11 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
             }
         }
 
-        if (!userId.equals("-")) {
+        if (!userCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.createdBy = '" + userId + "'";
+                strFilter = "o.createdBy = '" + userCode + "'";
             } else {
-                strFilter = strFilter + " and o.createdBy = '" + userId + "'";
+                strFilter = strFilter + " and o.createdBy = '" + userCode + "'";
             }
         }
 
@@ -114,7 +114,7 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
 
     @Override
     public ResultSet searchM(String fromDate, String toDate, String cusId,
-            String vouStatusId, String remark, String stockCode, String userId) throws Exception {
+            String vouStatusId, String remark, String stockCode, String userCode) throws Exception {
 
         String strSql = "";
 
@@ -164,11 +164,11 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
             }
         }
 
-        if (!userId.equals("-")) {
+        if (!userCode.equals("-")) {
             if (strSql.isEmpty()) {
-                strSql = "sh.user_id = '" + userId + "'";
+                strSql = "sh.user_code = '" + userCode + "'";
             } else {
-                strSql = strSql + " and sh.user_id = '" + userId + "'";
+                strSql = strSql + " and sh.user_code = '" + userCode + "'";
             }
         }
 
@@ -188,7 +188,7 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
                     + " apu.user_short_name \n"
                     + " from sale_his sh	\n"
                     + " join sale_his_detail shd ON shd.vou_id = sh.voucher_no\n"
-                    + " join appuser apu on sh.user_id = apu.app_user_code\n"
+                    + " join appuser apu on sh.user_code = apu.app_user_code\n"
                     + " left join trader td on sh.cus_id=td.code\n"
                     + "  where  \n"
                     +strSql

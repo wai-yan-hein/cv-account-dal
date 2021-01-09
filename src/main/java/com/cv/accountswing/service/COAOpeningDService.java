@@ -25,34 +25,34 @@ public interface COAOpeningDService {
     public int delete(String tranId);
 
     public void insertFilter(String coaCode, int level, String opDate,
-            String curr, String userId) throws Exception;
+            String curr, String userCode) throws Exception;
 
     public List<TmpOpeningClosing> getOpBalance(String coaCode, int level, String opDate,
-            String curr, String userId) throws Exception;
+            String curr, String userCode) throws Exception;
 
-    public void deleteTmp(String coaCode, String userId) throws Exception;
+    public void deleteTmp(String coaCode, String userCode) throws Exception;
 
     public void insertFilterGL(String coaCode, String opDate, int level,
-            String curr, String userId) throws Exception;
+            String curr, String userCode) throws Exception;
 
     public List<TmpOpeningClosing> getOpBalanceGL(String coaCode, String opDate,
-            String clDae, int level, String curr, String userId, String dept) throws Exception;
+            String clDae, int level, String curr, String userCode, String dept) throws Exception;
 
     public List<TmpOpeningClosing> getOpBalanceGL1(String coaCode, String opDate,
-            String clDae, int level, String curr, String userId, String dept, String macId) throws Exception;
+            String clDae, int level, String curr, String userCode, String dept, String macId) throws Exception;
 
     public void genTriBalance(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userId) throws Exception;
+            String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
 
     public void genTriBalance1(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userId, String macId) throws Exception;
+            String coaCode, String currency, String dept, String cvId, String userCode, String macId) throws Exception;
 
     public void genArAp(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userId) throws Exception;
+            String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
 
     public void genArAp1(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userId) throws Exception;
+            String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
 
     public List<TmpOpeningClosing> getOpBalanceByTrader(String coaCode, String opDate,
-            String clDate, int level, String curr, String userId, String dept, String cvId, String macID) throws Exception;
+            String clDate, int level, String curr, String userCode, String dept, String cvId, String macID) throws Exception;
 }

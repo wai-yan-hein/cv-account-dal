@@ -43,8 +43,8 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public int delete(String code, String compId) {
-        int cnt = dao.delete(code, compId);
+    public int delete(String code, String compCode) {
+        int cnt = dao.delete(code, compCode);
         return cnt;
     }
 

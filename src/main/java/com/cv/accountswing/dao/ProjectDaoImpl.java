@@ -31,7 +31,7 @@ public class ProjectDaoImpl extends AbstractDao<Long, Project> implements Projec
     
     @Override
     public List<Project> search(String projectCode, String projectName, String startDate,
-            String endDate, String projectStatus, String compCode, String userId){
+            String endDate, String projectStatus, String compCode, String userCode){
         String strFilter = "";
         
         if(!projectCode.equals("-")){
@@ -92,13 +92,13 @@ public class ProjectDaoImpl extends AbstractDao<Long, Project> implements Projec
             }
         }
         
-        if(!userId.equals("-")){
+        if(!userCode.equals("-")){
             if(strFilter.isEmpty()){
                 strFilter = "o.projectId in (select i.projectId "
-                        + "from ProjectUserMapping i where i.userId = " + userId + ")";
+                        + "from ProjectUserMapping i where i.userCode = " + userCode + ")";
             }else{
                 strFilter = strFilter + " and o.projectId in (select i.projectId "
-                        + "from ProjectUserMapping i where i.userId = " + userId + ")";
+                        + "from ProjectUserMapping i where i.userCode = " + userCode + ")";
             }
         }
         

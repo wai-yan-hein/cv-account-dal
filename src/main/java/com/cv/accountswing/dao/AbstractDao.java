@@ -187,12 +187,12 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     public String getGlLogSql(long glCode, String actionType) {
         String strSql = "insert into gl_log (gl_id,gl_date,created_date,modify_date,modify_by,"
                 + "description,source_ac_id,account_id,to_cur_id,from_cur_id,ex_rate,dr_amt,cr_amt,"
-                + "reference,dept_id,voucher_no,user_id,cv_id,cheque_no,comp_code,gst,tran_source,"
+                + "reference,dept_code,voucher_no,user_code,trader_code,cheque_no,comp_code,gst,tran_source,"
                 + "action_type,action_dt,split_id,remark,from_desp,to_desp,naration,"
                 + "project_id) "
                 + "select gl_id,gl_date,created_date,modify_date,modify_by,description,source_ac_id,"
-                + "account_id,to_cur_id,from_cur_id,ex_rate,dr_amt,cr_amt,reference,dept_id,"
-                + "voucher_no,user_id,cv_id,cheque_no,comp_id,gst,tran_source,'" + actionType
+                + "account_id,to_cur_id,from_cur_id,ex_rate,dr_amt,cr_amt,reference,dept_code,"
+                + "voucher_no,user_code,trader_code,cheque_no,comp_code,gst,tran_source,'" + actionType
                 + "',sysdate(),split_id,remark,from_"
                 + "desp,to_desp,naration,project_id from gl where gl_id = " + glCode;
         return strSql;

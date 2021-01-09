@@ -16,15 +16,15 @@ import javax.persistence.Table;
  * @author winswe
  */
 @Entity
-@Table(name="v_assign_dept")
+@Table(name = "v_assign_dept")
 public class VAssignDept implements java.io.Serializable {
+
     private AssignDeptKey key;
     private boolean allow;
-    private String compCode;
     private String compName;
     private String deptUsrCode;
     private String deptName;
-    
+
     @EmbeddedId
     public AssignDeptKey getKey() {
         return key;
@@ -34,7 +34,7 @@ public class VAssignDept implements java.io.Serializable {
         this.key = key;
     }
 
-    @Column(name="allow")
+    @Column(name = "allow")
     public boolean isAllow() {
         return allow;
     }
@@ -43,16 +43,7 @@ public class VAssignDept implements java.io.Serializable {
         this.allow = allow;
     }
 
-    @Column(name="comp_code")
-    public String getCompCode() {
-        return compCode;
-    }
-
-    public void setCompCode(String compCode) {
-        this.compCode = compCode;
-    }
-
-    @Column(name="comp_name")
+    @Column(name = "comp_name")
     public String getCompName() {
         return compName;
     }
@@ -61,7 +52,7 @@ public class VAssignDept implements java.io.Serializable {
         this.compName = compName;
     }
 
-    @Column(name="dept_usr_code")
+    @Column(name = "dept_usr_code")
     public String getDeptUsrCode() {
         return deptUsrCode;
     }
@@ -70,7 +61,7 @@ public class VAssignDept implements java.io.Serializable {
         this.deptUsrCode = deptUsrCode;
     }
 
-    @Column(name="dept_name")
+    @Column(name = "dept_name")
     public String getDeptName() {
         return deptName;
     }

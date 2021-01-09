@@ -15,6 +15,6 @@ import java.util.List;
 public interface ProjectUserMappingDao {
     public ProjectUserMapping save(ProjectUserMapping pum);
     public ProjectUserMapping findById(Long id);
-    public List search(String projectId, String userId);
+    public List search(String projectId, String userCode);
     public int delete(String projectId, String id);
 }

@@ -24,12 +24,12 @@ public class CoaDeptMapServiceImpl implements CoaDeptMapService{
     private CoaDeptMapDao dao;
     
     @Override
-    public CoaDeptMap save(String compId, String coaCode, String dept){
+    public CoaDeptMap save(String compCode, String coaCode, String dept){
         CoaDeptMap cdm = new CoaDeptMap();
         CoaDeptMapKey cdmk = new CoaDeptMapKey();
         
         cdmk.setCoaCode(coaCode);
-        cdmk.setCompCode(compId);
+        cdmk.setCompCode(compCode);
         cdmk.setDeptCode(dept);
         cdm.setKey(cdmk);
         
@@ -42,17 +42,17 @@ public class CoaDeptMapServiceImpl implements CoaDeptMapService{
     }
     
     @Override
-    public List<CoaDeptMap> search(String compId, String coaCode, String dept){
-        return dao.search(compId, coaCode, dept);
+    public List<CoaDeptMap> search(String compCode, String coaCode, String dept){
+        return dao.search(compCode, coaCode, dept);
     }
     
     @Override
-    public List searchMap(String compId, String coaCode, String dept){
-        return dao.searchMap(compId, coaCode, dept);
+    public List searchMap(String compCode, String coaCode, String dept){
+        return dao.searchMap(compCode, coaCode, dept);
     }
     
     @Override
-    public int delete(String compId, String coaCode, String dept){
-        return dao.delete(compId, coaCode, dept);
+    public int delete(String compCode, String coaCode, String dept){
+        return dao.delete(compCode, coaCode, dept);
     }
 }

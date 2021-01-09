@@ -15,7 +15,7 @@ public class VoucherSearch {
     private String name;
     private String address;
     private String phone;
-    private String compId;
+    private String compCode;
 
     public String getCode() {
         return code;
@@ -50,11 +50,11 @@ public class VoucherSearch {
     }
 
     public String getCompId() {
-        return compId;
+        return compCode;
     }
 
-    public void setCompId(String compId) {
-        this.compId = compId;
+    public void setCompId(String compCode) {
+        this.compCode = compCode;
     }
 
 }

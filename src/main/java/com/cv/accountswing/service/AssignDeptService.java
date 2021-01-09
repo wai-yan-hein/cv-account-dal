@@ -16,7 +16,7 @@ import java.util.List;
 public interface AssignDeptService {
     public AssignDept save(AssignDept ad);
     public AssignDept findById(AssignDeptKey key);
-    public List search(String compId, String roleId);
-    public int delete(String compId, String roleId, String deptCode);
-    public void updateNew(String compId, String roleId) throws Exception;
+    public List search(String compCode, String roleId);
+    public int delete(String compCode, String roleId, String deptCode);
+    public void updateNew(String compCode, String roleId) throws Exception;
 }

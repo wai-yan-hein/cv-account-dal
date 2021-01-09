@@ -28,7 +28,7 @@ public class SaleDetailDaoImpl extends AbstractDao<SaleDetailKey, SaleHisDetail>
 
     @Override
     public List<SaleHisDetail> search(String vouId) {
-        String hsql = "select o from SaleHisDetail o where o.saleDetailKey.vouId ='" + vouId + "' order by o.uniqueId";
+        String hsql = "select o from SaleHisDetail o where o.saleDetailKey.vouId is '" + vouId + "' order by o.uniqueId";
         return findHSQL(hsql);
     }
 

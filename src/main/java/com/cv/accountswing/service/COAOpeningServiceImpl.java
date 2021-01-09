@@ -54,18 +54,18 @@ public class COAOpeningServiceImpl implements COAOpeningService {
     }
 
     @Override
-    public void GenerateZeroGL(String opDate, String userId, String compCode,
+    public void GenerateZeroGL(String opDate, String userCode, String compCode,
             String currCode, String dept, String coaGroup) throws Exception {
         opDate = Util1.toDateStrMYSQL(opDate, "dd/MM/yyyy");
         dao.deleteOpeningGL(opDate, compCode, currCode, dept);
-        dao.GenerateZeroGL(opDate, userId, compCode, currCode, dept, coaGroup);
+        dao.GenerateZeroGL(opDate, userCode, compCode, currCode, dept, coaGroup);
 
     }
 
     @Override
-    public void generateZeroOpening(String opDate, String userId, String compCode, String currCode, String dept, String coaGroup) throws Exception {
+    public void generateZeroOpening(String opDate, String userCode, String compCode, String currCode, String dept, String coaGroup) throws Exception {
         opDate = Util1.toDateStrMYSQL(opDate, "dd/MM/yyyy");
         dao.deleteOpening(opDate, compCode, currCode, dept);
-        dao.generateZeroOpening(opDate, userId, compCode, currCode, dept, coaGroup);
+        dao.generateZeroOpening(opDate, userCode, compCode, currCode, dept, coaGroup);
     }
 }

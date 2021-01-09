@@ -17,8 +17,8 @@ import org.springframework.stereotype.Repository;
 public class VCoaTreeDaoImpl extends AbstractDao<String, VCoaTree> implements VCoaTreeDao{
     
     @Override
-    public List<VCoaTree> getCompanyCoa(String compId){
-        String strSql = "select o from VCoaTree o where o.compCode = " +compId;
+    public List<VCoaTree> getCompanyCoa(String compCode){
+        String strSql = "select o from VCoaTree o where o.compCode = " +compCode;
         List<VCoaTree> listVCT = findHSQL(strSql);
         return listVCT;
     }

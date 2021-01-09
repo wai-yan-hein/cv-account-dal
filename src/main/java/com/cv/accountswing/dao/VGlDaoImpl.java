@@ -160,9 +160,9 @@ public class VGlDaoImpl extends AbstractDao<String, VGl> implements VGlDao {
 
         if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.compId = " + compCode;
+                strFilter = "o.compCode = " + compCode;
             } else {
-                strFilter = strFilter + " and o.compId = " + compCode;
+                strFilter = strFilter + " and o.compCode = " + compCode;
             }
         }
 
@@ -296,9 +296,9 @@ public class VGlDaoImpl extends AbstractDao<String, VGl> implements VGlDao {
 
         if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.compId = '" + compCode + "'";
+                strFilter = "o.compCode = '" + compCode + "'";
             } else {
-                strFilter = strFilter + " and o.compId = '" + compCode + "'";
+                strFilter = strFilter + " and o.compCode = '" + compCode + "'";
             }
         }
 
@@ -326,7 +326,7 @@ public class VGlDaoImpl extends AbstractDao<String, VGl> implements VGlDao {
     @Override
     public List<VGl> getCrDrVoucher(String vouNo, String compCode) {
         String strSql = "select o from VGl o where o.vouNo = '" + vouNo
-                + "' and o.compId = '" + compCode + "' order by o.glCode";
+                + "' and o.compCode = '" + compCode + "' order by o.glCode";
         List<VGl> listVGL = findHSQL(strSql);
         return listVGL;
     }

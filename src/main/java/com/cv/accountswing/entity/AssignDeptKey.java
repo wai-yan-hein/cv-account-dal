@@ -6,7 +6,6 @@
 package com.cv.accountswing.entity;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -15,30 +14,32 @@ import javax.persistence.Embeddable;
  * @author winswe
  */
 @Embeddable
-public class AssignDeptKey implements Serializable{
-    private Integer compId;
-    private Integer roleId;
+public class AssignDeptKey implements Serializable {
+
+    private String compCode;
+
+    private String roleCode;
     private String deptCode;
 
-    @Column(name="comp_id")
-    public Integer getCompId() {
-        return compId;
+    @Column(name = "comp_code")
+    public String getCompCode() {
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
     }
 
-    @Column(name="role_id")
-    public Integer getRoleId() {
-        return roleId;
+    @Column(name = "role_id")
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 
-    @Column(name="dept_code", length=15)
+    @Column(name = "dept_code", length = 15)
     public String getDeptCode() {
         return deptCode;
     }
@@ -47,33 +48,4 @@ public class AssignDeptKey implements Serializable{
         this.deptCode = deptCode;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.compId);
-        hash = 23 * hash + Objects.hashCode(this.roleId);
-        hash = 23 * hash + Objects.hashCode(this.deptCode);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AssignDeptKey other = (AssignDeptKey) obj;
-        if (!Objects.equals(this.compId, other.compId)) {
-            return false;
-        }
-        if (!Objects.equals(this.roleId, other.roleId)) {
-            return false;
-        }
-        if (!Objects.equals(this.deptCode, other.deptCode)) {
-            return false;
-        }
-        return true;
-    }
 }

@@ -75,7 +75,7 @@ public class CurrencyDaoImpl extends AbstractDao<CurrencyKey, Currency> implemen
     @Override
     public int delete(String code, String compCode) {
         String strSql = "delete from Currency o where o.key.code = '" + code
-                + "' and o.key.compId = " + compCode;
+                + "' and o.key.compCode = " + compCode;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

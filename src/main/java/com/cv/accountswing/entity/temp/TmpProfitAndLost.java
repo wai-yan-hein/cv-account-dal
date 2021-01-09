@@ -25,8 +25,8 @@ public class TmpProfitAndLost implements java.io.Serializable {
     private String accName;
     private String currency;
     private Double accTotal;
-    private String userId;
-    private Integer compId;
+    private String userCode;
+    private Integer compCode;
     private Integer sortOrder;
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -84,22 +84,22 @@ public class TmpProfitAndLost implements java.io.Serializable {
         this.accTotal = accTotal;
     }
 
-    @Column(name="user_id", length=15)
+    @Column(name="user_code", length=15)
     public String getUserId() {
-        return userId;
+        return userCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String userCode) {
+        this.userCode = userCode;
     }
 
-    @Column(name="comp_id")
+    @Column(name="comp_code")
     public Integer getCompId() {
-        return compId;
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompId(Integer compCode) {
+        this.compCode = compCode;
     }
 
     @Column(name="sort_order")

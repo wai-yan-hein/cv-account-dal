@@ -17,7 +17,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ABankKey implements Serializable{
     private String bankCode;
-    private Integer compId;
+    private Integer compCode;
 
     @Column(name="bank_code", length=15)
     public String getBankCode() {
@@ -28,20 +28,20 @@ public class ABankKey implements Serializable{
         this.bankCode = bankCode;
     }
 
-    @Column(name="comp_id")
+    @Column(name="comp_code")
     public Integer getCompId() {
-        return compId;
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompId(Integer compCode) {
+        this.compCode = compCode;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 37 * hash + Objects.hashCode(this.bankCode);
-        hash = 37 * hash + Objects.hashCode(this.compId);
+        hash = 37 * hash + Objects.hashCode(this.compCode);
         return hash;
     }
 
@@ -57,7 +57,7 @@ public class ABankKey implements Serializable{
         if (!Objects.equals(this.bankCode, other.bankCode)) {
             return false;
         }
-        if (!Objects.equals(this.compId, other.compId)) {
+        if (!Objects.equals(this.compCode, other.compCode)) {
             return false;
         }
         return true;

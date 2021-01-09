@@ -17,11 +17,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VAparKey implements Serializable{
     private Integer cvId;
-    private String userId;
+    private String userCode;
     private Integer compCode;
     private String currency;
     
-    @Column(name="cv_id")
+    @Column(name="trader_code")
     public Integer getCvId() {
         return cvId;
     }
@@ -30,13 +30,13 @@ public class VAparKey implements Serializable{
         this.cvId = cvId;
     }
 
-    @Column(name="user_id")
+    @Column(name="user_code")
     public String getUserId() {
-        return userId;
+        return userCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String userCode) {
+        this.userCode = userCode;
     }
 
     @Column(name="comp_code")
@@ -62,7 +62,7 @@ public class VAparKey implements Serializable{
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + Objects.hashCode(this.cvId);
-        hash = 97 * hash + Objects.hashCode(this.userId);
+        hash = 97 * hash + Objects.hashCode(this.userCode);
         hash = 97 * hash + Objects.hashCode(this.compCode);
         hash = 97 * hash + Objects.hashCode(this.currency);
         return hash;
@@ -80,7 +80,7 @@ public class VAparKey implements Serializable{
         if (!Objects.equals(this.cvId, other.cvId)) {
             return false;
         }
-        if (!Objects.equals(this.userId, other.userId)) {
+        if (!Objects.equals(this.userCode, other.userCode)) {
             return false;
         }
         if (!Objects.equals(this.compCode, other.compCode)) {

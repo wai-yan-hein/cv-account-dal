@@ -5,7 +5,6 @@
  */
 package com.cv.accountswing.entity.view;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -171,7 +170,7 @@ public class VGl implements java.io.Serializable {
         this.reference = reference;
     }
 
-    @Column(name = "dept_id")
+    @Column(name = "dept_code")
     public String getDeptId() {
         return deptId;
     }
@@ -189,7 +188,7 @@ public class VGl implements java.io.Serializable {
         this.vouNo = vouNo;
     }
 
-    @Column(name = "cv_id")
+    @Column(name = "trader_code")
     public String getTraderCode() {
         return traderCode;
     }
@@ -245,7 +244,7 @@ public class VGl implements java.io.Serializable {
         this.modifyBy = modifyBy;
     }
 
-    @Column(name = "user_id", length = 15)
+    @Column(name = "user_code", length = 15)
     public String getCreatedBy() {
         return createdBy;
     }
@@ -344,14 +343,6 @@ public class VGl implements java.io.Serializable {
         this.bankName = bankName;
     }
 
-    @Column(name = "trader_id")
-    public String getTraderUserCode() {
-        return traderUserCode;
-    }
-
-    public void setTraderUserCode(String traderUserCode) {
-        this.traderUserCode = traderUserCode;
-    }
 
     @Column(name = "trader_name")
     public String getTraderName() {

@@ -18,7 +18,7 @@ import javax.persistence.Embeddable;
 public class TmpOpeningClosingKey implements Serializable{
     private String coaId;
     private String currId;
-    private String userId;
+    private String userCode;
 
     public TmpOpeningClosingKey() {}
     
@@ -40,26 +40,30 @@ public class TmpOpeningClosingKey implements Serializable{
         this.currId = currId;
     }
 
-    @Column(name="user_id", nullable=false, length=15)
-    public String getUserId() {
-        return userId;
+    @Column(name="user_code", nullable=false, length=15)
+
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.coaId);
-        hash = 67 * hash + Objects.hashCode(this.currId);
-        hash = 67 * hash + Objects.hashCode(this.userId);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.coaId);
+        hash = 59 * hash + Objects.hashCode(this.currId);
+        hash = 59 * hash + Objects.hashCode(this.userCode);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -73,9 +77,12 @@ public class TmpOpeningClosingKey implements Serializable{
         if (!Objects.equals(this.currId, other.currId)) {
             return false;
         }
-        if (!Objects.equals(this.userId, other.userId)) {
+        if (!Objects.equals(this.userCode, other.userCode)) {
             return false;
         }
         return true;
     }
+    
+
+    
 }

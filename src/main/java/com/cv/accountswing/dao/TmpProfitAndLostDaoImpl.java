@@ -29,22 +29,22 @@ public class TmpProfitAndLostDaoImpl extends AbstractDao<Long, TmpProfitAndLost>
     }
     
     @Override
-    public List<TmpProfitAndLost> search(String userId, String compId){
+    public List<TmpProfitAndLost> search(String userCode, String compCode){
         String strFilter = "";
         
-        if(!userId.equals("-")){
+        if(!userCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.userId = '" + userId + "'";
+                strFilter = "o.userCode = '" + userCode + "'";
             }else{
-                strFilter = strFilter + " and o.userId = '" + userId + "'";
+                strFilter = strFilter + " and o.userCode = '" + userCode + "'";
             }
         }
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.compId = " + compId;
+                strFilter = "o.compCode = " + compCode;
             }else{
-                strFilter = strFilter + " and o.compId = " + compId;
+                strFilter = strFilter + " and o.compCode = " + compCode;
             }
         }
         
@@ -59,7 +59,7 @@ public class TmpProfitAndLostDaoImpl extends AbstractDao<Long, TmpProfitAndLost>
     }
     
     @Override
-    public int delete(String id, String userId, String compId) throws Exception{
+    public int delete(String id, String userCode, String compCode) throws Exception{
         String strFilter = "";
         
         if(!id.equals("-")){
@@ -70,19 +70,19 @@ public class TmpProfitAndLostDaoImpl extends AbstractDao<Long, TmpProfitAndLost>
             }
         }
         
-        if(!userId.equals("-")){
+        if(!userCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "user_id = '" + userId + "'";
+                strFilter = "user_code = '" + userCode + "'";
             }else{
-                strFilter = strFilter + " and user_id = '" + userId + "'";
+                strFilter = strFilter + " and user_code = '" + userCode + "'";
             }
         }
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "comp_id = " + compId;
+                strFilter = "comp_code = " + compCode;
             }else{
-                strFilter = strFilter + " and comp_id = " + compId;
+                strFilter = strFilter + " and comp_code = " + compCode;
             }
         }
         

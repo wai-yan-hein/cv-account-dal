@@ -15,6 +15,6 @@ import java.util.List;
 public interface PaymentTypeDao {
     public PaymentType save(PaymentType pt);
     public PaymentType findById(Integer id);
-    public List<PaymentType> search(String name, String compId);
-    public int delete(Integer code, String compId);
+    public List<PaymentType> search(String name, String compCode);
+    public int delete(Integer code, String compCode);
 }

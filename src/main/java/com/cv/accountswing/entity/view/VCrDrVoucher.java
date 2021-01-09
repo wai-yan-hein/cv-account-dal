@@ -76,7 +76,7 @@ public class VCrDrVoucher implements java.io.Serializable {
         this.glDate = glDate;
     }
 
-    @Column(name="dept_id")
+    @Column(name="dept_code")
     public String getDeptId() {
         return deptId;
     }

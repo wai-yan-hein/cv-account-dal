@@ -24,7 +24,7 @@ public class VCoaTreeServiceImpl implements VCoaTreeService{
     private VCoaTreeDao dao;
     
     @Override
-    public List<VCoaTree> getCompanyCoa(String compId){
-        return dao.getCompanyCoa(compId);
+    public List<VCoaTree> getCompanyCoa(String compCode){
+        return dao.getCompanyCoa(compCode);
     }
 }

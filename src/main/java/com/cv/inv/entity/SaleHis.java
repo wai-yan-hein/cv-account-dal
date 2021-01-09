@@ -24,7 +24,7 @@ public class SaleHis implements java.io.Serializable {
     @Column(name = "voucher_no", unique = true, nullable = false, length = 20)
     private String vouNo;
     @ManyToOne
-    @JoinColumn(name = "cus_id")
+    @JoinColumn(name = "cus_code")
     private Trader traderId;
     @ManyToOne
     @JoinColumn(name = "saleman_code")
@@ -42,8 +42,8 @@ public class SaleHis implements java.io.Serializable {
     })
     private Currency currency;
     @ManyToOne
-    @JoinColumn(name = "vou_status_id")
-    private VouStatus vouStatusId;
+    @JoinColumn(name = "vou_status_code")
+    private VouStatus vouStatus;
     @Column(name = "remark", length = 500)
     private String remark;
     @Column(name = "vou_total")
@@ -65,7 +65,7 @@ public class SaleHis implements java.io.Serializable {
     @Column(name = "vou_balance")
     private Double vouBalance;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "created_by")
     private AppUser createdBy;
     @Column(name = "session_id")
     private Integer session;
@@ -82,6 +82,11 @@ public class SaleHis implements java.io.Serializable {
     @ManyToOne
     @JoinColumn(name = "reg_code")
     private Region region;
+    @ManyToOne
+    @JoinColumn(name = "loc_code")
+    private Location location;
+    @Column(name = "mac_id")
+    private Integer macId;
 
     public SaleHis() {
     }
@@ -140,14 +145,6 @@ public class SaleHis implements java.io.Serializable {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
-    }
-
-    public VouStatus getVouStatusId() {
-        return vouStatusId;
-    }
-
-    public void setVouStatusId(VouStatus vouStatusId) {
-        this.vouStatusId = vouStatusId;
     }
 
     public String getRemark() {
@@ -276,6 +273,30 @@ public class SaleHis implements java.io.Serializable {
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    public VouStatus getVouStatus() {
+        return vouStatus;
+    }
+
+    public void setVouStatus(VouStatus vouStatus) {
+        this.vouStatus = vouStatus;
     }
 
 }

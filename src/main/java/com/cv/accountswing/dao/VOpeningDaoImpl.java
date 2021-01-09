@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 public class VOpeningDaoImpl extends AbstractDao<Integer, VCOAOpening> implements VOpeningDao {
 
     @Override
-    public List<VCOAOpening> search(String opDate, String sourceAccId, String userId, String compId, String depId,String curCode) {
+    public List<VCOAOpening> search(String opDate, String sourceAccId, String userCode, String compCode, String depId,String curCode) {
         String hsql = "select o from VCOAOpening o";
         String strFilter = "";
         if (!opDate.equals("-")) {
@@ -35,18 +35,18 @@ public class VOpeningDaoImpl extends AbstractDao<Integer, VCOAOpening> implement
                 strFilter = strFilter + " and o.sourceAccId = '" + sourceAccId + "'";
             }
         }
-        if (!userId.equals("-")) {
+        if (!userCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.userId = '" + userId + "'";
+                strFilter = "o.userCode = '" + userCode + "'";
             } else {
-                strFilter = strFilter + " and o.userId = '" + userId + "'";
+                strFilter = strFilter + " and o.userCode = '" + userCode + "'";
             }
         }
-        if (!compId.equals("-")) {
+        if (!compCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.compId = '" + compId + "'";
+                strFilter = "o.compCode = '" + compCode + "'";
             } else {
-                strFilter = strFilter + " and o.compId = '" + compId + "'";
+                strFilter = strFilter + " and o.compCode = '" + compCode + "'";
             }
         }
         if (!depId.equals("-")) {

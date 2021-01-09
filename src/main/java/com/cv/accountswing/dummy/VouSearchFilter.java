@@ -17,7 +17,7 @@ public class VouSearchFilter {
     private String vouStatusId;
     private String remark;
     private String stockCode;
-    private String userId;
+    private String userCode;
     private String locId;
     private String filterCode;
     private String vouNo;
@@ -72,11 +72,11 @@ public class VouSearchFilter {
     }
 
     public String getUserId() {
-        return userId;
+        return userCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String userCode) {
+        this.userCode = userCode;
     }
 
     public String getLocId() {

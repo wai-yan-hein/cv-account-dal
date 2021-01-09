@@ -15,6 +15,6 @@ import java.util.List;
 public interface RegionService {
     public Region save(Region region);
     public Region findById(String id);
-    public List<Region> search(String code, String name, String compId,String parentCode);
+    public List<Region> search(String code, String name, String compCode,String parentCode);
     public int delete(String code, String compCode);
 }

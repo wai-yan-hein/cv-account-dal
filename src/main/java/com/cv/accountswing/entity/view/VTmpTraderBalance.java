@@ -24,7 +24,7 @@ public class VTmpTraderBalance implements java.io.Serializable{
     private String cusCode;
     private String cusName;
     private Double balance;
-    private String userId;
+    private String userCode;
 
     @Id
     @Column(name = "tran_id", unique = true, nullable = false)
@@ -90,12 +90,12 @@ public class VTmpTraderBalance implements java.io.Serializable{
         this.balance = balance;
     }
 
-    @Column(name="user_id")
+    @Column(name="user_code")
     public String getUserId() {
-        return userId;
+        return userCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String userCode) {
+        this.userCode = userCode;
     }
 }

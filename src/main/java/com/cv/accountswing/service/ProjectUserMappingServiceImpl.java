@@ -34,8 +34,8 @@ public class ProjectUserMappingServiceImpl implements ProjectUserMappingService 
     }
     
     @Override
-    public List search(String projectId, String userId){
-        return dao.search(projectId, userId);
+    public List search(String projectId, String userCode){
+        return dao.search(projectId, userCode);
     }
     
     @Override

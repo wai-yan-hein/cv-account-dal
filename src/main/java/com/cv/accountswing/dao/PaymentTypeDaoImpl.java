@@ -29,7 +29,7 @@ public class PaymentTypeDaoImpl extends AbstractDao<Integer, PaymentType> implem
     }
     
     @Override
-    public List<PaymentType> search(String name, String compId){
+    public List<PaymentType> search(String name, String compCode){
         String strSql = "select o from PaymentType o ";
         String strFilter = "";
         
@@ -41,11 +41,11 @@ public class PaymentTypeDaoImpl extends AbstractDao<Integer, PaymentType> implem
             }
         }
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.compId = " + compId;
+                strFilter = "o.compCode = " + compCode;
             }else{
-                strFilter = strFilter + " and o.compId = " + compId;
+                strFilter = strFilter + " and o.compCode = " + compCode;
             }
         }
         
@@ -58,9 +58,9 @@ public class PaymentTypeDaoImpl extends AbstractDao<Integer, PaymentType> implem
     }
     
     @Override
-    public int delete(Integer id, String compId){
+    public int delete(Integer id, String compCode){
         String strSql = "delete from PaymentType o where o.typeId = " + id +
-                " and o.compId = " + compId;
+                " and o.compCode = " + compCode;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

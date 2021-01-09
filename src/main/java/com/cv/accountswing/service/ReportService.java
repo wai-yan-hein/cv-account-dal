@@ -16,11 +16,11 @@ public interface ReportService {
     public void genCreditVoucher(String reportPath, String filePath, String fontPath, 
             Map<String, Object> parameters) throws Exception;
     public void getProfitLost(String plProcess, String from, String to, String dept, 
-            String currency, String comp, String userId) throws Exception;
-    public ProfitAndLostRetObj getPLCalculateValue(String userId, String compId);
-    public void genGLReport(String from, String to, String sourceAcId, String acId, String compId,
+            String currency, String comp, String userCode) throws Exception;
+    public ProfitAndLostRetObj getPLCalculateValue(String userCode, String compCode);
+    public void genGLReport(String from, String to, String sourceAcId, String acId, String compCode,
             String desp, String fromCurr, String toCurr, String ref, String dept, String tranSource,
-            String vouNo, String cvId, String userId, String glVouNo, String deptName, String traderName);
-    public void genBalanceSheet(String from, String to, String dept, String userId, 
-            String compId, String curr) throws Exception;
+            String vouNo, String cvId, String userCode, String glVouNo, String deptName, String traderName);
+    public void genBalanceSheet(String from, String to, String dept, String userCode, 
+            String compCode, String curr) throws Exception;
 }

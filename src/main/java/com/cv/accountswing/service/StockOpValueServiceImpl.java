@@ -29,14 +29,14 @@ public class StockOpValueServiceImpl implements StockOpValueService {
     StockOpValueDao dao;
 
     @Override
-    public StockOpValue save(StockOpValue value, String userId) {
+    public StockOpValue save(StockOpValue value, String userCode) {
         try {
             String tranDate = Util1.toDateStr(value.getKey().getTranDate(), "yyyy-MM-dd");
             String coaCode = value.getKey().getCoaCode();
             String currancy = value.getKey().getCurrency();
-            String compId = value.getKey().getCompCode();
+            String compCode = value.getKey().getCompCode();
             String dept = value.getKey().getDeptCode();
-            dao.backup(tranDate, coaCode, dept, currancy, compId, userId, "EDIT");
+            dao.backup(tranDate, coaCode, dept, currancy, compCode, userCode, "EDIT");
         } catch (Exception ex) {
             LOGGER.error("Save Stock Op Value :" + ex.getMessage());
 
@@ -53,26 +53,26 @@ public class StockOpValueServiceImpl implements StockOpValueService {
 
     @Override
     public List search(String from, String to, String coaCode, String currency,
-            String dept, String compId) {
-        return dao.search(from, to, coaCode, currency, dept, compId);
+            String dept, String compCode) {
+        return dao.search(from, to, coaCode, currency, dept, compCode);
     }
 
     @Override
     public void backup(String tranDate, String coaCode, String dept, String currency,
-            String compId, String userId, String option) throws Exception {
-        dao.backup(tranDate, coaCode, dept, currency, compId, userId, option);
+            String compCode, String userCode, String option) throws Exception {
+        dao.backup(tranDate, coaCode, dept, currency, compCode, userCode, option);
     }
 
     @Override
     public int delete(String tranDate, String coaCode, String dept, String currency,
-            String compId, String userId) {
+            String compCode, String userCode) {
         try {
-            dao.backup(tranDate, coaCode, dept, currency, compId, userId, "DELETE");
+            dao.backup(tranDate, coaCode, dept, currency, compCode, userCode, "DELETE");
         } catch (Exception ex) {
 
         }
 
-        int cnt = dao.delete(tranDate, coaCode, dept, currency, compId);
+        int cnt = dao.delete(tranDate, coaCode, dept, currency, compCode);
         return cnt;
     }
 

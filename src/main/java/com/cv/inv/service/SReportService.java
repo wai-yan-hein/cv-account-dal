@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface SReportService {
 
-    public void generateStockBalance(String stockCode, String locId, String compId, String macId);
+    public void generateStockBalance(String stockCode, String locId, String compCode, String macId);
 
     public void generateSaleByStock(String stockCode, String regionCode, String macId);
 

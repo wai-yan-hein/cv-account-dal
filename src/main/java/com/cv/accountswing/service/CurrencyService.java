@@ -23,5 +23,5 @@ public interface CurrencyService {
 
     public List<Currency> search(String code, String name, String compCode);
 
-    public int delete(String code, String compId);
+    public int delete(String code, String compCode);
 }

@@ -15,6 +15,6 @@ import java.util.List;
 public interface TmpProfitAndLostDao {
     public TmpProfitAndLost save(TmpProfitAndLost pal) throws Exception;
     public TmpProfitAndLost findById(Long id);
-    public List<TmpProfitAndLost> search(String userId, String compId);
-    public int delete(String id, String userId, String compId) throws Exception;
+    public List<TmpProfitAndLost> search(String userCode, String compCode);
+    public int delete(String id, String userCode, String compCode) throws Exception;
 }

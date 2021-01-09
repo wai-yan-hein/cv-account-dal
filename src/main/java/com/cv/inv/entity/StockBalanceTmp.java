@@ -32,7 +32,7 @@ public class StockBalanceTmp implements Serializable {
     private Stock stock;
     @Column(name = "loc_id", nullable = false)
     private Integer locId;
-    @Column(name = "machine_id", nullable = false)
+    @Column(name = "mac_id", nullable = false)
     private Integer machineId;
     @Column(name = "change_wt")
     private Float changeWt;

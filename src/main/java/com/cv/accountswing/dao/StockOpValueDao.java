@@ -20,13 +20,13 @@ public interface StockOpValueDao {
     public StockOpValue findById(StockOpValueKey key);
 
     public List search(String from, String to, String coaCode, String currency,
-            String dept, String compId);
+            String dept, String compCode);
 
     public void backup(String tranDate, String coaCode, String dept, String currency,
-            String compId, String userId, String option) throws Exception;
+            String compCode, String userCode, String option) throws Exception;
 
     public int delete(String tranDate, String coaCode, String dept, String currency,
-            String compId);
+            String compCode);
 
     public List<StockOpValue> findAll();
 

@@ -30,14 +30,14 @@ public class AssignCOADaoImpl extends AbstractDao<AssignCOAKey, AssignCOA> imple
     }
     
     @Override
-    public List search(String compId, String roleId, String deptCode){
+    public List search(String compCode, String roleId, String deptCode){
         String strFilter = "";
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.key.compId = " + compId;
+                strFilter = "o.key.compCode = " + compCode;
             }else{
-                strFilter = strFilter + " and o.key.compId = " + compId;
+                strFilter = strFilter + " and o.key.compCode = " + compCode;
             }
         }
         
@@ -67,15 +67,15 @@ public class AssignCOADaoImpl extends AbstractDao<AssignCOAKey, AssignCOA> imple
     }
     
     @Override
-    public int delete(String compId, String roleId, String deptCode, String coaCode){
+    public int delete(String compCode, String roleId, String deptCode, String coaCode){
         int cnt = 0;
         String strFilter = "";
         
-        if(!compId.equals("-")){
+        if(!compCode.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.key.compId = " + compId;
+                strFilter = "o.key.compCode = " + compCode;
             }else{
-                strFilter = strFilter + " and o.key.compId = " + compId;
+                strFilter = strFilter + " and o.key.compCode = " + compCode;
             }
         }
         
@@ -112,13 +112,13 @@ public class AssignCOADaoImpl extends AbstractDao<AssignCOAKey, AssignCOA> imple
     }
     
     @Override
-    public void updateNew(String compId, String roleId, String deptCode) throws Exception{
-        String strSql = "insert into assign_coa(comp_id, role_id, dept_code, coa_code)\n" +
+    public void updateNew(String compCode, String roleId, String deptCode) throws Exception{
+        String strSql = "insert into assign_coa(comp_code, role_id, dept_code, coa_code)\n" +
             "select comp_code," + roleId + ",'" + deptCode + "',coa_code\n" +
             "from chart_of_account \n" +
-            "where comp_code = " + compId + " and level >= 3\n" +
+            "where comp_code = " + compCode + " and level >= 3\n" +
             "and coa_code not in (select coa_code from assign_coa "
-                + "where comp_id = " + compId + " and role_id = " + roleId 
+                + "where comp_code = " + compCode + " and role_id = " + roleId 
                 + " and dept_code = '" + deptCode + "')";
         execSQL(strSql);
     }

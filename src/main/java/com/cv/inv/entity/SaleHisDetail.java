@@ -117,7 +117,7 @@ public class SaleHisDetail implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "loc_id")
+    @JoinColumn(name = "loc_code")
     public Location getLocation() {
         return location;
     }
@@ -172,7 +172,7 @@ public class SaleHisDetail implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "dept_id")
+    @JoinColumn(name = "dept_code")
     public Department getDepartment() {
         return department;
     }

@@ -15,18 +15,18 @@ import java.util.List;
  */
 public interface StockOpValueService {
 
-    public StockOpValue save(StockOpValue value, String userId);
+    public StockOpValue save(StockOpValue value, String userCode);
 
     public StockOpValue findById(StockOpValueKey key);
 
     public List search(String from, String to, String coaCode, String currency,
-            String dept, String compId);
+            String dept, String compCode);
 
     public void backup(String tranDate, String coaCode, String dept, String currency,
-            String compId, String userId, String option) throws Exception;
+            String compCode, String userCode, String option) throws Exception;
 
     public int delete(String tranDate, String coaCode, String dept, String currency,
-            String compId, String userId);
+            String compCode, String userCode);
     
     public List<StockOpValue> findAll();
 }

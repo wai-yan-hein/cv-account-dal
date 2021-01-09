@@ -24,7 +24,7 @@ public class VGeneralVoucher implements java.io.Serializable{
     private Date glDate;
     private String vouNo;
     private String reference;
-    private Integer compId;
+    private Integer compCode;
     
     @Id
     @Column(name = "gl_vou_no", unique = true, nullable = false)
@@ -64,12 +64,12 @@ public class VGeneralVoucher implements java.io.Serializable{
         this.reference = reference;
     }
 
-    @Column(name="comp_id")
+    @Column(name="comp_code")
     public Integer getCompId() {
-        return compId;
+        return compCode;
     }
 
-    public void setCompId(Integer compId) {
-        this.compId = compId;
+    public void setCompId(Integer compCode) {
+        this.compCode = compCode;
     }
 }

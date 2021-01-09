@@ -41,9 +41,9 @@ public class VCOAOpening implements Serializable {
     private Double crAmt;
     @Column(name = "dr_amt")
     private Double drAmt;
-    @Column(name = "user_id")
-    private String userId;
-    @Column(name = "comp_id")
+    @Column(name = "user_code")
+    private String userCode;
+    @Column(name = "comp_code")
     private String compCode;
     @Column(name = "dep_usr_code")
     private String depUsrCode;
@@ -53,8 +53,8 @@ public class VCOAOpening implements Serializable {
     private String traderName;
     @Column(name = "dept_code")
     private String depCode;
-    @Column(name = "cv_id")
-    private String cvId;
+    @Column(name = "trader_usr_code")
+    private String traderUsrCode;
 
     public Integer getOpId() {
         return opId;
@@ -105,11 +105,11 @@ public class VCOAOpening implements Serializable {
     }
 
     public String getUserId() {
-        return userId;
+        return userCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String userCode) {
+        this.userCode = userCode;
     }
 
     public String getCompCode() {
@@ -160,12 +160,12 @@ public class VCOAOpening implements Serializable {
         this.depCode = depCode;
     }
 
-    public String getCvId() {
-        return cvId;
+    public String getTraderUsrCode() {
+        return traderUsrCode;
     }
 
-    public void setCvId(String cvId) {
-        this.cvId = cvId;
+    public void setTraderUsrCode(String traderUsrCode) {
+        this.traderUsrCode = traderUsrCode;
     }
 
 }
