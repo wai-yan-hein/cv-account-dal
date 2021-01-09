@@ -120,7 +120,7 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
         return listRootMenu;
     }
 
-    private void getChild(VRoleMenu parent, String roleCode, String menuType) {
+      private void getChild(VRoleMenu parent, String roleCode, String menuType) {
         String strSql = "select o from VRoleMenu o where o.parent = '" + parent.getKey().getMenuCode()
                 + "' and o.key.roleCode = " + roleCode + "";
         if (!menuType.equals("-")) {
@@ -134,6 +134,36 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
                 for (int i = 0; i < listChild.size(); i++) {
                     VRoleMenu child = (VRoleMenu) listChild.get(i);
                     getChild(child, roleCode, menuType);
+                }
+            }
+        }
+    }
+     @Override
+    public List getParentChildMenuSelect(String roleCode, String menuType) {
+        String strSql ="select m from Menu m where m.parent = '1' and "
+                +" m.code in(select p.key.menuCode from Privilege p where p.isAllow=true and p.key.roleCode = "+ roleCode +") order by m.orderBy";
+        List listRootMenu = findHSQL(strSql);
+        for (int i = 0; i < listRootMenu.size(); i++) {
+            Menu parent = (Menu) listRootMenu.get(i);
+            getChildSelect(parent, roleCode, "-");
+        }
+
+        return listRootMenu;
+    }
+    private void getChildSelect(Menu parent, String roleCode, String menuType) {
+        String strSql = "select m from Menu m where m.parent=" + parent.getCode()
+                + " and m.code in(select p.key.menuCode from Privilege p where p.isAllow=true and p.key.roleCode='" + roleCode + "') order by m.orderBy";
+        if (!menuType.equals("-")) {
+            strSql = strSql + " and m.menuType = '" + menuType + "'";
+        }
+        List listChild = findHSQL(strSql);
+
+        if (listChild != null) {
+            if (listChild.size() > 0) {
+                parent.setChild(listChild);
+                for (int i = 0; i < listChild.size(); i++) {
+                    Menu child = (Menu) listChild.get(i);
+                    getChildSelect(child, roleCode, menuType);
                 }
             }
         }

@@ -7,6 +7,7 @@ package com.cv.accountswing.dao;
 
 import com.cv.accountswing.entity.UsrCompRole;
 import com.cv.accountswing.entity.UsrCompRoleKey;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public interface UsrCompRoleDao {
     public List<UsrCompRole> search(String userId, String compCode, String roleId);
     public List getAssignRole(String userId);
     public List getAssignCompany(String userId);
+    public ResultSet getAssignCompanySelect(String userId)throws Exception;
     public List getAssignCompany(String userId, String roleId, String compId);
     public int delete(String userId, String compCode, String roleId);
 }

@@ -11,8 +11,12 @@ import java.util.Map;
  *
  * @author winswe
  */
-public interface ReportDao{
-    public void genReport(String reportPath, String filePath, String fontPath, 
+public interface ReportDao {
+
+    public void genReport(String reportPath, String filePath, String fontPath,
             Map<String, Object> parameters) throws Exception;
+
     public void execSQLRpt(String... strSql) throws Exception;
+
+    public Object getAggResult(String sql);
 }

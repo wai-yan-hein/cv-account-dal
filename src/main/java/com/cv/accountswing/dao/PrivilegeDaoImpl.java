@@ -36,17 +36,17 @@ public class PrivilegeDaoImpl extends AbstractDao<PrivilegeKey, Privilege> imple
         
         if(!roleId.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.key.roleId = " + roleId;
+                strFilter = "o.key.roleCode = " + roleId;
             }else{
-                strFilter = strFilter + " and o.key.roleId = " + roleId;
+                strFilter = strFilter + " and o.key.roleCode = " + roleId;
             }
         }
         
         if(!menuId.equals("-")){
             if(strFilter.isEmpty()){
-                strFilter = "o.key.menuId = " + menuId;
+                strFilter = "o.key.menuCode = " + menuId;
             }else{
-                strFilter = strFilter + " and o.key.menuId = " + menuId;
+                strFilter = strFilter + " and o.key.menuCode = " + menuId;
             }
         }
         
@@ -60,17 +60,17 @@ public class PrivilegeDaoImpl extends AbstractDao<PrivilegeKey, Privilege> imple
     
     @Override
     public int delete(String roleId, String menuId){
-        String strSql = "delete from Privilege o where o.key.roleId = " + 
-                roleId + " and o.key.menuId = " + menuId;
+        String strSql = "delete from Privilege o where o.key.roleCode = " + 
+                roleId + " and o.key.menuCode = " + menuId;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }
     
     @Override
     public void copyPrivilege(String fromRoleId, String toRoleId) throws Exception{
-        String strSql = "insert into privilege(role_id, menu_id) " +
-            "select " + toRoleId + ", menu_id " +
-            "from privilege where role_id = " + fromRoleId;
+        String strSql = "insert into privilege(role_code, menu_code) " +
+            "select " + toRoleId + ", menu_code " +
+            "from privilege where role_code = " + fromRoleId;
         execSQL(strSql);
     }
     

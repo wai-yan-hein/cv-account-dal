@@ -38,6 +38,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public AppUser saveM(AppUser au) {
+        return dao.saveAccount(au);
+    }
+    @Override
     public AppUser findUserById(Integer id) {
         AppUser au = dao.findUserById(id);
         return au;
@@ -71,5 +75,10 @@ public class AccountServiceImpl implements AccountService {
         int seqNo = seqService.getSequence(macId, option, period, compCode);
         String tmpCatCode = String.format("%0" + 2 + "d", macId) + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
+    }
+    
+    @Override
+    public List<AppUser> findAll(){
+        return dao.findAll();
     }
 }

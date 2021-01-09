@@ -97,4 +97,7 @@ public class CompanyInfoDaoImpl extends AbstractDao<String, CompanyInfo> impleme
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }
+    
+   
+    
 }

@@ -92,6 +92,52 @@ public class SaleDetailServiceImpl implements SaleDetailService {
         }
 
     }
+    
+    @Override
+    public SaleHisDetail saveM(SaleHis saleHis, List<SaleHisDetail> listSaleDetail,
+            String vouStatus, List<String> deleteList) throws Exception {
+        String retInDetailId;
+        //serialize unique id
+        for (int i = 0; i < listSaleDetail.size(); i++) {
+            SaleHisDetail cSd = listSaleDetail.get(i);
+            if (cSd.getUniqueId() == null) {
+                if (i == 0) {
+                    cSd.setUniqueId(1);
+                } else {
+                    SaleHisDetail pSd = listSaleDetail.get(i - 1);
+                    cSd.setUniqueId(pSd.getUniqueId() + 1);
+                }
+            }
+        }
+        if (vouStatus.equals("EDIT")) {
+
+            if (deleteList != null) {
+                deleteList.forEach(detailId -> {
+                    if (detailId != null) {
+                        dao.delete(detailId);
+                    }
+                });
+            }
+        }
+        hisDao.save(saleHis);
+        String vouNo = saleHis.getVouNo();
+        SaleHisDetail shd= new SaleHisDetail();
+        for (SaleHisDetail sd : listSaleDetail) {
+            if (sd.getStock() != null) {
+                if (sd.getSaleDetailKey() != null) {
+                    sd.setSaleDetailKey(sd.getSaleDetailKey());
+                } else {
+                    retInDetailId = vouNo + '-' + sd.getUniqueId();
+                    sd.setSaleDetailKey(new SaleDetailKey(vouNo, retInDetailId));
+                }
+                //  pd.setLocation(pur.getLocationId());
+              shd=  dao.save(sd);
+            }
+        }
+        
+        return  shd;
+
+    }
 
     /*private void saveInGl() throws Exception {
     String sourceAccId = "";

@@ -7,14 +7,8 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.COADao;
 import com.cv.accountswing.dao.CompanyInfoDao;
-import com.cv.accountswing.entity.AppUser;
 import com.cv.accountswing.entity.ChartOfAccount;
 import com.cv.accountswing.entity.CompanyInfo;
-import com.cv.accountswing.entity.SystemProperty;
-import com.cv.accountswing.entity.SystemPropertyKey;
-import com.cv.accountswing.entity.UserRole;
-import com.cv.accountswing.entity.UsrCompRole;
-import com.cv.accountswing.entity.UsrCompRoleKey;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +45,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     private UsrCompRoleService usrCompRoleService;
 
     @Override
-    public CompanyInfo save(CompanyInfo ci) {
+    public CompanyInfo saveM(CompanyInfo ci) {
         return dao.save(ci);
     }
 
@@ -155,7 +149,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
             newCOA.setPrvCoaCode(newCOA.getCode());
             newCOA.setCode(newCOACode);
             newCOA.setCompCode(newCompCode);
-            newCOA.setParent(currParent);
+            newCOA.setCoaParent(currParent);
             coaDao.save(newCOA);
 
             insertChild(oldCompCode, newCompCode, newCOA.getPrvCoaCode(), newCOA.getCode(),
@@ -193,4 +187,6 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         String coaCode = macId + "-" + String.format("%0" + 2 + "d", seqNo);
         return coaCode;
     }
+  
+            
 }

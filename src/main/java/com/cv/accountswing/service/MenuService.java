@@ -25,6 +25,8 @@ public interface MenuService {
     public List<Menu> getParentChildMenu();
 
     public List getParentChildMenu(String roleId, String menuType);
+    
+    public List getParentChildMenuSelect(String roleId, String menuType);
 
     public List<Menu> searchM(String updatedDate);
 

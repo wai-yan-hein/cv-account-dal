@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cv.inv.entity;
+package com.cv.inv.h2.entity;
 
 import java.util.Date;
 import javax.persistence.*;
@@ -13,11 +13,10 @@ import org.hibernate.annotations.GenerationTime;
  * @author WSwe
  */
 @Entity
-@Table(name = "machine_info")
-public class MachineInfo implements java.io.Serializable {
+@Table(name = "machine_info_h2")
+public class MachineInfoH2 implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mac_id", unique = true, nullable = false)
     private Integer machineId;
     @Column(name = "machine_name", unique = true, nullable = false)
@@ -34,7 +33,7 @@ public class MachineInfo implements java.io.Serializable {
     @Column(name = "updated_date")
     private Date updatedDate;
 
-    public MachineInfo() {
+    public MachineInfoH2() {
     }
 
     public Integer getMachineId() {

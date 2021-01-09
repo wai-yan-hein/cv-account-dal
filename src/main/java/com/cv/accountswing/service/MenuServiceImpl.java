@@ -60,6 +60,11 @@ public class MenuServiceImpl implements MenuService {
     public List getParentChildMenu(String roleId, String menuType) {
         return dao.getParentChildMenu(roleId, menuType);
     }
+    
+    @Override
+    public List getParentChildMenuSelect(String roleId, String menuType){
+        return dao.getParentChildMenuSelect(roleId, menuType);
+    }
 
     @Override
     public List getReports(String roleId) {

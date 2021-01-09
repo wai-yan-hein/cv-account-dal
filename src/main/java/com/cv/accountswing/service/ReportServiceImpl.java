@@ -397,4 +397,8 @@ public class ReportServiceImpl implements ReportService {
                 + "group by bs_side, child_coa_code";
         dao.execSQLRpt(strSql);
     }
+     @Override
+    public Object getAggResult(String sql) {
+        return dao.getAggResult(sql);
+    }
 }

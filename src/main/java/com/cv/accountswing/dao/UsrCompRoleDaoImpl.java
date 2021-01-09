@@ -7,6 +7,7 @@ package com.cv.accountswing.dao;
 
 import com.cv.accountswing.entity.UsrCompRole;
 import com.cv.accountswing.entity.UsrCompRoleKey;
+import java.sql.ResultSet;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -86,6 +87,21 @@ public class UsrCompRoleDaoImpl extends AbstractDao<UsrCompRoleKey, UsrCompRole>
                 + userCode + " and o.key.roleCode = " + roleCode + " and o.key.compCode = " + compId;
         List listAssignComp = findHSQL(strSql);
         return listAssignComp;
+    }
+
+    @Override
+    public ResultSet getAssignCompanySelect(String userCode) throws Exception {
+        /* String strSql = "select ucr from UsrCompRole ucr  where ucr.key.userCode= '" + userCode + "' and "
+                + "ucr.key.compCode in (select  ci.compCode from CompanyInfo ci)";*/
+        String strSql = " SELECT ci.comp_code ,ci.name,ci.finicial_period_from,\n"
+                + "        ci.finicial_period_to,ucr.user_code,ucr.role_code\n"
+                + "    FROM\n"
+                + "        (company_info ci\n"
+                + "        JOIN usr_comp_role ucr)\n"
+                + "    WHERE\n"
+                + "        ci.comp_code = ucr.comp_code  and ucr.user_code='" + userCode + "'";
+        ResultSet rs = getResultSet(strSql);
+        return rs;
     }
 
     @Override

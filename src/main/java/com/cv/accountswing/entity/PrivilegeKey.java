@@ -17,9 +17,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class PrivilegeKey implements Serializable {
 
-    @Column(name = "role_code")
+   
     private String roleCode;
-    @Column(name = "menu_code")
     private String menuCode;
 
     public PrivilegeKey(String roleCode, String menuCode) {
@@ -30,6 +29,7 @@ public class PrivilegeKey implements Serializable {
     public PrivilegeKey() {
     }
 
+     @Column(name = "role_code")
     public String getRoleCode() {
         return roleCode;
     }
@@ -38,6 +38,7 @@ public class PrivilegeKey implements Serializable {
         this.roleCode = roleCode;
     }
 
+     @Column(name = "menu_code")
     public String getMenuCode() {
         return menuCode;
     }

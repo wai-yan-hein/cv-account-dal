@@ -23,4 +23,6 @@ public interface ReportService {
             String vouNo, String cvId, String userId, String glVouNo, String deptName, String traderName);
     public void genBalanceSheet(String from, String to, String dept, String userId, 
             String compId, String curr) throws Exception;
+    
+    public Object getAggResult(String sql);
 }

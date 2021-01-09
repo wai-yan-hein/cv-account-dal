@@ -19,6 +19,7 @@ public interface UsrCompRoleService {
     public List<UsrCompRole> search(String userId, String compCode, String roleId);
     public List getAssignRole(String userId);
     public List getAssignCompany(String userId);
+    public List getAssignCompanySelect(String userId)throws Exception;
     public List getAssignCompany(String userId, String roleId, String compId);
     public int delete(String userId, String compCode, String roleId);
 }

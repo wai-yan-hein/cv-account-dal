@@ -31,10 +31,10 @@ public class ChartOfAccount implements java.io.Serializable {
     private Date modifiedDate;
     private String createdBy;
     private String modifiedBy;
-    private String parent;
+    private String coaParent;
     private String option;
     private String compCode;
-    private Integer level;
+    private Integer coaLevel;
     private String coaCodeUsr;
     private String parentUsrCode;
     private String parentUsrDesp;
@@ -53,7 +53,7 @@ public class ChartOfAccount implements java.io.Serializable {
     }
 
     @Id
-    @Column(name = "coa_code", unique = true, nullable = false, length = 15)
+    @Column(name = "coa_code", unique = true, nullable = false)
     public String getCode() {
         return code;
     }
@@ -145,13 +145,13 @@ public class ChartOfAccount implements java.io.Serializable {
         this.modifiedBy = modifiedBy;
     }
 
-    @Column(name = "coa_parent", length = 15)
-    public String getParent() {
-        return parent;
+    @Column(name = "coa_parent")
+    public String getCoaParent() {
+        return coaParent;
     }
 
-    public void setParent(String parent) {
-        this.parent = parent;
+    public void setCoaParent(String coaParent) {
+        this.coaParent = coaParent;
     }
 
     @Column(name = "coa_option", length = 5)
@@ -172,13 +172,13 @@ public class ChartOfAccount implements java.io.Serializable {
         this.compCode = compCode;
     }
 
-    @Column(name = "level")
-    public Integer getLevel() {
-        return level;
+    @Column(name = "coa_level")
+    public Integer getCoaLevel() {
+        return coaLevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setCoaLevel(Integer coaLevel) {
+        this.coaLevel = coaLevel;
     }
 
     @Column(name = "coa_code_usr", length = 15)
@@ -258,5 +258,4 @@ public class ChartOfAccount implements java.io.Serializable {
         this.macId = macId;
     }
 
-    
 }
