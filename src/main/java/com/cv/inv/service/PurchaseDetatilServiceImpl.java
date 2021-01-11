@@ -5,8 +5,8 @@
  */
 package com.cv.inv.service;
 
-import com.cv.accountswing.dao.GlDao;
 import com.cv.accountswing.entity.Gl;
+import com.cv.accountswing.service.GlService;
 import com.cv.accountswing.util.Util1;
 import com.cv.inv.dao.AccSettingDao;
 import com.cv.inv.dao.PurchaseHisDao;
@@ -15,7 +15,6 @@ import com.cv.inv.entity.AccSetting;
 import com.cv.inv.entity.PurDetailKey;
 import com.cv.inv.entity.PurHis;
 import com.cv.inv.entity.PurHisDetail;
-import com.cv.inv.entity.SaleHis;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +37,8 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
     private final String SOURCE_PROG = "ACCOUNT";
     @Autowired
     private AccSettingDao settingDao;
-
     @Autowired
-    private GlDao glDao;
+    private GlService glService;
 
     @Autowired
     private PurchaseDetailDao dao;
@@ -82,7 +80,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             });
         }
         purchaseHisDao.save(pur);
-        String vouNo = pur.getPurInvId();
+        String vouNo = pur.getVouNo();
         for (PurHisDetail pd : listPD) {
             if (pd.getStock() != null) {
                 if (pd.getPurDetailKey() != null) {
@@ -95,13 +93,20 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                 dao.save(pd);
             }
         }
+        saveGl(pur);
     }
 
-    private void saveGl(SaleHis sh) throws Exception {
-        String vouNo = sh.getVouNo();
-        String compCode = sh.getCurrency().getKey().getCompCode();
-        String curCode = sh.getCurrency().getKey().getCode();
-        String cusCode = sh.getTraderId().getCode();
+    private void saveGl(PurHis ph) {
+        Date glDate = ph.getPurDate();
+        Integer macId = ph.getMacId();
+        String vouNo = ph.getVouNo();
+        String compCode = ph.getCurrency().getKey().getCompCode();
+        String curCode = ph.getCurrency().getKey().getCode();
+        String cusCode = ph.getTrader().getCode();
+        float vouTotal = Util1.getFloat(ph.getVouTotal());
+        float discount = Util1.getFloat(ph.getDiscP());
+        float payment = Util1.getFloat(ph.getPaid());
+        float tax = Util1.getFloat(ph.getTaxP());
         String vouTtlAccId = "";
         String sourceAccount = "";
         String discAccId = "";
@@ -131,12 +136,8 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
         String tranSource = "INVENTORY" + "-PUR";
         String remark = "";
         int split_id = 3;
-        double vouTotal = 0.0;
-        double discount = 0.0;
-        double payment = 0.0;
-        double tax = 0.0;
-        Date purDate = null;
-        List<Gl> listGL = glDao.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo, "-", "-", compCode, tranSource, "-", "-", "-");
+
+        List<Gl> listGL = glService.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo, "-", "-", compCode, tranSource, "-", "-", "-");
 
         boolean vTtlNeed = true;
         boolean discNeed = true;
@@ -147,47 +148,47 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             if (!listGL.isEmpty()) {
                 for (Gl gl : listGL) {
                     if (isDeleted) {
-                        glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                        //glDao.delete(gl.getGlCode(), DELETE_OPTION);
                     } else {
                         if (gl.getAccountId().equals(vouTtlAccId)) {
                             vTtlNeed = false;
                             if (vouTotal != 0) {
-                                glDao.delete(gl.getGlCode(), "Update");
+                                //glDao.delete(gl.getGlCode(), "Update");
                                 gl.setCrAmt(vouTotal);
                                 gl.setDescription(vouNo + remark);
                             } else {
-                                glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
                             }
                         } else if (gl.getAccountId().equals(discAccId)) {
                             discNeed = false;
                             if (discount != 0) {
-                                glDao.delete(gl.getGlCode(), "Update");
+                                //glDao.delete(gl.getGlCode(), "Update");
                                 gl.setDrAmt(discount);
                                 gl.setDescription(vouNo + remark);
                             } else {
-                                glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
                             }
                         } else if (gl.getAccountId().equals(payAccId)) {
                             payNeed = false;
                             if (payment != 0) {
-                                glDao.delete(gl.getGlCode(), "Update");
+                                //glDao.delete(gl.getGlCode(), "Update");
                                 gl.setDrAmt(payment);
                                 gl.setDescription(vouNo + remark);
                             } else {
-                                glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
                             }
                         } else if (gl.getAccountId().equals(taxAccId)) {
                             taxNeed = false;
                             if (tax != 0) {
-                                glDao.delete(gl.getGlCode(), "Update");
+                                //glDao.delete(gl.getGlCode(), "Update");
                                 gl.setDrAmt(tax);
                                 gl.setDescription(vouNo + remark);
                             } else {
-                                glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
                             }
                         }
 
-                        gl.setGlDate(purDate);
+                        gl.setGlDate(glDate);
                         gl.setTraderCode(cusCode);
                         gl.setFromCurId(curCode);
                     }
@@ -214,7 +215,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             glVouTotal.setCompCode(compCode);
             glVouTotal.setCrAmt(vouTotal);
             glVouTotal.setDescription(vouNo + remark);
-            glVouTotal.setGlDate(purDate);
+            glVouTotal.setGlDate(glDate);
             glVouTotal.setCreatedBy(SOURCE_PROG);
             glVouTotal.setCreatedDate(Util1.getTodayDate());
             glVouTotal.setTraderCode(cusCode);
@@ -224,6 +225,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             glVouTotal.setSplitId(split_id);
             glVouTotal.setFromCurId(curCode);
             glVouTotal.setDeptId(depCode);
+            glVouTotal.setMacId(macId);
             listGL.add(glVouTotal);
         }
 
@@ -234,7 +236,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             glDiscount.setCompCode(compCode);
             glDiscount.setDrAmt(discount);
             glDiscount.setDescription(vouNo + remark);
-            glDiscount.setGlDate(purDate);
+            glDiscount.setGlDate(glDate);
             glDiscount.setCreatedBy(SOURCE_PROG);
             glDiscount.setCreatedDate(Util1.getTodayDate());
             glDiscount.setTraderCode(cusCode);
@@ -244,6 +246,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             //glDiscount.setSplitId(split_id);
             glDiscount.setFromCurId(curCode);
             glDiscount.setDeptId(depCode);
+            glDiscount.setMacId(macId);
             listGL.add(glDiscount);
         }
 
@@ -254,7 +257,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             glVouPay.setCompCode(compCode);
             glVouPay.setDrAmt(payment);
             glVouPay.setDescription(vouNo + remark);
-            glVouPay.setGlDate(purDate);
+            glVouPay.setGlDate(glDate);
             glVouPay.setCreatedBy(SOURCE_PROG);
             glVouPay.setCreatedDate(Util1.getTodayDate());
             glVouPay.setTraderCode(cusCode);
@@ -264,6 +267,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             //glVouPay.setSplitId(split_id);
             glVouPay.setFromCurId(curCode);
             glVouPay.setDeptId(depCode);
+            glVouPay.setMacId(macId);
             listGL.add(glVouPay);
         }
 
@@ -274,7 +278,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             glVouTax.setCompCode(compCode);
             glVouTax.setCrAmt(tax);
             glVouTax.setDescription(vouNo + remark);
-            glVouTax.setGlDate(purDate);
+            glVouTax.setGlDate(glDate);
             glVouTax.setCreatedBy(SOURCE_PROG);
             glVouTax.setCreatedDate(Util1.getTodayDate());
             glVouTax.setTraderCode(depCode);
@@ -284,11 +288,18 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
             //glVouTax.setSplitId(split_id);
             glVouTax.setFromCurId(curCode);
             glVouTax.setDeptId(depCode);
+            glVouTax.setMacId(macId);
             listGL.add(glVouTax);
         }
 
         if (!listGL.isEmpty()) {
-            //saveBatchGL(listGL);
+            for (Gl gl : listGL) {
+                try {
+                    glService.save(gl);
+                } catch (Exception ex) {
+                    logger.error("Save Purchase GL :" + ex.getMessage());
+                }
+            }
         }
 
     }

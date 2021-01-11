@@ -23,18 +23,18 @@ public class RetInHisDetail implements java.io.Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "expire_date")
     private Date expireDate;
-    @Column(name = "ret_in_qty")
+    @Column(name = "qty")
     private Float qty;
-    @Column(name = "ret_in_price")
+    @Column(name = "price")
     private Float price;
     @ManyToOne
     @JoinColumn(name = "stock_unit")
     private StockUnit stockUnit;
-    @Column(name = "ret_in_amount")
+    @Column(name = "amount")
     private Float amount;
     @Column(name = "unique_id")
     private Integer uniqueId;
-    @Column(name = "ret_in_std_weight")
+    @Column(name = "std_wt")
     private Float stdWt;
     @Column(name = "small_wt")
     private Float smallWeight;

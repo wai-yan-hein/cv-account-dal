@@ -55,12 +55,14 @@ public class Location implements java.io.Serializable {
     public Location() {
     }
 
+    public Location(String locationName) {
+        this.locationName = locationName;
+    }
+
     public Location(String locationCode, String locationName) {
         this.locationCode = locationCode;
         this.locationName = locationName;
     }
-
-    
 
     @Override
     public String toString() {
@@ -74,8 +76,6 @@ public class Location implements java.io.Serializable {
     public void setLocationCode(String locationCode) {
         this.locationCode = locationCode;
     }
-
-    
 
     public String getLocationName() {
         return locationName;
@@ -157,5 +157,4 @@ public class Location implements java.io.Serializable {
         this.compCode = compCode;
     }
 
-    
 }

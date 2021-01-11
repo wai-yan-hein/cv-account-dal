@@ -203,7 +203,7 @@ public class GlDaoImpl extends AbstractDao<String, Gl> implements GlDao {
 
     @Override
     public int delete(String glCode, String option) throws Exception {
-        String strSql = "delete from Gl o where o.glCode = " + glCode;
+        String strSql = "delete from Gl o where o.glCode ='" + glCode + "'";
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

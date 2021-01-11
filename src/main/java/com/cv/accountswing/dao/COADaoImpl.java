@@ -32,7 +32,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
 
     @Override
     public List<ChartOfAccount> search(String code, String name, String compCode,
-            String level, String parent, String userParent, String usrCoaCode) {
+            String coaLevel, String parent, String userParent, String usrCoaCode) {
         String strSql = "select o from ChartOfAccount o ";
         String strFilter = "";
 
@@ -60,19 +60,19 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
             }
         }
 
-        if (!level.equals("-")) {
+        if (!coaLevel.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.level = " + level;
+                strFilter = "o.coaLevel = " + coaLevel;
             } else {
-                strFilter = strFilter + " and o.level = " + level;
+                strFilter = strFilter + " and o.coaLevel = " + coaLevel;
             }
         }
 
         if (!parent.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.parent = '" + parent + "'";
+                strFilter = "o.coaParent = '" + parent + "'";
             } else {
-                strFilter = strFilter + " and o.parent = '" + parent + "'";
+                strFilter = strFilter + " and o.coaParent = '" + parent + "'";
             }
         }
 
@@ -142,7 +142,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
     @Override
     public List<ChartOfAccount> getCOALevel3Above(String compCode) {
         String strSql = "select o from ChartOfAccount o where o.compCode = '"
-                + compCode + "' and o.level >= 3 order by o.level, o.coaNameEng";
+                + compCode + "' and o.coaLevel >= 3 order by o.coaLevel, o.coaNameEng";
         List<ChartOfAccount> listCOA = findHSQL(strSql);
         return listCOA;
     }
@@ -150,7 +150,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
     @Override
     public List<ChartOfAccount> getCOALevel2Above(String compCode) {
         String strSql = "select o from ChartOfAccount o where o.compCode = '"
-                + compCode + "' and o.level >= 2 order by o.level, o.coaNameEng";
+                + compCode + "' and o.coaLevel >= 2 order by o.coaLevel, o.coaNameEng";
         List<ChartOfAccount> listCOA = findHSQL(strSql);
         return listCOA;
     }
@@ -169,7 +169,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
 
     private void getChild(List<ChartOfAccount> listAllChild, String parent, String compCode) {
         String strSql = "select o from ChartOfAccount o where o.compCode = '"
-                + compCode + "' and o.parent = '" + parent + "'";
+                + compCode + "' and o.coaParent = '" + parent + "'";
         List<ChartOfAccount> listCOA = findHSQL(strSql);
 
         if (listCOA != null) {
@@ -186,15 +186,15 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
     @Override
     public List<ChartOfAccount> getChild(String compCode, String parent) {
         String strSql = "select o from ChartOfAccount o where o.compCode = '"
-                + compCode + "' and o.parent = '" + parent + "'";
+                + compCode + "' and o.coaParent = '" + parent + "'";
         List<ChartOfAccount> listCOA = findHSQL(strSql);
         return listCOA;
     }
 
     @Override
-    public List<ChartOfAccount> getCOAWithLevel(String compCode, String level) {
+    public List<ChartOfAccount> getCOAWithLevel(String compCode, String coaLevel) {
         String strSql = "select o from ChartOfAccount o where o.compCode = '"
-                + compCode + "' and o.level = " + level;
+                + compCode + "' and o.coaLevel = " + coaLevel;
         List<ChartOfAccount> listCOA = findHSQL(strSql);
         return listCOA;
     }
@@ -202,7 +202,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
     @Override
     public List<ChartOfAccount> getCompanyCOA(String compCode) {
         String strSql = "select o from ChartOfAccount o where o.compCode = '"
-                + compCode + "' or o.parent = '#' order by o.level, o.coaNameEng";
+                + compCode + "' or o.coaParent = '#' order by o.coaLevel, o.coaNameEng";
         List<ChartOfAccount> listCOA = findHSQL(strSql);
         return listCOA;
     }
@@ -210,21 +210,21 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
     @Override
     public List<ChartOfAccount> getCompanyCOA(String compCode, String deptId, String projectId) {
         String strSql = "select o from ChartOfAccount o where (o.compCode = '"
-                + compCode + "' or o.parent = '#') and o.code in "
+                + compCode + "' or o.coaParent = '#') and o.code in "
                 + "(select i.coaCode from ProjectCOAMapping i where i.projectId = "
-                + projectId + ") order by o.level, o.coaNameEng";
+                + projectId + ") order by o.coaLevel, o.coaNameEng";
         List<ChartOfAccount> listCOA = findHSQL(strSql);
 
         if (listCOA.isEmpty()) {
             strSql = "select o from ChartOfAccount o where (o.compCode = '"
-                    + compCode + "' or o.parent = '#') and o.code in (select i.key.coaCode "
-                    + "from CoaDeptMap i where i.key.deptCode = '" + deptId + "') order by o.level, o.coaNameEng";
+                    + compCode + "' or o.coaParent = '#') and o.code in (select i.key.coaCode "
+                    + "from CoaDeptMap i where i.key.deptCode = '" + deptId + "') order by o.coaLevel, o.coaNameEng";
             listCOA = findHSQL(strSql);
         }
 
         if (listCOA.isEmpty()) {
             strSql = "select o from ChartOfAccount o where o.compCode = '"
-                    + compCode + "' or o.parent = '#' order by o.level, o.coaNameEng";
+                    + compCode + "' or o.coaParent = '#' order by o.coaLevel, o.coaNameEng";
             listCOA = findHSQL(strSql);
         }
 
@@ -240,7 +240,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
     
     @Override
     public List<ChartOfAccount> findAll(){
-         String hsql = "select o from ChartOfAccount o  order by o.level";
+         String hsql = "select o from ChartOfAccount o  order by o.coaLevel";
          List<ChartOfAccount> ListCOA=findHSQL(hsql);
          return ListCOA;
          

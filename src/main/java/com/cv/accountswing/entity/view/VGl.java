@@ -28,9 +28,9 @@ public class VGl implements java.io.Serializable {
     private String accountId;
     private String toCurId;
     private String fromCurId;
-    private Double exRate;
-    private Double drAmt;
-    private Double crAmt;
+    private Float exRate;
+    private Float drAmt;
+    private Float crAmt;
     private String reference;
     private String deptId;
     private String vouNo;
@@ -38,7 +38,7 @@ public class VGl implements java.io.Serializable {
     private String traderCode;
     private String chequeNo;
     private String compCode;
-    private Double gst;
+    private Float gst;
     private Date createdDate;
     private Date modifyDate;
     private String modifyBy;
@@ -135,29 +135,29 @@ public class VGl implements java.io.Serializable {
     }
 
     @Column(name = "ex_rate")
-    public Double getExRate() {
+    public Float getExRate() {
         return exRate;
     }
 
-    public void setExRate(Double exRate) {
+    public void setExRate(Float exRate) {
         this.exRate = exRate;
     }
 
     @Column(name = "dr_amt")
-    public Double getDrAmt() {
+    public Float getDrAmt() {
         return drAmt;
     }
 
-    public void setDrAmt(Double drAmt) {
+    public void setDrAmt(Float drAmt) {
         this.drAmt = drAmt;
     }
 
     @Column(name = "cr_amt")
-    public Double getCrAmt() {
+    public Float getCrAmt() {
         return crAmt;
     }
 
-    public void setCrAmt(Double crAmt) {
+    public void setCrAmt(Float crAmt) {
         this.crAmt = crAmt;
     }
 
@@ -254,11 +254,11 @@ public class VGl implements java.io.Serializable {
     }
 
     @Column(name = "gst")
-    public Double getGst() {
+    public Float getGst() {
         return gst;
     }
 
-    public void setGst(Double gst) {
+    public void setGst(Float gst) {
         this.gst = gst;
     }
 

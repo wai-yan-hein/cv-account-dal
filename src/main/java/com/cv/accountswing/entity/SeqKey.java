@@ -6,6 +6,7 @@
 package com.cv.accountswing.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -56,5 +57,43 @@ public class SeqKey implements Serializable {
     public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.macId);
+        hash = 89 * hash + Objects.hashCode(this.seqOption);
+        hash = 89 * hash + Objects.hashCode(this.period);
+        hash = 89 * hash + Objects.hashCode(this.compCode);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SeqKey other = (SeqKey) obj;
+        if (!Objects.equals(this.seqOption, other.seqOption)) {
+            return false;
+        }
+        if (!Objects.equals(this.period, other.period)) {
+            return false;
+        }
+        if (!Objects.equals(this.compCode, other.compCode)) {
+            return false;
+        }
+        if (!Objects.equals(this.macId, other.macId)) {
+            return false;
+        }
+        return true;
+    }
+    
 
 }

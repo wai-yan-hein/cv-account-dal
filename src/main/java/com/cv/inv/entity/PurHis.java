@@ -21,8 +21,8 @@ import org.hibernate.annotations.GenerationTime;
 @Table(name = "pur_his")
 public class PurHis implements java.io.Serializable {
 
-    private String purInvId;
-    private Trader customerId;
+    private String vouNo;
+    private Trader trader;
     private Date purDate;
     private Date dueDate;
     private PaymentType paymentTypeId;
@@ -63,13 +63,13 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Id
-    @Column(name = "pur_inv_id", unique = true, nullable = false, length = 15)
-    public String getPurInvId() {
-        return purInvId;
+    @Column(name = "vou_no", unique = true, nullable = false, length = 15)
+    public String getVouNo() {
+        return vouNo;
     }
 
-    public void setPurInvId(String PurInvId) {
-        this.purInvId = PurInvId;
+    public void setVouNo(String vouNo) {
+        this.vouNo = vouNo;
     }
 
     @Column(name = "balance")
@@ -104,13 +104,13 @@ public class PurHis implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cus_id")
-    public Trader getCustomerId() {
-        return customerId;
+    @JoinColumn(name = "trader_code")
+    public Trader getTrader() {
+        return trader;
     }
 
-    public void setCustomerId(Trader customerId) {
-        this.customerId = customerId;
+    public void setTrader(Trader trader) {
+        this.trader = trader;
     }
 
     @Column(name = "deleted")

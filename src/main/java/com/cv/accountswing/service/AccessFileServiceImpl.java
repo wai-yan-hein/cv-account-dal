@@ -127,13 +127,12 @@ public class AccessFileServiceImpl implements AccessFileService {
                         }
 
                         //dr amount
-                        Double drAmt = resultSet.getDouble(7);
+                        /*Double drAmt = resultSet.getDouble(7);
                         gl.setDrAmt(drAmt);
-
+                        
                         //cr amount
                         Double crAmt = resultSet.getDouble(8);
-                        gl.setCrAmt(crAmt);
-
+                        gl.setCrAmt(crAmt);*/
                         //trader id
                         String tmpData = resultSet.getString(9);
                         if (tmpData.isEmpty()) {

@@ -8,8 +8,6 @@ package com.cv.inv.entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,16 +22,14 @@ import javax.persistence.Table;
 public class StockBalanceTmp implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "tran_id", unique = true, nullable = false)
-    private Integer tranId;
+    @Column(name = "mac_id", nullable = false)
+    private Integer macId;
     @ManyToOne
     @JoinColumn(name = "stock_code")
     private Stock stock;
-    @Column(name = "loc_id", nullable = false)
-    private Integer locId;
-    @Column(name = "mac_id", nullable = false)
-    private Integer machineId;
+    @ManyToOne
+    @JoinColumn(name = "loc_code")
+    private Location location;
     @Column(name = "change_wt")
     private Float changeWt;
     @Column(name = "change_unit")
@@ -47,7 +43,7 @@ public class StockBalanceTmp implements Serializable {
     @Column(name = "wt", nullable = false)
     private Float stdWt;
     @Column(name = "small_wt_ttl", nullable = false)
-    private Float stdWtTotal;
+    private Float totalWt;
     @Column(name = "small_unit", nullable = false)
     private String unit;
 
@@ -67,12 +63,12 @@ public class StockBalanceTmp implements Serializable {
         this.stdWt = stdWt;
     }
 
-    public Float getStdWtTotal() {
-        return stdWtTotal;
+    public Float getTotalWt() {
+        return totalWt;
     }
 
-    public void setStdWtTotal(Float stdWtTotal) {
-        this.stdWtTotal = stdWtTotal;
+    public void setTotalWt(Float totalWt) {
+        this.totalWt = totalWt;
     }
 
     public String getUnit() {
@@ -119,24 +115,20 @@ public class StockBalanceTmp implements Serializable {
         this.stock = stock;
     }
 
-    public Integer getLocId() {
-        return locId;
+    public Integer getMacId() {
+        return macId;
     }
 
-    public void setLocId(Integer locId) {
-        this.locId = locId;
+    public void setMacId(Integer macId) {
+        this.macId = macId;
     }
 
-    public Integer getMachineId() {
-        return machineId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setMachineId(Integer machineId) {
-        this.machineId = machineId;
-    }
-
-    public Integer getTranId() {
-        return tranId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
 }

@@ -70,9 +70,9 @@ public class TraderDaoImpl extends AbstractDao<String, Trader> implements Trader
 
         if (!parentCode.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.parent like '%" + parentCode + "%'";
+                strFilter = "o.coaParent like '%" + parentCode + "%'";
             } else {
-                strFilter = strFilter + " and o.parent like '%" + parentCode + "%'";
+                strFilter = strFilter + " and o.coaParent like '%" + parentCode + "%'";
             }
         }
         if (!appTraderCode.equals("-")) {

@@ -55,7 +55,7 @@ public class Stock implements java.io.Serializable {
     @Column(name = "pur_price")
     private Float purPrice;
     @ManyToOne
-    @JoinColumn(name = "pur_price_unit")
+    @JoinColumn(name = "pur_unit")
     private StockUnit purUnit;
     @Column(name = "sale_wt")
     private Float saleWeight;
@@ -335,6 +335,11 @@ public class Stock implements java.io.Serializable {
 
     public void setMacId(Integer macId) {
         this.macId = macId;
+    }
+
+    @Override
+    public String toString() {
+        return "Stock{" + "stockName=" + stockName + '}';
     }
 
 }

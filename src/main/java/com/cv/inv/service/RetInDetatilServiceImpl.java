@@ -5,11 +5,7 @@
  */
 package com.cv.inv.service;
 
-import com.cv.inv.dao.PurchaseHisDao;
 import com.cv.inv.dao.RetInDetailDao;
-import com.cv.inv.entity.PurDetailKey;
-import com.cv.inv.entity.PurHis;
-import com.cv.inv.entity.PurHisDetail;
 import com.cv.inv.entity.RetInHisDetail;
 import java.util.List;
 import org.slf4j.Logger;

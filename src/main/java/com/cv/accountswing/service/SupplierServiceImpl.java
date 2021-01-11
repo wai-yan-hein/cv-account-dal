@@ -7,8 +7,6 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.SupplierDao;
 import com.cv.accountswing.entity.Supplier;
-import com.cv.accountswing.entity.SystemProperty;
-import com.cv.accountswing.entity.SystemPropertyKey;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,7 +68,7 @@ public class SupplierServiceImpl implements SupplierService {
             ttlLength = Integer.parseInt(traderCodeLength);
         }
         int seqNo = seqService.getSequence(macId, option, period, compCode);
-        String tmpTraderId = String.format("%0" + 2 + "d", macId) + "-" + option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo);
+        String tmpTraderId = option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo) + "-" + String.format("%0" + 3 + "d", macId);
         return tmpTraderId;
     }
 

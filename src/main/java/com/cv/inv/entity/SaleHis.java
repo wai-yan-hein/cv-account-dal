@@ -28,7 +28,7 @@ public class SaleHis implements java.io.Serializable {
     private Trader traderId;
     @ManyToOne
     @JoinColumn(name = "saleman_code")
-    private SaleMan saleManId;
+    private SaleMan saleMan;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sale_date")
     private Date saleDate;
@@ -47,23 +47,23 @@ public class SaleHis implements java.io.Serializable {
     @Column(name = "remark", length = 500)
     private String remark;
     @Column(name = "vou_total")
-    private Double vouTotal;
+    private Float vouTotal;
     @Column(name = "discount")
-    private Double discount;
+    private Float discount;
     @Column(name = "disc_p")
-    private Double discP;
+    private Float discP;
     @Column(name = "tax_amt")
-    private Double taxAmt;
+    private Float taxAmt;
     @Column(name = "tax_p")
-    private Double taxP;
+    private Float taxP;
     @Column(name = "deleted")
     private Boolean deleted;
     @Column(name = "grand_total")
-    private Double grandTotal;
+    private Float grandTotal;
     @Column(name = "paid")
-    private Double paid;
+    private Float paid;
     @Column(name = "vou_balance")
-    private Double vouBalance;
+    private Float vouBalance;
     @ManyToOne
     @JoinColumn(name = "created_by")
     private AppUser createdBy;
@@ -115,12 +115,12 @@ public class SaleHis implements java.io.Serializable {
         this.traderId = traderId;
     }
 
-    public SaleMan getSaleManId() {
-        return saleManId;
+    public SaleMan getSaleMan() {
+        return saleMan;
     }
 
-    public void setSaleManId(SaleMan saleManId) {
-        this.saleManId = saleManId;
+    public void setSaleMan(SaleMan saleMan) {
+        this.saleMan = saleMan;
     }
 
     public Date getSaleDate() {
@@ -155,43 +155,43 @@ public class SaleHis implements java.io.Serializable {
         this.remark = remark;
     }
 
-    public Double getVouTotal() {
+    public Float getVouTotal() {
         return vouTotal;
     }
 
-    public void setVouTotal(Double vouTotal) {
+    public void setVouTotal(Float vouTotal) {
         this.vouTotal = vouTotal;
     }
 
-    public Double getDiscount() {
+    public Float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(Float discount) {
         this.discount = discount;
     }
 
-    public Double getDiscP() {
+    public Float getDiscP() {
         return discP;
     }
 
-    public void setDiscP(Double discP) {
+    public void setDiscP(Float discP) {
         this.discP = discP;
     }
 
-    public Double getTaxAmt() {
+    public Float getTaxAmt() {
         return taxAmt;
     }
 
-    public void setTaxAmt(Double taxAmt) {
+    public void setTaxAmt(Float taxAmt) {
         this.taxAmt = taxAmt;
     }
 
-    public Double getTaxP() {
+    public Float getTaxP() {
         return taxP;
     }
 
-    public void setTaxP(Double taxP) {
+    public void setTaxP(Float taxP) {
         this.taxP = taxP;
     }
 
@@ -203,27 +203,27 @@ public class SaleHis implements java.io.Serializable {
         this.deleted = deleted;
     }
 
-    public Double getGrandTotal() {
+    public Float getGrandTotal() {
         return grandTotal;
     }
 
-    public void setGrandTotal(Double grandTotal) {
+    public void setGrandTotal(Float grandTotal) {
         this.grandTotal = grandTotal;
     }
 
-    public Double getPaid() {
+    public Float getPaid() {
         return paid;
     }
 
-    public void setPaid(Double paid) {
+    public void setPaid(Float paid) {
         this.paid = paid;
     }
 
-    public Double getVouBalance() {
+    public Float getVouBalance() {
         return vouBalance;
     }
 
-    public void setVouBalance(Double vouBalance) {
+    public void setVouBalance(Float vouBalance) {
         this.vouBalance = vouBalance;
     }
 

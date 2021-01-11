@@ -20,7 +20,7 @@ import org.hibernate.annotations.GenerationTime;
 @Table(name = "ret_in_his")
 public class RetInHis implements java.io.Serializable {
 
-    private String retInId;
+    private String vouNo;
     private Date retInDate;
     private Trader customer;
     private PaymentType paymentType;
@@ -36,6 +36,8 @@ public class RetInHis implements java.io.Serializable {
     private Float paid;
     private Float balance;
     private Currency currency;
+    private Integer macId;
+    private String compCode;
     //For parent currency
     private Float exRateP;
     //=========================
@@ -93,7 +95,7 @@ public class RetInHis implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "location")
+    @JoinColumn(name = "loc_code")
     public Location getLocation() {
         return location;
     }
@@ -141,13 +143,13 @@ public class RetInHis implements java.io.Serializable {
     }
 
     @Id
-    @Column(name = "ret_in_code", unique = true, nullable = false, length = 15)
-    public String getRetInId() {
-        return retInId;
+    @Column(name = "vou_no", unique = true, nullable = false, length = 15)
+    public String getVouNo() {
+        return vouNo;
     }
 
-    public void setRetInId(String retInId) {
-        this.retInId = retInId;
+    public void setVouNo(String vouNo) {
+        this.vouNo = vouNo;
     }
 
     @Column(name = "session_id")
@@ -219,5 +221,13 @@ public class RetInHis implements java.io.Serializable {
         this.migId = migId;
     }
 
-    
+    @Column(name = "mac_id")
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
 }

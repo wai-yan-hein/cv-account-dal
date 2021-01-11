@@ -26,7 +26,7 @@ public class StockBalanceTmpDaoImpl extends AbstractDao<StockBalanceTmpKey, Stoc
 
     @Override
     public List<StockBalanceTmp> search(String machineId) {
-        String hsql = "select o from StockBalanceTmp o where o.machineId = " + machineId + "";
+        String hsql = "select o from StockBalanceTmp o where o.macId = " + machineId + "";
         return findHSQL(hsql);
     }
 

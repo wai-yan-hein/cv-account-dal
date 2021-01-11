@@ -115,13 +115,12 @@ public class CSVFileServiceImpl implements CSVFileService {
                     }
 
                     //dr amount
-                    Double drAmt = Util1.nullZero(nextRecord[6]);
+                    /*Double drAmt = Util1.nullZero(nextRecord[6]);
                     gl.setDrAmt(drAmt);
-
+                    
                     //cr amount
                     Double crAmt = Util1.nullZero(nextRecord[7]);
-                    gl.setCrAmt(crAmt);
-
+                    gl.setCrAmt(crAmt);*/
                     //trader id
                     String tmpData = nextRecord[8];
                     if (tmpData.isEmpty()) {

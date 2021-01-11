@@ -37,11 +37,11 @@ public class Gl implements java.io.Serializable {
     @Column(name = "from_cur_id")
     private String fromCurId;
     @Column(name = "ex_rate")
-    private Double exRate;
+    private Float exRate;
     @Column(name = "dr_amt")
-    private Double drAmt;
+    private Float drAmt;
     @Column(name = "cr_amt")
-    private Double crAmt;
+    private Float crAmt;
     @Column(name = "reference", length = 50)
     private String reference;
     @Column(name = "dept_code")
@@ -55,7 +55,7 @@ public class Gl implements java.io.Serializable {
     @Column(name = "comp_code")
     private String compCode;
     @Column(name = "gst")
-    private Double gst;
+    private Float gst;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
@@ -145,27 +145,27 @@ public class Gl implements java.io.Serializable {
         this.fromCurId = fromCurId;
     }
 
-    public Double getExRate() {
+    public Float getExRate() {
         return exRate;
     }
 
-    public void setExRate(Double exRate) {
+    public void setExRate(Float exRate) {
         this.exRate = exRate;
     }
 
-    public Double getDrAmt() {
+    public Float getDrAmt() {
         return drAmt;
     }
 
-    public void setDrAmt(Double drAmt) {
+    public void setDrAmt(Float drAmt) {
         this.drAmt = drAmt;
     }
 
-    public Double getCrAmt() {
+    public Float getCrAmt() {
         return crAmt;
     }
 
-    public void setCrAmt(Double crAmt) {
+    public void setCrAmt(Float crAmt) {
         this.crAmt = crAmt;
     }
 
@@ -249,11 +249,11 @@ public class Gl implements java.io.Serializable {
         this.createdBy = createdBy;
     }
 
-    public Double getGst() {
+    public Float getGst() {
         return gst;
     }
 
-    public void setGst(Double gst) {
+    public void setGst(Float gst) {
         this.gst = gst;
     }
 

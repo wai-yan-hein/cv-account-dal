@@ -187,6 +187,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         String coaCode = String.format("%0" + 2 + "d", macId) + String.format("%0" + 2 + "d", seqNo);
         return coaCode;
     }
+
+    @Override
+    public CompanyInfo save(CompanyInfo ci) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   
             
 }

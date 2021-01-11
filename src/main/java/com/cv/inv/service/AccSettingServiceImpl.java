@@ -35,7 +35,7 @@ public class AccSettingServiceImpl implements AccSettingService {
 
     @Override
     public AccSetting findByCode(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dao.findByCode(code);
     }
 
 }

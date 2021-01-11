@@ -29,7 +29,7 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
         try {
             deleteTmpFilter(macId);
             insertTmpStockFilter(stockCode, locId, compCode, macId);
-            calculateBalance();
+            calculateBalance(macId);
         } catch (Exception ex) {
             log.error("calclate stock balance :" + ex.getMessage());
         }
@@ -61,19 +61,29 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
         log.info("insert tmp table success.");
     }
 
-    private void calculateBalance() throws Exception {
-        String insertSql = "insert into tmp_stock_balance(stock_code,qty,wt,small_wt_ttl,small_unit,loc_id,mac_id)\n"
-                + "select b.stock_code,sum(b.qty) qty,b.wt,sum(b.small_wt) as small_wt_ttl,b.small_unit,b.loc,3\n"
+    private void calculateBalance(String macId) throws Exception {
+        String insertSql = "insert into tmp_stock_balance(stock_code,qty,wt,small_wt_ttl,small_unit,loc_code,mac_id)\n"
+                + "select b.stock_code,sum(b.qty) qty,b.wt,sum(b.small_wt) as small_wt_ttl,b.small_unit,b.loc," + macId + "\n"
                 + "	from(\n"
-                + "		select p.stock_code,sum(p.qty) as qty,p.avg_wt as wt,p.small_wt,p.small_unit,p.loc_id as loc \n"
+                + "		select p.stock_code,sum(p.qty) as qty,p.avg_wt as wt,sum(p.small_wt) as small_wt,p.small_unit,p.loc_code as loc \n"
                 + "		from v_purchase p,tmp_stock_filter tmp\n"
-                + "        where p.stock_code = tmp.stock_code and p.loc_id = tmp.loc_id and p.comp_code = tmp.comp_code\n"
+                + "        where p.stock_code = tmp.stock_code and p.loc_code = tmp.loc_code and p.comp_code = tmp.comp_code\n"
                 + "		group by stock_code,loc,std_wt\n"
                 + "			union all\n"
-                + "		select s.stock_code,sum(s.qty)*-1 as qty,s.std_weight as wt,(s.small_wt)*-1 small_wt,s.small_unit,s.loc_id as loc \n"
+                + "		select s.stock_code,sum(s.qty)*-1 as qty,s.std_weight as wt,sum(s.small_wt)*-1 as small_wt,s.small_unit,s.loc_code as loc \n"
                 + "		from v_sale s, tmp_stock_filter tmp\n"
-                + "		where s.stock_code = tmp.stock_code and s.loc_id = tmp.loc_id and s.comp_code = tmp.comp_code\n"
+                + "		where s.stock_code = tmp.stock_code and s.loc_code = tmp.loc_code and s.comp_code = tmp.comp_code\n"
                 + "		group by stock_code,loc,std_weight\n"
+                + "			union all \n"
+                + "		select  r.stock_code,sum(r.qty) as qty,r.std_wt as wt,sum(r.small_wt) as small_wt,r.small_unit,r.loc_code as loc\n"
+                + "		from v_return_in r, tmp_stock_filter tmp\n"
+                + "		where r.stock_code = tmp.stock_code and r.loc_code = tmp.loc_code and r.comp_code = tmp.comp_code \n"
+                + "		group by stock_code,loc,std_wt\n"
+                + "			union all \n"
+                + "        select  r.stock_code,sum(r.qty)*-1 as qty,r.std_wt as wt,sum(r.small_wt*-1) as  small_wt,r.small_unit,r.loc_code as loc\n"
+                + "		from v_return_out r, tmp_stock_filter tmp\n"
+                + "		where r.stock_code = tmp.stock_code and r.loc_code = tmp.loc_code and r.comp_code = tmp.comp_code \n"
+                + "		group by stock_code,loc,std_wt\n"
                 + "        ) b\n"
                 + "group by b.stock_code,b.loc";
         execSQL(insertSql);
