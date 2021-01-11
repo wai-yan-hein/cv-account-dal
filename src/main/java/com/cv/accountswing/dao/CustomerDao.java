@@ -6,6 +6,7 @@
 package com.cv.accountswing.dao;
 
 import com.cv.accountswing.entity.Customer;
+import com.cv.accountswing.entity.Trader;
 import java.util.List;
 
 /**
@@ -17,5 +18,6 @@ public interface CustomerDao {
     public Customer findById(String id);
     public List<Customer> search(String code, String name, String address, 
             String phone, String compCode);
+   
     public int delete(Integer id);
 }

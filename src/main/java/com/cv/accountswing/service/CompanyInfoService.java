@@ -16,7 +16,10 @@ public interface CompanyInfoService {
 
     public CompanyInfo save(CompanyInfo ci, String status, String userCode, String type);
 
+<<<<<<< HEAD
     public CompanyInfo save(CompanyInfo ci);
+=======
+>>>>>>> cefd04f7e7ee7b16d40a5b7675bd26e6e5737121
 
     public CompanyInfo saveM(CompanyInfo ci);
 

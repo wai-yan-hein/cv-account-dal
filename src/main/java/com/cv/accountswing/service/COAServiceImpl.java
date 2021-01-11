@@ -36,7 +36,12 @@ public class COAServiceImpl implements COAService {
     public ChartOfAccount save(ChartOfAccount coa) {
         if (coa.getCode() == null || coa.getCode().isEmpty()) {
             Integer macId = coa.getMacId();
+<<<<<<< HEAD
             coa.setCode(getCOACode(macId, coa.getCompCode()));
+=======
+            String compCode = coa.getCompCode();
+            coa.setCode(getCOACode(macId, "ChartOfAccount", "-", compCode));
+>>>>>>> cefd04f7e7ee7b16d40a5b7675bd26e6e5737121
         }
 
         return dao.save(coa);
@@ -116,10 +121,18 @@ public class COAServiceImpl implements COAService {
         return listCOA;
     }
 
+<<<<<<< HEAD
     private String getCOACode(Integer macId, String compCode) {
         int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
         String coaCode = String.format("%0" + 3 + "d", macId) + "-" + String.format("%0" + 5 + "d", seqNo);
         return coaCode;
+=======
+
+    private String getCOACode(Integer macId, String option, String period, String compCode) {
+        int seqNo = seqService.getSequence(macId, option, period, compCode);
+        String tmpCatCode = String.format("%0" + 2 + "d", macId) + "-" + String.format("%0" + 3 + "d", seqNo);
+        return tmpCatCode;
+>>>>>>> cefd04f7e7ee7b16d40a5b7675bd26e6e5737121
     }
 
     @Override

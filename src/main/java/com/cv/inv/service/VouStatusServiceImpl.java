@@ -32,7 +32,7 @@ public class VouStatusServiceImpl implements VouStatusService {
         if (vs.getVouStatusCode() == null || vs.getVouStatusCode().isEmpty()) {
             Integer macId = vs.getMacId();
             String compCode = vs.getCompCode();
-            vs.setVouStatusCode(getVouStatusCode(macId, "UnitPattern", "-", compCode));
+            vs.setVouStatusCode(getVouStatusCode(macId, "VouStatus", "-", compCode));
         }
         return vouDao.save(vs);
     }
