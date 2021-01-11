@@ -13,18 +13,13 @@ import java.util.List;
  * @author WSwe
  */
 public interface CompanyInfoService {
-<<<<<<< HEAD
-    public CompanyInfo save(CompanyInfo ci, String status, String userCode, String type);
-    public CompanyInfo save(CompanyInfo ci);
-=======
 
-    public CompanyInfo save(CompanyInfo ci, String status, String userId, String type);
+    public CompanyInfo save(CompanyInfo ci, String status, String userCode, String type);
+
 
     public CompanyInfo saveM(CompanyInfo ci);
 
->>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
     public CompanyInfo findById(String code);
-
 
     public List<CompanyInfo> search(String code, String name, String phone, String address,
             String businessType, String owner);

@@ -39,7 +39,7 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService {
     }
     
     @Override
-<<<<<<< HEAD
+
     public List<UsrCompRole> search(String userCode, String compCode, String roleId){
         return dao.search(userCode, compCode, roleId);
     }
@@ -57,25 +57,7 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService {
     @Override
     public List getAssignCompany(String userCode, String roleId, String compCode){
         return dao.getAssignCompany(userCode, roleId, compCode);
-=======
-    public List<UsrCompRole> search(String userId, String compCode, String roleId) {
-        return dao.search(userId, compCode, roleId);
-    }
-    
-    @Override
-    public List getAssignRole(String userId) {
-        return dao.getAssignRole(userId);
-    }
-    
-    @Override
-    public List getAssignCompany(String userId) {
-        return dao.getAssignCompany(userId);
-    }
-    
-    @Override
-    public List getAssignCompany(String userId, String roleId, String compId) {
-        return dao.getAssignCompany(userId, roleId, compId);
->>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
+        
     }
 
     @Override
@@ -103,13 +85,8 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService {
         return listC;
     }
 
-    @Override
-<<<<<<< HEAD
     public int delete(String userCode, String compCode, String roleId){
         return dao.delete(userCode, compCode, roleId);
-=======
-    public int delete(String userId, String compCode, String roleId) {
-        return dao.delete(userId, compCode, roleId);
->>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
+
     }
 }

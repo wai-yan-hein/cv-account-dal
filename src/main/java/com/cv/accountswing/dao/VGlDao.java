@@ -6,6 +6,7 @@
 package com.cv.accountswing.dao;
 
 import com.cv.accountswing.entity.view.VGl;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -23,6 +24,12 @@ public interface VGlDao {
             String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
             String glVouNo, String deptName, String traderName, String splitId,
             String projectId, String debAmt, String crdAmt);
+    
+    public ResultSet searchM(String from, String to, String desp, String sourceAcId,
+            String acId, String frmCurr, String toCurr, String reference, String dept,
+            String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
+            String glVouNo, String deptName, String traderName, String splitId,
+            String projectId, String debAmt, String crdAmt)throws Exception;
 
     public List<VGl> searchGlDrCr(String from, String to, String sourceAcId,
             String frmCurr, String dept, String cvId, String compCode, String option);

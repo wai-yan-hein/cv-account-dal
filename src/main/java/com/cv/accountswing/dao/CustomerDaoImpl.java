@@ -14,78 +14,80 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class CustomerDaoImpl extends AbstractDao<String, Customer> implements CustomerDao{
-    
+public class CustomerDaoImpl extends AbstractDao<String, Customer> implements CustomerDao {
+
     @Override
-    public Customer save(Customer cus){
+    public Customer save(Customer cus) {
         persist(cus);
         return cus;
     }
-    
+
     @Override
-    public Customer findById(String id){
+    public Customer findById(String id) {
         Customer cus = getByKey(id);
         return cus;
     }
-    
+
     @Override
-    public List<Customer> search(String code, String name, String address, 
-            String phone, String compCode){
+    public List<Customer> search(String code, String name, String address,
+            String phone, String compCode) {
         String strSql = "select o from Customer o ";
         String strFilter = "";
-        
-        if(!compCode.equals("-")){
-            if(strFilter.isEmpty()){
+
+        if (!compCode.equals("-")) {
+            if (strFilter.isEmpty()) {
                 strFilter = "o.compCode = '" + compCode + "'";
-            }else{
+            } else {
                 strFilter = strFilter + " and o.compCode = '" + compCode + "'";
             }
         }
-        
-        if(!code.equals("-")){
-            if(strFilter.isEmpty()){
+
+        if (!code.equals("-")) {
+            if (strFilter.isEmpty()) {
                 strFilter = "o.traderId = '" + code + "'";
-            }else{
+            } else {
                 strFilter = strFilter + " and o.traderId = '" + code + "'";
             }
         }
-        
-        if(!name.equals("-")){
-            if(strFilter.isEmpty()){
+
+        if (!name.equals("-")) {
+            if (strFilter.isEmpty()) {
                 strFilter = "o.traderName like '%" + name + "%'";
-            }else{
+            } else {
                 strFilter = strFilter + " and o.traderName like '%" + name + "%'";
             }
         }
-        
-        if(!address.equals("-")){
-            if(strFilter.isEmpty()){
+
+        if (!address.equals("-")) {
+            if (strFilter.isEmpty()) {
                 strFilter = "o.address like '%" + address + "%'";
-            }else{
+            } else {
                 strFilter = strFilter + " and o.address like '%" + address + "%'";
             }
         }
-        
-        if(!phone.equals("-")){
-            if(strFilter.isEmpty()){
+
+        if (!phone.equals("-")) {
+            if (strFilter.isEmpty()) {
                 strFilter = "o.phone like '%" + phone + "%'";
-            }else{
+            } else {
                 strFilter = strFilter + " and o.phone like '%" + phone + "%'";
             }
         }
-        
-        if(!strFilter.isEmpty()){
+
+        if (!strFilter.isEmpty()) {
             strSql = strSql + " where " + strFilter;
         }
-        
+
         List<Customer> listCus = findHSQL(strSql);
         return listCus;
     }
-    
+
     @Override
-    public int delete(Integer id){
+    public int delete(Integer id) {
         String strSql = "delete from Customer o where o.id = " + id;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }
+
+   
 }

@@ -34,12 +34,8 @@ public class COAServiceImpl implements COAService {
     public ChartOfAccount save(ChartOfAccount coa) {
         if (coa.getCode() == null || coa.getCode().isEmpty()) {
             Integer macId = coa.getMacId();
-<<<<<<< HEAD
-            coa.setCode(getCOACode(macId, coa.getCompCode().toString()));
-=======
             String compCode = coa.getCompCode();
             coa.setCode(getCOACode(macId, "ChartOfAccount", "-", compCode));
->>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
         }
 
         return dao.save(coa);
@@ -119,23 +115,11 @@ public class COAServiceImpl implements COAService {
         return listCOA;
     }
 
-<<<<<<< HEAD
-    private String getCOACode(Integer macId, String compCode) {
-        SystemPropertyKey spk = new SystemPropertyKey("system.coa.code.length",
-                compCode);
-        SystemProperty sp = spService.findById(spk);
-        int ttlLength = Integer.parseInt(sp.getPropValue());
-        int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
-        String coaCode = compCode + "-" + String.format("%0" + ttlLength + "d", seqNo);
-        return coaCode;
-=======
+
     private String getCOACode(Integer macId, String option, String period, String compCode) {
-
         int seqNo = seqService.getSequence(macId, option, period, compCode);
-
         String tmpCatCode = String.format("%0" + 2 + "d", macId) + "-" + String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
->>>>>>> 9d90b5663312bac2b0ac1ae2e6b571e906585deb
     }
 
     @Override

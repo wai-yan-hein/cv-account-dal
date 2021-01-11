@@ -62,17 +62,17 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
 
         if (!level.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.level = " + level;
+                strFilter = "o.coaLevel = " + level;
             } else {
-                strFilter = strFilter + " and o.level = " + level;
+                strFilter = strFilter + " and o.coaLevel = " + level;
             }
         }
 
         if (!parent.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.parent = '" + parent + "'";
+                strFilter = "o.coaParent = '" + parent + "'";
             } else {
-                strFilter = strFilter + " and o.parent = '" + parent + "'";
+                strFilter = strFilter + " and o.coaParent = '" + parent + "'";
             }
         }
 
