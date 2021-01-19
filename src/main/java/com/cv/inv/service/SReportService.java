@@ -19,4 +19,9 @@ public interface SReportService {
 
     public void reportViewer(String reportPath, String filePath, String fontPath,
             Map<String, Object> parameters);
+    
+    public void reportJsonViewer(String path,String reportPath, String filePath, String fontPath,
+            Map<String, Object> parameters);
+    
+     public String genJsonFile(final String strSql) throws Exception;
 }

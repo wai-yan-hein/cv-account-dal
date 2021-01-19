@@ -22,6 +22,6 @@ public interface SaleDetailService {
     public void save(SaleHis saleHis, List<SaleHisDetail> listSaleDetail,
             String vouStatus, List<String> deleteList) throws Exception;
     
-       public SaleHisDetail saveM(SaleHis saleHis, List<SaleHisDetail> listSaleDetail,
+       public void saveH2(SaleHis saleHis, List<SaleHisDetail> listSaleDetail,
             String vouStatus, List<String> deleteList) throws Exception;
 }

@@ -27,7 +27,7 @@ public class MachineInfoH2DaoImpl extends AbstractDao<Integer, MachineInfoH2> im
     public int getMax(String machineName) throws Exception {
         int maxId = 0;
         Object obj = null;
-        String strSQL = "select max(o.machineId) from MachineInfo o where o.machineName = '" + machineName + "'";
+        String strSQL = "select max(o.machineId) from MachineInfoH2 o where o.machineName = '" + machineName + "'";
         obj = exeSQL(strSQL);
         if (obj == null) {
             maxId = 0;

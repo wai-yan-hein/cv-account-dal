@@ -32,9 +32,17 @@ public class SReportServiceImpl implements SReportService {
         dao.reportViewer(reportPath, filePath, fontPath, parameters);
     }
 
+     @Override
+    public void reportJsonViewer(String path,String reportPath, String filePath, String fontPath, Map<String, Object> parameters) {
+        dao.reportJsonViewer(path,reportPath, filePath, fontPath, parameters);
+    }
     @Override
     public void generateSaleByStock(String stockCode, String regionCode, String macId) {
         dao.generateSaleByStock(stockCode, regionCode, macId);
     }
 
+    @Override
+     public String genJsonFile(final String strSql) throws Exception{
+         return dao.genJsonFile(strSql);
+     }
 }

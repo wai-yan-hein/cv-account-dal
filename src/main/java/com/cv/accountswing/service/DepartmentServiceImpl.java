@@ -66,7 +66,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private String getDepCode(Integer macId, String option, String period, String compCode) {
         int seqNo = seqService.getSequence(macId, option, period, compCode);
-        String tmpCatCode = String.format("%0" + 3 + "d", macId) + period + String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = String.format("%0" + 3 + "d", macId) + period + String.format("%0" + 4 + "d", seqNo);
         return tmpCatCode;
     }
 

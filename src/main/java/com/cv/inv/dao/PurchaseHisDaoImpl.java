@@ -119,9 +119,9 @@ public class PurchaseHisDaoImpl extends AbstractDao<String, PurHis> implements P
 
         if (!cusId.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "ph.cus_id = '" + cusId + "'";
+                strFilter = "ph.trader_code = '" + cusId + "'";
             } else {
-                strFilter = strFilter + " and ph.cus_id = '" + cusId + "'";
+                strFilter = strFilter + " and ph.trader_code = '" + cusId + "'";
             }
         }
 
@@ -142,16 +142,16 @@ public class PurchaseHisDaoImpl extends AbstractDao<String, PurHis> implements P
         }
         ResultSet rs = null;
         if (!strFilter.isEmpty()) {
-            strFilter = "select distinct ph.pur_date, ph.pur_inv_id, ph.remark,td.trader_name,\n"
-                    + " ph.vou_total, ph.deleted, l.location_name,\n"
-                    + " apu.user_short_name  from pur_his ph\n"
-                    + " join  pur_his_detail phd on phd.vou_id=ph.pur_inv_id\n"
-                    + " join location l on ph.ph_loc_id = l.location_id\n"
-                    + " join appuser apu on ph.created_by = apu.user_code\n"
-                    + " left join trader td on ph.cus_id=td.id\n"
-                    + "  where " + strFilter
-                    + " and ph.deleted=false\n"
-                    + " order by ph.pur_date  desc ,ph.pur_inv_id desc";
+            strFilter = "select distinct ph.pur_date, ph.vou_no, ph.remark,td.trader_name,\n"
+                    + " ph.vou_total,apu.user_short_name,ph.deleted  from pur_his ph\n"
+                    + "                     join  pur_his_detail phd on phd.vou_id=ph.vou_no\n"
+                    + "                    join location l on ph.loc_code = l.location_code\n"
+                    + "                     join appuser apu on ph.created_by = apu.app_user_code\n"
+                    + "                     left join trader td on ph.trader_code=td.code\n"
+                    + "                     where \n"
+                    +strFilter
+                    + "                     and ph.deleted=false\n"
+                    + "                    order by ph.pur_date  desc ,ph.vou_no desc";
             rs = getResultSet(strFilter);
         }
 
@@ -160,8 +160,8 @@ public class PurchaseHisDaoImpl extends AbstractDao<String, PurHis> implements P
     }
 
     @Override
-    public int delete(String vouNo) throws Exception{
-        String strSql = "update pur_his set pur_his = true where pur_inv_id = '" + vouNo + "'";
+    public int delete(String vouNo) throws Exception {
+        String strSql = "update pur_his set pur_his = true where vou_no = '" + vouNo + "'";
         execSQL(strSql);
         return 1;
     }

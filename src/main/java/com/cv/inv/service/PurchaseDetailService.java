@@ -16,7 +16,8 @@ import java.util.List;
 public interface PurchaseDetailService {
 
     public PurHisDetail save(PurHisDetail pd);
-
+    
+    public void saveH2(PurHis pur, List<PurHisDetail> listPD, List<String> delList);
     public List<PurHisDetail> search(String glCode);
 
     public void save(PurHis gl, List<PurHisDetail> pd, List<String> delList);

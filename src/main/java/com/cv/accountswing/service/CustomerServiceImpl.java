@@ -7,6 +7,8 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.CustomerDao;
 import com.cv.accountswing.entity.Customer;
+import com.cv.accountswing.entity.SystemProperty;
+import com.cv.accountswing.entity.SystemPropertyKey;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,8 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
         String tmpTraderId = option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo) + "-" + String.format("%0" + 3 + "d", macId);
         return tmpTraderId;
     }
-<<<<<<< HEAD
-=======
+
 
     private boolean isAutoGenerate(String compCode) {
         boolean status = false;
@@ -89,7 +90,5 @@ public class CustomerServiceImpl implements CustomerService {
 
         return status;
     }
-    
-   
->>>>>>> cefd04f7e7ee7b16d40a5b7675bd26e6e5737121
+
 }

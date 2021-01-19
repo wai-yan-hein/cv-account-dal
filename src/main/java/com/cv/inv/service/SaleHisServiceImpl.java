@@ -5,7 +5,7 @@
  */
 package com.cv.inv.service;
 
-import com.cv.accountswing.dummy.SaleVouSearch;
+import com.cv.accountswing.dummy.SaleVouSearchFilter;
 import com.cv.accountswing.util.Util1;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -50,20 +50,20 @@ public class SaleHisServiceImpl implements SaleHisService {
     }
 
     @Override
-    public List<SaleVouSearch> searchM(String fromDate, String toDate, String cusId,
+    public List<SaleVouSearchFilter> searchM(String fromDate, String toDate, String cusId,
             String vouStatusId, String remark, String stockCode, String userCode) throws Exception {
         ResultSet rs = hisDao.searchM(fromDate, toDate, cusId, vouStatusId, remark, stockCode, userCode);
-        List<SaleVouSearch> listVS = null;
+        List<SaleVouSearchFilter> listVS = null;
 
         if (rs != null) {
             listVS = new ArrayList();
             while (rs.next()) {
-                SaleVouSearch vs = new SaleVouSearch(
-                        Util1.toDateStr(rs.getDate("sale_date"), "yyyy-MM-dd HH:mm:ss"),
+                SaleVouSearchFilter vs = new SaleVouSearchFilter(
+                        Util1.toDate(rs.getDate("sale_date"), "yyyy-MM-dd HH:mm:ss"),
                         rs.getString("voucher_no"),
                         rs.getString("remark"),
                         rs.getString("trader_name"),
-                        rs.getDouble("grand_total"),
+                        rs.getFloat("vou_total"),
                         rs.getBoolean("deleted"),
                         rs.getString("user_short_name")
                 );

@@ -57,6 +57,7 @@ public class PurHis implements java.io.Serializable {
     private Float promoGetPercent;
     private boolean promoGetComplete;
     private String intgUpdStatus;
+    private Integer macId;
 
     public PurHis() {
     }
@@ -141,7 +142,7 @@ public class PurHis implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "ph_loc_id")
+    @JoinColumn(name = "loc_code")
     public Location getLocation() {
         return location;
     }
@@ -394,5 +395,16 @@ public class PurHis implements java.io.Serializable {
     public void setDeptCode(Department deptCode) {
         this.deptCode = deptCode;
     }
+
+    @Column(name = "mac_id")
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+    
+    
 
 }

@@ -19,4 +19,6 @@ public interface StockReportDao {
     public List<StockReport> getReports();
     
     public List<StockReport> findAll();
+    
+    
 }

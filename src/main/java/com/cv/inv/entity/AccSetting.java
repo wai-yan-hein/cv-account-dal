@@ -7,6 +7,7 @@ package com.cv.inv.entity;
 
 import com.cv.accountswing.entity.ChartOfAccount;
 import com.cv.accountswing.entity.Department;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,9 +19,9 @@ import javax.persistence.Table;
  *
  * @author Lenovo
  */
-@Entity()
+@Entity
 @Table(name = "acc_setting")
-public class AccSetting {
+public class AccSetting implements Serializable {
 
     @Id
     @Column(name = "type", unique = true, nullable = false)

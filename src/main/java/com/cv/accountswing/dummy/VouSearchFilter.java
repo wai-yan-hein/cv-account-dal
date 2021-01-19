@@ -21,6 +21,7 @@ public class VouSearchFilter {
     private String locId;
     private String filterCode;
     private String vouNo;
+    private String machineId;
     
 
     public String getFromDate() {
@@ -103,5 +104,22 @@ public class VouSearchFilter {
         this.vouNo = vouNo;
     }
 
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getMachineId() {
+        return machineId;
+    }
+
+    public void setMachineId(String machineId) {
+        this.machineId = machineId;
+    }
+
+    
     
 }

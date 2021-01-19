@@ -184,7 +184,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
     private String getCompCode(Integer macId) {
         int seqNo = seqService.getSequence(macId, "Company", "-", "-");
-        String coaCode = String.format("%0" + 2 + "d", macId) + String.format("%0" + 2 + "d", seqNo);
+        String coaCode = String.format("%0" + 3 + "d", macId) + String.format("%0" + 4 + "d", seqNo);
         return coaCode;
     }
 

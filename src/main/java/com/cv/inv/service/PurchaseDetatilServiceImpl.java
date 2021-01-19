@@ -57,6 +57,46 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
     }
 
     @Override
+    public void saveH2(PurHis pur, List<PurHisDetail> listPD, List<String> delList) {
+        String retInDetailId;
+        for (int i = 0; i < listPD.size(); i++) {
+            PurHisDetail cPD = listPD.get(i);
+            if (cPD.getUniqueId() == null) {
+                if (i == 0) {
+                    cPD.setUniqueId(1);
+                } else {
+                    PurHisDetail pSd = listPD.get(i - 1);
+                    cPD.setUniqueId(pSd.getUniqueId() + 1);
+                }
+            }
+        }
+        if (delList != null) {
+            delList.forEach(detailId -> {
+                try {
+                    dao.delete(detailId);
+                } catch (Exception ex) {
+                    logger.error("delete purchase detail :" + ex.getMessage());
+                }
+            });
+        }
+        purchaseHisDao.save(pur);
+        String vouNo = pur.getVouNo();
+        for (PurHisDetail pd : listPD) {
+            if (pd.getStock() != null) {
+                if (pd.getPurDetailKey() != null) {
+                    pd.setPurDetailKey(pd.getPurDetailKey());
+                } else {
+                    retInDetailId = vouNo + '-' + pd.getUniqueId();
+                    pd.setPurDetailKey(new PurDetailKey(vouNo, retInDetailId));
+                }
+                //  pd.setLocation(pur.getLocationId());
+                dao.save(pd);
+            }
+        }
+        
+    }
+
+    @Override
     public void save(PurHis pur, List<PurHisDetail> listPD, List<String> delList) {
         String retInDetailId;
         for (int i = 0; i < listPD.size(); i++) {
@@ -93,7 +133,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                 dao.save(pd);
             }
         }
-        saveGl(pur);
+       // saveGl(pur);
     }
 
     private void saveGl(PurHis ph) {

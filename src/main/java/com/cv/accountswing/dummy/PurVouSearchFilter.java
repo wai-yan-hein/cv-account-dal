@@ -5,21 +5,23 @@
  */
 package com.cv.accountswing.dummy;
 
+import java.util.Date;
+
 /**
  *
  * @author SAI
  */
-public class SaleVouSearch {
+public class PurVouSearchFilter {
 
-    private String tranDate;
+    private Date tranDate;
     private String vouNo;
     private String remark;
     private String traderName;
-    private Double vouTotal;
+    private Float vouTotal;
     private boolean deleted;
     private String userName;
 
-    public SaleVouSearch(String tranDate, String vouNo, String remark, String traderName, Double vouTotal, boolean deleted, String userName) {
+    public PurVouSearchFilter(Date tranDate, String vouNo, String remark, String traderName, Float vouTotal, boolean deleted, String userName) {
         this.tranDate = tranDate;
         this.vouNo = vouNo;
         this.remark = remark;
@@ -29,11 +31,11 @@ public class SaleVouSearch {
         this.userName = userName;
     }
 
-    public String getTranDate() {
+    public Date getTranDate() {
         return tranDate;
     }
 
-    public void setTranDate(String tranDate) {
+    public void setTranDate(Date tranDate) {
         this.tranDate = tranDate;
     }
 
@@ -61,11 +63,11 @@ public class SaleVouSearch {
         this.traderName = traderName;
     }
 
-    public Double getVouTotal() {
+    public Float getVouTotal() {
         return vouTotal;
     }
 
-    public void setVouTotal(Double vouTotal) {
+    public void setVouTotal(Float vouTotal) {
         this.vouTotal = vouTotal;
     }
 

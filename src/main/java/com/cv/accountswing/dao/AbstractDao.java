@@ -1,7 +1,5 @@
 package com.cv.accountswing.dao;
 
-
-
 import com.cv.account.api.util.ZipFile;
 import com.cv.accountswing.common.CVWork;
 import com.cv.accountswing.util.Util1;
@@ -23,9 +21,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import net.sf.jasperreports.engine.DefaultJasperReportsContext;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperReportsContext;
+import net.sf.jasperreports.engine.data.JsonDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 import org.hibernate.Criteria;
@@ -225,6 +229,21 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         doWork(work);
     }
 
+    public void genJsonReport(final String path, final String reportPath, final String filePath,
+            final Map<String, Object> parameters, final String fontPath) throws Exception {
+        File file = null;
+        file = new File(reportPath + ".jrxml");
+        JsonDataSource ds = new JsonDataSource(new File(path), "data");
+        JasperDesign jasperDesign = JRXmlLoader.load(file);
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
+        if (jasperPrint != null) {
+            JasperViewer.viewReport(jasperPrint, false);
+
+        }
+    }
+
     private JasperPrint getReport(String reportPath, Map<String, Object> parameters,
             Connection con, String fontPath) throws Exception {
         JasperPrint jp;
@@ -234,9 +253,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         jasperReportsContext.setProperty("net.sf.jasperreports.default.pdf.font.name", fontPath);
         jasperReportsContext.setProperty("net.sf.jasperreports.default.pdf.encoding", "Identity-H");
         jasperReportsContext.setProperty("net.sf.jasperreports.default.pdf.embedded", "true");
-        //JRProperties.setProperty("net.sf.jasperreports.default.pdf.font.name", fontPath);
-        //JRProperties.setProperty("net.sf.jasperreports.default.pdf.encoding", "Identity-H");
-        //JRProperties.setProperty("net.sf.jasperreports.default.pdf.embedded", true);
+
         jp = JasperFillManager.fillReport(reportPath, parameters, con);
 
         return jp;
@@ -262,7 +279,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
             FileOutputStream fos = new FileOutputStream(filePath + fileName + ".json");
             OutputStreamWriter isr = new OutputStreamWriter(fos, "UTF-8");
 
-            try (JsonWriter writer = new JsonWriter(isr)) {
+            try ( JsonWriter writer = new JsonWriter(isr)) {
                 writer.beginObject();
                 writer.name("data");
                 writer.beginArray();
@@ -353,5 +370,55 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         }
 
         return resultSet;
+    }
+    
+     public String genJSON(final String strSql) throws Exception {
+
+        String filePath = Util1.getAppWorkFolder() + File.separator + "zipFile" + File.separator;
+        String fileName = UUID.randomUUID().toString();
+        String jsonFile = "";
+
+        CVWork work = new CVWork(strSql);
+        doWork(work);
+        Connection con = work.getCon();
+
+//        while (!work.isStatus()) {
+//            System.out.println("Waiting.");
+//        }
+        try {
+            PreparedStatement pstmt = con.prepareStatement(strSql);
+            ResultSet rsFile = pstmt.executeQuery();
+            int ttlCols = rsFile.getMetaData().getColumnCount();
+            FileOutputStream fos = new FileOutputStream(filePath + fileName + ".json");
+            OutputStreamWriter isr = new OutputStreamWriter(fos, "UTF-8");
+
+            try ( JsonWriter writer = new JsonWriter(isr)) {
+                writer.beginObject();
+                writer.name("data");
+                writer.beginArray();
+
+                while (rsFile.next()) {
+
+                    writer.beginObject();
+                    for (int i = 1; i <= ttlCols; i++) {
+
+                        String colName = rsFile.getMetaData().getColumnName(i);
+                        writer.name(colName).value(rsFile.getString(colName));
+                    }
+                    writer.endObject();
+                }
+
+                writer.endArray();
+                writer.endObject();
+                writer.close();
+            }
+            
+            jsonFile = filePath+fileName + ".json";
+
+        } catch (IOException | SQLException ex) {
+            logger.error("getResultSet : " + strSql + " : " + ex.getMessage());
+        }
+
+        return jsonFile;
     }
 }

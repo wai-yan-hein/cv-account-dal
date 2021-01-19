@@ -142,9 +142,9 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
 
         if (!cusId.equals("-")) {
             if (strSql.isEmpty()) {
-                strSql = "sh.cus_id = " + cusId;
+                strSql = "sh.cus_code = '" + cusId + "'";
             } else {
-                strSql = strSql + " and sh.cus_id = " + cusId;
+                strSql = strSql + " and sh.cus_code = '" + cusId + "'";
             }
         }
 
@@ -166,9 +166,9 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
 
         if (!userCode.equals("-")) {
             if (strSql.isEmpty()) {
-                strSql = "sh.user_code = '" + userCode + "'";
+                strSql = "sh.created_by = '" + userCode + "'";
             } else {
-                strSql = strSql + " and sh.user_code = '" + userCode + "'";
+                strSql = strSql + " and sh.created_by = '" + userCode + "'";
             }
         }
 
@@ -184,15 +184,14 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
         ResultSet rs = null;
         if (!strSql.isEmpty()) {
             strSql = "  select distinct sh.sale_date, sh.voucher_no, sh.remark,td.trader_name,\n"
-                    + " sh.grand_total, sh.deleted,\n"
+                    + " sh.vou_total, sh.deleted,\n"
                     + " apu.user_short_name \n"
                     + " from sale_his sh	\n"
                     + " join sale_his_detail shd ON shd.vou_id = sh.voucher_no\n"
-                    + " join appuser apu on sh.user_code = apu.app_user_code\n"
-                    + " left join trader td on sh.cus_id=td.code\n"
-                    + "  where  \n"
-                    +strSql
-                    + "  and sh.deleted= false order by sh.sale_date desc, sh.voucher_no desc";
+                    + " join appuser apu on sh.created_by = apu.app_user_code\n"
+                    + " left join trader td on sh.cus_code=td.code\n"
+                    + "  where " + strSql
+                    + " and sh.deleted= false";
             rs = getResultSet(strSql);
         }
 

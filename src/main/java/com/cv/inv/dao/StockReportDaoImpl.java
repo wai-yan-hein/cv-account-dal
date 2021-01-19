@@ -35,4 +35,5 @@ public class StockReportDaoImpl extends AbstractDao<Integer, StockReport> implem
         return findHSQL(hsql);
     }
 
+    
 }

@@ -130,6 +130,15 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
             log.error("Report Viewer Error :" + ex.getMessage());
         }
     }
+    
+       @Override
+    public void reportJsonViewer(String path,String reportPath, String filePath, String fontPath, Map<String, Object> parameters) {
+        try {
+            genJsonReport(path,reportPath, filePath, parameters, fontPath);
+        } catch (Exception ex) {
+            log.error("Report Viewer Error :" + ex.getMessage());
+        }
+    }
 
     @Override
     public void generateSaleByStock(String stockCode, String regionCode, String macId) {
@@ -141,4 +150,8 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
         }
     }
 
+     @Override
+    public String genJsonFile(final String strSql) throws Exception {
+        return genJSON(strSql);
+    }
 }

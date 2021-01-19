@@ -152,4 +152,8 @@ public class StockServiceImpl implements StockService {
         return dao.searchB(stockBrand);
     }
 
+    @Override
+    public List<Stock> searchM(String updatedDate) {
+        return dao.searchM(updatedDate);
+    }
 }

@@ -102,11 +102,11 @@ public class SaleDetailServiceImpl implements SaleDetailService {
             }
         }
         //save to account 
-        saveGl(saleHis);
+       //saveGl(saleHis);
     }
 
     @Override
-    public SaleHisDetail saveM(SaleHis saleHis, List<SaleHisDetail> listSaleDetail,
+    public void saveH2(SaleHis saleHis, List<SaleHisDetail> listSaleDetail,
             String vouStatus, List<String> deleteList) throws Exception {
         String retInDetailId;
         //serialize unique id
@@ -147,7 +147,7 @@ public class SaleDetailServiceImpl implements SaleDetailService {
             }
         }
 
-        return shd;
+       
 
     }
 

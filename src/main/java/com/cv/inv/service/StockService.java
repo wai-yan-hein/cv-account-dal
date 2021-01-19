@@ -30,4 +30,6 @@ public interface StockService {
 
     public List<Stock> searchB(String stockBrand);
 
+    public List<Stock> searchM(String updatedDate);
+
 }
