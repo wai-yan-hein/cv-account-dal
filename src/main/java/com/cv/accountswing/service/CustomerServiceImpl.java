@@ -70,26 +70,5 @@ public class CustomerServiceImpl implements CustomerService {
         String tmpTraderId = option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo) + "-" + String.format("%0" + 3 + "d", macId);
         return tmpTraderId;
     }
-<<<<<<< HEAD
-=======
 
-    private boolean isAutoGenerate(String compCode) {
-        boolean status = false;
-        SystemPropertyKey spk = new SystemPropertyKey("system.trader.id.auto.generate",
-                compCode);
-        SystemProperty sp = spService.findById(spk);
-
-        if (sp != null) {
-            if (sp.getPropValue() != null) {
-                if (sp.getPropValue().equals("Y")) {
-                    status = true;
-                }
-            }
-        }
-
-        return status;
-    }
-    
-   
->>>>>>> cefd04f7e7ee7b16d40a5b7675bd26e6e5737121
 }

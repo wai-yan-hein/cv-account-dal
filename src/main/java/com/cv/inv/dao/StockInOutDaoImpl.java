@@ -29,9 +29,56 @@ public class StockInOutDaoImpl extends AbstractDao<String, StockInOut> implement
     }
 
     @Override
-    public List<StockInOut> search(String batchCode, String date, String desp, String remark) {
-        String hsql;
-        return null;
+    public List<StockInOut> search(String batchCode, String fromDate, String toDate, String desp, String remark) {
+        String strFilter = "";
+        if (!fromDate.equals("-") && !toDate.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "date(o.tranDate) between '" + fromDate
+                        + "' and '" + toDate + "'";
+            } else {
+                strFilter = strFilter + " and date(o.tranDate) between '"
+                        + fromDate + "' and '" + toDate + "'";
+            }
+        } else if (!fromDate.endsWith("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "date(o.tranDate) >= '" + fromDate + "'";
+            } else {
+                strFilter = strFilter + " and date(o.tranDate) >= '" + fromDate + "'";
+            }
+        } else if (!toDate.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "date(o.tranDate) <= '" + toDate + "'";
+            } else {
+                strFilter = strFilter + " and date(o.tranDate) <= '" + toDate + "'";
+            }
+        }
+        if (!batchCode.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "o.batchCode = '" + batchCode + "'";
+            } else {
+                strFilter = strFilter + " and o.batchCode = '" + batchCode + "'";
+            }
+        }
+        if (!desp.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "o.description = '" + desp + "'";
+            } else {
+                strFilter = strFilter + " and o.description = '" + desp + "'";
+            }
+        }
+        if (!remark.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "o.remark = '" + remark + "'";
+            } else {
+                strFilter = strFilter + " and o.remark = '" + remark + "'";
+            }
+        }
+        String strSql = "select o from StockInOut o";
+        if (!strFilter.isEmpty()) {
+            strSql = strSql + " where " + strFilter + " order by date(o.tranDate) desc, o.batchCode desc";
+        }
+
+        return findHSQL(strSql);
     }
 
     @Override

@@ -38,9 +38,9 @@ public class TraderDaoImpl extends AbstractDao<String, Trader> implements Trader
 
         if (!code.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.traderId like '" + code + "%'";
+                strFilter = "o.code like '" + code + "%'";
             } else {
-                strFilter = strFilter + " and o.traderId like '" + code + "%'";
+                strFilter = strFilter + " and o.code like '" + code + "%'";
             }
         }
 

@@ -29,9 +29,5 @@ public interface ReportService {
     public void genBalanceSheet(String from, String to, String dept, String userCode,
             String compCode, String curr) throws Exception;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cefd04f7e7ee7b16d40a5b7675bd26e6e5737121
     public Object getAggResult(String sql);
 }

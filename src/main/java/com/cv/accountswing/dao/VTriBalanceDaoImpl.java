@@ -15,12 +15,11 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class VTriBalanceDaoImpl extends AbstractDao<TmpOpeningClosingKey, VTriBalance> implements VTriBalanceDao{
-    
+public class VTriBalanceDaoImpl extends AbstractDao<TmpOpeningClosingKey, VTriBalance> implements VTriBalanceDao {
+
     @Override
-    public List<VTriBalance> getTriBalance(String userCode, String compCode){
-        String strSql = "select o from VTriBalance o where o.key.userCode = '" + 
-                userCode + "' and o.key.compCode = " + compCode;
+    public List<VTriBalance> getTriBalance(String macId) {
+        String strSql = "select o from VTriBalance o where o.macId = " + macId + "";
         List<VTriBalance> listVTB = findHSQL(strSql);
         return listVTB;
     }

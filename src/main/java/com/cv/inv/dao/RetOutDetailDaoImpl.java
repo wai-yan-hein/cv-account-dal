@@ -18,28 +18,15 @@ import org.springframework.stereotype.Repository;
 public class RetOutDetailDaoImpl extends AbstractDao<String, RetOutHisDetail> implements RetOutDetailDao {
 
     @Override
-    public List<RetOutHisDetail> search(String glCode) {
-        String strFilter = "";
-        if (!glCode.equals("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "v.outCompoundKey.vouNo = '" + glCode + "'";
-            } else {
-                strFilter = strFilter + " and v.outCompoundKey.vouNo = '" + glCode + "'";
-            }
-        }
-        String strSql = "select v from RetOutDetailHis v";
+    public List<RetOutHisDetail> search(String code) {
 
-        List<RetOutHisDetail> listDH = null;
-        if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter;
-            listDH = findHSQL(strSql);
-        }
-
-        return listDH;
+        String hsql = "select v from RetOutDetailHis v where v.outCompoundKey.vouNo = '" + code + "' "
+                + " order by v.uniqueId";
+        return findHSQL(hsql);
     }
 
     @Override
-    public int delete(String id) throws Exception{
+    public int delete(String id) throws Exception {
         String strSql = "delete from ret_out_detail_his where ret_out_detail_id = '" + id + "'";
         execSQL(strSql);
         return 1;

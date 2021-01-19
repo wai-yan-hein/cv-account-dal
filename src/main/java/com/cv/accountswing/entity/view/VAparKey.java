@@ -15,31 +15,32 @@ import javax.persistence.Embeddable;
  * @author winswe
  */
 @Embeddable
-public class VAparKey implements Serializable{
-    private Integer cvId;
+public class VAparKey implements Serializable {
+
+    private String traderCode;
     private String userCode;
     private Integer compCode;
     private String currency;
-    
-    @Column(name="trader_code")
-    public Integer getCvId() {
-        return cvId;
+
+    @Column(name = "trader_code")
+    public String getTraderCode() {
+        return traderCode;
     }
 
-    public void setCvId(Integer cvId) {
-        this.cvId = cvId;
+    public void setTraderCode(String traderCode) {
+        this.traderCode = traderCode;
     }
 
-    @Column(name="user_code")
-    public String getUserId() {
+    @Column(name = "user_code")
+    public String getUserCode() {
         return userCode;
     }
 
-    public void setUserId(String userCode) {
+    public void setUserCode(String userCode) {
         this.userCode = userCode;
     }
 
-    @Column(name="comp_code")
+    @Column(name = "comp_code")
     public Integer getCompCode() {
         return compCode;
     }
@@ -48,28 +49,30 @@ public class VAparKey implements Serializable{
         this.compCode = compCode;
     }
 
-    @Column(name="curr_id")
+    @Column(name = "curr_id")
     public String getCurrency() {
         return currency;
     }
 
-    
     public void setCurrency(String currency) {
         this.currency = currency;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.cvId);
-        hash = 97 * hash + Objects.hashCode(this.userCode);
-        hash = 97 * hash + Objects.hashCode(this.compCode);
-        hash = 97 * hash + Objects.hashCode(this.currency);
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.traderCode);
+        hash = 19 * hash + Objects.hashCode(this.userCode);
+        hash = 19 * hash + Objects.hashCode(this.compCode);
+        hash = 19 * hash + Objects.hashCode(this.currency);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -77,18 +80,19 @@ public class VAparKey implements Serializable{
             return false;
         }
         final VAparKey other = (VAparKey) obj;
-        if (!Objects.equals(this.cvId, other.cvId)) {
+        if (!Objects.equals(this.traderCode, other.traderCode)) {
             return false;
         }
         if (!Objects.equals(this.userCode, other.userCode)) {
             return false;
         }
-        if (!Objects.equals(this.compCode, other.compCode)) {
+        if (!Objects.equals(this.currency, other.currency)) {
             return false;
         }
-        if (!Objects.equals(this.currency, other.currency)) {
+        if (!Objects.equals(this.compCode, other.compCode)) {
             return false;
         }
         return true;
     }
+
 }

@@ -34,7 +34,7 @@ public class Order implements Serializable {
     @Column(name = "description")
     private String desp;
     @ManyToOne
-    @JoinColumn(name = "cus_id")
+    @JoinColumn(name = "cus_code")
     private Trader trader;
     @Column(name = "order_status")
     private Boolean isOrder;

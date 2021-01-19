@@ -18,10 +18,11 @@ import javax.persistence.Table;
 @Table(name = "privilege")
 public class Privilege implements java.io.Serializable {
 
+    @EmbeddedId
     private PrivilegeKey key;
+    @Column(name = "allow")
     private Boolean isAllow;
 
-    @EmbeddedId
     public PrivilegeKey getKey() {
         return key;
     }
@@ -30,7 +31,6 @@ public class Privilege implements java.io.Serializable {
         this.key = key;
     }
 
-    @Column(name = "allow")
     public Boolean getIsAllow() {
         return isAllow;
     }

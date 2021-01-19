@@ -6,6 +6,7 @@
 package com.cv.inv.dao;
 
 import com.cv.inv.entity.StockInOut;
+import com.cv.inv.entity.StockInOutDetail;
 import java.util.List;
 
 /**
@@ -18,7 +19,8 @@ public interface StockInOutDao {
 
     public StockInOut save(StockInOut stock);
 
-    public List<StockInOut> search(String batchCode, String date, String desp, String remark);
+    public List<StockInOut> search(String batchCode, String fromDate, String toDate, String desp, String remark);
 
     public int delete(String id);
+
 }

@@ -116,7 +116,7 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
         String delSql = "delete from tmp_region_code where mac_id = " + macId + "";
         execSQL(delSql);
         if (!regionCode.equals("-")) {
-            String insertSql = "insert tmp_region_code(reg_id,mac_id)\n"
+            String insertSql = "insert tmp_region_code(reg_code,mac_id)\n"
                     + "select reg_id," + macId + " from region where reg_id in (" + regionCode + ")";
             execSQL(insertSql);
         }

@@ -26,19 +26,9 @@ public class RetInDetailDaoImpl extends AbstractDao<RetInCompoundKey, RetInHisDe
 
     @Override
     public List<RetInHisDetail> search(String retInCode) {
-        String strFilter = "";
-        if (!retInCode.equals("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "o.retInKey.vouNo = '" + retInCode + "'";
-            } else {
-                strFilter = strFilter + " and o.retInKey.vouNo = '" + retInCode + "'";
-            }
-        }
-        String strSql = "select o from RetInHisDetail o";
 
-        if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter;
-        }
+        String strSql = "select o from RetInHisDetail o where o.retInKey.vouNo = '" + retInCode + "'"
+                + " order by o.uniqueId";
         return findHSQL(strSql);
     }
 
