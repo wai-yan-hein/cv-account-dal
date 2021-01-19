@@ -19,6 +19,10 @@ public interface UsrCompRoleService {
 
     public UsrCompRole findById(UsrCompRoleKey key);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
     public List<UsrCompRole> search(String userCode, String compCode, String roleId);
 
     public List getAssignRole(String userCode);

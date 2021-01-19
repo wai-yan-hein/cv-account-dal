@@ -5,8 +5,11 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.dao.SystemPropertyDao;
 import com.cv.accountswing.dummy.VouSearch;
 import com.cv.accountswing.entity.Gl;
+import com.cv.accountswing.entity.SystemProperty;
+import com.cv.accountswing.entity.SystemPropertyKey;
 import com.cv.accountswing.service.GlService;
 import com.cv.accountswing.util.Util1;
 
@@ -43,6 +46,8 @@ public class RetInServiceImpl implements RetInService {
     private GlService glService;
     @Autowired
     private AccSettingService settingService;
+    @Autowired
+    private SystemPropertyDao systemPropertyDao;
 
     @Autowired
     private RetInDetailDao dao;
@@ -141,139 +146,114 @@ public class RetInServiceImpl implements RetInService {
     }
 
     private void saveGl(RetInHis rh) {
-        Date glDate = rh.getRetInDate();
-        Integer macId = rh.getMacId();
-        String vouNo = rh.getVouNo();
         String compCode = rh.getCurrency().getKey().getCompCode();
-        String curCode = rh.getCurrency().getKey().getCode();
-        String cusCode = rh.getCustomer().getCode();
-        float vouTotal = Util1.getFloat(rh.getVouTotal());
-        float payment = Util1.getFloat(rh.getPaid());
-        String vouTtlAccId = "";
-        String sourceAccount = "";
-        String payAccId = "";
-        String depCode = "";
-        AccSetting setting = settingService.findByCode("Return In");
-        if (setting.getVouAccount() != null) {
-            vouTtlAccId = setting.getVouAccount().getCode();
-        }
-        /*if (setting.getDisAccount() != null) {
+        SystemPropertyKey key = new SystemPropertyKey("system.inventory.use.account", compCode);
+        SystemProperty systemProperty = systemPropertyDao.findById(key);
+        if (systemProperty != null) {
+            if (systemProperty.getPropValue().equals("1")) {
+                Date glDate = rh.getRetInDate();
+                Integer macId = rh.getMacId();
+                String vouNo = rh.getVouNo();
+                String curCode = rh.getCurrency().getKey().getCode();
+                String cusCode = rh.getCustomer().getCode();
+                float vouTotal = Util1.getFloat(rh.getVouTotal());
+                //float payment = Util1.getFloat(rh.getPaid());
+                String vouTotalACc = rh.getCustomer().getAccount().getCode();
+                String sourceAccount = "";
+                //String payAccId = "";
+                String depCode = "";
+                AccSetting setting = settingService.findByCode("Return In");
+                if (setting != null) {
+                    
+                    /*if (setting.getDisAccount() != null) {
         discAccId = setting.getDisAccount().getCode();
         }*/
-        if (setting.getPayAccount() != null) {
+ /*if (setting.getPayAccount() != null) {
             payAccId = setting.getPayAccount().getCode();
-        }
-        /* if (setting.getTaxAccount() != null) {
+            }*/
+ /* if (setting.getTaxAccount() != null) {
         taxAccId = setting.getTaxAccount().getCode();
         }*/
-        if (setting.getDepartment() != null) {
-            depCode = setting.getDepartment().getDeptCode();
-        }
-        if (setting.getSoureAccount() != null) {
-            sourceAccount = setting.getSoureAccount().getCode();
-        }
-        boolean isDeleted = false;
-        String tranSource = "INVENTORY" + "-RETURN IN";
-        String remark = "";
-        int split_id = 5;
-
-        List<Gl> listGL = glService.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo, "-", "-", compCode, tranSource, "-", "-", "-");
-
-        boolean vTtlNeed = true;
-        boolean payNeed = true;
-
-        if (listGL != null) {
-            if (!listGL.isEmpty()) {
-                for (Gl gl : listGL) {
-                    if (isDeleted) {
-                        //glDao.delete(gl.getGlCode(), DELETE_OPTION);
-                    } else {
-                        if (gl.getAccountId().equals(vouTtlAccId)) {
-                            vTtlNeed = false;
-                            if (vouTotal != 0) {
-                                //glDao.delete(gl.getGlCode(), "Update");
-                                gl.setCrAmt(vouTotal);
-                                gl.setDescription(vouNo + remark);
-                            } else {
-                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
-                            }
-                        } else if (gl.getAccountId().equals(payAccId)) {
-                            payNeed = false;
-                            if (payment != 0) {
-                                //glDao.delete(gl.getGlCode(), "Update");
-                                gl.setDrAmt(payment);
-                                gl.setDescription(vouNo + remark);
-                            } else {
-                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
-                            }
-                        }
-
-                        gl.setGlDate(glDate);
-                        gl.setTraderCode(cusCode);
-                        gl.setFromCurId(curCode);
+                    if (setting.getDepartment() != null) {
+                        depCode = setting.getDepartment().getDeptCode();
+                    }
+                    if (setting.getSoureAccount() != null) {
+                        sourceAccount = setting.getSoureAccount().getCode();
                     }
                 }
-            } else {
-                listGL = new ArrayList();
-            }
-        } else {
+                boolean isDeleted = false;
+                String tranSource = "INVENTORY" + "-RETURN IN";
+                String remark = "";
+                int split_id = 5;
 
-            listGL = new ArrayList();
-        }
+                List<Gl> listGL = glService.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo, "-", "-", compCode, tranSource, "-", "-", "-");
 
-        if (isDeleted) {
-            vTtlNeed = false;
-            payNeed = false;
-        }
+                boolean vTtlNeed = true;
+                if (listGL != null) {
+                    if (!listGL.isEmpty()) {
+                        String userCode = rh.getUpdatedBy().getAppUserCode();
+                        for (Gl gl : listGL) {
+                            if (isDeleted) {
+                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                            } else {
+                                if (gl.getAccountId().equals(vouTotalACc)) {
+                                    vTtlNeed = false;
+                                    if (vouTotal != 0) {
+                                        //glDao.delete(gl.getGlCode(), "Update");
+                                        gl.setDrAmt(vouTotal);
+                                        gl.setDescription(vouNo + remark);
+                                    } else {
+                                        //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                    }
+                                }
 
-        if (vouTotal != 0 && vTtlNeed) {
-            Gl glVouTotal = new Gl();
-            glVouTotal.setSourceAcId(sourceAccount);
-            glVouTotal.setAccountId(vouTtlAccId);
-            glVouTotal.setCompCode(compCode);
-            glVouTotal.setCrAmt(vouTotal);
-            glVouTotal.setDescription(vouNo + remark);
-            glVouTotal.setGlDate(glDate);
-            glVouTotal.setCreatedBy(SOURCE_PROG);
-            glVouTotal.setCreatedDate(Util1.getTodayDate());
-            glVouTotal.setTraderCode(cusCode);
-            glVouTotal.setTranSource(tranSource);
-            glVouTotal.setVouNo(vouNo);
-            glVouTotal.setReference("Return In Voucher Total");
-            glVouTotal.setSplitId(split_id);
-            glVouTotal.setFromCurId(curCode);
-            glVouTotal.setDeptId(depCode);
-            glVouTotal.setMacId(macId);
-            listGL.add(glVouTotal);
-        }
+                                gl.setGlDate(glDate);
+                                gl.setTraderCode(cusCode);
+                                gl.setFromCurId(curCode);
+                                gl.setModifyBy(userCode);
+                            }
+                        }
+                    } else {
+                        listGL = new ArrayList();
+                    }
+                } else {
 
-        if (payment != 0 && payNeed) {
-            Gl glVouPay = new Gl();
-            glVouPay.setSourceAcId(sourceAccount);
-            glVouPay.setAccountId(payAccId);
-            glVouPay.setCompCode(compCode);
-            glVouPay.setDrAmt(payment);
-            glVouPay.setDescription(vouNo + remark);
-            glVouPay.setGlDate(glDate);
-            glVouPay.setCreatedBy(SOURCE_PROG);
-            glVouPay.setCreatedDate(Util1.getTodayDate());
-            glVouPay.setTraderCode(cusCode);
-            glVouPay.setTranSource(tranSource);
-            glVouPay.setVouNo(vouNo);
-            glVouPay.setReference("Return In Voucher Payment");
-            glVouPay.setSplitId(split_id);
-            glVouPay.setFromCurId(curCode);
-            glVouPay.setDeptId(depCode);
-            glVouPay.setMacId(macId);
-            listGL.add(glVouPay);
-        }
+                    listGL = new ArrayList();
+                }
 
-        if (!listGL.isEmpty()) {
-            for (Gl gl : listGL) {
-                try {
-                    glService.save(gl);
-                } catch (Exception ex) {
-                    log.error("Save Return In GL :" + ex.getMessage());
+                if (isDeleted) {
+                    vTtlNeed = false;
+                }
+
+                if (vouTotal != 0 && vTtlNeed) {
+                    Gl glVouTotal = new Gl();
+                    glVouTotal.setSourceAcId(sourceAccount);
+                    glVouTotal.setAccountId(vouTotalACc);
+                    glVouTotal.setCompCode(compCode);
+                    glVouTotal.setDrAmt(vouTotal);
+                    glVouTotal.setDescription(vouNo + remark);
+                    glVouTotal.setGlDate(glDate);
+                    glVouTotal.setCreatedBy(SOURCE_PROG);
+                    glVouTotal.setCreatedDate(Util1.getTodayDate());
+                    glVouTotal.setTraderCode(cusCode);
+                    glVouTotal.setTranSource(tranSource);
+                    glVouTotal.setVouNo(vouNo);
+                    glVouTotal.setReference("Return In Voucher Total");
+                    glVouTotal.setSplitId(split_id);
+                    glVouTotal.setFromCurId(curCode);
+                    glVouTotal.setDeptId(depCode);
+                    glVouTotal.setMacId(macId);
+                    listGL.add(glVouTotal);
+                }
+
+                if (!listGL.isEmpty()) {
+                    for (Gl gl : listGL) {
+                        try {
+                            glService.save(gl);
+                        } catch (Exception ex) {
+                            log.error("Save Return In GL :" + ex.getMessage());
+                        }
+                    }
                 }
             }
         }

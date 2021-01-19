@@ -5,11 +5,14 @@
  */
 package com.cv.inv.entity;
 
+import com.cv.accountswing.entity.AppUser;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,9 +28,6 @@ public class StockInOut implements Serializable {
     @Id
     @Column(name = "batch_code", unique = true, nullable = false)
     private String batchCode;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "tran_date")
-    private Date tranDate;
     @Column(name = "remark")
     private String remark;
     @Column(name = "desp")
@@ -35,6 +35,31 @@ public class StockInOut implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
     private Date updatedDate;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private AppUser updatedBy;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private Date createdDate;
+    @Column(name = "comp_code")
+    private String compCode;
+    @Column(name = "mac_id")
+    private Integer macId;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "tran_date")
+    private Date tranDate;
+    @Column(name = "in_total")
+    private Float inTotal;
+    @Column(name = "in_unit")
+    private String inUnit;
+    @Column(name = "out_total")
+    private Float outTotal;
+    @Column(name = "out_unit")
+
+    private String outUnit;
 
     public String getBatchCode() {
         return batchCode;
@@ -42,14 +67,6 @@ public class StockInOut implements Serializable {
 
     public void setBatchCode(String batchCode) {
         this.batchCode = batchCode;
-    }
-
-    public Date getTranDate() {
-        return tranDate;
-    }
-
-    public void setTranDate(Date tranDate) {
-        this.tranDate = tranDate;
     }
 
     public String getRemark() {
@@ -75,6 +92,85 @@ public class StockInOut implements Serializable {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
+
+    public AppUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(AppUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public AppUser getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(AppUser updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    public Date getTranDate() {
+        return tranDate;
+    }
+
+    public void setTranDate(Date tranDate) {
+        this.tranDate = tranDate;
+    }
+
+    public Float getInTotal() {
+        return inTotal;
+    }
+
+    public void setInTotal(Float inTotal) {
+        this.inTotal = inTotal;
+    }
+
+    public String getInUnit() {
+        return inUnit;
+    }
+
+    public void setInUnit(String inUnit) {
+        this.inUnit = inUnit;
+    }
+
+    public Float getOutTotal() {
+        return outTotal;
+    }
+
+    public void setOutTotal(Float outTotal) {
+        this.outTotal = outTotal;
+    }
+
+    public String getOutUnit() {
+        return outUnit;
+    }
+
+    public void setOutUnit(String outUnit) {
+        this.outUnit = outUnit;
+    }
 
 }

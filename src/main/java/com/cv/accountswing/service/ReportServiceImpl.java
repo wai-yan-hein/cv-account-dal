@@ -324,9 +324,9 @@ public class ReportServiceImpl implements ReportService {
         }*/
         if (!cvId.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.traderId = " + cvId;
+                strFilter = "o.traderCode = " + cvId;
             } else {
-                strFilter = strFilter + " and o.traderId = " + cvId;
+                strFilter = strFilter + " and o.traderCode = " + cvId;
             }
         }
 

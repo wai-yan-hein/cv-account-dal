@@ -28,10 +28,10 @@ public class PurHis implements java.io.Serializable {
     private PaymentType paymentTypeId;
     private Location location;
     private Boolean deleted;
-    private Double vouTotal;
-    private Double paid;
-    private Double discount;
-    private Double balance;
+    private Float vouTotal;
+    private Float paid;
+    private Float discount;
+    private Float balance;
     private AppUser createdBy;
     private Date createdDate;
     private String updatedBy;
@@ -39,14 +39,14 @@ public class PurHis implements java.io.Serializable {
     private String remark;
     private String refNo;
     private VouStatus vouStatus;
-    private Double expenseTotal;
+    private Float expenseTotal;
     private Integer session;
     private Currency currency;
-    private Double discP;
-    private Double taxP;
-    private Double taxAmt;
+    private Float discP;
+    private Float taxP;
+    private Float taxAmt;
     private boolean cashOut; //for purchase expense
-    private Double exRateP; //for parent currency
+    private Float exRateP; //for parent currency
     private String migId;
     private Department deptCode;
 
@@ -73,11 +73,11 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Column(name = "balance")
-    public Double getBalance() {
+    public Float getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(Float balance) {
         this.balance = balance;
     }
 
@@ -123,11 +123,11 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Column(name = "discount")
-    public Double getDiscount() {
+    public Float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(Float discount) {
         this.discount = discount;
     }
 
@@ -152,11 +152,11 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Column(name = "paid")
-    public Double getPaid() {
+    public Float getPaid() {
         return paid;
     }
 
-    public void setPaid(Double paid) {
+    public void setPaid(Float paid) {
         this.paid = paid;
     }
 
@@ -209,11 +209,11 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Column(name = "vou_total")
-    public Double getVouTotal() {
+    public Float getVouTotal() {
         return vouTotal;
     }
 
-    public void setVouTotal(Double vouTotal) {
+    public void setVouTotal(Float vouTotal) {
         this.vouTotal = vouTotal;
     }
 
@@ -237,11 +237,11 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Column(name = "pur_exp_total")
-    public Double getExpenseTotal() {
+    public Float getExpenseTotal() {
         return expenseTotal;
     }
 
-    public void setExpenseTotal(Double expenseTotal) {
+    public void setExpenseTotal(Float expenseTotal) {
         this.expenseTotal = expenseTotal;
     }
 
@@ -268,29 +268,29 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Column(name = "disc_p")
-    public Double getDiscP() {
+    public Float getDiscP() {
         return discP;
     }
 
-    public void setDiscP(Double discP) {
+    public void setDiscP(Float discP) {
         this.discP = discP;
     }
 
     @Column(name = "tax_p")
-    public Double getTaxP() {
+    public Float getTaxP() {
         return taxP;
     }
 
-    public void setTaxP(Double taxP) {
+    public void setTaxP(Float taxP) {
         this.taxP = taxP;
     }
 
     @Column(name = "tax_amt")
-    public Double getTaxAmt() {
+    public Float getTaxAmt() {
         return taxAmt;
     }
 
-    public void setTaxAmt(Double taxAmt) {
+    public void setTaxAmt(Float taxAmt) {
         this.taxAmt = taxAmt;
     }
 
@@ -304,11 +304,11 @@ public class PurHis implements java.io.Serializable {
     }
 
     @Column(name = "exchange_rate_p")
-    public Double getExRateP() {
+    public Float getExRateP() {
         return exRateP;
     }
 
-    public void setExRateP(Double exRateP) {
+    public void setExRateP(Float exRateP) {
         this.exRateP = exRateP;
     }
 
@@ -404,7 +404,10 @@ public class PurHis implements java.io.Serializable {
     public void setMacId(Integer macId) {
         this.macId = macId;
     }
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
 
 }

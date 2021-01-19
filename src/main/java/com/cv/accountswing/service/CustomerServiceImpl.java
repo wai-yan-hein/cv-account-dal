@@ -72,6 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
         String tmpTraderId = option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo) + "-" + String.format("%0" + 3 + "d", macId);
         return tmpTraderId;
     }
+<<<<<<< HEAD
 
 
     private boolean isAutoGenerate(String compCode) {
@@ -91,4 +92,7 @@ public class CustomerServiceImpl implements CustomerService {
         return status;
     }
 
+=======
+
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
 }

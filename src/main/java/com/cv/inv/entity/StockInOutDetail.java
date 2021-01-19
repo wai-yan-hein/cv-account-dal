@@ -9,8 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,14 +25,13 @@ import javax.persistence.TemporalType;
 public class StockInOutDetail implements Serializable {
 
     @Id
-   
-    @Column(name = "id", unique = true, nullable = false)
-    private Integer id;
+    @Column(name = "code", unique = true, nullable = false)
+    private String code;
     @ManyToOne
-    @JoinColumn(name = "stock_id")
+    @JoinColumn(name = "stock_code")
     private Stock stock;
     @ManyToOne
-    @JoinColumn(name = "loc_id")
+    @JoinColumn(name = "loc_code")
     private Location location;
     @Column(name = "in_qty")
     private Float inQty;
@@ -54,29 +51,20 @@ public class StockInOutDetail implements Serializable {
     private String description;
     @Column(name = "remark")
     private String remark;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date")
-    private Date date;
     @Column(name = "small_in_weight")
     private Float smallInWeight;
     @ManyToOne
     @JoinColumn(name = "small_in_unit")
     private StockUnit smallInUnit;
     @Column(name = "small_out_weight")
-    private Float samllOutWeight;
+    private Float smallOutWeight;
     @ManyToOne
     @JoinColumn(name = "small_out_unit")
     private StockUnit smallOutUnit;
     @Column(name = "batch_code")
     private String batchCode;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @Column(name = "unique_id")
+    private Integer uniqueId;
 
     public Stock getStock() {
         return stock;
@@ -158,14 +146,6 @@ public class StockInOutDetail implements Serializable {
         this.remark = remark;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public Float getSmallInWeight() {
         return smallInWeight;
     }
@@ -182,12 +162,12 @@ public class StockInOutDetail implements Serializable {
         this.smallInUnit = smallInUnit;
     }
 
-    public Float getSamllOutWeight() {
-        return samllOutWeight;
+    public Float getSmallOutWeight() {
+        return smallOutWeight;
     }
 
-    public void setSamllOutWeight(Float samllOutWeight) {
-        this.samllOutWeight = samllOutWeight;
+    public void setSmallOutWeight(Float smallOutWeight) {
+        this.smallOutWeight = smallOutWeight;
     }
 
     public StockUnit getSmallOutUnit() {
@@ -204,6 +184,22 @@ public class StockInOutDetail implements Serializable {
 
     public void setBatchCode(String batchCode) {
         this.batchCode = batchCode;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(Integer uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
 }

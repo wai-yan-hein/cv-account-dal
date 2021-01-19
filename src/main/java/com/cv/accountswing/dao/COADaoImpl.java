@@ -5,7 +5,6 @@
  */
 package com.cv.accountswing.dao;
 
-
 import com.cv.accountswing.entity.ChartOfAccount;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +64,11 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
                 strFilter = "o.coaLevel = " + coaLevel;
             } else {
                 strFilter = strFilter + " and o.coaLevel = " + coaLevel;
+<<<<<<< HEAD
                 
             
+=======
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
             }
         }
 
@@ -119,7 +121,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
         return listCOA;
     }
 
-/*    @Override
+    /*    @Override
     public List<COALevel> getParentChildCOA(String compCode) {
         String strSql = "select o from COALevel o ";
         String strFilter = "";
@@ -140,7 +142,7 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
                 compCode);
         return listCOAL;
     }
-*/
+     */
     @Override
     public List<ChartOfAccount> getCOALevel3Above(String compCode) {
         String strSql = "select o from ChartOfAccount o where o.compCode = '"
@@ -239,12 +241,12 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
                 + "and o.active = true and o.compCode = " + compCode + "";
         return findHSQL(hsql);
     }
-    
+
     @Override
-    public List<ChartOfAccount> findAll(){
-         String hsql = "select o from ChartOfAccount o  order by o.coaLevel";
-         List<ChartOfAccount> ListCOA=findHSQL(hsql);
-         return ListCOA;
-         
+    public List<ChartOfAccount> findAll() {
+        String hsql = "select o from ChartOfAccount o  order by o.coaLevel";
+        List<ChartOfAccount> ListCOA = findHSQL(hsql);
+        return ListCOA;
+
     }
 }

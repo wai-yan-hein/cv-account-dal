@@ -44,9 +44,9 @@ public class CustomerDaoImpl extends AbstractDao<String, Customer> implements Cu
 
         if (!code.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.traderId = '" + code + "'";
+                strFilter = "o.code = '" + code + "'";
             } else {
-                strFilter = strFilter + " and o.traderId = '" + code + "'";
+                strFilter = strFilter + " and o.code = '" + code + "'";
             }
         }
 

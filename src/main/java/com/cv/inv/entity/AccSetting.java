@@ -30,9 +30,6 @@ public class AccSetting implements Serializable {
     @JoinColumn(name = "dis_acc")
     private ChartOfAccount disAccount;
     @ManyToOne
-    @JoinColumn(name = "vou_acc")
-    private ChartOfAccount vouAccount;
-    @ManyToOne
     @JoinColumn(name = "pay_acc")
     private ChartOfAccount payAccount;
     @ManyToOne
@@ -51,14 +48,6 @@ public class AccSetting implements Serializable {
 
     public void setDisAccount(ChartOfAccount disAccount) {
         this.disAccount = disAccount;
-    }
-
-    public ChartOfAccount getVouAccount() {
-        return vouAccount;
-    }
-
-    public void setVouAccount(ChartOfAccount vouAccount) {
-        this.vouAccount = vouAccount;
     }
 
     public ChartOfAccount getPayAccount() {

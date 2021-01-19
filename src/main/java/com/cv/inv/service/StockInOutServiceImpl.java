@@ -7,11 +7,11 @@ package com.cv.inv.service;
 
 import com.cv.inv.dao.StockInOutDao;
 import com.cv.inv.entity.StockInOut;
+import com.cv.inv.entity.StockInOutDetail;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.cv.inv.dao.StockInOutDetailDao;
 
 /**
  *
@@ -23,6 +23,8 @@ public class StockInOutServiceImpl implements StockInOutService {
 
     @Autowired
     private StockInOutDao dao;
+    @Autowired
+    private StockInOutDetailService detailService;
 
     @Override
     public StockInOut findById(String id) {
@@ -35,13 +37,40 @@ public class StockInOutServiceImpl implements StockInOutService {
     }
 
     @Override
-    public List<StockInOut> search(String batchCode, String date, String desp, String remark) {
-        return dao.search(batchCode, date, desp, remark);
+    public List<StockInOut> search(String batchCode, String fromDate, String toDate, String desp, String remark) {
+        return dao.search(batchCode, fromDate, toDate, desp, remark);
     }
 
     @Override
     public int delete(String id) {
         return dao.delete(id);
+    }
+
+    @Override
+    public StockInOut save(StockInOut stock, List<StockInOutDetail> listDetail) {
+        for (int i = 0; i < listDetail.size(); i++) {
+            StockInOutDetail cRD = listDetail.get(i);
+            if (cRD.getUniqueId() == null) {
+                if (i == 0) {
+                    cRD.setUniqueId(1);
+                } else {
+                    StockInOutDetail pRD = listDetail.get(i - 1);
+                    cRD.setUniqueId(pRD.getUniqueId() + 1);
+                }
+            }
+        }
+        String vouNo = stock.getBatchCode();
+        for (StockInOutDetail rd : listDetail) {
+            if (rd.getStock().getStockCode() != null) {
+                if (rd.getCode() == null || rd.getCode().isEmpty()) {
+                    String code = vouNo + "-" + rd.getUniqueId();
+                    rd.setCode(code);
+                    rd.setBatchCode(vouNo);
+                    detailService.save(rd);
+                }
+            }
+        }
+        return dao.save(stock);
     }
 
 }

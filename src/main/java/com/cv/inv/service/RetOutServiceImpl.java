@@ -5,14 +5,16 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.dao.SystemPropertyDao;
 import com.cv.accountswing.dummy.VouSearch;
 import com.cv.accountswing.entity.Gl;
+import com.cv.accountswing.entity.SystemProperty;
+import com.cv.accountswing.entity.SystemPropertyKey;
 import com.cv.accountswing.service.GlService;
 import com.cv.accountswing.util.Util1;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import com.cv.inv.dao.RetOutDao;
-import com.cv.inv.dao.RetOutDetailDao;
 import com.cv.inv.entity.AccSetting;
 import com.cv.inv.entity.RetOutCompoundKey;
 import com.cv.inv.entity.RetOutHisDetail;
@@ -42,7 +44,9 @@ public class RetOutServiceImpl implements RetOutService {
     @Autowired
     private RetOutDao retOutDao;
     @Autowired
-    private RetOutDetailDao dao;
+    private RetOutDetailService outDetailService;
+    @Autowired
+    private SystemPropertyDao systemPropertyDao;
 
     @Override
     public void save(RetOutHis retOut, List<RetOutHisDetail> listRetIn, List<String> delList) {
@@ -60,7 +64,7 @@ public class RetOutServiceImpl implements RetOutService {
         if (delList != null) {
             delList.forEach(detailId -> {
                 try {
-                    dao.delete(detailId);
+                    outDetailService.delete(detailId);
                 } catch (Exception ex) {
                     log.error("Delete Return Out Detail :" + ex.getMessage());
                 }
@@ -77,7 +81,7 @@ public class RetOutServiceImpl implements RetOutService {
             }
             return rd;
         }).forEachOrdered(rd -> {
-            dao.save(rd);
+            outDetailService.save(rd);
         });
         saveGl(retOut);
 
@@ -126,139 +130,112 @@ public class RetOutServiceImpl implements RetOutService {
     }
 
     private void saveGl(RetOutHis rh) {
-        Date glDate = rh.getRetOutDate();
-        Integer macId = rh.getMacId();
-        String vouNo = rh.getVouNo();
         String compCode = rh.getCurrency().getKey().getCompCode();
-        String curCode = rh.getCurrency().getKey().getCode();
-        String cusCode = rh.getCustomer().getCode();
-        float vouTotal = Util1.getFloat(rh.getVouTotal());
-        float payment = Util1.getFloat(rh.getPaid());
-        String vouTtlAccId = "";
-        String sourceAccount = "";
-        String payAccId = "";
-        String depCode = "";
-        AccSetting setting = settingService.findByCode("Return Out");
-        if (setting.getVouAccount() != null) {
-            vouTtlAccId = setting.getVouAccount().getCode();
-        }
-        /*if (setting.getDisAccount() != null) {
-        discAccId = setting.getDisAccount().getCode();
-        }*/
-        if (setting.getPayAccount() != null) {
-            payAccId = setting.getPayAccount().getCode();
-        }
-        /* if (setting.getTaxAccount() != null) {
-        taxAccId = setting.getTaxAccount().getCode();
-        }*/
-        if (setting.getDepartment() != null) {
-            depCode = setting.getDepartment().getDeptCode();
-        }
-        if (setting.getSoureAccount() != null) {
-            sourceAccount = setting.getSoureAccount().getCode();
-        }
-        boolean isDeleted = false;
-        String tranSource = "INVENTORY" + "-RETURN OUT";
-        String remark = "";
-        int split_id = 6;
-
-        List<Gl> listGL = glService.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo, "-", "-", compCode, tranSource, "-", "-", "-");
-
-        boolean vTtlNeed = true;
-        boolean payNeed = true;
-
-        if (listGL != null) {
-            if (!listGL.isEmpty()) {
-                for (Gl gl : listGL) {
-                    if (isDeleted) {
-                        //glDao.delete(gl.getGlCode(), DELETE_OPTION);
-                    } else {
-                        if (gl.getAccountId().equals(vouTtlAccId)) {
-                            vTtlNeed = false;
-                            if (vouTotal != 0) {
-                                //glDao.delete(gl.getGlCode(), "Update");
-                                gl.setCrAmt(vouTotal);
-                                gl.setDescription(vouNo + remark);
-                            } else {
-                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
-                            }
-                        } else if (gl.getAccountId().equals(payAccId)) {
-                            payNeed = false;
-                            if (payment != 0) {
-                                //glDao.delete(gl.getGlCode(), "Update");
-                                gl.setDrAmt(payment);
-                                gl.setDescription(vouNo + remark);
-                            } else {
-                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
-                            }
-                        }
-
-                        gl.setGlDate(glDate);
-                        gl.setTraderCode(cusCode);
-                        gl.setFromCurId(curCode);
+        SystemPropertyKey key = new SystemPropertyKey("system.inventory.use.account", compCode);
+        SystemProperty systemProperty = systemPropertyDao.findById(key);
+        if (systemProperty != null) {
+            if (systemProperty.getPropValue().equals("1")) {
+                Date glDate = rh.getRetOutDate();
+                Integer macId = rh.getMacId();
+                String vouNo = rh.getVouNo();
+                String curCode = rh.getCurrency().getKey().getCode();
+                String cusCode = rh.getCustomer().getCode();
+                float vouTotal = Util1.getFloat(rh.getVouTotal());
+                String vouTotalAcc = rh.getCustomer().getAccount().getCode();
+                String sourceAccount = "";
+                String depCode = "";
+                AccSetting setting = settingService.findByCode("Return Out");
+                if (setting != null) {
+                    if (setting.getDepartment() != null) {
+                        depCode = setting.getDepartment().getDeptCode();
+                    }
+                    if (setting.getSoureAccount() != null) {
+                        sourceAccount = setting.getSoureAccount().getCode();
                     }
                 }
-            } else {
-                listGL = new ArrayList();
-            }
-        } else {
+                boolean isDeleted = false;
+                String tranSource = "INVENTORY" + "-RETURN OUT";
+                String remark = "";
+                int split_id = 6;
 
-            listGL = new ArrayList();
-        }
+                List<Gl> listGL = glService.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo, "-", "-", compCode, tranSource, "-", "-", "-");
 
-        if (isDeleted) {
-            vTtlNeed = false;
-            payNeed = false;
-        }
+                boolean vTtlNeed = true;
 
-        if (vouTotal != 0 && vTtlNeed) {
-            Gl glVouTotal = new Gl();
-            glVouTotal.setSourceAcId(sourceAccount);
-            glVouTotal.setAccountId(vouTtlAccId);
-            glVouTotal.setCompCode(compCode);
-            glVouTotal.setCrAmt(vouTotal);
-            glVouTotal.setDescription(vouNo + remark);
-            glVouTotal.setGlDate(glDate);
-            glVouTotal.setCreatedBy(SOURCE_PROG);
-            glVouTotal.setCreatedDate(Util1.getTodayDate());
-            glVouTotal.setTraderCode(cusCode);
-            glVouTotal.setTranSource(tranSource);
-            glVouTotal.setVouNo(vouNo);
-            glVouTotal.setReference("Return Out Voucher Total");
-            glVouTotal.setSplitId(split_id);
-            glVouTotal.setFromCurId(curCode);
-            glVouTotal.setDeptId(depCode);
-            glVouTotal.setMacId(macId);
-            listGL.add(glVouTotal);
-        }
+                if (listGL != null) {
+                    if (!listGL.isEmpty()) {
+                        String userCode = rh.getUpdatedBy();
+                        for (Gl gl : listGL) {
+                            if (isDeleted) {
+                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                            } else {
+                                if (gl.getAccountId().equals(vouTotalAcc)) {
+                                    vTtlNeed = false;
+                                    if (vouTotal != 0) {
+                                        //glDao.delete(gl.getGlCode(), "Update");
+                                        gl.setCrAmt(vouTotal);
+                                        gl.setDescription(vouNo + remark);
+                                    } else {
+                                        //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                    }
+                                }/* else if (gl.getAccountId().equals(payAccId)) {
+                        payNeed = false;
+                        if (payment != 0) {
+                        //glDao.delete(gl.getGlCode(), "Update");
+                        gl.setDrAmt(payment);
+                        gl.setDescription(vouNo + remark);
+                        } else {
+                        //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                        }
+                        }*/
 
-        if (payment != 0 && payNeed) {
-            Gl glVouPay = new Gl();
-            glVouPay.setSourceAcId(sourceAccount);
-            glVouPay.setAccountId(payAccId);
-            glVouPay.setCompCode(compCode);
-            glVouPay.setDrAmt(payment);
-            glVouPay.setDescription(vouNo + remark);
-            glVouPay.setGlDate(glDate);
-            glVouPay.setCreatedBy(SOURCE_PROG);
-            glVouPay.setCreatedDate(Util1.getTodayDate());
-            glVouPay.setTraderCode(cusCode);
-            glVouPay.setTranSource(tranSource);
-            glVouPay.setVouNo(vouNo);
-            glVouPay.setReference("Return Out Voucher Payment");
-            glVouPay.setSplitId(split_id);
-            glVouPay.setFromCurId(curCode);
-            glVouPay.setDeptId(depCode);
-            glVouPay.setMacId(macId);
-            listGL.add(glVouPay);
-        }
+                                gl.setGlDate(glDate);
+                                gl.setTraderCode(cusCode);
+                                gl.setFromCurId(curCode);
+                                gl.setModifyBy(userCode);
+                            }
+                        }
+                    } else {
+                        listGL = new ArrayList();
+                    }
+                } else {
 
-        if (!listGL.isEmpty()) {
-            for (Gl gl : listGL) {
-                try {
-                    glService.save(gl);
-                } catch (Exception ex) {
-                    log.error("Save Return Out GL :" + ex.getMessage());
+                    listGL = new ArrayList();
+                }
+
+                if (isDeleted) {
+                    vTtlNeed = false;
+                }
+
+                if (vouTotal != 0 && vTtlNeed) {
+                    Gl glVouTotal = new Gl();
+                    glVouTotal.setSourceAcId(sourceAccount);
+                    glVouTotal.setAccountId(vouTotalAcc);
+                    glVouTotal.setCompCode(compCode);
+                    glVouTotal.setCrAmt(vouTotal);
+                    glVouTotal.setDescription(vouNo + remark);
+                    glVouTotal.setGlDate(glDate);
+                    glVouTotal.setCreatedBy(SOURCE_PROG);
+                    glVouTotal.setCreatedDate(Util1.getTodayDate());
+                    glVouTotal.setTraderCode(cusCode);
+                    glVouTotal.setTranSource(tranSource);
+                    glVouTotal.setVouNo(vouNo);
+                    glVouTotal.setReference("Return Out Voucher Total");
+                    glVouTotal.setSplitId(split_id);
+                    glVouTotal.setFromCurId(curCode);
+                    glVouTotal.setDeptId(depCode);
+                    glVouTotal.setMacId(macId);
+                    listGL.add(glVouTotal);
+                }
+
+                if (!listGL.isEmpty()) {
+                    for (Gl gl : listGL) {
+                        try {
+                            glService.save(gl);
+                        } catch (Exception ex) {
+                            log.error("Save Return Out GL :" + ex.getMessage());
+                        }
+                    }
                 }
             }
         }

@@ -22,4 +22,6 @@ public interface PurchaseDetailService {
 
     public void save(PurHis gl, List<PurHisDetail> pd, List<String> delList);
 
+    public int delete(String code) throws Exception;
+
 }

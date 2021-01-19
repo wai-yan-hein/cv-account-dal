@@ -37,10 +37,14 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService {
         return dao.findById(key);
     }
 
+<<<<<<< HEAD
     @Override
 
     public List<UsrCompRole> search(String userCode, String compCode, String roleId) {
 
+=======
+    public List<UsrCompRole> search(String userCode, String compCode, String roleId) {
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
         return dao.search(userCode, compCode, roleId);
     }
 
@@ -57,7 +61,10 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService {
     @Override
     public List getAssignCompany(String userCode, String roleId, String compCode) {
         return dao.getAssignCompany(userCode, roleId, compCode);
+<<<<<<< HEAD
 
+=======
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
     }
 
     @Override
@@ -85,9 +92,13 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService {
         return listC;
     }
 
+<<<<<<< HEAD
     @Override
     public int delete(String userCode, String compCode, String roleId) {
 
+=======
+    public int delete(String userCode, String compCode, String roleId) {
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
         return dao.delete(userCode, compCode, roleId);
 
     }

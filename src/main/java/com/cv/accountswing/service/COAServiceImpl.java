@@ -8,8 +8,6 @@ package com.cv.accountswing.service;
 import com.cv.accountswing.dao.COADao;
 import com.cv.accountswing.dao.COAOpeningDao;
 import com.cv.accountswing.entity.ChartOfAccount;
-import com.cv.accountswing.entity.SystemProperty;
-import com.cv.accountswing.entity.SystemPropertyKey;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,7 +119,10 @@ public class COAServiceImpl implements COAService {
         int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
         String coaCode = String.format("%0" + 3 + "d", macId) + "-" + String.format("%0" + 5 + "d", seqNo);
         return coaCode;
+<<<<<<< HEAD
 
+=======
+>>>>>>> db470af18248d9e21ead772344765748468f4a10
     }
 
     @Override

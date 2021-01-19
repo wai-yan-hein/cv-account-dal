@@ -15,8 +15,9 @@ import javax.persistence.Table;
  * @author winswe
  */
 @Entity
-@Table(name="v_tri_balance")
-public class VTriBalance implements java.io.Serializable{
+@Table(name = "v_tri_balance")
+public class VTriBalance implements java.io.Serializable {
+
     private VTriBalanceKey key;
     private Double opening;
     private Double drAmt;
@@ -24,6 +25,7 @@ public class VTriBalance implements java.io.Serializable{
     private Double closing;
     private String coaName;
     private String usrCoaCode;
+    private Integer macId;
 
     @EmbeddedId
     public VTriBalanceKey getKey() {
@@ -34,7 +36,7 @@ public class VTriBalance implements java.io.Serializable{
         this.key = key;
     }
 
-    @Column(name="opening")
+    @Column(name = "opening")
     public Double getOpening() {
         return opening;
     }
@@ -43,7 +45,7 @@ public class VTriBalance implements java.io.Serializable{
         this.opening = opening;
     }
 
-    @Column(name="dr_amt")
+    @Column(name = "dr_amt")
     public Double getDrAmt() {
         return drAmt;
     }
@@ -52,7 +54,7 @@ public class VTriBalance implements java.io.Serializable{
         this.drAmt = drAmt;
     }
 
-    @Column(name="cr_amt")
+    @Column(name = "cr_amt")
     public Double getCrAmt() {
         return crAmt;
     }
@@ -61,7 +63,7 @@ public class VTriBalance implements java.io.Serializable{
         this.crAmt = crAmt;
     }
 
-    @Column(name="closing")
+    @Column(name = "closing")
     public Double getClosing() {
         return closing;
     }
@@ -70,7 +72,7 @@ public class VTriBalance implements java.io.Serializable{
         this.closing = closing;
     }
 
-    @Column(name="coa_name_eng")
+    @Column(name = "coa_name_eng")
     public String getCoaName() {
         return coaName;
     }
@@ -79,7 +81,7 @@ public class VTriBalance implements java.io.Serializable{
         this.coaName = coaName;
     }
 
-    @Column(name="coa_code_usr")
+    @Column(name = "coa_code_usr")
     public String getUsrCoaCode() {
         return usrCoaCode;
     }
@@ -87,4 +89,14 @@ public class VTriBalance implements java.io.Serializable{
     public void setUsrCoaCode(String usrCoaCode) {
         this.usrCoaCode = usrCoaCode;
     }
+
+    @Column(name = "mac_id")
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
 }

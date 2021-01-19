@@ -6,6 +6,7 @@
 package com.cv.inv.service;
 
 import com.cv.inv.entity.StockInOut;
+import com.cv.inv.entity.StockInOutDetail;
 import java.util.List;
 
 /**
@@ -18,7 +19,9 @@ public interface StockInOutService {
 
     public StockInOut save(StockInOut stock);
 
-    public List<StockInOut> search(String batchCode, String date, String desp, String remark);
+    public StockInOut save(StockInOut stock, List<StockInOutDetail> listDetail);
+
+    public List<StockInOut> search(String batchCode, String fromDate, String toDate, String desp, String remark);
 
     public int delete(String id);
 }
