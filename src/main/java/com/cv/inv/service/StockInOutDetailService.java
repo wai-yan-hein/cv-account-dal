@@ -18,5 +18,7 @@ public interface StockInOutDetailService {
 
     public List<StockInOutDetail> search(String fromDate, String toDate, String stockCode, String locId, String option, String remark);
 
+    public List<StockInOutDetail> search(String batchCode);
+
     public int delete(Integer id);
 }

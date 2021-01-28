@@ -19,4 +19,7 @@ public interface StockInOutDetailDao {
     public List<StockInOutDetail> search(String fromDate, String toDate, String stockCode, String locId, String option, String remark);
 
     public int delete(Integer id);
+
+    public List<StockInOutDetail> search(String batchCode);
+
 }

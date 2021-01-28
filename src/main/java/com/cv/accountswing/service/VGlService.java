@@ -22,7 +22,7 @@ public interface VGlService {
             String acId, String frmCurr, String toCurr, String reference, String dept,
             String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
             String glVouNo, String deptName, String traderName, String splitId,
-            String projectId, String debAmt, String crdAmt);
+            String projectId, String traderType, String crdAmt);
 
     public List<VGl> searchGlDrCr(String from, String to, String sourceAcId,
             String frmCurr, String dept, String cvId, String compCode, String option);

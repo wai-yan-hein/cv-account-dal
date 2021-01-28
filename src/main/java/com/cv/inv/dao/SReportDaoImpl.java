@@ -68,22 +68,36 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
                 + "		select p.stock_code,sum(p.qty) as qty,p.avg_wt as wt,sum(p.small_wt) as small_wt,p.small_unit,p.loc_code as loc \n"
                 + "		from v_purchase p,tmp_stock_filter tmp\n"
                 + "        where p.stock_code = tmp.stock_code and p.loc_code = tmp.loc_code and p.comp_code = tmp.comp_code\n"
-                + "		group by stock_code,loc,std_wt\n"
+                + "             and tmp.mac_id = " + macId + "\n"
+                + "		group by stock_code,loc,std_wt,small_unit\n"
                 + "			union all\n"
                 + "		select s.stock_code,sum(s.qty)*-1 as qty,s.std_weight as wt,sum(s.small_wt)*-1 as small_wt,s.small_unit,s.loc_code as loc \n"
                 + "		from v_sale s, tmp_stock_filter tmp\n"
                 + "		where s.stock_code = tmp.stock_code and s.loc_code = tmp.loc_code and s.comp_code = tmp.comp_code\n"
-                + "		group by stock_code,loc,std_weight\n"
+                + "             and tmp.mac_id = " + macId + "\n"
+                + "		group by stock_code,loc,std_weight,small_unit\n"
                 + "			union all \n"
                 + "		select  r.stock_code,sum(r.qty) as qty,r.std_wt as wt,sum(r.small_wt) as small_wt,r.small_unit,r.loc_code as loc\n"
                 + "		from v_return_in r, tmp_stock_filter tmp\n"
                 + "		where r.stock_code = tmp.stock_code and r.loc_code = tmp.loc_code and r.comp_code = tmp.comp_code \n"
-                + "		group by stock_code,loc,std_wt\n"
+                + "             and tmp.mac_id = " + macId + "\n"
+                + "		group by stock_code,loc,std_wt,small_unit\n"
                 + "			union all \n"
                 + "        select  r.stock_code,sum(r.qty)*-1 as qty,r.std_wt as wt,sum(r.small_wt*-1) as  small_wt,r.small_unit,r.loc_code as loc\n"
                 + "		from v_return_out r, tmp_stock_filter tmp\n"
                 + "		where r.stock_code = tmp.stock_code and r.loc_code = tmp.loc_code and r.comp_code = tmp.comp_code \n"
-                + "		group by stock_code,loc,std_wt\n"
+                + "             and tmp.mac_id = " + macId + "\n"
+                + "		group by stock_code,loc,std_wt,small_unit\n"
+                + "                      union all \n"
+                + "         select od.stock_code,sum(ifnull(od.in_qty,0)) qty,sum(ifnull(od.in_weight,0)) wt,sum(ifnull(od.small_in_weight,0)) small_wt,od.small_in_unit unit,od.loc_code loc\n"
+                + "             from stock_in_out_detail od,tmp_stock_filter tmp\n"
+                + "             where od.stock_code = tmp.stock_code and tmp.mac_id = " + macId + "\n"
+                + "             group by od.stock_code,od.small_in_unit,od.loc_code\n"
+                + "                     union all \n"
+                + "         select od.stock_code,sum(ifnull(od.out_qty,0))*-1 qty,sum(ifnull(od.out_weight,0))*-1 wt,sum(ifnull(od.small_out_weight,0))*-1 small_wt,od.small_out_unit unit,od.loc_code loc\n"
+                + "             from stock_in_out_detail od,tmp_stock_filter tmp\n"
+                + "             where od.stock_code = tmp.stock_code and tmp.mac_id = " + macId + "\n"
+                + "             group by od.stock_code,od.small_in_unit,od.loc_code"
                 + "        ) b\n"
                 + "group by b.stock_code,b.loc";
         execSQL(insertSql);
@@ -130,11 +144,11 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
             log.error("Report Viewer Error :" + ex.getMessage());
         }
     }
-    
-       @Override
-    public void reportJsonViewer(String path,String reportPath, String filePath, String fontPath, Map<String, Object> parameters) {
+
+    @Override
+    public void reportJsonViewer(String path, String reportPath, String filePath, String fontPath, Map<String, Object> parameters) {
         try {
-            genJsonReport(path,reportPath, filePath, parameters, fontPath);
+            genJsonReport(path, reportPath, filePath, parameters, fontPath);
         } catch (Exception ex) {
             log.error("Report Viewer Error :" + ex.getMessage());
         }
@@ -150,7 +164,7 @@ public class SReportDaoImpl extends AbstractDao<Serializable, Object> implements
         }
     }
 
-     @Override
+    @Override
     public String genJsonFile(final String strSql) throws Exception {
         return genJSON(strSql);
     }

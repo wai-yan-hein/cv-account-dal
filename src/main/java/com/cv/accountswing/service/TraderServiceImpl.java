@@ -21,11 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class TraderServiceImpl implements TraderService {
 
     @Autowired
-    TraderDao dao;
+    private TraderDao dao;
     @Autowired
-    SeqTableService seqService;
+    private SeqTableService seqService;
     @Autowired
-    SystemPropertyService spService;
+    private SystemPropertyService spService;
 
     @Override
     public Trader findById(String id) {
@@ -43,7 +43,7 @@ public class TraderServiceImpl implements TraderService {
     @Override
     public Trader saveTrader(Trader td) {
 
-       /* if (td.getCode() == null || td.getCode().isEmpty()) {
+        /* if (td.getCode() == null || td.getCode().isEmpty()) {
             Integer macId = td.getMacId();
             String compCode = td.getCompCode();
             td.setCode(getTraderCode(macId, "Trader", "-", compCode));
@@ -62,5 +62,10 @@ public class TraderServiceImpl implements TraderService {
 
         String tmpCatCode = String.format("%0" + 3 + "d", seqNo);
         return tmpCatCode;
+    }
+
+    @Override
+    public List<Trader> search(String regionCode) {
+        return dao.search(regionCode);
     }
 }

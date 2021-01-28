@@ -119,10 +119,6 @@ public class COAServiceImpl implements COAService {
         int seqNo = seqService.getSequence(macId, "COA", "-", compCode);
         String coaCode = String.format("%0" + 3 + "d", macId) + "-" + String.format("%0" + 5 + "d", seqNo);
         return coaCode;
-<<<<<<< HEAD
-
-=======
->>>>>>> db470af18248d9e21ead772344765748468f4a10
     }
 
     @Override

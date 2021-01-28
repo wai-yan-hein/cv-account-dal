@@ -195,8 +195,9 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
     }
 
     @Override
-    public List<TmpOpeningClosing> getOpBalanceGL(String userCode, String coaCode) {
-        String strHSql = "select o from TmpOpeningClosing o where o.key.userCode = '" + userCode + "' and o.key.coaId ='" + coaCode + "'";
+    public List<TmpOpeningClosing> getOpBalanceGL(String userCode, String coaCode, String macId) {
+        String strHSql = "select o from TmpOpeningClosing o where o.key.userCode = "
+                + "'" + userCode + "' and o.key.coaId ='" + coaCode + "' and o.key.macId = " + macId + "";
         List<TmpOpeningClosing> listTOC = findHSQLList(strHSql);
         return listTOC;
     }
@@ -219,8 +220,8 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
         execSQL(delSql);
         String strSql = "insert into tmp_op_cl_apar(coa_code, curr_id, user_code, trader_code, dept_code, dr_amt, cr_amt)\n"
                 + "select vcc.account_code, vcc.cur_code,'1', vcc.id trader_code ,ifnull(a.dept_code, '-') dept_code,\n"
-                + "       if(sum(a.dr_amt-a.cr_amt)<0, sum(a.dr_amt-a.cr_amt)*-1,0) dr,\n"
-                + "       if(sum(a.dr_amt-a.cr_amt)>0, sum(a.dr_amt-a.cr_amt),0) cr\n"
+                + "       sum(a.dr_amt) dr,\n"
+                + "       sum(a.cr_amt) cr\n"
                 + "  from v_trader_curr_dept vcc \n"
                 + "  left join (\n"
                 + "  select coa.comp_code,coa.op_date,coa.source_acc_id, coa.cur_code, coa.trader_code, coa.dept_code, \n"
@@ -236,7 +237,7 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "                      ifnull(g.cr_amt,0), 'CR')) cr_amt\n"
                 + "			   from gl g, trader t\n"
                 + "			  where g.trader_code = t.code and g.gl_date <= '" + tranDate + "'\n"
-                + "				and (g.comp_code = " + compCode + " or '-' = '" + compCode + "') "
+                + "				and (g.comp_code = '" + compCode + "' or '-' = '" + compCode + "') "
                 + "and (g.from_cur_id = '" + currency + "' or '-' = '" + currency + "') and (g.dept_code = '" + dept + "' or '-' = '" + dept + "') \n"
                 + "			  group by g.comp_code,g.gl_date,g.comp_code, g.source_ac_id, g.account_id, g.dept_code, g.from_cur_id, \n"
                 + "              g.tran_source, g.trader_code, t.code, t.account_code) a\n"
@@ -367,38 +368,41 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
 
     @Override
     public void getOpBalanceByTrader(String coaCode, String opDate, String clDate,
-            int level, String curr, String userCode, String dept, String cvId, String macId) throws Exception {
-        deleteTmp(Integer.parseInt(macId));
-        String insertSql = "insert into tmp_op_filter(comp_code, coa_code, op_tran_id_d, curr_id, op_date, user_code,trader_code,mac_id) \n"
-                + "select coa.comp_code,coa.coa_code,op.coa_op_id,ifnull(op.cur_code,'" + curr + "'),op.op_date,'" + userCode + "',op.trader_code," + macId + "\n"
-                + "from chart_of_account coa left join coa_opening op \n"
-                + "on coa.coa_code = op.source_acc_id\n"
-                + "where coa.coa_code = '" + coaCode + "'";
-        execSQL(insertSql);
-        String strSql = "insert into tmp_op_cl(coa_code, curr_id, user_code, opening, dr_amt, cr_amt,mac_id) \n"
-                + "select coa_code, curr_id, '" + userCode + "', sum(balance), 0, 0," + macId + " \n"
-                + "from (\n"
-                + "select tof.coa_code, tof.curr_id, ifnull(coa.dr_amt,0)-ifnull(coa.cr_amt,0) balance,\n"
-                + "ifnull(coa.dr_amt,0) dr_amt, ifnull(coa.cr_amt,0) cr_amt,tof.trader_code\n"
-                + "from tmp_op_filter tof, coa_opening coa\n"
-                + "where tof.op_tran_id_d = coa.coa_op_id and tof.comp_code = coa.comp_code and tof.curr_id = coa.cur_code and \n"
-                + "tof.coa_code = coa.source_acc_id and tof.op_date = coa.op_date\n"
-                + " and tof.user_code = '" + userCode + "' and (coa.dept_code = '" + dept + "' or '-' = '" + dept + "'"
-                + "and tof.coa_code = '" + coaCode + "') and coa.trader_code = '" + cvId + "'\n"
-                + "union all\n"
-                + "select tof.coa_code, tof.curr_id, get_dr_cr_amt(gl.source_ac_id, gl.account_id, tof.coa_code, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'DR')-\n"
-                + "get_dr_cr_amt(gl.source_ac_id, gl.account_id, tof.coa_code, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'CR') balance, \n"
-                + "ifnull(gl.dr_amt,0) dr_amt, ifnull(gl.cr_amt,0),tof.trader_code \n"
-                + "from tmp_op_filter tof, gl\n"
-                + "where tof.comp_code = gl.comp_code and tof.trader_code = gl.trader_code\n"
-                + "and (tof.coa_code = gl.source_ac_id or tof.coa_code = gl.account_id) "
-                + "and ifnull(gl.tran_source,'-') <> 'OPENING' and \n"
-                + "tof.curr_id = gl.from_cur_id and gl.gl_date >= '" + opDate + "' and gl.gl_date < '"
-                + Util1.toDateStrMYSQL(clDate, "dd/MM/yyyy")
-                + "' and tof.user_code = '" + userCode + "' and (gl.dept_code = '" + dept + "' or '-' = '" + dept + "')"
-                + "and tof.coa_code = '" + coaCode + "' and tof.trader_code ='" + cvId + "') a \n"
-                + "group by coa_code, curr_id";
+            int level, String curr, String userCode, String dept, String traderCode, String macId, String compCode) throws Exception {
+        logger.info("Ar / Ap Start.");
+        String delSql = "delete from tmp_op_cl where mac_id = " + macId + "";
+        execSQL(delSql);
+        String strSql = "insert into tmp_op_cl(coa_code, curr_id, user_code, trader_code, dept_code, dr_amt, cr_amt,mac_id)\n"
+                + "select vcc.account_code, vcc.cur_code,'1', vcc.id trader_code ,ifnull(a.dept_code, '-') dept_code,\n"
+                + "       sum(a.dr_amt) dr,\n"
+                + "       sum(a.cr_amt) cr, " + macId + "\n"
+                + "  from v_trader_curr_dept vcc \n"
+                + "  left join (\n"
+                + "  select coa.comp_code,coa.op_date,coa.source_acc_id, coa.cur_code, coa.trader_code, coa.dept_code, \n"
+                + "			        sum(ifnull(coa.dr_amt,0)) dr_amt, sum(ifnull(coa.cr_amt,0)) cr_amt\n"
+                + "			   from coa_opening coa, trader t\n"
+                + "               where coa.trader_code = t.code and coa.trader_code = '" + traderCode + "'\n"
+                + "               group by coa.trader_code \n"
+                + "			  union all\n"
+                + "			 select g.comp_code,g.gl_date,t.account_code, g.from_cur_id, g.trader_code, g.dept_code,\n"
+                + "					sum(get_dr_cr_amt(g.source_ac_id, g.account_id, t.account_code, \n"
+                + "					ifnull(g.dr_amt,0), ifnull(g.cr_amt,0), 'DR')) dr_amt,\n"
+                + "					sum(get_dr_cr_amt(g.source_ac_id, g.account_id, t.account_code, ifnull(g.dr_amt,0), \n"
+                + "                      ifnull(g.cr_amt,0), 'CR')) cr_amt\n"
+                + "			   from gl g, trader t\n"
+                + "			  where g.trader_code = t.code and g.gl_date < '" + clDate + "' and g.trader_code = '" + traderCode + "'\n"
+                + "				and (g.comp_code = " + compCode + " or '-' = '" + compCode + "') "
+                + "and (g.from_cur_id = '" + curr + "' or '-' = '" + curr + "') and (g.dept_code = '" + dept + "' or '-' = '" + dept + "') \n"
+                + "			  group by g.comp_code,g.gl_date,g.comp_code, g.source_ac_id, g.account_id, g.dept_code, g.from_cur_id, \n"
+                + "              g.tran_source, g.trader_code, t.code, t.account_code) a\n"
+                + "  on vcc.comp_code = a.comp_code and vcc.account_code = a.source_acc_id and vcc.cur_code = a.cur_code\n"
+                + "and vcc.id = a.trader_code  and vcc.dept_code = a.dept_code\n"
+                + "where (vcc.account_code = '" + coaCode + "' or '-' = '" + coaCode + "' or vcc.coa_parent = '-') \n"
+                + "and (vcc.cur_code = '" + curr + "' or '-' = '" + curr + "') and (a.cr_amt > 0 or a.dr_amt >0) \n"
+                + "and (vcc.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
+                + "group by vcc.account_code,vcc.cur_code,vcc.comp_code,vcc.id;";
         execSQL(strSql);
+        logger.info("Ar / Ap By Customer Finished.");
     }
 
     private void deleteTmp(Integer machineId) throws Exception {

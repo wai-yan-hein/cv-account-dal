@@ -15,14 +15,17 @@ import javax.persistence.Embeddable;
  * @author winswe
  */
 @Embeddable
-public class TmpOpeningClosingKey implements Serializable{
+public class TmpOpeningClosingKey implements Serializable {
+
     private String coaId;
     private String currId;
     private String userCode;
+    private Integer macId;
 
-    public TmpOpeningClosingKey() {}
-    
-    @Column(name="coa_code", nullable=false, length=25)
+    public TmpOpeningClosingKey() {
+    }
+
+    @Column(name = "coa_code", nullable = false, length = 25)
     public String getCoaId() {
         return coaId;
     }
@@ -31,7 +34,7 @@ public class TmpOpeningClosingKey implements Serializable{
         this.coaId = coaId;
     }
 
-    @Column(name="curr_id", nullable=false, length=15)
+    @Column(name = "curr_id", nullable = false, length = 15)
     public String getCurrId() {
         return currId;
     }
@@ -40,7 +43,7 @@ public class TmpOpeningClosingKey implements Serializable{
         this.currId = currId;
     }
 
-    @Column(name="user_code", nullable=false, length=15)
+    @Column(name = "user_code", nullable = false, length = 15)
 
     public String getUserCode() {
         return userCode;
@@ -50,12 +53,22 @@ public class TmpOpeningClosingKey implements Serializable{
         this.userCode = userCode;
     }
 
+    @Column(name = "mac_id")
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.coaId);
-        hash = 59 * hash + Objects.hashCode(this.currId);
-        hash = 59 * hash + Objects.hashCode(this.userCode);
+        hash = 67 * hash + Objects.hashCode(this.coaId);
+        hash = 67 * hash + Objects.hashCode(this.currId);
+        hash = 67 * hash + Objects.hashCode(this.userCode);
+        hash = 67 * hash + Objects.hashCode(this.macId);
         return hash;
     }
 
@@ -80,9 +93,10 @@ public class TmpOpeningClosingKey implements Serializable{
         if (!Objects.equals(this.userCode, other.userCode)) {
             return false;
         }
+        if (!Objects.equals(this.macId, other.macId)) {
+            return false;
+        }
         return true;
     }
-    
 
-    
 }

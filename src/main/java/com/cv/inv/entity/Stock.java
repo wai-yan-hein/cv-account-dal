@@ -63,7 +63,7 @@ public class Stock implements java.io.Serializable {
     @JoinColumn(name = "sale_unit")
     private StockUnit saleUnit;
     @ManyToOne
-    @JoinColumn(name = "pattern_id")
+    @JoinColumn(name = "pattern_code")
     private UnitPattern pattern;
     @Temporal(TemporalType.DATE)
     @Column(name = "licene_exp_date")

@@ -107,7 +107,7 @@ public class SaleDetailServiceImpl implements SaleDetailService {
             }
         }
         //save to account 
-       //saveGl(saleHis);
+        saveGl(saleHis);
     }
 
     @Override
@@ -151,8 +151,6 @@ public class SaleDetailServiceImpl implements SaleDetailService {
                 shd = dao.save(sd);
             }
         }
-
-       
 
     }
 

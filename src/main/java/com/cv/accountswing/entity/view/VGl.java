@@ -34,7 +34,6 @@ public class VGl implements java.io.Serializable {
     private String reference;
     private String deptId;
     private String vouNo;
-    private String traderUserCode;
     private String traderCode;
     private String chequeNo;
     private String compCode;

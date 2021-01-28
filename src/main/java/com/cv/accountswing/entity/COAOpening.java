@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,7 +39,7 @@ public class COAOpening implements Serializable {
     @Column(name = "dr_amt")
     private Double drAmt;
     @Column(name = "user_code")
-    private Integer userCode;
+    private String userCode;
     @Column(name = "comp_code")
     private String compCode;
     @Temporal(TemporalType.DATE)
@@ -99,14 +98,6 @@ public class COAOpening implements Serializable {
         this.drAmt = drAmt;
     }
 
-    public Integer getUserId() {
-        return userCode;
-    }
-
-    public void setUserId(Integer userCode) {
-        this.userCode = userCode;
-    }
-
     public String getCompCode() {
         return compCode;
     }
@@ -114,8 +105,6 @@ public class COAOpening implements Serializable {
     public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
-
-    
 
     public Date getCreatedDate() {
         return createdDate;
@@ -139,6 +128,14 @@ public class COAOpening implements Serializable {
 
     public void setCvId(String cvId) {
         this.cvId = cvId;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
 }

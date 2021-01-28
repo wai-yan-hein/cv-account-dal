@@ -19,9 +19,10 @@ public interface TraderDao {
     public List<Trader> searchTrader(String code, String name, String address,
             String phone, String parentCode, String compCode, String appTraderCode);
 
-    
     public List<Trader> searchM(String updatedDate);
 
     public Trader saveTrader(Trader trader);
+
+    public List<Trader> search(String regionCode);
 
 }

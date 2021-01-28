@@ -39,7 +39,7 @@ public interface COAOpeningDaoD {
     public void genOpBalanceGL1(String coaCode, String opDate,
             String clDate, int level, String curr, String userCode, String dept, String macId) throws Exception;
 
-    public List<TmpOpeningClosing> getOpBalanceGL(String userCode, String coaCode);
+    public List<TmpOpeningClosing> getOpBalanceGL(String userCode, String coaCode, String macId);
 
     public void genTriBalance(String compCode, String fromDate, String opDate, String tranDate, String coaCode,
             String currency, String dept, String cvId, String userCode) throws Exception;
@@ -54,6 +54,6 @@ public interface COAOpeningDaoD {
             String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
 
     public void getOpBalanceByTrader(String coaCode, String opDate,
-            String clDate, int level, String curr, String userCode, String dept, String cvId, String macId) throws Exception;
+            String clDate, int level, String curr, String userCode, String dept, String traderCode, String macId, String compCode) throws Exception;
 
 }

@@ -89,4 +89,11 @@ public class StockInOutDetailDaoImpl extends AbstractDao<Integer, StockInOutDeta
         return execUpdateOrDelete(hsql);
     }
 
+    @Override
+    public List<StockInOutDetail> search(String batchCode) {
+        String hsql = "select o from StockInOutDetail o where o.batchCode ='" + batchCode + "'";
+        return findHSQL(hsql);
+
+    }
+
 }

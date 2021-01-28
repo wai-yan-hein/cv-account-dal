@@ -38,4 +38,9 @@ public class StockInOutDetailServiceImpl implements StockInOutDetailService {
         return dao.delete(id);
     }
 
+    @Override
+    public List<StockInOutDetail> search(String batchCode) {
+        return dao.search(batchCode);
+    }
+
 }

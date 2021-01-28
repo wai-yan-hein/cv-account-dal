@@ -77,8 +77,8 @@ public class COAOpeningDServiceImpl implements COAOpeningDService {
     public List<TmpOpeningClosing> getOpBalanceGL(String coaCode, String opDate,
             String clDae, int level, String curr, String userCode, String dept) throws Exception {
         dao.genOpBalanceGL(coaCode, opDate, clDae, level, curr, userCode, dept);
-        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode);
-        return listTOC;
+        //List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode,);
+        return null;
     }
 
     @Override
@@ -110,15 +110,15 @@ public class COAOpeningDServiceImpl implements COAOpeningDService {
     public List<TmpOpeningClosing> getOpBalanceGL1(String coaCode, String opDate,
             String clDae, int level, String curr, String userCode, String dept, String macId) throws Exception {
         dao.genOpBalanceGL1(coaCode, opDate, clDae, level, curr, userCode, dept, macId);
-        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode);
+        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode, macId);
         return listTOC;
     }
 
     @Override
     public List<TmpOpeningClosing> getOpBalanceByTrader(String coaCode, String opDate,
-            String clDate, int level, String curr, String userCode, String dept, String cvId, String macId) throws Exception {
-        dao.getOpBalanceByTrader(coaCode, opDate, clDate, level, curr, userCode, dept, cvId, macId);
-        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode);
+            String clDate, int level, String curr, String userCode, String dept, String traderCode, String macId, String compCode) throws Exception {
+        dao.getOpBalanceByTrader(coaCode, opDate, clDate, level, curr, userCode, dept, traderCode, macId, compCode);
+        List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode, macId);
         return listTOC;
     }
 }

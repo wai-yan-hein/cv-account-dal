@@ -20,6 +20,7 @@ import com.cv.inv.entity.PurHisDetail;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,42 +63,46 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
 
     @Override
     public void saveH2(PurHis pur, List<PurHisDetail> listPD, List<String> delList) {
-        String retInDetailId;
-        for (int i = 0; i < listPD.size(); i++) {
-            PurHisDetail cPD = listPD.get(i);
-            if (cPD.getUniqueId() == null) {
-                if (i == 0) {
-                    cPD.setUniqueId(1);
-                } else {
-                    PurHisDetail pSd = listPD.get(i - 1);
-                    cPD.setUniqueId(pSd.getUniqueId() + 1);
+        try {
+            String retInDetailId;
+            for (int i = 0; i < listPD.size(); i++) {
+                PurHisDetail cPD = listPD.get(i);
+                if (cPD.getUniqueId() == null) {
+                    if (i == 0) {
+                        cPD.setUniqueId(1);
+                    } else {
+                        PurHisDetail pSd = listPD.get(i - 1);
+                        cPD.setUniqueId(pSd.getUniqueId() + 1);
+                    }
                 }
             }
-        }
-        if (delList != null) {
-            delList.forEach(detailId -> {
-                try {
-                    dao.delete(detailId);
-                } catch (Exception ex) {
-                    logger.error("delete purchase detail :" + ex.getMessage());
-                }
-            });
-        }
-        purchaseHisDao.save(pur);
-        String vouNo = pur.getVouNo();
-        for (PurHisDetail pd : listPD) {
-            if (pd.getStock() != null) {
-                if (pd.getPurDetailKey() != null) {
-                    pd.setPurDetailKey(pd.getPurDetailKey());
-                } else {
-                    retInDetailId = vouNo + '-' + pd.getUniqueId();
-                    pd.setPurDetailKey(new PurDetailKey(vouNo, retInDetailId));
-                }
-                //  pd.setLocation(pur.getLocationId());
-                dao.save(pd);
+            if (delList != null) {
+                delList.forEach(detailId -> {
+                    try {
+                        dao.delete(detailId);
+                    } catch (Exception ex) {
+                        logger.error("delete purchase detail :" + ex.getMessage());
+                    }
+                });
             }
+            purService.save(pur);
+            String vouNo = pur.getVouNo();
+            for (PurHisDetail pd : listPD) {
+                if (pd.getStock() != null) {
+                    if (pd.getPurDetailKey() != null) {
+                        pd.setPurDetailKey(pd.getPurDetailKey());
+                    } else {
+                        retInDetailId = vouNo + '-' + pd.getUniqueId();
+                        pd.setPurDetailKey(new PurDetailKey(vouNo, retInDetailId));
+                    }
+                    //  pd.setLocation(pur.getLocationId());
+                    dao.save(pd);
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("Save Purchase Detail :" + ex.getMessage());
         }
-        
+
     }
 
     @Override
@@ -142,10 +147,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
         } catch (Exception ex) {
             logger.error("Save Purchase :" + ex.getMessage());
         }
-<<<<<<< HEAD
-       // saveGl(pur);
-=======
->>>>>>> db470af18248d9e21ead772344765748468f4a10
+        saveGl(pur);
     }
 
     private void saveGl(PurHis ph) {

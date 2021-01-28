@@ -25,9 +25,7 @@ public class TraderType implements Serializable {
     private Integer typeId;
     private String description;
     private Date updatedDate;
-  
 
-    
     @Id
     @Column(name = "trader_type_id", unique = true, nullable = false)
     public Integer getTypeId() {
@@ -37,6 +35,7 @@ public class TraderType implements Serializable {
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
+
     @Column(name = "description", unique = true, nullable = false, length = 10)
     public String getDescription() {
         return description;
@@ -47,7 +46,7 @@ public class TraderType implements Serializable {
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-     @Column(name = "updated_date")
+    @Column(name = "updated_date")
     public Date getUpdatedDate() {
         return updatedDate;
     }
@@ -56,6 +55,9 @@ public class TraderType implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    
+    @Override
+    public String toString() {
+        return description;
+    }
 
 }

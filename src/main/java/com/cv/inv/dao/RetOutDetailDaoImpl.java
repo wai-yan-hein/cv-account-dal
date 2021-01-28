@@ -20,7 +20,7 @@ public class RetOutDetailDaoImpl extends AbstractDao<String, RetOutHisDetail> im
     @Override
     public List<RetOutHisDetail> search(String code) {
 
-        String hsql = "select v from RetOutDetailHis v where v.outCompoundKey.vouNo = '" + code + "' "
+        String hsql = "select v from RetOutHisDetail v where v.outCompoundKey.vouNo = '" + code + "' "
                 + " order by v.uniqueId";
         return findHSQL(hsql);
     }

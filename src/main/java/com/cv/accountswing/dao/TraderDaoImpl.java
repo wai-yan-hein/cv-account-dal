@@ -104,4 +104,10 @@ public class TraderDaoImpl extends AbstractDao<String, Trader> implements Trader
         List<Trader> listTrader = findHSQL(strSql);
         return listTrader;
     }
+
+    @Override
+    public List<Trader> search(String regionCode) {
+        String hsql = "select distinct o.region.regCode from Trader o where o.region.regCode = '" + regionCode + "'";
+        return findHSQL(hsql);
+    }
 }

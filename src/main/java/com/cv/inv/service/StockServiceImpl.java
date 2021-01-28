@@ -6,11 +6,8 @@
 package com.cv.inv.service;
 
 import com.cv.accountswing.service.SeqTableService;
-import com.cv.accountswing.util.Util1;
 import com.cv.inv.dao.CharacterNoDao;
 import com.cv.inv.dao.StockDao;
-import com.cv.inv.entity.CharacterNo;
-import com.cv.inv.entity.StockType;
 import com.cv.inv.entity.Stock;
 import java.util.List;
 import org.slf4j.Logger;
@@ -41,10 +38,8 @@ public class StockServiceImpl implements StockService {
         if (stock.getStockCode() == null || stock.getStockCode().isEmpty()) {
             Integer macId = stock.getMacId();
             String compCode = stock.getCompCode();
-            String stockType = stock.getStockType().getItemTypeCode();
-            stock.setStockCode(getStockCode(stockType, macId, "Stock", "-", compCode));
+            stock.setStockCode(getStockCode(macId, "Stock", "-", compCode));
         }
-
         return dao.save(stock);
     }
 
@@ -130,10 +125,10 @@ public class StockServiceImpl implements StockService {
         return medCode;
     }
      */
-    private String getStockCode(String stockType, Integer macId, String option, String period, String compCode) {
+    private String getStockCode(Integer macId, String option, String period, String compCode) {
 
         int seqNo = seqService.getSequence(macId, option, period, compCode);
-        String tmpCatCode = stockType + macId + String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = String.format("%0" + 3 + "d", macId) + "-" + String.format("%0" + 5 + "d", seqNo);
         return tmpCatCode;
     }
 

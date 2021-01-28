@@ -23,7 +23,7 @@ public interface VGlDao {
             String acId, String frmCurr, String toCurr, String reference, String dept,
             String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
             String glVouNo, String deptName, String traderName, String splitId,
-            String projectId, String debAmt, String crdAmt);
+            String projectId, String traderType, String crdAmt);
     
     public ResultSet searchM(String from, String to, String desp, String sourceAcId,
             String acId, String frmCurr, String toCurr, String reference, String dept,

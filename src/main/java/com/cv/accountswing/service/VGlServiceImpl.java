@@ -35,10 +35,10 @@ public class VGlServiceImpl implements VGlService {
             String acId, String frmCurr, String toCurr, String reference, String dept,
             String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
             String glVouNo, String deptName, String traderName, String splitId,
-            String projectId, String debAmt, String crdAmt) {
+            String projectId, String traderType, String crdAmt) {
         List<VGl> listVGL = dao.search(from, to, desp, sourceAcId, acId, frmCurr,
                 toCurr, reference, dept, vouNo, cvId, chequeNo, compCode, tranSource,
-                glVouNo, deptName, traderName, splitId, projectId, debAmt, crdAmt);
+                glVouNo, deptName, traderName, splitId, projectId, traderType, crdAmt);
         return listVGL;
     }
 

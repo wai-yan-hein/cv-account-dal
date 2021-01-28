@@ -7,8 +7,6 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.CustomerDao;
 import com.cv.accountswing.entity.Customer;
-import com.cv.accountswing.entity.SystemProperty;
-import com.cv.accountswing.entity.SystemPropertyKey;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,27 +70,4 @@ public class CustomerServiceImpl implements CustomerService {
         String tmpTraderId = option.toUpperCase() + String.format("%0" + ttlLength + "d", seqNo) + "-" + String.format("%0" + 3 + "d", macId);
         return tmpTraderId;
     }
-<<<<<<< HEAD
-
-
-    private boolean isAutoGenerate(String compCode) {
-        boolean status = false;
-        SystemPropertyKey spk = new SystemPropertyKey("system.trader.id.auto.generate",
-                compCode);
-        SystemProperty sp = spService.findById(spk);
-
-        if (sp != null) {
-            if (sp.getPropValue() != null) {
-                if (sp.getPropValue().equals("Y")) {
-                    status = true;
-                }
-            }
-        }
-
-        return status;
-    }
-
-=======
-
->>>>>>> db470af18248d9e21ead772344765748468f4a10
 }

@@ -404,10 +404,4 @@ public class PurHis implements java.io.Serializable {
     public void setMacId(Integer macId) {
         this.macId = macId;
     }
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> db470af18248d9e21ead772344765748468f4a10
-
 }

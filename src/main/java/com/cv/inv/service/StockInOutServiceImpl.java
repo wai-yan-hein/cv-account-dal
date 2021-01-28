@@ -66,9 +66,9 @@ public class StockInOutServiceImpl implements StockInOutService {
                     String code = vouNo + "-" + rd.getUniqueId();
                     rd.setCode(code);
                     rd.setBatchCode(vouNo);
-                    detailService.save(rd);
                 }
             }
+            detailService.save(rd);
         }
         return dao.save(stock);
     }

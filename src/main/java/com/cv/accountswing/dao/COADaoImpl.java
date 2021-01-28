@@ -64,11 +64,6 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
                 strFilter = "o.coaLevel = " + coaLevel;
             } else {
                 strFilter = strFilter + " and o.coaLevel = " + coaLevel;
-<<<<<<< HEAD
-                
-            
-=======
->>>>>>> db470af18248d9e21ead772344765748468f4a10
             }
         }
 
