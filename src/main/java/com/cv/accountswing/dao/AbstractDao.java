@@ -182,11 +182,11 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         }
     }
 
-    public void execSQL(List<String> listSql) throws Exception {
+    /*public void execSQL(List<String> listSql) throws Exception {
         listSql.stream().map(sql -> getSession().createSQLQuery(sql)).forEachOrdered(query -> {
             query.executeUpdate();
         });
-    }
+    }*/
 
     public String getGlLogSql(String glCode, String actionType) {
         String strSql = "insert \n"
