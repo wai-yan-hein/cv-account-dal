@@ -55,7 +55,13 @@ public class VCOAOpening implements Serializable {
     private String depCode;
     @Column(name = "trader_usr_code")
     private String traderUsrCode;
-
+    @Column(name = "trader_type")
+    private String traderType;
+    @Column(name = "coa_parent")
+    private String coaParent;
+    @Column(name = "reg_code")
+    private String regCode;
+    
     public Integer getOpId() {
         return opId;
     }
@@ -166,6 +172,30 @@ public class VCOAOpening implements Serializable {
 
     public void setTraderUsrCode(String traderUsrCode) {
         this.traderUsrCode = traderUsrCode;
+    }
+
+    public String getTraderType() {
+        return traderType;
+    }
+
+    public void setTraderType(String traderType) {
+        this.traderType = traderType;
+    }
+
+    public String getCoaParent() {
+        return coaParent;
+    }
+
+    public void setCoaParent(String coaParent) {
+        this.coaParent = coaParent;
+    }
+
+    public String getRegCode() {
+        return regCode;
+    }
+
+    public void setRegCode(String regCode) {
+        this.regCode = regCode;
     }
 
 }

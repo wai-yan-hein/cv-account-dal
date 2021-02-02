@@ -65,7 +65,7 @@ public class RegionDaoImpl extends AbstractDao<Integer, Region> implements Regio
         }
 
         if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter;
+            strSql = strSql + " where " + strFilter + " order by o.regionName";
         }
 
         List<Region> listRegion = findHSQL(strSql);

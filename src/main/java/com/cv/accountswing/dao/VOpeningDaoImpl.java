@@ -18,7 +18,9 @@ import org.springframework.stereotype.Repository;
 public class VOpeningDaoImpl extends AbstractDao<Integer, VCOAOpening> implements VOpeningDao {
 
     @Override
-    public List<VCOAOpening> search(String opDate, String sourceAccId, String userCode, String compCode, String depId,String curCode) {
+    public List<VCOAOpening> search(String opDate, String sourceAccId, String userCode,
+            String compCode, String depId, String curCode,
+            String traderType, String coaParent, String regCode) {
         String hsql = "select o from VCOAOpening o";
         String strFilter = "";
         if (!opDate.equals("-")) {
@@ -63,6 +65,68 @@ public class VOpeningDaoImpl extends AbstractDao<Integer, VCOAOpening> implement
                 strFilter = strFilter + " and o.curCode = '" + curCode + "'";
             }
         }
+        //New
+        if (!traderType.equals("-")) {
+            switch (traderType) {
+                case "CUSSUP":
+                    if (strFilter.isEmpty()) {
+                        strFilter = "o.traderType is not null";
+                    } else {
+                        strFilter = strFilter + " and o.traderType is not null";
+                    }
+                    break;
+                case "CUSCOA":
+                    if (strFilter.isEmpty()) {
+                        strFilter = "(o.traderType = 'C' or o.traderType is null)";
+                    } else {
+                        strFilter = strFilter + " and (o.traderType = 'C' or o.traderType is null)";
+                    }
+                    break;
+                case "SUPCOA":
+                    if (strFilter.isEmpty()) {
+                        strFilter = "(o.traderType = 'S' or o.traderType is null)";
+                    } else {
+                        strFilter = strFilter + " and (o.traderType = 'S' or o.traderType is null)";
+                    }
+                    break;
+                case "CUS":
+                    if (strFilter.isEmpty()) {
+                        strFilter = "o.traderType = 'C'";
+                    } else {
+                        strFilter = strFilter + " and o.traderType = 'C'";
+                    }
+                    break;
+                case "SUP":
+                    if (strFilter.isEmpty()) {
+                        strFilter = "o.traderType = 'S'";
+                    } else {
+                        strFilter = strFilter + " and o.traderType = 'S'";
+                    }
+                    break;
+                case "COA":
+                    if (strFilter.isEmpty()) {
+                        strFilter = "o.traderType is null";
+                    } else {
+                        strFilter = strFilter + " and o.traderType is null";
+                    }
+                    break;
+            }
+        }
+        if (!coaParent.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "o.coaParent = '" + coaParent + "'";
+            } else {
+                strFilter = strFilter + " and o.coaParent = '" + coaParent + "'";
+            }
+        }
+        if (!regCode.equals("-")) {
+            if (strFilter.isEmpty()) {
+                strFilter = "o.regCode = '" + regCode + "'";
+            } else {
+                strFilter = strFilter + " and o.regCode = '" + regCode + "'";
+            }
+        }
+
         if (!strFilter.isEmpty()) {
             hsql = hsql + " where " + strFilter;
         }
