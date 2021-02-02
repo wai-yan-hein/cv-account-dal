@@ -20,7 +20,7 @@ public interface TraderService {
             String phone, String parentCode, String compCode,
             String appTraderCode);
 
-    public List<Trader> search(String regionCode);
+    public List<Trader> search(String regionCode, String coaCode);
 
     public List<Trader> searchM(String updatedDate);
 

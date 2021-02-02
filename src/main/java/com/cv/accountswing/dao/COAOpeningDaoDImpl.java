@@ -215,7 +215,6 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
     @Override
     public void genArAp1(String compCode, String fromDate, String opDate,
             String tranDate, String coaCode, String currency, String dept, String cvId, String userCode) throws Exception {
-        logger.info("Ar / Ap Start.");
         String delSql = "delete from tmp_op_cl_apar where user_code = '" + userCode + "'";
         execSQL(delSql);
         String strSql = "insert into tmp_op_cl_apar(coa_code, curr_id, user_code, trader_code, dept_code, dr_amt, cr_amt)\n"
@@ -248,7 +247,6 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "and (vcc.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                 + "group by vcc.account_code,vcc.cur_code,vcc.comp_code,vcc.id;";
         execSQL(strSql);
-        logger.info("Ar / Ap Finished.");
     }
 
     @Override
@@ -320,8 +318,9 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "	where  tof.comp_code = coa.comp_code and tof.curr_id = coa.cur_code \n"
                 + "		and tof.coa_code = coa.source_acc_id \n"
                 + "		and tof.user_code = '" + userCode + "' and tof.coa_code = '" + coaCode + "'"
-                + "             and (coa.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
-                + "union all\n"
+                + "             and (coa.dept_code = '" + dept + "' or '-' = '" + dept + "')"
+                + "             and tof.mac_id = " + macId + "\n"
+                + "             union all\n"
                 + "select tof.coa_code, tof.curr_id, get_dr_cr_amt(gl.source_ac_id, gl.account_id, tof.coa_code, \n"
                 + "		ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'DR')-get_dr_cr_amt(gl.source_ac_id, \n"
                 + "             gl.account_id, tof.coa_code, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'CR') balance, \n"

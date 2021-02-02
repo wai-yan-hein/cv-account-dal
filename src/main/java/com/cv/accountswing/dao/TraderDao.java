@@ -23,6 +23,6 @@ public interface TraderDao {
 
     public Trader saveTrader(Trader trader);
 
-    public List<Trader> search(String regionCode);
+    public List<Trader> search(String regionCode, String coaCode);
 
 }

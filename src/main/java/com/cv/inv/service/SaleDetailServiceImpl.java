@@ -138,7 +138,6 @@ public class SaleDetailServiceImpl implements SaleDetailService {
         }
         hisDao.save(saleHis);
         String vouNo = saleHis.getVouNo();
-        SaleHisDetail shd = new SaleHisDetail();
         for (SaleHisDetail sd : listSaleDetail) {
             if (sd.getStock() != null) {
                 if (sd.getSaleDetailKey() != null) {
@@ -148,7 +147,7 @@ public class SaleDetailServiceImpl implements SaleDetailService {
                     sd.setSaleDetailKey(new SaleDetailKey(vouNo, retInDetailId));
                 }
                 //  pd.setLocation(pur.getLocationId());
-                shd = dao.save(sd);
+                dao.save(sd);
             }
         }
 
@@ -197,7 +196,7 @@ public class SaleDetailServiceImpl implements SaleDetailService {
                     }
                 }
                 String remark = "";
-                boolean isDeleted = false;
+                boolean isDeleted = sh.getDeleted();
                 List<Gl> listGL = glService.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo,
                         "-", "-", compCode, tranSource, "-", "-", "-");
                 boolean vTtlNeed = true;

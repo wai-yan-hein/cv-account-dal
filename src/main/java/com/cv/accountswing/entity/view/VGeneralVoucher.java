@@ -18,14 +18,15 @@ import javax.persistence.TemporalType;
  * @author winswe
  */
 @Entity
-@Table(name="v_general_voucher")
-public class VGeneralVoucher implements java.io.Serializable{
+@Table(name = "v_general_voucher")
+public class VGeneralVoucher implements java.io.Serializable {
+
     private String gvVouNo;
     private Date glDate;
     private String vouNo;
     private String reference;
     private Integer compCode;
-    
+
     @Id
     @Column(name = "gl_vou_no", unique = true, nullable = false)
     public String getGvVouNo() {
@@ -46,16 +47,16 @@ public class VGeneralVoucher implements java.io.Serializable{
         this.glDate = glDate;
     }
 
-    @Column(name="voucher_no")
+    @Column(name = "voucher_no")
     public String getVouNo() {
         return vouNo;
     }
-    
+
     public void setVouNo(String vouNo) {
         this.vouNo = vouNo;
     }
 
-    @Column(name="reference")
+    @Column(name = "reference")
     public String getReference() {
         return reference;
     }
@@ -64,12 +65,13 @@ public class VGeneralVoucher implements java.io.Serializable{
         this.reference = reference;
     }
 
-    @Column(name="comp_code")
-    public Integer getCompId() {
+    @Column(name = "comp_code")
+    public Integer getCompCode() {
         return compCode;
     }
 
-    public void setCompId(Integer compCode) {
+    public void setCompCode(Integer compCode) {
         this.compCode = compCode;
     }
+
 }

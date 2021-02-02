@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import com.cv.accountswing.dao.AbstractDao;
 import com.cv.inv.entity.SaleHis;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements SaleHisDao {
-
+    
     @Override
     public SaleHis save(SaleHis sh) {
         persist(sh);
@@ -92,7 +93,7 @@ public class SaleHisDaoImpl extends AbstractDao<String, SaleHis> implements Sale
         }*/
         String strSql = "select o from SaleHis o";
         if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter + " order by date(o.saleDate) desc, o.vouNo desc";
+            strSql = strSql + " where " + strFilter + " and o.deleted is not true order by date(o.saleDate) desc, o.vouNo desc";
         }
 
         List<SaleHis> listSaleHis = findHSQL(strSql);

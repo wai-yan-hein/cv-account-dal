@@ -188,17 +188,21 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         });
     }
 
-    public String getGlLogSql(long glCode, String actionType) {
-        String strSql = "insert into gl_log (gl_id,gl_date,created_date,modify_date,modify_by,"
-                + "description,source_ac_id,account_id,to_cur_id,from_cur_id,ex_rate,dr_amt,cr_amt,"
-                + "reference,dept_code,voucher_no,user_code,trader_code,cheque_no,comp_code,gst,tran_source,"
-                + "action_type,action_dt,split_id,remark,from_desp,to_desp,naration,"
-                + "project_id) "
-                + "select gl_id,gl_date,created_date,modify_date,modify_by,description,source_ac_id,"
-                + "account_id,to_cur_id,from_cur_id,ex_rate,dr_amt,cr_amt,reference,dept_code,"
-                + "voucher_no,user_code,trader_code,cheque_no,comp_code,gst,tran_source,'" + actionType
-                + "',sysdate(),split_id,remark,from_"
-                + "desp,to_desp,naration,project_id from gl where gl_id = " + glCode;
+    public String getGlLogSql(String glCode, String actionType) {
+        String strSql = "insert \n"
+                + "into gl_log(gl_code, gl_date, created_date, modify_date, modify_by, description,\n"
+                + "            source_ac_id, account_id, to_cur_id,from_cur_id, ex_rate, dr_amt,\n"
+                + "            cr_amt, reference, dept_code, voucher_no, user_code, trader_code, \n"
+                + "            cheque_no, comp_code, gst, tran_source, bank_code, gl_vou_no, split_id, \n"
+                + "            intg_upd_status, remark, from_desp, to_desp, naration, project_id, location_id,\n"
+                + "            ref_no, cerdit_term, mac_id)\n"
+                + "     select gl_code, gl_date, created_date, modify_date, modify_by, description,\n"
+                + "            source_ac_id, account_id, to_cur_id,from_cur_id, ex_rate, dr_amt,\n"
+                + "            cr_amt, reference, dept_code, voucher_no, user_code, trader_code, \n"
+                + "            cheque_no, comp_code, gst, '" + actionType + "', bank_code, gl_vou_no, split_id, \n"
+                + "            intg_upd_status, remark, from_desp, to_desp, naration, project_id, location_id,\n"
+                + "            ref_no, cerdit_term, mac_id\n"
+                + "	from gl where gl_code = '" + glCode + "'";
         return strSql;
     }
 
@@ -279,7 +283,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
             FileOutputStream fos = new FileOutputStream(filePath + fileName + ".json");
             OutputStreamWriter isr = new OutputStreamWriter(fos, "UTF-8");
 
-            try ( JsonWriter writer = new JsonWriter(isr)) {
+            try (JsonWriter writer = new JsonWriter(isr)) {
                 writer.beginObject();
                 writer.name("data");
                 writer.beginArray();
@@ -371,8 +375,8 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 
         return resultSet;
     }
-    
-     public String genJSON(final String strSql) throws Exception {
+
+    public String genJSON(final String strSql) throws Exception {
 
         String filePath = Util1.getAppWorkFolder() + File.separator + "zipFile" + File.separator;
         String fileName = UUID.randomUUID().toString();
@@ -392,7 +396,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
             FileOutputStream fos = new FileOutputStream(filePath + fileName + ".json");
             OutputStreamWriter isr = new OutputStreamWriter(fos, "UTF-8");
 
-            try ( JsonWriter writer = new JsonWriter(isr)) {
+            try (JsonWriter writer = new JsonWriter(isr)) {
                 writer.beginObject();
                 writer.name("data");
                 writer.beginArray();
@@ -412,8 +416,8 @@ public abstract class AbstractDao<PK extends Serializable, T> {
                 writer.endObject();
                 writer.close();
             }
-            
-            jsonFile = filePath+fileName + ".json";
+
+            jsonFile = filePath + fileName + ".json";
 
         } catch (IOException | SQLException ex) {
             logger.error("getResultSet : " + strSql + " : " + ex.getMessage());

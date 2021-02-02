@@ -34,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
-
+    
     private static final Logger logger = LoggerFactory.getLogger(RetInServiceImpl.class);
     private final String DELETE_OPTION = "INV_DELETE";
     private final String SOURCE_PROG = "ACCOUNT";
@@ -44,23 +44,23 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
     private GlService glService;
     @Autowired
     private SystemPropertyDao systemPropertyDao;
-
+    
     @Autowired
     private PurchaseHisService purService;
     @Autowired
     private PurchaseDetailDao dao;
-
+    
     @Override
     public PurHisDetail save(PurHisDetail pd) {
-
+        
         return dao.save(pd);
     }
-
+    
     @Override
     public List<PurHisDetail> search(String glCode) {
         return dao.search(glCode);
     }
-
+    
     @Override
     public void saveH2(PurHis pur, List<PurHisDetail> listPD, List<String> delList) {
         try {
@@ -102,9 +102,9 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
         } catch (Exception ex) {
             logger.error("Save Purchase Detail :" + ex.getMessage());
         }
-
+        
     }
-
+    
     @Override
     public void save(PurHis pur, List<PurHisDetail> listPD, List<String> delList) {
         try {
@@ -149,7 +149,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
         }
         saveGl(pur);
     }
-
+    
     private void saveGl(PurHis ph) {
         String compCode = ph.getCurrency().getKey().getCompCode();
         SystemPropertyKey key = new SystemPropertyKey("system.inventory.use.account", compCode);
@@ -173,7 +173,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                 String depCode = "";
                 AccSetting setting = settingDao.findByCode("Purchase");
                 if (setting != null) {
-
+                    
                     if (setting.getDisAccount() != null) {
                         discAccId = setting.getDisAccount().getCode();
                     }
@@ -190,24 +190,28 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                         sourceAccount = setting.getSoureAccount().getCode();
                     }
                 }
-                boolean isDeleted = false;
+                boolean isDeleted = Util1.getBoolean(ph.getDeleted());
                 String tranSource = "INVENTORY" + "-PUR";
                 String remark = "";
                 int split_id = 3;
-
+                
                 List<Gl> listGL = glService.search("-", "-", "-", "-", "-", "-", "-", "-", "-", vouNo, "-", "-", compCode, tranSource, "-", "-", "-");
-
+                
                 boolean vTtlNeed = true;
                 boolean discNeed = true;
                 boolean payNeed = true;
                 boolean taxNeed = true;
-
+                
                 if (listGL != null) {
                     if (!listGL.isEmpty()) {
                         for (Gl gl : listGL) {
                             String userCode = ph.getUpdatedBy();
                             if (isDeleted) {
-                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                try {
+                                    glService.delete(gl.getGlCode(), DELETE_OPTION);
+                                } catch (Exception ex) {
+                                    logger.error("Delete GL : " + ex.getMessage());
+                                }
                             } else {
                                 if (gl.getAccountId().equals(vBalAcc)) {
                                     vTtlNeed = false;
@@ -246,7 +250,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                                         //glDao.delete(gl.getGlCode(), DELETE_OPTION);
                                     }
                                 }
-
+                                
                                 gl.setGlDate(glDate);
                                 gl.setTraderCode(cusCode);
                                 gl.setFromCurId(curCode);
@@ -257,17 +261,17 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                         listGL = new ArrayList();
                     }
                 } else {
-
+                    
                     listGL = new ArrayList();
                 }
-
+                
                 if (isDeleted) {
                     vTtlNeed = false;
                     discNeed = false;
                     payNeed = false;
                     taxNeed = false;
                 }
-
+                
                 if (vouBalance != 0 && vTtlNeed) {
                     Gl glVouTotal = new Gl();
                     glVouTotal.setSourceAcId(sourceAccount);
@@ -288,7 +292,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                     glVouTotal.setMacId(macId);
                     listGL.add(glVouTotal);
                 }
-
+                
                 if (discount != 0 && discNeed) {
                     Gl glDiscount = new Gl();
                     glDiscount.setSourceAcId(sourceAccount);
@@ -309,7 +313,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                     glDiscount.setMacId(macId);
                     listGL.add(glDiscount);
                 }
-
+                
                 if (payment != 0 && payNeed) {
                     Gl glVouPay = new Gl();
                     glVouPay.setSourceAcId(sourceAccount);
@@ -330,7 +334,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                     glVouPay.setMacId(macId);
                     listGL.add(glVouPay);
                 }
-
+                
                 if (tax != 0 && taxNeed) {
                     Gl glVouTax = new Gl();
                     glVouTax.setSourceAcId(sourceAccount);
@@ -351,7 +355,7 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                     glVouTax.setMacId(macId);
                     listGL.add(glVouTax);
                 }
-
+                
                 if (!listGL.isEmpty()) {
                     for (Gl gl : listGL) {
                         try {
@@ -363,12 +367,12 @@ public class PurchaseDetatilServiceImpl implements PurchaseDetailService {
                 }
             }
         }
-
+        
     }
-
+    
     @Override
     public int delete(String code) throws Exception {
         return dao.delete(code);
-
+        
     }
 }

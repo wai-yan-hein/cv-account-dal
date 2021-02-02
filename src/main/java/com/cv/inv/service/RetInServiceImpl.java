@@ -23,6 +23,7 @@ import com.cv.inv.entity.RetInHisDetail;
 import com.cv.inv.entity.RetInHis;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class RetInServiceImpl implements RetInService {
 
     private static final Logger log = LoggerFactory.getLogger(RetInServiceImpl.class);
     private final String SOURCE_PROG = "ACCOUNT";
+    private final String DELETE_OPTION = "INV_DELETE";
 
     @Autowired
     private RetInDao retInDao;
@@ -164,7 +166,7 @@ public class RetInServiceImpl implements RetInService {
                 String depCode = "";
                 AccSetting setting = settingService.findByCode("Return In");
                 if (setting != null) {
-                    
+
                     /*if (setting.getDisAccount() != null) {
         discAccId = setting.getDisAccount().getCode();
         }*/
@@ -181,7 +183,7 @@ public class RetInServiceImpl implements RetInService {
                         sourceAccount = setting.getSoureAccount().getCode();
                     }
                 }
-                boolean isDeleted = false;
+                boolean isDeleted = Util1.getBoolean(rh.isDeleted());
                 String tranSource = "INVENTORY" + "-RETURN IN";
                 String remark = "";
                 int split_id = 5;
@@ -194,7 +196,11 @@ public class RetInServiceImpl implements RetInService {
                         String userCode = rh.getUpdatedBy().getAppUserCode();
                         for (Gl gl : listGL) {
                             if (isDeleted) {
-                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                try {
+                                    glService.delete(gl.getGlCode(), DELETE_OPTION);
+                                } catch (Exception ex) {
+                                    log.error("Delete GL : " + ex.getMessage());
+                                }
                             } else {
                                 if (gl.getAccountId().equals(vouTotalACc)) {
                                     vTtlNeed = false;

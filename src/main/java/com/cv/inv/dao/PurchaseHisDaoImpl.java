@@ -78,7 +78,7 @@ public class PurchaseHisDaoImpl extends AbstractDao<String, PurHis> implements P
 
         String strSql = "select o from PurHis o";
         if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter;
+            strSql = strSql + " where " + strFilter + " and o.deleted is not true";
         }
 
         List<PurHis> listPurHis = findHSQL(strSql);
@@ -149,7 +149,7 @@ public class PurchaseHisDaoImpl extends AbstractDao<String, PurHis> implements P
                     + "                     join appuser apu on ph.created_by = apu.app_user_code\n"
                     + "                     left join trader td on ph.trader_code=td.code\n"
                     + "                     where \n"
-                    +strFilter
+                    + strFilter
                     + "                     and ph.deleted=false\n"
                     + "                    order by ph.pur_date  desc ,ph.vou_no desc";
             rs = getResultSet(strFilter);

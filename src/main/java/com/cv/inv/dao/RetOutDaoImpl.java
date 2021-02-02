@@ -82,7 +82,7 @@ public class RetOutDaoImpl extends AbstractDao<String, RetOutHis> implements Ret
         }
         String strSql = "select o from RetOutHis o";
         if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter;
+            strSql = strSql + " where " + strFilter + " and o.deleted is not true";
         }
 
         List<RetOutHis> listPurHis = findHSQL(strSql);
@@ -172,7 +172,7 @@ public class RetOutDaoImpl extends AbstractDao<String, RetOutHis> implements Ret
     }
 
     @Override
-    public int delete(String id) throws Exception{
+    public int delete(String id) throws Exception {
         String strSql = "update ret_out_his set deleted = true where ret_out_id = '" + id + "'";
         execSQL(strSql);
         return 1;

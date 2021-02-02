@@ -75,7 +75,7 @@ public class StockInOutDaoImpl extends AbstractDao<String, StockInOut> implement
         }
         String strSql = "select o from StockInOut o";
         if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter + " order by date(o.tranDate) desc, o.batchCode desc";
+            strSql = strSql + " where " + strFilter + "and o.deleted is not true order by date(o.tranDate) desc, o.batchCode desc";
         }
 
         return findHSQL(strSql);

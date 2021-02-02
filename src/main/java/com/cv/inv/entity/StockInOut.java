@@ -28,9 +28,9 @@ public class StockInOut implements Serializable {
     @Id
     @Column(name = "batch_code", unique = true, nullable = false)
     private String batchCode;
-    @Column(name = "remark")
+    @Column(name = "v_remark")
     private String remark;
-    @Column(name = "desp")
+    @Column(name = "v_desp")
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
@@ -53,13 +53,12 @@ public class StockInOut implements Serializable {
     private Date tranDate;
     @Column(name = "in_total")
     private Float inTotal;
-    @Column(name = "in_unit")
-    private String inUnit;
+
     @Column(name = "out_total")
     private Float outTotal;
-    @Column(name = "out_unit")
 
-    private String outUnit;
+    @Column(name = "deleted")
+    private Boolean deleted;
 
     public String getBatchCode() {
         return batchCode;
@@ -149,14 +148,6 @@ public class StockInOut implements Serializable {
         this.inTotal = inTotal;
     }
 
-    public String getInUnit() {
-        return inUnit;
-    }
-
-    public void setInUnit(String inUnit) {
-        this.inUnit = inUnit;
-    }
-
     public Float getOutTotal() {
         return outTotal;
     }
@@ -165,12 +156,12 @@ public class StockInOut implements Serializable {
         this.outTotal = outTotal;
     }
 
-    public String getOutUnit() {
-        return outUnit;
+    public Boolean getDeleted() {
+        return deleted;
     }
 
-    public void setOutUnit(String outUnit) {
-        this.outUnit = outUnit;
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
 }

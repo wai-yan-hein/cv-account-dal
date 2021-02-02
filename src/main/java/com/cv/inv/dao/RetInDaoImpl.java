@@ -82,7 +82,7 @@ public class RetInDaoImpl extends AbstractDao<String, RetInHis> implements RetIn
         }
         String strSql = "select o from RetInHis o";
         if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter;
+            strSql = strSql + " where " + strFilter + " and o.deleted is not true";
         }
 
         List<RetInHis> listPurHis = findHSQL(strSql);

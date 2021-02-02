@@ -65,7 +65,7 @@ public class TraderServiceImpl implements TraderService {
     }
 
     @Override
-    public List<Trader> search(String regionCode) {
-        return dao.search(regionCode);
+    public List<Trader> search(String regionCode,String coaCode) {
+        return dao.search(regionCode,coaCode);
     }
 }

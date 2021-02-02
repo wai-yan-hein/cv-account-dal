@@ -5,6 +5,7 @@
  */
 package com.cv.inv.service;
 
+import com.cv.accountswing.dao.GlDao;
 import com.cv.accountswing.dummy.SaleVouSearchFilter;
 import com.cv.accountswing.util.Util1;
 import java.sql.ResultSet;
@@ -26,6 +27,9 @@ public class SaleHisServiceImpl implements SaleHisService {
 
     @Autowired
     private SaleHisDao hisDao;
+    @Autowired
+    private GlDao glDao;
+    private final String DELETE_OPTION = "INV_DELETE";
 
     @Override
     public SaleHis save(SaleHis saleHis) throws Exception {
@@ -46,6 +50,7 @@ public class SaleHisServiceImpl implements SaleHisService {
 
     @Override
     public int delete(String vouNo) throws Exception {
+        glDao.delete(vouNo, DELETE_OPTION);
         return hisDao.delete(vouNo);
     }
 

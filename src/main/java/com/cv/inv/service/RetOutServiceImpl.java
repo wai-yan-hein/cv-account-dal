@@ -21,6 +21,7 @@ import com.cv.inv.entity.RetOutHisDetail;
 import com.cv.inv.entity.RetOutHis;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class RetOutServiceImpl implements RetOutService {
 
     private static final Logger log = LoggerFactory.getLogger(RetOutServiceImpl.class);
     private final String SOURCE_PROG = "ACCOUNT";
+    private final String DELETE_OPTION = "INV_DELETE";
     @Autowired
     private GlService glService;
     @Autowired
@@ -153,7 +155,7 @@ public class RetOutServiceImpl implements RetOutService {
                         sourceAccount = setting.getSoureAccount().getCode();
                     }
                 }
-                boolean isDeleted = false;
+                boolean isDeleted = Util1.getBoolean(rh.isDeleted());
                 String tranSource = "INVENTORY" + "-RETURN OUT";
                 String remark = "";
                 int split_id = 6;
@@ -167,7 +169,11 @@ public class RetOutServiceImpl implements RetOutService {
                         String userCode = rh.getUpdatedBy();
                         for (Gl gl : listGL) {
                             if (isDeleted) {
-                                //glDao.delete(gl.getGlCode(), DELETE_OPTION);
+                                try {
+                                    glService.delete(gl.getGlCode(), DELETE_OPTION);
+                                } catch (Exception ex) {
+                                    log.error("Delete GL :" + ex.getMessage());
+                                }
                             } else {
                                 if (gl.getAccountId().equals(vouTotalAcc)) {
                                     vTtlNeed = false;
