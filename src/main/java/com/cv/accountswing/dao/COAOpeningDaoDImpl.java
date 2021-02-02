@@ -302,8 +302,9 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
     public void genOpBalanceGL1(String coaCode, String opDate, String clDate,
             int level, String curr, String userCode, String dept, String macId) throws Exception {
         deleteTmp(Integer.parseInt(macId));
-        String insertSql = "insert into tmp_op_filter(comp_code, coa_code, op_tran_id_d, curr_id, op_date, user_code,mac_id) \n"
+        String insertSql = "insert into tmp_op_filter(comp_code, coa_code, op_tran_id_d, curr_id, op_date, user_code,mac_id,dept_code) \n"
                 + "select coa.comp_code,coa.coa_code,op.coa_op_id,ifnull(op.cur_code,'" + curr + "'),op.op_date,'" + userCode + "'," + macId + "\n"
+                + ",op.dept_code "
                 + "from chart_of_account coa left join coa_opening op \n"
                 + "on coa.coa_code = op.source_acc_id and coa.comp_code = op.comp_code\n"
                 + "where coa.coa_code = '" + coaCode + "'"
