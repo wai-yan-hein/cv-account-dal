@@ -187,7 +187,6 @@ public abstract class AbstractDao<PK extends Serializable, T> {
             query.executeUpdate();
         });
     }*/
-
     public String getGlLogSql(String glCode, String actionType) {
         String strSql = "insert \n"
                 + "into gl_log(gl_code, gl_date, created_date, modify_date, modify_by, description,\n"
