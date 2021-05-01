@@ -21,7 +21,7 @@ public interface UsrCompRoleService {
 
     public List<UsrCompRole> search(String userCode, String compCode, String roleId);
 
-    public List getAssignRole(String userCode);
+    public List getAssignRole(String userCode, String compCode);
 
     public List getAssignCompany(String userCode);
 

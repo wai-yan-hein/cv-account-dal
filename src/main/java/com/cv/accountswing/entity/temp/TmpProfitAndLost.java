@@ -17,8 +17,9 @@ import javax.persistence.Table;
  * @author winswe
  */
 @Entity
-@Table(name="tmp_profit_lost")
+@Table(name = "tmp_profit_lost")
 public class TmpProfitAndLost implements java.io.Serializable {
+
     private Long tranId;
     private String groupDesp;
     private String accId;
@@ -29,7 +30,8 @@ public class TmpProfitAndLost implements java.io.Serializable {
     private Integer compCode;
     private Integer sortOrder;
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "tran_id", unique = true, nullable = false)
     public Long getTranId() {
         return tranId;
@@ -39,7 +41,7 @@ public class TmpProfitAndLost implements java.io.Serializable {
         this.tranId = tranId;
     }
 
-    @Column(name="group_desp", length=255)
+    @Column(name = "group_desp", length = 255)
     public String getGroupDesp() {
         return groupDesp;
     }
@@ -48,7 +50,7 @@ public class TmpProfitAndLost implements java.io.Serializable {
         this.groupDesp = groupDesp;
     }
 
-    @Column(name="acc_id", length=15)
+    @Column(name = "acc_code", length = 15)
     public String getAccId() {
         return accId;
     }
@@ -57,7 +59,7 @@ public class TmpProfitAndLost implements java.io.Serializable {
         this.accId = accId;
     }
 
-    @Column(name="acc_name", length=255)
+    @Column(name = "acc_name", length = 255)
     public String getAccName() {
         return accName;
     }
@@ -66,7 +68,7 @@ public class TmpProfitAndLost implements java.io.Serializable {
         this.accName = accName;
     }
 
-    @Column(name="curr_id", length=15)
+    @Column(name = "curr_code", length = 15)
     public String getCurrency() {
         return currency;
     }
@@ -75,7 +77,7 @@ public class TmpProfitAndLost implements java.io.Serializable {
         this.currency = currency;
     }
 
-    @Column(name="acc_total")
+    @Column(name = "acc_total")
     public Double getAccTotal() {
         return accTotal;
     }
@@ -84,25 +86,29 @@ public class TmpProfitAndLost implements java.io.Serializable {
         this.accTotal = accTotal;
     }
 
-    @Column(name="user_code", length=15)
-    public String getUserId() {
+    @Column(name = "user_code", length = 15)
+    public String getUserCode() {
         return userCode;
     }
 
-    public void setUserId(String userCode) {
+    public void setUserCode(String userCode) {
         this.userCode = userCode;
     }
 
-    @Column(name="comp_code")
-    public Integer getCompId() {
+    @Column(name = "comp_code")
+    public Integer getCompCode() {
         return compCode;
+    }
+
+    public void setCompCode(Integer compCode) {
+        this.compCode = compCode;
     }
 
     public void setCompId(Integer compCode) {
         this.compCode = compCode;
     }
 
-    @Column(name="sort_order")
+    @Column(name = "sort_order")
     public Integer getSortOrder() {
         return sortOrder;
     }

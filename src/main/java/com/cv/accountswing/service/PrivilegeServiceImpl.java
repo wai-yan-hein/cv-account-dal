@@ -47,34 +47,30 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public void save(String roleId, List<Menu> listMenu) {
-        for (Menu menu : listMenu) {
+        listMenu.forEach(menu -> {
             PrivilegeKey key = new PrivilegeKey();
             key.setMenuCode(menu.getCode());
             key.setRoleCode(roleId);
-
             Privilege privilege = new Privilege();
             privilege.setKey(key);
             privilege.setIsAllow(Boolean.FALSE);
             dao.save(privilege);
-
             if (menu.getChild() != null) {
                 if (menu.getChild().size() > 0) {
                     save(roleId, menu.getChild());
                 }
             }
-        }
+        });
     }
 
     @Override
     public void delete(String roleId, List<Menu> listMenu) {
-        for (Menu menu : listMenu) {
+        listMenu.stream().map(menu -> {
             dao.delete(roleId, menu.getCode().toString());
-            if (menu.getChild() != null) {
-                if (menu.getChild().size() > 0) {
-                    delete(roleId, menu.getChild());
-                }
-            }
-        }
+            return menu;
+        }).filter(menu -> (menu.getChild() != null)).filter(menu -> (menu.getChild().size() > 0)).forEachOrdered(menu -> {
+            delete(roleId, menu.getChild());
+        });
     }
 
     @Override

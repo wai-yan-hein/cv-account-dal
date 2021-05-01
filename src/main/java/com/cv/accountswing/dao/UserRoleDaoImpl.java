@@ -59,7 +59,7 @@ public class UserRoleDaoImpl extends AbstractDao<Integer, UserRole> implements U
 
     @Override
     public int delete(String id) {
-        String strSql = "delete from UserRole o where o.roleId = " + id;
+        String strSql = "delete from UserRole o where o.roleCode = " + id;
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

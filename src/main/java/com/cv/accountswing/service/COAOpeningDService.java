@@ -51,7 +51,7 @@ public interface COAOpeningDService {
             String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
 
     public void genArAp1(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
+            String coaCode, String currency, String dept, String traderCode, String userCode) throws Exception;
 
     public List<TmpOpeningClosing> getOpBalanceByTrader(String coaCode, String opDate,
             String clDate, int level, String curr, String userCode, String dept, String traderCode, String macID, String compCode) throws Exception;

@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class VAParServiceImpl implements VAParService{
-    
+public class VAParServiceImpl implements VAParService {
+
     @Autowired
     private VAParDao dao;
-    
+
     @Override
-    public List<VApar> getApAr(String userCode, String compCode){
-        return dao.getApAr(userCode, compCode);
+    public List<VApar> getApAr(String userCode, String compCode, String traderType) {
+        return dao.getApAr(userCode, compCode, traderType);
     }
 }

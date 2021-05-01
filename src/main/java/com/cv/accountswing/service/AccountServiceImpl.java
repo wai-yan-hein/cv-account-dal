@@ -78,7 +78,7 @@ public class AccountServiceImpl implements AccountService {
     }
     
     @Override
-    public List<AppUser> findAll(){
-        return dao.findAll();
+    public List<AppUser> findAll(String compCode){
+        return dao.findAll(compCode);
     }
 }

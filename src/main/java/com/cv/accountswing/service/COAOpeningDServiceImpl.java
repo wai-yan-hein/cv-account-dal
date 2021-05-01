@@ -95,8 +95,9 @@ public class COAOpeningDServiceImpl implements COAOpeningDService {
     }
 
     @Override
-    public void genArAp1(String compCode, String fromDate, String opDate, String tranDate, String coaCode, String currency, String dept, String cvId, String userCode) throws Exception {
-        dao.genArAp1(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userCode);
+    public void genArAp1(String compCode, String fromDate, String opDate, String tranDate,
+            String coaCode, String currency, String dept, String traderCode, String userCode) throws Exception {
+        dao.genArAp1(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, traderCode, userCode);
     }
 
     @Override

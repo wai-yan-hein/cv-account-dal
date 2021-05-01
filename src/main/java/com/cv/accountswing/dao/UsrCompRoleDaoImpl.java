@@ -68,8 +68,9 @@ public class UsrCompRoleDaoImpl extends AbstractDao<UsrCompRoleKey, UsrCompRole>
     }
 
     @Override
-    public List getAssignRole(String userCode) {
-        String strSql = "select o from VUsrCompRole o where o.key.userCode = " + userCode;
+    public List getAssignRole(String userCode, String compCode) {
+        String strSql = "select o from VUsrCompRole o where o.key.userCode = '" + userCode + "' "
+                + "and o.key.compCode ='" + compCode + "'";
         List listAssignRole = findHSQL(strSql);
         return listAssignRole;
     }
@@ -106,8 +107,8 @@ public class UsrCompRoleDaoImpl extends AbstractDao<UsrCompRoleKey, UsrCompRole>
 
     @Override
     public int delete(String userCode, String compCode, String roleCode) {
-        String strSql = "delete from UsrCompRole o where o.key.userCode = "
-                + userCode + " and o.key.compCode = " + compCode + " and o.key.roleCode = " + roleCode;
+        String strSql = "delete from UsrCompRole o where o.key.userCode = '"
+                + userCode + "' and o.key.compCode = '" + compCode + "' and o.key.roleCode = '" + roleCode + "'";
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

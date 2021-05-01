@@ -14,12 +14,15 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class VAParDaoImpl extends AbstractDao<Integer, VApar> implements VAParDao{
-    
+public class VAParDaoImpl extends AbstractDao<Integer, VApar> implements VAParDao {
+
     @Override
-    public List<VApar> getApAr(String userCode, String compCode){
-        String strSql = "select o from VApar o where o.key.userCode = " + userCode +
-                " and o.key.compCode = " + compCode;
+    public List<VApar> getApAr(String userCode, String compCode, String traderType) {
+        String strSql = "select o from VApar o where o.key.userCode = " + userCode
+                + " and o.key.compCode = " + compCode;
+        if (!traderType.equals("-")) {
+            strSql = strSql + " and trader_code like '" + traderType + "%'";
+        }
         List<VApar> listApAr = findHSQL(strSql);
         return listApAr;
     }

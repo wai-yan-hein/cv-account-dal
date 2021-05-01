@@ -135,9 +135,9 @@ public class AccountDaoImpl extends AbstractDao<Integer, AppUser> implements Acc
     }
 
     @Override
-    public List<AppUser> findAll() {
+    public List<AppUser> findAll(String compCode) {
 
-        String strSql = "select o from AppUser o";
+        String strSql = "select o from AppUser  o where o.compCode = '" + compCode + "'";
         List<AppUser> ListAU = findHSQL(strSql);
         return ListAU;
 

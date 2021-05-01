@@ -13,5 +13,6 @@ import java.util.List;
  * @author winswe
  */
 public interface VAParDao {
-    public List<VApar> getApAr(String userCode, String compCode);
+
+    public List<VApar> getApAr(String userCode, String compCode, String traderType);
 }

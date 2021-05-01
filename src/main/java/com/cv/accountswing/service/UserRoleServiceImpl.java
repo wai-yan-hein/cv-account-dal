@@ -32,7 +32,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         if (ur.getRoleCode() == null || ur.getRoleCode().isEmpty()) {
             Integer macId = ur.getMacId();
             String compCode = ur.getCompCode();
-            ur.setRoleCode(getUserRoleCode(macId, "Trader", "-", compCode));
+            ur.setRoleCode(getUserRoleCode(macId, "UserRole", "-", compCode));
         }
         return dao.save(ur);
     }

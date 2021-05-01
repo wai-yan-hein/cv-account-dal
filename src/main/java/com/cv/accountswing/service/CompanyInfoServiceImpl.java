@@ -9,6 +9,8 @@ import com.cv.accountswing.dao.COADao;
 import com.cv.accountswing.dao.CompanyInfoDao;
 import com.cv.accountswing.entity.ChartOfAccount;
 import com.cv.accountswing.entity.CompanyInfo;
+import com.cv.accountswing.entity.SystemProperty;
+import com.cv.accountswing.entity.SystemPropertyKey;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,14 +37,6 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     private SeqTableService seqService;
     @Autowired
     private SystemPropertyService spService;
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private UserRoleService userRoleService;
-    @Autowired
-    private PrivilegeService privilegeService;
-    @Autowired
-    private UsrCompRoleService usrCompRoleService;
 
     @Override
     public CompanyInfo saveM(CompanyInfo ci) {
@@ -54,8 +48,28 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         if (ci.getCompCode() == null || ci.getCompCode().isEmpty()) {
             String compCode = getCompCode(ci.getMacId());
             ci.setCompCode(compCode);
+            //copy system property
+            List<CompanyInfo> listCI = dao.search("-", "-", "-", "-", ci.getBusinessType().getCode(), "-");
+            if (!listCI.isEmpty()) {
+                String oldCompCode = listCI.get(0).getCompCode();
+                List<SystemProperty> listSys = spService.search("-", oldCompCode, "-");
+                if (!listSys.isEmpty()) {
+                    for (SystemProperty sys : listSys) {
+                        SystemPropertyKey key = new SystemPropertyKey();
+                        key.setCompCode(compCode);
+                        key.setPropKey(sys.getKey().getPropKey());
+                        SystemProperty property = new SystemProperty();
+                        property.setPropValue(sys.getPropValue());
+                        property.setRemark(sys.getRemark());
+                        property.setKey(key);
+                        spService.save(property);
+                    }
+                }
+
+            }
         }
         ci = dao.save(ci);
+
 
         /*if (status.equals("NEW")) {
             String businessType = ci.getBusinessType().getCode();
@@ -192,6 +206,5 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     public CompanyInfo save(CompanyInfo ci) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-  
-            
+
 }

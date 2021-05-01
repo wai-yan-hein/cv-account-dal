@@ -42,8 +42,8 @@ public class UsrCompRoleServiceImpl implements UsrCompRoleService {
     }
 
     @Override
-    public List getAssignRole(String userCode) {
-        return dao.getAssignRole(userCode);
+    public List getAssignRole(String userCode, String compCode) {
+        return dao.getAssignRole(userCode, compCode);
     }
 
     @Override

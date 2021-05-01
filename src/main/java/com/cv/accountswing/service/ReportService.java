@@ -18,7 +18,7 @@ public interface ReportService {
             Map<String, Object> parameters) throws Exception;
 
     public void getProfitLost(String plProcess, String from, String to, String dept,
-            String currency, String comp, String userCode) throws Exception;
+            String currency, String comp, String userCode,String macId) throws Exception;
 
     public ProfitAndLostRetObj getPLCalculateValue(String userCode, String compCode);
 
@@ -27,7 +27,7 @@ public interface ReportService {
             String vouNo, String cvId, String userCode, String glVouNo, String deptName, String traderName);
 
     public void genBalanceSheet(String from, String to, String dept, String userCode,
-            String compCode, String curr) throws Exception;
+            String compCode, String curr, String macId) throws Exception;
 
     public Object getAggResult(String sql);
 }

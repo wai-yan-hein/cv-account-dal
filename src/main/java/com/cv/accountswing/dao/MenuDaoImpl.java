@@ -75,7 +75,7 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
 
     @Override
     public int delete(String id) {
-        String strSql = "delete from Menu o where o.id = " + id;
+        String strSql = "delete from Menu o where o.code = '" + id + "'";
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }
@@ -109,8 +109,8 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
 
     @Override
     public List getParentChildMenu(String roleCode, String menuType) {
-        String strSql = "select o from VRoleMenu o where o.key.roleCode = " + roleCode
-                + " and o.parent = '1' order by o.orderBy";
+        String strSql = "select o from VRoleMenu o where o.key.roleCode = '" + roleCode
+                + "' and o.parent = '1' order by o.orderBy";
         List listRootMenu = findHSQL(strSql);
         for (int i = 0; i < listRootMenu.size(); i++) {
             VRoleMenu parent = (VRoleMenu) listRootMenu.get(i);
@@ -120,9 +120,9 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
         return listRootMenu;
     }
 
-      private void getChild(VRoleMenu parent, String roleCode, String menuType) {
+    private void getChild(VRoleMenu parent, String roleCode, String menuType) {
         String strSql = "select o from VRoleMenu o where o.parent = '" + parent.getKey().getMenuCode()
-                + "' and o.key.roleCode = " + roleCode + "";
+                + "' and o.key.roleCode = '" + roleCode + "'";
         if (!menuType.equals("-")) {
             strSql = strSql + " and o.menuType = '" + menuType + "'";
         }
@@ -138,10 +138,11 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
             }
         }
     }
-     @Override
+
+    @Override
     public List getParentChildMenuSelect(String roleCode, String menuType) {
-        String strSql ="select m from Menu m where m.parent = '1' and "
-                +" m.code in(select p.key.menuCode from Privilege p where p.isAllow=true and p.key.roleCode = "+ roleCode +") order by m.orderBy";
+        String strSql = "select m from Menu m where m.parent = '1' and "
+                + " m.code in(select p.key.menuCode from Privilege p where p.isAllow=true and p.key.roleCode = " + roleCode + ") order by m.orderBy";
         List listRootMenu = findHSQL(strSql);
         for (int i = 0; i < listRootMenu.size(); i++) {
             Menu parent = (Menu) listRootMenu.get(i);
@@ -150,6 +151,7 @@ public class MenuDaoImpl extends AbstractDao<String, Menu> implements MenuDao {
 
         return listRootMenu;
     }
+
     private void getChildSelect(Menu parent, String roleCode, String menuType) {
         String strSql = "select m from Menu m where m.parent=" + parent.getCode()
                 + " and m.code in(select p.key.menuCode from Privilege p where p.isAllow=true and p.key.roleCode='" + roleCode + "') order by m.orderBy";

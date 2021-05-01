@@ -7,6 +7,7 @@ package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.VDescriptionDao;
 import com.cv.accountswing.entity.view.VDescription;
+import com.cv.accountswing.entity.view.VMenuClass;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class VDescriptionSeviceImpl implements VDescriptionService {
     @Override
     public List<VDescription> getDescriptions() {
         return dao.getDescriptions();
+    }
+
+    @Override
+    public List<VMenuClass> getMenuClass() {
+        return dao.getMenuClass();
     }
 
 }

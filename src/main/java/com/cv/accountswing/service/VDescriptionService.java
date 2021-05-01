@@ -6,7 +6,7 @@
 package com.cv.accountswing.service;
 
 import com.cv.accountswing.entity.view.VDescription;
-import com.cv.accountswing.entity.view.VGl;
+import com.cv.accountswing.entity.view.VMenuClass;
 import java.util.List;
 
 /**
@@ -16,4 +16,6 @@ import java.util.List;
 public interface VDescriptionService {
 
     public List<VDescription> getDescriptions();
+
+    public List<VMenuClass> getMenuClass();
 }

@@ -6,6 +6,7 @@
 package com.cv.accountswing.dao;
 
 import com.cv.accountswing.entity.view.VDescription;
+import com.cv.accountswing.entity.view.VMenuClass;
 import java.util.List;
 
 /**
@@ -16,4 +17,5 @@ public interface VDescriptionDao {
 
     public List<VDescription> getDescriptions();
 
+    public List<VMenuClass> getMenuClass();
 }

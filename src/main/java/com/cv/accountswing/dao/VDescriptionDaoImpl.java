@@ -7,6 +7,7 @@ package com.cv.accountswing.dao;
 
 import com.cv.accountswing.entity.view.VDescription;
 import com.cv.accountswing.entity.view.VGl;
+import com.cv.accountswing.entity.view.VMenuClass;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,12 @@ public class VDescriptionDaoImpl extends AbstractDao<String, VDescription> imple
     public List<VDescription> getDescriptions() {
         String hsql = "select o from VDescription o";
         return findHSQL(hsql);
+    }
+
+    @Override
+    public List<VMenuClass> getMenuClass() {
+        String hsql = "select o from VMenuClass o";
+        return findHSQLList(hsql);
     }
 
 }

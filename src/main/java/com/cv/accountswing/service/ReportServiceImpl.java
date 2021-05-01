@@ -45,10 +45,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void getProfitLost(String plProcess, String from, String to, String dept,
-            String currency, String comp, String userCode) throws Exception {
-        dao.execSQLRpt("delete from tmp_profit_lost where user_code = '" + userCode + "' and comp_code = " + comp);
-        String strInsert = "insert into tmp_profit_lost(group_desp, acc_id, acc_name, curr_id, "
-                + "acc_total, user_code, comp_code, sort_order)";
+            String currency, String comp, String userCode, String macId) throws Exception {
+        dao.execSQLRpt("delete from tmp_profit_lost where mac_id = " + macId + "");
+        String strInsert = "insert into tmp_profit_lost(group_desp, acc_code, acc_name, curr_code, "
+                + "acc_total, user_code, comp_code, sort_order,mac_id)";
         String[] process = plProcess.split(",");
         int sortOrder = 1;
 
@@ -61,7 +61,7 @@ public class ReportServiceImpl implements ReportService {
             switch (tmp) {
                 case "os":
                     String strOS = "select 'Cost of Sale', 'os', 'Opening Stock', curr_code, sum(ifnull(amount,0)) amount, "
-                            + "'" + userCode + "',comp_code, " + sortOrder + "\n"
+                            + "'" + userCode + "',comp_code, " + sortOrder + "," + macId + "\n"
                             + "from stock_op_value\n"
                             + "where date(tran_date) = '" + tmpFrom + "' and comp_code = " + comp
                             + " and (dept_code = '" + dept + "' or '-' = '" + dept + "') \n"
@@ -72,7 +72,7 @@ public class ReportServiceImpl implements ReportService {
                     break;
                 case "cs":
                     String strCS = "select 'Cost of Sale', 'cs', 'Closing Stock', curr_code, sum(ifnull(amount,0)*-1) amount, "
-                            + "'" + userCode + "',comp_code, " + sortOrder + "\n"
+                            + "'" + userCode + "',comp_code, " + sortOrder + "," + macId + "\n"
                             + "from stock_op_value\n"
                             + "where date(tran_date) = '" + to + "' and comp_code = " + comp
                             + " and (dept_code = '" + dept + "' or '-' = '" + dept + "') \n"
@@ -120,7 +120,7 @@ public class ReportServiceImpl implements ReportService {
                                 + "group by a.acc_id, a.curr_id";*/
                         String strSelectDr = "select '" + group + "' pl_group, a.acc_id,'" + accDesp + "',a.curr_id"
                                 + ", sum(ifnull(a.dr_amt,0) - ifnull(a.cr_amt,0)) acc_total,'" + userCode + "' user_code \n"
-                                + ", " + comp + "," + sortOrder + "\n "
+                                + ", " + comp + "," + sortOrder + "," + macId + "\n "
                                 + "from (\n select '" + coaCode + "' acc_id, "
                                 + "if(tran_source='GV',cr_amt,dr_amt) dr_amt,"
                                 + "if(tran_source='GV', dr_amt, cr_amt) cr_amt,\n"
@@ -139,7 +139,7 @@ public class ReportServiceImpl implements ReportService {
 
                         String strSelectCr = "select '" + group + "' pl_group, a.acc_id,'" + accDesp + "',a.curr_id"
                                 + ", sum(ifnull(a.cr_amt,0) - ifnull(a.dr_amt,0)) acc_total,'" + userCode + "' user_code \n"
-                                + ", " + comp + "," + sortOrder + "\n "
+                                + ", " + comp + "," + sortOrder + "," + macId + "\n"
                                 + "from (\n select '" + coaCode + "' acc_id, "
                                 + "get_dr_cr_amt(source_ac_id, account_id, '" + coaCode + "', dr_amt, cr_amt, 'DR') as dr_amt, "
                                 + "get_dr_cr_amt(source_ac_id, account_id, '" + coaCode + "', dr_amt, cr_amt, 'CR') as cr_amt,\n"
@@ -379,16 +379,15 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void genBalanceSheet(String from, String to, String dept, String userCode,
-            String compCode, String curr) throws Exception {
-        String strSqlDelete = "delete from tmp_balance_sheet where user_code = '" + userCode + "'";
+            String compCode, String curr, String macId) throws Exception {
+        String strSqlDelete = "delete from tmp_balance_sheet where mac_id = '" + macId + "'";
         dao.execSQLRpt(strSqlDelete);
-
         //from = Util1.toDateStrMYSQL(from, "EE MMM d y H:m:s 'GMT'Z (zz)");
         to = Util1.toDateStrMYSQL(to, "dd/MM/yyyy");
 
-        String strSql = "insert tmp_balance_sheet(bs_side,coa_code,bs_balance,user_code)\n"
+        String strSql = "insert tmp_balance_sheet(bs_side,coa_code,bs_balance,user_code,mac_id)\n"
                 + "select bs_side, child_coa_code, sum((dr_amt-cr_amt)*bs_factor) bs_balance,'"
-                + userCode + "' "
+                + userCode + "', '" + macId + "'"
                 + "from v_balance_sheet_detail "
                 + "where comp_code = " + compCode + " and dept_code = '" + dept + "' "
                 + " and gl_date between '" + from
@@ -397,7 +396,8 @@ public class ReportServiceImpl implements ReportService {
                 + "group by bs_side, child_coa_code";
         dao.execSQLRpt(strSql);
     }
-     @Override
+
+    @Override
     public Object getAggResult(String sql) {
         return dao.getAggResult(sql);
     }

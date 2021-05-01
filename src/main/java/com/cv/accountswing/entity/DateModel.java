@@ -5,8 +5,6 @@
  */
 package com.cv.accountswing.entity;
 
-import java.time.Month;
-
 /**
  *
  * @author Lenovo

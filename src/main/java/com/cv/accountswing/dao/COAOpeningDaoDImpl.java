@@ -214,7 +214,8 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
 
     @Override
     public void genArAp1(String compCode, String fromDate, String opDate,
-            String tranDate, String coaCode, String currency, String dept, String cvId, String userCode) throws Exception {
+            String tranDate, String coaCode, String currency, String dept,
+            String traderCode, String userCode) throws Exception {
         String delSql = "delete from tmp_op_cl_apar where user_code = '" + userCode + "'";
         execSQL(delSql);
         String strSql = "insert into tmp_op_cl_apar(coa_code, curr_id, user_code, trader_code, dept_code, dr_amt, cr_amt)\n"
@@ -244,7 +245,7 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "and vcc.id = a.trader_code  and vcc.dept_code = a.dept_code\n"
                 + "where (vcc.account_code = '-' or '-' = '-' or vcc.coa_parent = '-') \n"
                 + "and (vcc.cur_code = '" + currency + "' or '-' = '" + currency + "') and (a.cr_amt > 0 or a.dr_amt >0) \n"
-                + "and (vcc.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
+                + "and (vcc.dept_code = '" + dept + "' or '-' = '" + dept + "') and (vcc.id ='" + traderCode + "' or '-' = '" + traderCode + "')\n"
                 + "group by vcc.account_code,vcc.cur_code,vcc.comp_code,vcc.id;";
         execSQL(strSql);
     }
@@ -295,7 +296,7 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "	group by tof.coa_code, tof.curr_id, gl.source_ac_id, gl.account_id) a \n"
                 + "group by coa_code, curr_id";
         execSQL(strSql);
-        updatePreviousClosing(opDate, tranDate, userCode, dept);
+        //updatePreviousClosing(opDate, tranDate, userCode, dept);
     }
 
     @Override
@@ -369,7 +370,6 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
     @Override
     public void getOpBalanceByTrader(String coaCode, String opDate, String clDate,
             int level, String curr, String userCode, String dept, String traderCode, String macId, String compCode) throws Exception {
-        logger.info("Ar / Ap Start.");
         String delSql = "delete from tmp_op_cl where mac_id = " + macId + "";
         execSQL(delSql);
         String strSql = "insert into tmp_op_cl(coa_code, curr_id, user_code, trader_code, dept_code, dr_amt, cr_amt,mac_id)\n"
@@ -402,7 +402,6 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "and (vcc.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                 + "group by vcc.account_code,vcc.cur_code,vcc.comp_code,vcc.id;";
         execSQL(strSql);
-        logger.info("Ar / Ap By Customer Finished.");
     }
 
     private void deleteTmp(Integer machineId) throws Exception {
