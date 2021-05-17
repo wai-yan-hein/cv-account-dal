@@ -41,6 +41,9 @@ public class AccSetting implements Serializable {
     @ManyToOne
     @JoinColumn(name = "source_acc")
     private ChartOfAccount soureAccount;
+    @ManyToOne
+    @JoinColumn(name = "bal_acc")
+    private ChartOfAccount balAccount;
 
     public ChartOfAccount getDisAccount() {
         return disAccount;
@@ -88,6 +91,14 @@ public class AccSetting implements Serializable {
 
     public void setSoureAccount(ChartOfAccount soureAccount) {
         this.soureAccount = soureAccount;
+    }
+
+    public ChartOfAccount getBalAccount() {
+        return balAccount;
+    }
+
+    public void setBalAccount(ChartOfAccount balAccount) {
+        this.balAccount = balAccount;
     }
 
 }

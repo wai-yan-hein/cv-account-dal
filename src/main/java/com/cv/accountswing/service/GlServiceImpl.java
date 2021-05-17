@@ -70,7 +70,7 @@ public class GlServiceImpl implements GlService {
 
     private String getGLCode(Integer macId, String option, String period, String compCode) {
         int seqNo = seqService.getSequence(macId, option, period, compCode);
-        String tmpCatCode = String.format("%0" + 3 + "d", macId) + period + String.format("%0" + 3 + "d", seqNo);
+        String tmpCatCode = String.format("%0" + 3 + "d", macId) + period + String.format("%0" + 9 + "d", seqNo);
         return tmpCatCode;
     }
 }

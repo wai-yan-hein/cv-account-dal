@@ -16,7 +16,7 @@ public interface LocationService {
 
     public Location save(Location loc);
 
-    public List<Location> findAll();
+    public List<Location> findAll(String compCode);
 
     public int delete(String id);
 

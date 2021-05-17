@@ -255,17 +255,17 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
             String tranDate, String coaCode, String currency, String dept,
             String cvId, String userCode, String macId) throws Exception {
         deleteTmp(Integer.parseInt(macId));
-        String strSqlFilter = "insert into tmp_op_filter(comp_code, coa_code, dept_code, curr_id, tran_source, op_date, user_code,mac_id)"
+        String strSqlFilter = "insert into tmp_gl_filter(comp_code, coa_code, dept_code, curr_id, tran_source, op_date, user_code,mac_id)"
                 + "select vcc.comp_code, vcc.coa_code, ifnull(vcc.dept_code, '-') dept_code, vcc.cur_code, 'OPENING' as tran_source, ifnull(a.op_date, '1900-01-01') op_date,\n"
                 + "'" + userCode + "','" + macId + "'  from v_coa_curr_dept vcc left join (\n"
                 + "select comp_code, source_acc_id, ifnull(dept_code, '-') as dept_code, cur_code, \n"
                 + "ifnull(coa.tran_source, '-') tran_source, max(op_date) as op_date\n"
                 + "from coa_opening coa\n"
                 + "where coa.op_date = '" + opDate + "' and ifnull(coa.tran_source, '-') = 'OPENING'\n"
-                + "and (coa.comp_code = " + compCode + " or '-' = '" + compCode + "') and "
+                + "and (coa.comp_code = '" + compCode + "' or '-' = '" + compCode + "') and "
                 + "(coa.cur_code = '" + currency + "' or '-' = '" + currency + "') "
                 + "and (coa.dept_code = '" + dept + "' or '-' = '" + dept + "') \n"
-                + "and (ifnull(coa.trader_code, " + cvId + ")  = -1 or -1 = " + cvId + ")\n"
+                + "and coa.trader_code ='" + cvId + "' or '-' = '" + cvId + "' \n"
                 + "group by coa.comp_code, coa.source_acc_id, coa.dept_code, coa.cur_code, coa.tran_source) a\n"
                 + "on vcc.dept_code = a.dept_code and vcc.comp_code = a.comp_code and vcc.coa_code = a.source_acc_id\n"
                 + "and vcc.cur_code = a.cur_code\n"
@@ -287,7 +287,7 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "			tof.coa_code, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'DR')) dr_amt,\n"
                 + "            sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, tof.coa_code, ifnull(gl.dr_amt,0), \n"
                 + "			ifnull(gl.cr_amt,0), 'CR')) cr_amt\n"
-                + "	from tmp_op_filter tof, gl 	 \n"
+                + "	from tmp_gl_filter tof, gl 	 \n"
                 + "	where tof.dept_code = gl.dept_code and gl.gl_date between '" + opDate + "' \n"
                 + "        and '" + tranDate + "' and (gl.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                 + "        and tof.comp_code = gl.comp_code \n"
@@ -333,7 +333,7 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "		tof.curr_id = gl.from_cur_id and gl.gl_date >= '" + opDate + "' "
                 + "             and gl.gl_date < '" + Util1.toDateStrMYSQL(clDate, "dd/MM/yyyy") + "' \n"
                 + "		and tof.user_code = '" + userCode + "' and (gl.dept_code = '" + dept + "' or '-' = '" + dept + "')"
-                + "             and tof.coa_code = '" + coaCode + "') a \n"
+                + "             and tof.coa_code = '" + coaCode + "' and tof.mac_id = " + macId + ") a \n"
                 + "group by a.coa_code, a.curr_id\n";
         execSQL(opSql);
     }
@@ -407,6 +407,7 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
     private void deleteTmp(Integer machineId) throws Exception {
         String delSql = "delete from tmp_op_filter where mac_id = " + machineId + "";
         String delSql1 = "delete from tmp_op_cl where mac_id =" + machineId + "";
-        execSQL(delSql, delSql1);
+        String delSql2 = "delete from tmp_gl_filter where mac_id =" + machineId + "";
+        execSQL(delSql, delSql1, delSql2);
     }
 }

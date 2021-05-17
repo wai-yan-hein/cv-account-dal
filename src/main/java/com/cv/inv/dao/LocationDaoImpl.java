@@ -24,8 +24,8 @@ public class LocationDaoImpl extends AbstractDao<String, Location> implements Lo
     }
 
     @Override
-    public List<Location> findAll() {
-        String hsql = "select o from Location o";
+    public List<Location> findAll(String compCode) {
+        String hsql = "select o from Location o where o.compCode ='" + compCode + "'";
         return findHSQL(hsql);
     }
 
