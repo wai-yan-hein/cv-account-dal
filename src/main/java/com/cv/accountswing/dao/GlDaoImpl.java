@@ -8,6 +8,7 @@ package com.cv.accountswing.dao;
 import com.cv.accountswing.util.Util1;
 import com.cv.accountswing.entity.Gl;
 import java.util.List;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class GlDaoImpl extends AbstractDao<String, Gl> implements GlDao {
+
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(GlDaoImpl.class);
 
     @Override
     public Gl save(Gl gl) throws Exception {
@@ -202,11 +205,20 @@ public class GlDaoImpl extends AbstractDao<String, Gl> implements GlDao {
     }
 
     @Override
-    public int delete(String glCode, String option) throws Exception {
-        String bkSql = getGlLogSql(glCode, option);
-        execSQL(bkSql);
+    public int delete(String glCode, String option, String userCode, Integer macId) throws Exception {
+        backup(glCode, option, userCode, macId);
         String strSql = "delete from Gl o where o.glCode ='" + glCode + "'";
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
+    }
+
+    @Override
+    public void backup(String glCode, String option, String userCode, Integer macId) {
+        try {
+            String backup = getGlLogSql(glCode, option, userCode, macId);
+            execSQL(backup);
+        } catch (Exception ex) {
+            log.error("backup Gl : " + ex.getMessage());
+        }
     }
 }

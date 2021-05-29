@@ -34,6 +34,8 @@ public class GlServiceImpl implements GlService {
             String period = Util1.toDateStr(Util1.getTodayDate(), "MM");
             String glCode = getGLCode(macId, "GL", period, compCode);
             gl.setGlCode(glCode);
+        } else {
+            dao.backup(gl.getGlCode(), "EDIT", gl.getModifyBy(), gl.getMacId());
         }
         dao.save(gl);
         return gl;
@@ -63,8 +65,8 @@ public class GlServiceImpl implements GlService {
     }
 
     @Override
-    public int delete(String glCode, String option) throws Exception {
-        int cnt = dao.delete(glCode, option);
+    public int delete(String glCode, String option, String userCode, Integer macId) throws Exception {
+        int cnt = dao.delete(glCode, option, userCode, macId);
         return cnt;
     }
 

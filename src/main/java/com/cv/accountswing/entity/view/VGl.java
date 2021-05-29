@@ -64,6 +64,7 @@ public class VGl implements java.io.Serializable {
     private String toDesp;
     private String naration;
     private Long projectId;
+    private Integer macId;
 
     public VGl() {
     }
@@ -342,7 +343,6 @@ public class VGl implements java.io.Serializable {
         this.bankName = bankName;
     }
 
-
     @Column(name = "trader_name")
     public String getTraderName() {
         return traderName;
@@ -459,4 +459,14 @@ public class VGl implements java.io.Serializable {
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
+
+    @Column(name = "mac_id")
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
 }

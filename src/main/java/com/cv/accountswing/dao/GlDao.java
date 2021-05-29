@@ -25,5 +25,7 @@ public interface GlDao {
             String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
             String glVouNo, String splitId, String projectId);
 
-    public int delete(String glCode, String option) throws Exception;
+    public int delete(String glCode, String option, String userCode, Integer macId) throws Exception;
+
+    public void backup(String glCode, String option, String userCode, Integer macId);
 }

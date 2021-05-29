@@ -25,5 +25,5 @@ public interface GlService {
             String vouNo, String cvId, String chequeNo, String compCode, String tranSource,
             String glVouNo, String splitId, String projectId);
 
-    public int delete(String glCode, String option) throws Exception;
+    public int delete(String glCode, String option, String userCode, Integer macId) throws Exception;
 }
