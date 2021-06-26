@@ -13,8 +13,12 @@ import java.util.List;
  * @author winswe
  */
 public interface TmpProfitAndLostDao {
+
     public TmpProfitAndLost save(TmpProfitAndLost pal) throws Exception;
+
     public TmpProfitAndLost findById(Long id);
-    public List<TmpProfitAndLost> search(String userCode, String compCode);
+
+    public List<TmpProfitAndLost> search(String compCode, String macId);
+
     public int delete(String id, String userCode, String compCode) throws Exception;
 }

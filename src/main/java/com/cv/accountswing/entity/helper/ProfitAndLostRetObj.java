@@ -10,6 +10,7 @@ package com.cv.accountswing.entity.helper;
  * @author winswe
  */
 public class ProfitAndLostRetObj {
+
     private double ttlSaleIncome;
     private double ttlOPStock;
     private double ttlPurchase;
@@ -17,8 +18,8 @@ public class ProfitAndLostRetObj {
     private double ttlOtherIncome;
     private double ttlOtherExpense;
     private double costOfSale;
-    
-    public ProfitAndLostRetObj(){
+
+    public ProfitAndLostRetObj() {
         ttlSaleIncome = 0.0;
         ttlOPStock = 0.0;
         ttlPurchase = 0.0;
@@ -26,39 +27,39 @@ public class ProfitAndLostRetObj {
         ttlOtherIncome = 0.0;
         ttlOtherExpense = 0.0;
     }
-    
-    public void addSaleIncome(double value){
+
+    public void addSaleIncome(double value) {
         ttlSaleIncome += value;
     }
-    
-    public void addOPStock(double value){
+
+    public void addOPStock(double value) {
         ttlOPStock += value;
     }
-    
-    public void addPurchase(double value){
+
+    public void addPurchase(double value) {
         ttlPurchase += value;
     }
-    
-    public void addCLStock(double value){
+
+    public void addCLStock(double value) {
         ttlCLStock += value;
     }
-    
-    public void addOtherIncome(double value){
+
+    public void addOtherIncome(double value) {
         ttlOtherIncome += value;
     }
-    
-    public void addOtherExpense(double value){
+
+    public void addOtherExpense(double value) {
         ttlOtherExpense += value;
     }
-    
-    public double getGrossProfit(){
+
+    public double getGrossProfit() {
         return ttlSaleIncome - getCostOfSale();
     }
 
-    public double getNetProfit(){
-        return getGrossProfit() + ttlOtherIncome - (ttlOtherExpense*-1);
+    public double getNetProfit() {
+        return (getGrossProfit() + ttlOtherIncome) - ttlOtherExpense;
     }
-    
+
     public double getTtlSaleIncome() {
         return ttlSaleIncome;
     }
@@ -84,7 +85,7 @@ public class ProfitAndLostRetObj {
     }
 
     public double getCostOfSale() {
-        costOfSale = ttlOPStock + (ttlPurchase*-1) - (ttlCLStock*-1);
+        costOfSale = (ttlOPStock + ttlPurchase - ttlCLStock);
         return costOfSale;
     }
 }

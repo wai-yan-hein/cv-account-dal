@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
 public class COAOpening implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "coa_op_id", unique = true, nullable = false)
     private Integer opId;
     @Temporal(TemporalType.DATE)
@@ -48,7 +49,9 @@ public class COAOpening implements Serializable {
     @Column(name = "dept_code")
     private String depCode;
     @Column(name = "trader_code")
-    private String cvId;
+    private String traderCode;
+    @Column(name = "tran_source")
+    private String tranSource;
 
     public Integer getOpId() {
         return opId;
@@ -122,12 +125,12 @@ public class COAOpening implements Serializable {
         this.depCode = depCode;
     }
 
-    public String getCvId() {
-        return cvId;
+    public String getTraderCode() {
+        return traderCode;
     }
 
-    public void setCvId(String cvId) {
-        this.cvId = cvId;
+    public void setTraderCode(String traderCode) {
+        this.traderCode = traderCode;
     }
 
     public String getUserCode() {
@@ -136,6 +139,14 @@ public class COAOpening implements Serializable {
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
+    }
+
+    public String getTranSource() {
+        return tranSource;
+    }
+
+    public void setTranSource(String tranSource) {
+        this.tranSource = tranSource;
     }
 
 }

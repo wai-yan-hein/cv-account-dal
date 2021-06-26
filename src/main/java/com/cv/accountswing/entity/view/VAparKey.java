@@ -6,7 +6,6 @@
 package com.cv.accountswing.entity.view;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -18,8 +17,8 @@ import javax.persistence.Embeddable;
 public class VAparKey implements Serializable {
 
     private String traderCode;
-    private String userCode;
-    private Integer compCode;
+    private Integer macId;
+    private String compCode;
     private String currency;
 
     @Column(name = "trader_code")
@@ -31,68 +30,31 @@ public class VAparKey implements Serializable {
         this.traderCode = traderCode;
     }
 
-    @Column(name = "user_code")
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
-
-    @Column(name = "comp_code")
-    public Integer getCompCode() {
-        return compCode;
-    }
-
-    public void setCompCode(Integer compCode) {
-        this.compCode = compCode;
-    }
-
     @Column(name = "curr_id")
     public String getCurrency() {
         return currency;
     }
 
+    @Column(name = "mac_id")
+    public Integer getMacId() {
+        return macId;
+    }
+
+    public void setMacId(Integer macId) {
+        this.macId = macId;
+    }
+
+    @Column(name = "comp_code")
+    public String getCompCode() {
+        return compCode;
+    }
+
+    public void setCompCode(String compCode) {
+        this.compCode = compCode;
+    }
+
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.traderCode);
-        hash = 19 * hash + Objects.hashCode(this.userCode);
-        hash = 19 * hash + Objects.hashCode(this.compCode);
-        hash = 19 * hash + Objects.hashCode(this.currency);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final VAparKey other = (VAparKey) obj;
-        if (!Objects.equals(this.traderCode, other.traderCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.userCode, other.userCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.currency, other.currency)) {
-            return false;
-        }
-        if (!Objects.equals(this.compCode, other.compCode)) {
-            return false;
-        }
-        return true;
     }
 
 }

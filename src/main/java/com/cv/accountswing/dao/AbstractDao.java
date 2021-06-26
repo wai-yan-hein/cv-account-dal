@@ -215,7 +215,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         sess.doWork(work);
     }
 
-    public void doReportPDF(final String reportPath, final String filePath,
+    public void doReportJasper(final String reportPath, final String filePath,
             final Map<String, Object> parameters, final String fontPath) throws Exception {
         Work work = (Connection con) -> {
             try {

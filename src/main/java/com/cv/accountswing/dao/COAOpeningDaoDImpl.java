@@ -7,7 +7,6 @@
 package com.cv.accountswing.dao;
 
 import com.cv.accountswing.util.Util1;
-import com.cv.accountswing.entity.AccOpeningD;
 import com.cv.accountswing.entity.temp.TmpOpeningClosing;
 import com.cv.accountswing.entity.view.VAccOpeningD;
 import java.util.List;
@@ -20,21 +19,9 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implements COAOpeningDaoD {
+public class COAOpeningDaoDImpl extends AbstractDao<Long, VAccOpeningD> implements COAOpeningDaoD {
 
     private static final Logger logger = LoggerFactory.getLogger(COAOpeningDaoDImpl.class);
-
-    @Override
-    public AccOpeningD save(AccOpeningD aod) {
-        persist(aod);
-        return aod;
-    }
-
-    @Override
-    public AccOpeningD findById(Long id) {
-        AccOpeningD aod = getByKey(id);
-        return aod;
-    }
 
     @Override
     public List<VAccOpeningD> search(String tranIdH) {
@@ -215,11 +202,11 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
     @Override
     public void genArAp1(String compCode, String fromDate, String opDate,
             String tranDate, String coaCode, String currency, String dept,
-            String traderCode, String userCode) throws Exception {
-        String delSql = "delete from tmp_op_cl_apar where user_code = '" + userCode + "'";
+            String traderCode, String macId) throws Exception {
+        String delSql = "delete from tmp_op_cl_apar where mac_id = '" + macId + "'";
         execSQL(delSql);
-        String strSql = "insert into tmp_op_cl_apar(coa_code, curr_id, user_code, trader_code, dept_code, dr_amt, cr_amt)\n"
-                + "select vcc.account_code, vcc.cur_code,'1', vcc.id trader_code ,ifnull(a.dept_code, '-') dept_code,\n"
+        String strSql = "insert into tmp_op_cl_apar(coa_code, curr_id, mac_id, trader_code, dept_code, dr_amt, cr_amt)\n"
+                + "select vcc.account_code, vcc.cur_code," + macId + ", vcc.id trader_code ,ifnull(a.dept_code, '-') dept_code,\n"
                 + "       sum(a.dr_amt) dr,\n"
                 + "       sum(a.cr_amt) cr\n"
                 + "  from v_trader_curr_dept vcc \n"
@@ -251,10 +238,11 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
     }
 
     @Override
-    public void genTriBalance1(String compCode, String fromDate, String opDate,
+    public void genTriBalance1(String compCode, String opDate,
             String tranDate, String coaCode, String currency, String dept,
             String cvId, String userCode, String macId) throws Exception {
         deleteTmp(Integer.parseInt(macId));
+        logger.info("inserting fileter");
         String strSqlFilter = "insert into tmp_gl_filter(comp_code, coa_code, dept_code, curr_id, tran_source, op_date, user_code,mac_id)"
                 + "select vcc.comp_code, vcc.coa_code, ifnull(vcc.dept_code, '-') dept_code, vcc.cur_code, 'OPENING' as tran_source, ifnull(a.op_date, '1900-01-01') op_date,\n"
                 + "'" + userCode + "','" + macId + "'  from v_coa_curr_dept vcc left join (\n"
@@ -272,30 +260,67 @@ public class COAOpeningDaoDImpl extends AbstractDao<Long, AccOpeningD> implement
                 + "where vcc.coa_level >= 3 and (vcc.coa_code = '" + coaCode + "' or '-' = '" + coaCode + "' or vcc.coa_parent = '-') "
                 + "and (vcc.cur_code = '" + currency + "' or '-' = '" + currency + "')";
         execSQL(strSqlFilter);
-
-        String strSql = "insert into tmp_op_cl(coa_code, curr_id, user_code, dr_amt, cr_amt,mac_id) \n"
-                + "select coa_code, curr_id, '1', if(sum(dr_amt-cr_amt)>0, sum(dr_amt-cr_amt),0), if(sum(dr_amt-cr_amt)<0, sum(dr_amt-cr_amt)*-1,0), '" + macId + "'\n"
+        logger.info("inserting fileter end.");
+        logger.info("inserting opeinging.");
+        /*String strSql = "insert into tmp_op_cl(coa_code, curr_id, user_code, dr_amt, cr_amt,mac_id) \n"
+        + "select coa_code, curr_id, '1', if(sum(dr_amt-cr_amt)>0, sum(dr_amt-cr_amt),0), if(sum(dr_amt-cr_amt)<0, sum(dr_amt-cr_amt)*-1,0), '" + macId + "'\n"
+        + "from (\n"
+        + "	select op.source_acc_id as coa_code, op.cur_code as curr_id,\n"
+        + "		   sum(ifnull(op.dr_amt,0)) dr_amt, sum(ifnull(op.cr_amt,0)) cr_amt\n"
+        + "	from  coa_opening op\n"
+        + "	where date(op.op_date) = '" + opDate + "' \n"
+        + "		and (op.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
+        + "	group by op.source_acc_id, op.cur_code\n"
+        + "			union all\n"
+        + "	select tof.coa_code, tof.curr_id,sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, \n"
+        + "			tof.coa_code, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'DR')) dr_amt,\n"
+        + "            sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, tof.coa_code, ifnull(gl.dr_amt,0), \n"
+        + "			ifnull(gl.cr_amt,0), 'CR')) cr_amt\n"
+        + "	from tmp_gl_filter tof, gl 	 \n"
+        + "	where tof.dept_code = gl.dept_code and date(gl.gl_date) between '" + opDate + "' \n"
+        + "        and '" + tranDate + "' and (gl.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
+        + "        and tof.comp_code = gl.comp_code \n"
+        + "        and (tof.coa_code = gl.source_ac_id or tof.coa_code = gl.account_id) \n"
+        + "        and tof.curr_id = gl.from_cur_id and tof.user_code = '" + userCode + "' and tof.mac_id = " + macId + "\n"
+        + "	group by tof.coa_code, tof.curr_id, gl.source_ac_id, gl.account_id) a \n"
+        + "group by coa_code, curr_id";
+        execSQL(strSql);*/
+        String strSql1 = "insert into tmp_op_cl(coa_code, curr_id, user_code, dr_amt, cr_amt,mac_id) \n"
+                + "select coa_code, curr_id, '" + userCode + "', if(sum(dr_amt-cr_amt)>0, sum(dr_amt-cr_amt),0), if(sum(dr_amt-cr_amt)<0, sum(dr_amt-cr_amt)*-1,0), " + macId + "\n"
                 + "from (\n"
                 + "	select op.source_acc_id as coa_code, op.cur_code as curr_id,\n"
                 + "		   sum(ifnull(op.dr_amt,0)) dr_amt, sum(ifnull(op.cr_amt,0)) cr_amt\n"
                 + "	from  coa_opening op\n"
-                + "	where op.op_date = '" + opDate + "' \n"
+                + "	where date(op.op_date) = '" + opDate + "' \n"
                 + "		and (op.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
                 + "	group by op.source_acc_id, op.cur_code\n"
                 + "			union all\n"
-                + "	select tof.coa_code, tof.curr_id,sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, \n"
-                + "			tof.coa_code, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'DR')) dr_amt,\n"
-                + "            sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, tof.coa_code, ifnull(gl.dr_amt,0), \n"
+                + "	select gl.account_id, gl.from_cur_id,sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, \n"
+                + "			gl.account_id, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'DR')) dr_amt,\n"
+                + "            sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, gl.account_id, ifnull(gl.dr_amt,0), \n"
                 + "			ifnull(gl.cr_amt,0), 'CR')) cr_amt\n"
-                + "	from tmp_gl_filter tof, gl 	 \n"
-                + "	where tof.dept_code = gl.dept_code and gl.gl_date between '" + opDate + "' \n"
+                + "     from gl \n"
+                + "     where gl.account_id in (select coa_code from tmp_gl_filter where mac_id =" + macId + ")\n"
+                + "     and gl.dept_code = gl.dept_code and date(gl.gl_date) between '" + opDate + "' \n"
                 + "        and '" + tranDate + "' and (gl.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
-                + "        and tof.comp_code = gl.comp_code \n"
-                + "        and (tof.coa_code = gl.source_ac_id or tof.coa_code = gl.account_id) \n"
-                + "        and tof.curr_id = gl.from_cur_id and tof.user_code = '" + userCode + "' and tof.mac_id = " + macId + "\n"
-                + "	group by tof.coa_code, tof.curr_id, gl.source_ac_id, gl.account_id) a \n"
-                + "group by coa_code, curr_id";
-        execSQL(strSql);
+                + "        and gl.comp_code = '" + compCode + "'\n"
+                + "     group by gl.account_id, gl.from_cur_id, gl.source_ac_id, gl.account_id"
+                + "                     union all \n"
+                + "     select gl.source_ac_id, gl.from_cur_id,sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, \n"
+                + "			gl.source_ac_id, ifnull(gl.dr_amt,0), ifnull(gl.cr_amt,0), 'DR')) dr_amt,\n"
+                + "            sum(get_dr_cr_amt(gl.source_ac_id, gl.account_id, gl.source_ac_id, ifnull(gl.dr_amt,0), \n"
+                + "			ifnull(gl.cr_amt,0), 'CR')) cr_amt\n"
+                + "     from gl \n"
+                + "     where gl.source_ac_id in (select coa_code from tmp_gl_filter where mac_id =" + macId + ")\n"
+                + "     and gl.dept_code = gl.dept_code and date(gl.gl_date) between '" + opDate + "' \n"
+                + "        and '" + tranDate + "' and (gl.dept_code = '" + dept + "' or '-' = '" + dept + "')\n"
+                + "        and gl.comp_code = '" + compCode + "'\n"
+                + "     group by gl.account_id, gl.from_cur_id, gl.source_ac_id, gl.account_id) a \n"
+                + "     group by coa_code, curr_id";
+        //logger.info(strSql1);
+        execSQL(strSql1);
+
+        logger.info("inserting opening end.");
         //updatePreviousClosing(opDate, tranDate, userCode, dept);
     }
 

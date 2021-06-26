@@ -15,8 +15,8 @@ import javax.persistence.Table;
  * @author winswe
  */
 @Entity
-@Table(name = "tmp_profit_lost")
-public class TmpProfitAndLost implements java.io.Serializable {
+@Table(name = "tmp_balance_sheet")
+public class TmpBalanceSheet implements java.io.Serializable {
 
     @Id
     @Column(name = "acc_code", unique = true, nullable = false)
@@ -89,5 +89,6 @@ public class TmpProfitAndLost implements java.io.Serializable {
     public void setMacId(Integer macId) {
         this.macId = macId;
     }
+    
 
 }

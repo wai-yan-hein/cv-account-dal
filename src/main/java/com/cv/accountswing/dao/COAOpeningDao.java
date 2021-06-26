@@ -5,21 +5,11 @@
  */
 package com.cv.accountswing.dao;
 
-import com.cv.accountswing.entity.AccOpeningH;
-import java.util.List;
-
 /**
  *
  * @author winswe
  */
 public interface COAOpeningDao {
-
-    public AccOpeningH save(AccOpeningH aoh);
-
-    public AccOpeningH findById(Long Id);
-
-    public List<AccOpeningH> search(String from, String to, String compCode,
-            String currency, String remark);
 
     public void GenerateZero(String tranIdH, String compCode, String currCode) throws Exception;
 

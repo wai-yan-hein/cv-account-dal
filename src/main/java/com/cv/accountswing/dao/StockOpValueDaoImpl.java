@@ -114,11 +114,10 @@ public class StockOpValueDaoImpl extends AbstractDao<StockOpValueKey, StockOpVal
     @Override
     public int delete(String tranDate, String coaCode, String dept, String currency,
             String compCode) {
-        String strSql = "delete from stock_op_value o where date(o.tran_date) = '"
-                + Util1.toDateStrMYSQL(tranDate) + "' and o.coaCode = '" + coaCode
-                + "' and o.deptCode = '" + dept + "' and o.currency = '" + currency
-                + "' and o.compCode = " + compCode;
-
+        String strSql = "delete from StockOpValue o where date(o.key.tranDate) = '"
+                + tranDate + "' and o.key.coaCode = '" + coaCode
+                + "' and o.key.deptCode = '" + dept + "' and o.key.currency = '" + currency
+                + "' and o.key.compCode = '" + compCode + "'";
         int cnt = execUpdateOrDelete(strSql);
         return cnt;
     }

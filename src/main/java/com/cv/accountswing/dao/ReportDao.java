@@ -5,6 +5,7 @@
  */
 package com.cv.accountswing.dao;
 
+import java.sql.ResultSet;
 import java.util.Map;
 
 /**
@@ -19,4 +20,6 @@ public interface ReportDao {
     public void execSQLRpt(String... strSql) throws Exception;
 
     public Object getAggResult(String sql);
+
+    public ResultSet executeSql(String sql) throws Exception;
 }

@@ -245,4 +245,10 @@ public class COADaoImpl extends AbstractDao<String, ChartOfAccount> implements C
         return ListCOA;
 
     }
+
+    @Override
+    public List<ChartOfAccount> getLevelOneTwo(String compCode) {
+        String hsql = "select o from ChartOfAccount o where o.coaLevel in (1,2) and o.compCode = '" + compCode + "'";
+        return findHSQL(hsql);
+    }
 }

@@ -43,4 +43,6 @@ public interface COAService {
     public List<ChartOfAccount> searchWhereIn(String strList, String compCode);
 
     public List<ChartOfAccount> findAll();
+
+    public List<ChartOfAccount> getLevelOneTwo(String compCode);
 }

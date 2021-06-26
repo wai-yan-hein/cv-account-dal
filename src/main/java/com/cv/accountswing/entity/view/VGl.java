@@ -28,16 +28,16 @@ public class VGl implements java.io.Serializable {
     private String accountId;
     private String toCurId;
     private String fromCurId;
-    private Float exRate;
-    private Float drAmt;
-    private Float crAmt;
+    private Double exRate;
+    private Double drAmt;
+    private Double crAmt;
     private String reference;
     private String deptId;
     private String vouNo;
     private String traderCode;
     private String chequeNo;
     private String compCode;
-    private Float gst;
+    private Double gst;
     private Date createdDate;
     private Date modifyDate;
     private String modifyBy;
@@ -65,6 +65,7 @@ public class VGl implements java.io.Serializable {
     private String naration;
     private Long projectId;
     private Integer macId;
+    private String refNo;
 
     public VGl() {
     }
@@ -135,29 +136,29 @@ public class VGl implements java.io.Serializable {
     }
 
     @Column(name = "ex_rate")
-    public Float getExRate() {
+    public Double getExRate() {
         return exRate;
     }
 
-    public void setExRate(Float exRate) {
+    public void setExRate(Double exRate) {
         this.exRate = exRate;
     }
 
     @Column(name = "dr_amt")
-    public Float getDrAmt() {
+    public Double getDrAmt() {
         return drAmt;
     }
 
-    public void setDrAmt(Float drAmt) {
+    public void setDrAmt(Double drAmt) {
         this.drAmt = drAmt;
     }
 
     @Column(name = "cr_amt")
-    public Float getCrAmt() {
+    public Double getCrAmt() {
         return crAmt;
     }
 
-    public void setCrAmt(Float crAmt) {
+    public void setCrAmt(Double crAmt) {
         this.crAmt = crAmt;
     }
 
@@ -254,11 +255,11 @@ public class VGl implements java.io.Serializable {
     }
 
     @Column(name = "gst")
-    public Float getGst() {
+    public Double getGst() {
         return gst;
     }
 
-    public void setGst(Float gst) {
+    public void setGst(Double gst) {
         this.gst = gst;
     }
 
@@ -469,4 +470,14 @@ public class VGl implements java.io.Serializable {
         this.macId = macId;
     }
 
+    @Column(name = "ref_no")
+    public String getRefNo() {
+        return refNo;
+    }
+
+    public void setRefNo(String refNo) {
+        this.refNo = refNo;
+    }
+
 }
+

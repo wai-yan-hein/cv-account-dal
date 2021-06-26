@@ -75,11 +75,18 @@ public class VGlDaoImpl extends AbstractDao<String, VGl> implements VGlDao {
                 strFilter = strFilter + " and o.reference like '" + reference + "%'";
             }
         }
+        /*if (!acId.equals("-")) {
+        if (strFilter.isEmpty()) {
+        strFilter = "(o.accountId = '" + acId + "' or o.sourceAcId = '" + acId + "')";
+        } else {
+        strFilter = strFilter + " and (o.accountId = '" + acId + "' or o.sourceAcId = '" + acId + "')";
+        }
+        }*/
         if (!acId.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "(o.accountId = '" + acId + "' or o.sourceAcId = '" + acId + "')";
+                strFilter = "(o.accountId in (" + acId + ") or o.sourceAcId in (" + acId + ")";
             } else {
-                strFilter = strFilter + " and (o.accountId = '" + acId + "' or o.sourceAcId = '" + acId + "')";
+                strFilter = strFilter + " and (o.accountId in (" + acId + ") or o.sourceAcId in (" + acId + "))";
             }
         }
         if (!sourceAcId.equals("-")) {

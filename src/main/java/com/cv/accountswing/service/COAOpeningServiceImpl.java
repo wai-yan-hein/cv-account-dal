@@ -6,7 +6,6 @@
 package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.COAOpeningDao;
-import com.cv.accountswing.entity.AccOpeningH;
 import com.cv.accountswing.util.Util1;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class COAOpeningServiceImpl implements COAOpeningService {
 
     @Autowired
-    COAOpeningDao dao;
-
-    @Override
-    public AccOpeningH save(AccOpeningH aoh) {
-        return dao.save(aoh);
-    }
-
-    @Override
-    public AccOpeningH findById(Long Id) {
-        AccOpeningH aoh = dao.findById(Id);
-        return aoh;
-    }
-
-    @Override
-    public List<AccOpeningH> search(String from, String to, String compCode,
-            String currency, String remark) {
-        List<AccOpeningH> listAOH = dao.search(from, to, compCode, currency,
-                remark);
-        return listAOH;
-    }
+    private COAOpeningDao dao;
 
     @Override
     public void GenerateZero(String tranIdH, String compCode, String currCode) throws Exception {

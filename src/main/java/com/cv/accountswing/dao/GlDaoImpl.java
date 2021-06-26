@@ -9,6 +9,7 @@ import com.cv.accountswing.util.Util1;
 import com.cv.accountswing.entity.Gl;
 import java.util.List;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -88,15 +89,15 @@ public class GlDaoImpl extends AbstractDao<String, Gl> implements GlDao {
 
         if (!sourceAcId.equals("-") && !acId.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.sourceAcId = '" + sourceAcId + "' and a.accountId = '" + acId + "'";
+                strFilter = "o.sourceAcId = '" + sourceAcId + "' and o.accountId = '" + acId + "'";
             } else {
-                strFilter = strFilter + " and o.sourceAcId = '" + sourceAcId + "' and a.accountId = '" + acId + "'";
+                strFilter = strFilter + " and o.sourceAcId = '" + sourceAcId + "' and o.accountId = '" + acId + "'";
             }
         } else if (!sourceAcId.equals("-")) {
             if (strFilter.isEmpty()) {
-                strFilter = "o.sourceAcId = '" + sourceAcId + "' or a.accountId = '" + sourceAcId + "'";
+                strFilter = "o.sourceAcId = '" + sourceAcId + "' or o.accountId = '" + sourceAcId + "'";
             } else {
-                strFilter = strFilter + " and o.sourceAcId = '" + sourceAcId + "' or a.accountId = '" + sourceAcId + "'";
+                strFilter = strFilter + " and o.sourceAcId = '" + sourceAcId + "' or o.accountId = '" + sourceAcId + "'";
             }
         }
 
@@ -220,5 +221,18 @@ public class GlDaoImpl extends AbstractDao<String, Gl> implements GlDao {
         } catch (Exception ex) {
             log.error("backup Gl : " + ex.getMessage());
         }
+    }
+
+    @Override
+    public int deleteGV(String vouNo, String option, String userCode, Integer macId) {
+        String hsql = "select o from Gl o where o.glVouNo = '" + vouNo + "'";
+        String delHsql = "delete  from Gl o where o.glVouNo = '" + vouNo + "'";
+        List<Gl> gls = findHSQL(hsql);
+        if (!gls.isEmpty()) {
+            gls.forEach(gl -> {
+                backup(gl.getGlCode(), option, userCode, macId);
+            });
+        }
+        return execUpdateOrDelete(delHsql);
     }
 }

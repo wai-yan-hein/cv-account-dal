@@ -26,7 +26,7 @@ public interface StockOpValueService {
             String compCode, String userCode, String option) throws Exception;
 
     public int delete(String tranDate, String coaCode, String dept, String currency,
-            String compCode, String userCode);
-    
+            String compCode, String userCode) throws Exception;
+
     public List<StockOpValue> findAll();
 }

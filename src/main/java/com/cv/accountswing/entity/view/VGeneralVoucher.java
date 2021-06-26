@@ -21,20 +21,20 @@ import javax.persistence.TemporalType;
 @Table(name = "v_general_voucher")
 public class VGeneralVoucher implements java.io.Serializable {
 
-    private String gvVouNo;
     private Date glDate;
-    private String vouNo;
+    private String glVouNo;
     private String reference;
-    private Integer compCode;
+    private String compCode;
+    private String glCode;
 
     @Id
-    @Column(name = "gl_vou_no", unique = true, nullable = false)
-    public String getGvVouNo() {
-        return gvVouNo;
+    @Column(name = "gl_code", unique = true, nullable = false)
+    public String getGlCode() {
+        return glCode;
     }
 
-    public void setGvVouNo(String gvVouNo) {
-        this.gvVouNo = gvVouNo;
+    public void setGlCode(String glCode) {
+        this.glCode = glCode;
     }
 
     @Temporal(TemporalType.DATE)
@@ -47,13 +47,13 @@ public class VGeneralVoucher implements java.io.Serializable {
         this.glDate = glDate;
     }
 
-    @Column(name = "voucher_no")
-    public String getVouNo() {
-        return vouNo;
+    @Column(name = "gl_vou_no")
+    public String getGlVouNo() {
+        return glVouNo;
     }
 
-    public void setVouNo(String vouNo) {
-        this.vouNo = vouNo;
+    public void setGlVouNo(String glVouNo) {
+        this.glVouNo = glVouNo;
     }
 
     @Column(name = "reference")
@@ -66,11 +66,11 @@ public class VGeneralVoucher implements java.io.Serializable {
     }
 
     @Column(name = "comp_code")
-    public Integer getCompCode() {
+    public String getCompCode() {
         return compCode;
     }
 
-    public void setCompCode(Integer compCode) {
+    public void setCompCode(String compCode) {
         this.compCode = compCode;
     }
 

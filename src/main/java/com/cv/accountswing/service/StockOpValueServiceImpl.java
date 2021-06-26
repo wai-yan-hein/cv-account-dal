@@ -26,7 +26,7 @@ public class StockOpValueServiceImpl implements StockOpValueService {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(StockOpValueServiceImpl.class);
 
     @Autowired
-    StockOpValueDao dao;
+    private StockOpValueDao dao;
 
     @Override
     public StockOpValue save(StockOpValue value, String userCode) {
@@ -65,13 +65,8 @@ public class StockOpValueServiceImpl implements StockOpValueService {
 
     @Override
     public int delete(String tranDate, String coaCode, String dept, String currency,
-            String compCode, String userCode) {
-        try {
-            dao.backup(tranDate, coaCode, dept, currency, compCode, userCode, "DELETE");
-        } catch (Exception ex) {
-
-        }
-
+            String compCode, String userCode) throws Exception {
+        dao.backup(tranDate, coaCode, dept, currency, compCode, userCode, "DELETE");
         int cnt = dao.delete(tranDate, coaCode, dept, currency, compCode);
         return cnt;
     }

@@ -88,6 +88,8 @@ public class Gl implements java.io.Serializable {
     private Long projectId;
     @Column(name = "mac_id")
     private Integer macId;
+    @Column(name = "ref_no")
+    private String refNo;
 
     public String getGlCode() {
         return glCode;
@@ -343,6 +345,14 @@ public class Gl implements java.io.Serializable {
 
     public void setMacId(Integer macId) {
         this.macId = macId;
+    }
+
+    public String getRefNo() {
+        return refNo;
+    }
+
+    public void setRefNo(String refNo) {
+        this.refNo = refNo;
     }
 
 }

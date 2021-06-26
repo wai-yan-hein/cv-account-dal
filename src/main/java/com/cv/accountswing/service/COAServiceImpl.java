@@ -131,4 +131,9 @@ public class COAServiceImpl implements COAService {
     public List<ChartOfAccount> findAll() {
         return dao.findAll();
     }
+
+    @Override
+    public List<ChartOfAccount> getLevelOneTwo(String compCode) {
+        return dao.getLevelOneTwo(compCode);
+    }
 }

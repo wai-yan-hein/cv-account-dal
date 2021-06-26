@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface VTriBalanceService {
 
-    public List<VTriBalance> getTriBalance(String macId);
+    public List<VTriBalance> getTriBalance(String macId, String coaCode);
 }

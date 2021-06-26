@@ -17,9 +17,9 @@ import org.springframework.stereotype.Repository;
 public class VAParDaoImpl extends AbstractDao<Integer, VApar> implements VAParDao {
 
     @Override
-    public List<VApar> getApAr(String userCode, String compCode, String traderType) {
-        String strSql = "select o from VApar o where o.key.userCode = " + userCode
-                + " and o.key.compCode = " + compCode;
+    public List<VApar> getApAr(String macId, String compCode, String traderType) {
+        String strSql = "select o from VApar o where o.key.macId = " + macId
+                + " and o.key.compCode = '" + compCode + "'";
         if (!traderType.equals("-")) {
             strSql = strSql + " and trader_code like '" + traderType + "%'";
         }

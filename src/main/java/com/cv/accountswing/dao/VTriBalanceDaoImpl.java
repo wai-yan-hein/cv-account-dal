@@ -7,6 +7,7 @@ package com.cv.accountswing.dao;
 
 import com.cv.accountswing.entity.temp.TmpOpeningClosingKey;
 import com.cv.accountswing.entity.view.VTriBalance;
+import com.cv.accountswing.util.Util1;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -18,8 +19,10 @@ import org.springframework.stereotype.Repository;
 public class VTriBalanceDaoImpl extends AbstractDao<TmpOpeningClosingKey, VTriBalance> implements VTriBalanceDao {
 
     @Override
-    public List<VTriBalance> getTriBalance(String macId) {
-        String strSql = "select o from VTriBalance o where o.macId = " + macId + "";
+    public List<VTriBalance> getTriBalance(String macId, String coaCode) {
+        String strSql = Util1.isNull(coaCode)
+                ? "select o from VTriBalance o where o.macId = " + macId + ""
+                : "select o from VTriBalance o where o.key.coaId in (" + coaCode + ") and o.macId = " + macId + "";
         List<VTriBalance> listVTB = findHSQL(strSql);
         return listVTB;
     }

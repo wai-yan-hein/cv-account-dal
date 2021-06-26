@@ -61,6 +61,8 @@ public class VCOAOpening implements Serializable {
     private String coaParent;
     @Column(name = "reg_code")
     private String regCode;
+    @Column(name = "coa_code_usr")
+    private String coaUsrCode;
 
     public Integer getOpId() {
         return opId;
@@ -110,13 +112,7 @@ public class VCOAOpening implements Serializable {
         this.drAmt = drAmt;
     }
 
-    public String getUserId() {
-        return userCode;
-    }
-
-    public void setUserId(String userCode) {
-        this.userCode = userCode;
-    }
+   
 
     public String getCompCode() {
         return compCode;
@@ -204,6 +200,14 @@ public class VCOAOpening implements Serializable {
 
     public void setCoaParent(String coaParent) {
         this.coaParent = coaParent;
+    }
+
+    public String getCoaUsrCode() {
+        return coaUsrCode;
+    }
+
+    public void setCoaUsrCode(String coaUsrCode) {
+        this.coaUsrCode = coaUsrCode;
     }
 
 }

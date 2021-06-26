@@ -5,14 +5,15 @@
  */
 package com.cv.accountswing.dao;
 
-import com.cv.accountswing.entity.view.VTriBalance;
+import com.cv.accountswing.entity.temp.TmpBalanceSheet;
 import java.util.List;
 
 /**
  *
  * @author winswe
  */
-public interface VTriBalanceDao {
+public interface TmpBalanceSheetDao {
 
-    public List<VTriBalance> getTriBalance(String macId, String coaCode);
+    public List<TmpBalanceSheet> search(String compCode, String macId);
+
 }

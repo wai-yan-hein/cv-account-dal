@@ -5,7 +5,6 @@
  */
 package com.cv.accountswing.dao;
 
-
 import com.cv.accountswing.entity.ChartOfAccount;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface COADao {
     public ChartOfAccount save(ChartOfAccount coa);
 
     public ChartOfAccount findById(String id);
-    
+
     public List<ChartOfAccount> findAll();
 
     public List<ChartOfAccount> search(String code, String name, String compCode,
@@ -28,8 +27,7 @@ public interface COADao {
 
     public List<ChartOfAccount> getParent(String compCode);
 
-   // public List<COALevel> getParentChildCOA(String compCode);
-
+    // public List<COALevel> getParentChildCOA(String compCode);
     public List<ChartOfAccount> getCOALevel3Above(String compCode);
 
     public List<ChartOfAccount> getCOALevel2Above(String compCode);
@@ -45,5 +43,7 @@ public interface COADao {
     public List<ChartOfAccount> getCompanyCOA(String compCode, String deptId, String projectId);
 
     public List<ChartOfAccount> searchWhereIn(String strList, String compCode);
+
+    public List<ChartOfAccount> getLevelOneTwo(String compCode);
 
 }

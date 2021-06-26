@@ -5,7 +5,6 @@
  */
 package com.cv.accountswing.service;
 
-import com.cv.accountswing.entity.AccOpeningD;
 import com.cv.accountswing.entity.temp.TmpOpeningClosing;
 import com.cv.accountswing.entity.view.VAccOpeningD;
 import java.util.List;
@@ -15,10 +14,6 @@ import java.util.List;
  * @author winswe
  */
 public interface COAOpeningDService {
-
-    public AccOpeningD save(AccOpeningD aod);
-
-    public AccOpeningD findById(Long id);
 
     public List<VAccOpeningD> search(String tranIdH);
 
@@ -44,8 +39,9 @@ public interface COAOpeningDService {
     public void genTriBalance(String compCode, String fromDate, String opDate, String tranDate,
             String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
 
-    public void genTriBalance1(String compCode, String fromDate, String opDate, String tranDate,
-            String coaCode, String currency, String dept, String cvId, String userCode, String macId) throws Exception;
+    public void genTriBalance1(String compCode, String opDate,
+            String tranDate, String coaCode, String currency, String dept,
+            String cvId, String userCode, String macId) throws Exception;
 
     public void genArAp(String compCode, String fromDate, String opDate, String tranDate,
             String coaCode, String currency, String dept, String cvId, String userCode) throws Exception;
@@ -55,4 +51,5 @@ public interface COAOpeningDService {
 
     public List<TmpOpeningClosing> getOpBalanceByTrader(String coaCode, String opDate,
             String clDate, int level, String curr, String userCode, String dept, String traderCode, String macID, String compCode) throws Exception;
+
 }

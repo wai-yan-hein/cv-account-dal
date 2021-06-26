@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class VTriBalanceServiceImpl implements VTriBalanceService{
-    
+public class VTriBalanceServiceImpl implements VTriBalanceService {
+
     @Autowired
     private VTriBalanceDao dao;
-    
+
     @Override
-    public List<VTriBalance> getTriBalance(String macId){
-        return dao.getTriBalance(macId);
+    public List<VTriBalance> getTriBalance(String macId, String coaCode) {
+        return dao.getTriBalance(macId, coaCode);
     }
 }

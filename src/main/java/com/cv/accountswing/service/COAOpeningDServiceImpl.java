@@ -6,7 +6,6 @@
 package com.cv.accountswing.service;
 
 import com.cv.accountswing.dao.COAOpeningDaoD;
-import com.cv.accountswing.entity.AccOpeningD;
 import com.cv.accountswing.entity.temp.TmpOpeningClosing;
 import com.cv.accountswing.entity.view.VAccOpeningD;
 import java.util.List;
@@ -24,17 +23,6 @@ public class COAOpeningDServiceImpl implements COAOpeningDService {
 
     @Autowired
     private COAOpeningDaoD dao;
-
-    @Override
-    public AccOpeningD save(AccOpeningD aod) {
-        return dao.save(aod);
-    }
-
-    @Override
-    public AccOpeningD findById(Long id) {
-        AccOpeningD aod = dao.findById(id);
-        return aod;
-    }
 
     @Override
     public List<VAccOpeningD> search(String tranIdH) {
@@ -101,13 +89,6 @@ public class COAOpeningDServiceImpl implements COAOpeningDService {
     }
 
     @Override
-    public void genTriBalance1(String compCode, String fromDate, String opDate,
-            String tranDate, String coaCode, String currency, String dept,
-            String cvId, String userCode, String macId) throws Exception {
-        dao.genTriBalance1(compCode, fromDate, opDate, tranDate, coaCode, currency, dept, cvId, userCode, macId);
-    }
-
-    @Override
     public List<TmpOpeningClosing> getOpBalanceGL1(String coaCode, String opDate,
             String clDae, int level, String curr, String userCode, String dept, String macId) throws Exception {
         dao.genOpBalanceGL1(coaCode, opDate, clDae, level, curr, userCode, dept, macId);
@@ -121,5 +102,12 @@ public class COAOpeningDServiceImpl implements COAOpeningDService {
         dao.getOpBalanceByTrader(coaCode, opDate, clDate, level, curr, userCode, dept, traderCode, macId, compCode);
         List<TmpOpeningClosing> listTOC = dao.getOpBalanceGL(userCode, coaCode, macId);
         return listTOC;
+    }
+
+    @Override
+    public void genTriBalance1(String compCode, String opDate, String tranDate, 
+            String coaCode, String currency, String dept, String cvId,
+            String userCode, String macId) throws Exception {
+        dao.genTriBalance1(compCode, opDate, tranDate, coaCode, currency, dept, cvId, userCode, macId);
     }
 }

@@ -75,4 +75,9 @@ public class GlServiceImpl implements GlService {
         String tmpCatCode = String.format("%0" + 3 + "d", macId) + period + String.format("%0" + 9 + "d", seqNo);
         return tmpCatCode;
     }
+
+    @Override
+    public int deleteGV(String vouNo, String option, String userCode, Integer macId) throws Exception {
+        return dao.deleteGV(vouNo, option, userCode, macId);
+    }
 }

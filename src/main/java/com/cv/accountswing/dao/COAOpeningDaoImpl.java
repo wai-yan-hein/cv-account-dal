@@ -5,9 +5,7 @@
  */
 package com.cv.accountswing.dao;
 
-import com.cv.accountswing.util.Util1;
-import com.cv.accountswing.entity.AccOpeningH;
-import java.util.List;
+import com.cv.accountswing.entity.view.VAccOpeningD;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,82 +13,7 @@ import org.springframework.stereotype.Repository;
  * @author winswe
  */
 @Repository
-public class COAOpeningDaoImpl extends AbstractDao<Long, AccOpeningH> implements COAOpeningDao {
-
-    @Override
-    public AccOpeningH save(AccOpeningH aoh) {
-        persist(aoh);
-        return aoh;
-    }
-
-    @Override
-    public AccOpeningH findById(Long Id) {
-        AccOpeningH aoh = getByKey(Id);
-        return aoh;
-    }
-
-    @Override
-    public List<AccOpeningH> search(String from, String to, String compCode,
-            String currency, String remark) {
-        String strSql = "select o from AccOpeningH o ";
-        String strFilter = "";
-
-        if (!from.equals("-") && !to.equals("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "o.opDate between '" + Util1.toDateStr(from, "dd/MM/yyyy", "yyyy-MM-dd")
-                        + "' and '" + Util1.toDateStr(to, "dd/MM/yyyy", "yyyy-MM-dd") + "'";
-            } else {
-                strFilter = strFilter + " and o.opDate between '"
-                        + Util1.toDateStr(from, "dd/MM/yyyy", "yyyy-MM-dd") + "' and '"
-                        + Util1.toDateStr(to, "dd/MM/yyyy", "yyyy-MM-dd") + "'";
-            }
-        } else if (!from.endsWith("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "o.opDate >= '" + Util1.toDateStr(from, "dd/MM/yyyy", "yyyy-MM-dd") + "'";
-            } else {
-                strFilter = strFilter + " and o.opDate >= '"
-                        + Util1.toDateStr(from, "dd/MM/yyyy", "yyyy-MM-dd") + "'";
-            }
-        } else if (!to.equals("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "o.opDate <= '" + Util1.toDateStr(to, "dd/MM/yyyy", "yyyy-MM-dd") + "'";
-            } else {
-                strFilter = strFilter + " and o.opDate <= '"
-                        + Util1.toDateStr(to, "dd/MM/yyyy", "yyyy-MM-dd") + "'";
-            }
-        }
-
-        if (!compCode.equals("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "o.compCode = " + compCode;
-            } else {
-                strFilter = strFilter + " and o.compCode = " + compCode;
-            }
-        }
-
-        if (!currency.equals("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "o.curr = '" + currency + "'";
-            } else {
-                strFilter = strFilter + " and o.curr = '" + currency + "'";
-            }
-        }
-
-        if (!remark.equals("-")) {
-            if (strFilter.isEmpty()) {
-                strFilter = "o.remark = '" + remark + "'";
-            } else {
-                strFilter = strFilter + " and o.remark = '" + remark + "'";
-            }
-        }
-
-        if (!strFilter.isEmpty()) {
-            strSql = strSql + " where " + strFilter;
-        }
-
-        List<AccOpeningH> listAOH = findHSQL(strSql);
-        return listAOH;
-    }
+public class COAOpeningDaoImpl extends AbstractDao<Long, VAccOpeningD> implements COAOpeningDao {
 
     @Override
     public void GenerateZero(String tranIdH, String compCode, String currCode) throws Exception {
